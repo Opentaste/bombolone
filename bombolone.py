@@ -13,7 +13,7 @@ from flask import request, session, g, redirect, url_for, abort, render_template
 from jinja2 import contextfunction 
 
 # Imports inside bombolone
-from admin import login_page, admin_page, pages_page
+from admin import login_page, logout_page, admin_page, profile_page, pages_page, languages_page
 from before import core_before_request, core_inject_user
 from page import home_page
 from shared import app, PORT
@@ -35,14 +35,25 @@ def home():
 def login():
     return login_page()
     
+@app.route('/logout/')
+def logout():
+    return logout_page()
+    
 @app.route('/admin/')
 def admin():
     return admin_page()
+    
+@app.route('/admin/profile/', methods=['POST', 'GET'])
+def profile():
+    return profile_page()
 	
 @app.route('/admin/pages/')
 def pages():
     return pages_page()	
-	
+
+@app.route('/admin/languages/')
+def languages():
+    return languages_page()
 	
 # ========================================================================	
 # Error zone

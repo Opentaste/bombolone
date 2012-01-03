@@ -17,11 +17,11 @@
             <li>
                 <a>Amministratore</a>
                 <ul class="header_menu">
-                    <li><a href="" >Modifica profilo</a></li>
-                    <li><a href="" title="" >Sito Web</a></li>
+                    <li><a href="{{ url_for('profile') }}" title="" >Modifica profilo</a></li>
+                    <li><a href="{{ url_for('home') }}" title="" >Sito Web</a></li>
                 </ul>
             </li>
-            <li><a href="{{ url_for('home') }}" title="" >Esci</a></li>
+            <li><a href="{{ url_for('logout') }}" title="" >Esci</a></li>
         </ul>
     </header><!-- header -->
     
@@ -35,6 +35,11 @@
         <ul>
             <li>
                 <p><a href="{{ url_for('pages') }}" title="" >Pages</a></p>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <p><a href="{{ url_for('languages') }}" title="" >Languages</a></p>
             </li>
         </ul>
     </nav><!-- nav -->

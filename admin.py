@@ -22,14 +22,32 @@ def login_page():
 	    return redirect(url_for('admin'))
 	return render_template('admin/login.html')
 	
+def logout_page():
+	"""
+
+	"""
+	return redirect(url_for('home'))
+	
 def admin_page():
     """
     
     """
     return render_template('admin/dashboard.html')
     
+def profile_page():
+    """
+
+    """
+    return render_template('admin/profile.html')
+    
 def pages_page():
     """
 
     """
     return render_template('admin/pages.html')
+    
+def languages_page():
+    """
+
+    """
+    return render_template('admin/languages.html')
