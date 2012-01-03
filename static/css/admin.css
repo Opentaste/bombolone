@@ -168,9 +168,26 @@ header li:hover ul {
 
 /* Nav ===================================================================================== */
 nav {
-    background: none repeat scroll 0 0 #7C97C4;
+    background: none repeat scroll 0 0 #7C97C4; 
     float:left;
-    width: 20%;
+    font-size:1.4em;
+    width: 18%;
+}
+
+nav li {
+    border-bottom:1px solid #52689A;
+}
+
+nav p {
+    padding:0px;
+}
+
+nav a {
+    color:#fff!important;
+    display:block;
+    line-height:2.2em;
+    padding-left:30px;
+    width:100%;
 }
 
 /* Content ================================================================================= */
@@ -191,6 +208,18 @@ nav {
 
 .menu_languages li {
     cursor:pointer;
+}
+
+.menu_languages li:hover {
+    background:#97B2CF;
+}
+
+.two {
+    display:none;
+}
+
+.language_selected {
+    background:#97B2CF!important;
 }
 
 /* Form ==================================================================================== */
@@ -241,7 +270,7 @@ button.submit {
 }
 
 button.submit span {
-    background: url("button.png") repeat-x scroll 0 0 #DC7325;
+    background:#DC7325;
     color: #FFFFFF;
     display: block;
     font-family: Helvetica,Arial,sans-serif;
