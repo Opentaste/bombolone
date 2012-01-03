@@ -13,35 +13,40 @@ def init_mongodb():
     """
     g.db.pages.remove()
     
-    for num in range(1,9):
+    for num in range(1,6):
         page = {
-            'name' : 'Page '+str(num),
+            'name' : 'page_'+str(num),
             'title': {
-                'it' : 'Title '+str(num),
-                'en' : ''
+                'en' : 'Title '+str(num),
+                'it' : 'Titolo '+str(num)
             },
             'content' : {
-                'it' : [
-                    { 'label' : 'label_1' , 'value' : '' },
-                    { 'label' : 'label_2' , 'value' : '' },
-                    { 'label' : 'label_3' , 'value' : '' },
-                    { 'label' : 'label_4' , 'value' : '' },
-                    { 'label' : 'label_5' , 'value' : '' },
-                    { 'label' : 'label_6' , 'value' : '' },
-                    { 'label' : 'label_7' , 'value' : '' },
-                    { 'label' : 'label_8' , 'value' : '' }],
                 'en' : [
-                    { 'label' : 'label_1' , 'value' : '' },
-                    { 'label' : 'label_2' , 'value' : '' },
-                    { 'label' : 'label_3' , 'value' : '' },
-                    { 'label' : 'label_4' , 'value' : '' },
-                    { 'label' : 'label_5' , 'value' : '' },
-                    { 'label' : 'label_6' , 'value' : '' },
-                    { 'label' : 'label_7' , 'value' : '' },
-                    { 'label' : 'label_8' , 'value' : '' }]
+                    { 'label' : 'label_1' , 'value' : '1' },
+                    { 'label' : 'label_2' , 'value' : '2' },
+                    { 'label' : 'label_3' , 'value' : '3' },
+                    { 'label' : 'label_4' , 'value' : '4' },
+                    { 'label' : 'label_5' , 'value' : '5' },
+                    { 'label' : 'label_6' , 'value' : '6' },
+                    { 'label' : 'label_7' , 'value' : '7' },
+                    { 'label' : 'label_8' , 'value' : '8' }],
+                'it' : [
+                    { 'label' : 'label_1' , 'value' : '1' },
+                    { 'label' : 'label_2' , 'value' : '2' },
+                    { 'label' : 'label_3' , 'value' : '3' },
+                    { 'label' : 'label_4' , 'value' : '4' },
+                    { 'label' : 'label_5' , 'value' : '5' },
+                    { 'label' : 'label_6' , 'value' : '6' },
+                    { 'label' : 'label_7' , 'value' : '7' },
+                    { 'label' : 'label_8' , 'value' : '8' }]
             }
         }
-        g.db.pages.update( { 'name' : 'Page '+str(num) }, page, True)
+        if num == 1:
+            page['name'] = 'home_page'
+            page['title'] = { 'en' : 'Home Page', 'it' : 'Home' }
+            g.db.pages.update( { 'name' : 'home_page' }, page, True)
+        else:
+            g.db.pages.update( { 'name' : 'page_'+str(num) }, page, True)
         
     g.db.languages.update( { 'code' : 'it' }, { 'name' : 'Italiano', 'code' : 'it' }, True)
     g.db.languages.update( { 'code' : 'en' }, { 'name' : 'English', 'code' : 'en' }, True)

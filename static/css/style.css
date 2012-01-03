@@ -35,19 +35,65 @@ table {
 
 /* Layout ================================================================================== */
 body {
-	background-color: #fcfcfc;
-	color: #333;
+	background-color: #FCFBF6;
+	color: #424242;
 	font: 62.5%/1  Arial, Helvetica, sans-serif;
-	padding:20px;
+	text-align: center;
 }
 
 /* Typography ============================================================================== */
-
 h1 {
     color: #999;
     font-size: 2.8em;
     line-height: 1.4em;
 }
 
-/* Content ================================================================================= */
+a, a:link, a:visited {
+    color: #B45B1F;
+    cursor:pointer;
+    text-decoration:none;
+}
 
+a:hover {
+    color:#CAD7DD;
+    cursor:pointer;
+    text-decoration:none;
+}
+
+/* Header ================================================================================== */
+header {
+    background:#6E585A;
+    height: 80px;
+    width:100%;
+}
+nav {
+    margin: 0 auto;
+    width: 900px;
+}
+
+nav li {
+    display:inline-block;
+}
+
+nav li a{
+    color: #FFFCEF!important;
+    font-family: Georgia,serif !important;
+    font-size: 28px;
+    font-weight: bolder;
+    font-weight: 300 !important;
+    letter-spacing: -0.5px;
+    line-height:60px;
+    margin:0 30px ;
+    text-align:left;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+nav li a:hover {
+    color:#f9c24c;
+}
+
+/* Content ================================================================================= */
+body section {
+    min-height:400px;
+    padding:15px 0;
+}

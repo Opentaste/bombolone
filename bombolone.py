@@ -16,7 +16,7 @@ from jinja2 import contextfunction
 from admin import (login_page, logout_page, admin_page, profile_page, pages_page, 
                     pages_content_page, languages_page)
 from before import core_before_request, core_inject_user
-from page import home_page
+from page import home_page, page_two_base, page_three_base, page_four_base, page_five_base
 from shared import app, PORT
 
                   
@@ -31,6 +31,28 @@ def inject_user():
 @app.route('/', methods=['POST', 'GET'])
 def home():
     return home_page()
+    
+# ========================================================================	
+# Pages zone
+
+@app.route('/page_two/')
+def page_two():
+    return page_two_base()
+    
+@app.route('/page_three/')
+def page_three():
+    return page_three_base()
+    
+@app.route('/page_four/')
+def page_four():
+    return page_four_base()
+    
+@app.route('/page_five/')
+def page_five():
+    return page_five_base()
+    
+# ========================================================================	
+# Admin zone
     
 @app.route('/login/', methods=['POST', 'GET'])
 def login():

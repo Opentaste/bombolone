@@ -2,12 +2,9 @@
 """
     before.py
     ~~~~~~
-    
-    Yep!
-    by Leonardo Zizzamia and Stefano Biancorosso
-    
-    :copyright: (c) 2011 by OpenTaste.
-    :license:
+
+    :copyright: (c) 2012 by Leonardo Zizzamia
+    :license: BSD (See LICENSE for details)
 """
 from flask import g
 
@@ -27,4 +24,5 @@ def core_inject_user():
 	b = {}
 	b['path'] = PATH
 	b['admin'] = PATH + '/admin'
+	b['lan'] = 'en'
 	return b

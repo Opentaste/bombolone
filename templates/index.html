@@ -2,14 +2,40 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>Home | Bombolone</title>
+	{% block head %}
+	<title>Bombolone | {{ content['title'][lan] }}</title>
+	{% endblock %}
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
 	<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
 <body>
-	Content
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}" title="">Home</a></li>
+                <li><a href="{{ url_for('page_two') }}" title="">Page two</a></li>
+                <li><a href="{{ url_for('page_three') }}" title="">Page three</a></li>
+                <li><a href="{{ url_for('page_four') }}" title="">Page four</a></li>
+                <li><a href="{{ url_for('page_five') }}" title="">Page five</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+	{% block content %}
+	{% endblock %}
+	</section>
+	<footer>
+	    <p>© 2012 Bombolone Web Site </p>
+	    <p>
+	        <a href="{{ url_for('home') }}" title="">Home</a> |
+	        <a href="{{ url_for('page_two') }}" title="">Page two</a> | 
+	        <a href="{{ url_for('page_three') }}" title="">Page three</a> | 
+	        <a href="{{ url_for('page_four') }}" title="">Page four</a> | 
+	        <a href="{{ url_for('page_five') }}" title="">Page five</a>
+	    </p>
+    </footer>
 	<script src="{{ url_for('static', filename='js/tiramisu-0.1.5-min.js') }}"></script>
 </body>
 </html>
