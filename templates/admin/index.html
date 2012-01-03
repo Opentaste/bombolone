@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
+	{% block head %}
 	<title>Home | Bombolone</title>
+	{% endblock %}
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin.css') }}" />
 	<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -19,7 +21,7 @@
                     <li><a href="" title="" >Sito Web</a></li>
                 </ul>
             </li>
-            <li><a href="" title="" >Esci</a></li>
+            <li><a href="{{ url_for('home') }}" title="" >Esci</a></li>
         </ul>
     </header><!-- header -->
     
@@ -27,19 +29,20 @@
     <nav>
         <ul>
     		<li>
-            	<p><a href="" title="" >Dashboard</a></p>
+            	<p><a href="{{ url_for('admin') }}" title="" >Dashboard</a></p>
             </li>
     	</ul>
         <ul>
             <li>
-                <p><a href="" title="" >Pages</a></p>
+                <p><a href="{{ url_for('pages') }}" title="" >Pages</a></p>
             </li>
         </ul>
     </nav><!-- nav -->
     
     
     <div class="content">
-        hola
+        {% block content %}
+    	{% endblock %}
     </div><!-- .content -->
 
 </body>

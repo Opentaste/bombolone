@@ -26,4 +26,10 @@ def admin_page():
     """
     
     """
-    return render_template('admin/index.html')
+    return render_template('admin/dashboard.html')
+    
+def pages_page():
+    """
+
+    """
+    return render_template('admin/pages.html')
