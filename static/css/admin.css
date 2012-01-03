@@ -62,7 +62,8 @@ h1 {
 }
 
 h2 {
-    font-size:2.2em;
+    font-size: 2.2em;
+    padding-bottom: 10px;
 }
 
 p {
@@ -179,6 +180,19 @@ nav {
     width:76%;
 }
 
+.menu_languages li {
+    background: none repeat scroll 0 0 #7C97C4;
+    color:#fff;
+    display:inline-block;
+    font-size:1.5em;
+    padding:8px 15px;
+    margin:4px 10px 10px 0;
+}
+
+.menu_languages li {
+    cursor:pointer;
+}
+
 /* Form ==================================================================================== */
 .form_container {
     background: none repeat scroll 0 0 #f0f0f0;
@@ -186,13 +200,13 @@ nav {
     width:500px;
 }
 
-.field_row {
+.form_container section {
     clear: both;
     margin: 0 0 5px;
     min-height: 28px;
 }
 
-.field_row label {
+.form_container section label {
     color: #3C3C3C;
     display: block;
     font-size: 1.4em;
@@ -201,7 +215,7 @@ nav {
     text-align: left;
 }
 
-.field_row input {
+.form_container section input {
     border: 1px solid #d8d8d8;
     font-family: Arial,sans-serif;
     font-size: 1.5em;
@@ -213,11 +227,11 @@ nav {
    	border-radius: 3px;
 }
 
-.field_row input:focus {
+.form_container section input:focus {
     border: 1px solid #E28223;
 }
 
-button.submit_test {
+button.submit {
     background: none repeat scroll 0 0 transparent;
     border: medium none;
     cursor:pointer;
@@ -226,7 +240,7 @@ button.submit_test {
     width: auto;
 }
 
-button.submit_test span.green {
+button.submit span {
     background: url("button.png") repeat-x scroll 0 0 #DC7325;
     color: #FFFFFF;
     display: block;
@@ -242,11 +256,11 @@ button.submit_test span.green {
    	border-radius: 4px;
 }
 
-button.submit_test:hover span.green {
+button.submit:hover span {
     background-position: 0 -30px;
 }
 
-.field_error, .field_strength {
+.field_error {
     background-color: #FFE3DF;
     border: 1px solid #F08A73;
     display:none;
@@ -258,11 +272,6 @@ button.submit_test:hover span.green {
     -webkit-border-radius: 4px;
    	-moz-border-radius: 4px;
    	border-radius: 4px;
-}
-
-.field_strength {
-    background-color: #FDF1BD;
-    border: 1px solid #FADC96;
 }
 
 .width180 {

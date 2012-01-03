@@ -33,7 +33,7 @@ def admin_page():
     """
     
     """
-    init_mongodb()
+    #init_mongodb()
     return render_template('admin/dashboard.html')
     
 def profile_page():
@@ -53,6 +53,31 @@ def pages_content_page(_id):
     """
 
     """
+    
+    if request.method == 'POST':
+        name = request.form['name']
+        title_it = request.form['title_it']
+        title_en = request.form['title_en']
+        page = {
+            'name' : name,
+            'title': {
+                'it' : title_it,
+                'en' : title_en
+            },
+            'content' : {
+                'it' : [],
+                'en' : []
+            }
+        }
+        
+        len_of_label = len([int(x.split('_')[2]) for x in request.form if x.startswith('label_it_')])
+        for i in range(len_of_label):
+            page['content']['it'].append( { 'label' : 'label_it_'+str(i) , 'value' : request.form['label_it_'+str(i)] })
+        for i in range(len_of_label):
+            page['content']['en'].append( { 'label' : 'label_en_'+str(i) , 'value' : request.form['label_en_'+str(i)] })
+                
+        g.db.pages.update( { '_id' : ObjectId(_id) }, page)
+        
     page_content = g.db.pages.find_one({ '_id' : ObjectId(_id) })
     return render_template('admin/pages_content.html', page=page_content)
     

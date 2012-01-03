@@ -5,17 +5,45 @@
 {% block content %}
     <h2>Pages content</h2>
     <form action="#" method="post">
-        <div class="form_container">
-            {% for x in page['content'] %}
-            <div class="field_row">
-                <label>{{ x['label'] }}</label>
-                <input type="text" value="{{ x['value'] }}" tabindex="1" maxlength="40" name="first_name" />
+        <ul class="menu_languages">
+            <li class="section_one">Italiano</li>
+            <li class="section_two">English</li>
+        </ul>
+        <section class="one">
+            <div class="form_container">
+                <section>
+                    <label>Page name</label>
+                    <input type="text" name="name" value="{{ page['name'] }}" tabindex="1" maxlength="20" />
+                </section>
+                <section>
+                    <label>Page title</label>
+                    <input type="text" name="title_it" value="{{ page['title']['it'] }}" tabindex="2" maxlength="200" />
+                </section>
+                {% for i, x in enumerate(page['content']['it']) %}
+                <section>
+                    <label>{{ x['label'] }}</label>
+                    <input type="text" name="label_it_{{ i }}" value="{{ x['value'] }}" tabindex="{{ (i+2) }}" />
+                </section>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-        <div class="fieldRow">
-            <button tabindex="10" id="login" type="submit" class="submit_test">
-                <span class="green">Sign me in</span>
+        </section>
+        <section class="two">
+            <div class="form_container">
+                <section>
+                    <label>Page title</label>
+                    <input type="text" name="title_en" value="{{ page['title']['en'] }}" tabindex="2" maxlength="200" />
+                </section>
+                {% for i, x in enumerate(page['content']['en']) %}
+                <section>
+                    <label>{{ x['label'] }}</label>
+                    <input type="text" name="label_en_{{ i }}" value="{{ x['value'] }}" tabindex="{{ (i+2) }}" />
+                </section>
+                {% endfor %}
+            </div>
+        </section>
+        <div>
+            <button tabindex="200" type="submit" class="submit">
+                <span>Update page</span>
             </button>
         </div>
     </form>
