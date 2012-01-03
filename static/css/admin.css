@@ -1,0 +1,179 @@
+@charset "utf-8";
+/* Reset =================================================================================== */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, 
+acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
+strong, sub, sup, tt, var, b, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, 
+table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, 
+figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body { line-height: 1; }
+
+ol, ul { list-style: none; }
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Layout ================================================================================== */
+body {
+	background:#DFD2CA;
+	color:#6E585A;
+	font: 62.5%/1  Arial, Helvetica, sans-serif;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", "Bitstream Vera Sans", Arial, Verdana, sans-serif;
+	line-height:1.4em;
+}
+
+::selection { 
+    background: #ffcc89; 
+    color: #222; 
+}
+::-moz-selection { 
+    background: #ffcc89; 
+    color: #222; 
+}
+
+/* Typography ============================================================================== */
+
+h1 {
+    background:transparent url(./admin/logo/login.png) no-repeat scroll center top;
+    display:block;
+    height:142px;
+    overflow:hidden;
+    text-indent:-9999px;
+    width:340px;
+}
+
+p {
+    padding:5px 0 5px 0;
+    margin:0px;
+    text-align:justify;
+}
+
+a, a:visited, a:link, a:visited {
+    cursor:pointer;
+    color: #444;
+    text-decoration: none; 
+}
+
+a:hover {
+    cursor:pointer;
+    color: #cb3e07;
+    text-decoration: none;
+    border-bottom:none
+}
+
+/* Header ================================================================================== */
+
+header {
+    background: none repeat scroll 0 0 #93645A;
+    height: 38px;
+    width: 100%;
+}
+
+header img{
+    float:left;
+}
+
+header ul {
+    float:right;
+    margin-right:40px;
+}
+
+header li {
+    display: block;
+    float: left;
+    font-size: 13px;
+    position: relative;
+}
+
+header li a {
+    color: #fff;
+    display: block;
+    float: none;
+    line-height: 19px;
+    padding: 10px;
+    text-decoration: none;
+}
+
+header li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+header li:hover ul { 
+    display: inherit; 
+}
+
+.header_menu {
+    -moz-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    background-color: rgba(53, 151, 188, 0.95);
+    border: 0 none;
+    display: none;
+    float: left;
+    left: -75px;
+    margin-left: 0;
+    padding: 5px 0;
+    position: absolute;
+    text-align: left;
+    top: 38px;
+    width: 160px;
+}
+
+.header_menu li{
+    display: block;
+    float: left;
+    font-size: 13px;
+    clear: both;
+    display: block;
+    width: 160px;
+}
+
+.header_menu li a {
+    padding: 6px 15px;
+}
+
+.header_menu li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.vertical-line {
+    border-left: 1px solid #008DB8;
+    border-right: 1px solid #00A0D1;
+    height: 30px;
+    margin: 5px 3px 1px;
+}
+
+/* Nav ===================================================================================== */
+nav {
+    background: none repeat scroll 0 0 #7C97C4;
+    float:left;
+    width: 20%;
+}
+
+
+/* Content ================================================================================= */
+.content { 
+    float:left;
+    padding:20px;
+    width:76%;
+}

@@ -16,4 +16,14 @@ def login_page():
 	"""
 	
 	"""
+	if request.method == 'POST':
+	    username = request.form['username']
+	    password = request.form['password']
+	    return redirect(url_for('admin'))
 	return render_template('admin/login.html')
+	
+def admin_page():
+    """
+    
+    """
+    return render_template('admin/index.html')

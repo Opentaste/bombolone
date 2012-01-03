@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Home | Bombolone</title>
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin.css') }}" />
 	<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -14,11 +14,11 @@
 		<form name="login" action="{{ url_for('login') }}" method="post">
             <p>
                 <label>Username</label>
-                <input type="text" name="name"  value="" size="50" tabindex="10" />
+                <input type="text" name="username"  value="" size="50" tabindex="10" />
             </p>
             <p>
                 <label>Password</label>
-                <input type="password" name="pass" value="" size="50" tabindex="20" />
+                <input type="password" name="password" value="" size="50" tabindex="20" />
             </p>
             <p class="submit">
                 <input type="submit" name="submit" class="button" value="Entra" tabindex="100" />
