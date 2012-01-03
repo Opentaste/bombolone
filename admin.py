@@ -46,7 +46,8 @@ def pages_page():
     """
 
     """
-    return render_template('admin/pages.html')
+    list_pages = g.db.pages.find()
+    return render_template('admin/pages.html', pages=list_pages)
     
 def languages_page():
     """

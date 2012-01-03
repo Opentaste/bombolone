@@ -3,8 +3,26 @@
     <title>Pages</title>
 {% endblock %}
 {% block content %}
-    <h2>Pagine</h2>
-    <p>Crea pagina</p>
-    <table>
+    <h2>Pages</h2>
+    <table class="table_items">
+    	<thead>
+    		<tr>	
+    			<th style="width:40%;">Name</th>
+    			<th style="width:40%;">_id</th>
+    		</tr>
+    	</thead>
+    	<tfoot>
+    		<tr>
+    			<td colspan="2"></td>
+    		</tr>
+    	</tfoot>
+    	<tbody>
+    		{% for x in pages %}
+    		<tr>
+    			<td>{{ x['name'] }}</td>
+    			<td>{{ x['_id'] }}</td>
+    		</tr>
+    		{% endfor %}
+    	</tbody>
     </table>
 {% endblock %}
