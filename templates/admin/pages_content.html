@@ -1,0 +1,22 @@
+{% extends "admin/index.html" %}
+{% block head %}
+    <title>Pages content</title>
+{% endblock %}
+{% block content %}
+    <h2>Pages content</h2>
+    <form action="#" method="post">
+        <div class="form_container">
+            {% for x in page['content'] %}
+            <div class="field_row">
+                <label>{{ x['label'] }}</label>
+                <input type="text" value="{{ x['value'] }}" tabindex="1" maxlength="40" name="first_name" />
+            </div>
+            {% endfor %}
+        </div>
+        <div class="fieldRow">
+            <button tabindex="10" id="login" type="submit" class="submit_test">
+                <span class="green">Sign me in</span>
+            </button>
+        </div>
+    </form>
+{% endblock %}

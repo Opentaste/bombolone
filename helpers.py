@@ -17,15 +17,16 @@ def init_mongodb():
         page = {
             'name' : 'Page '+str(num),
             'title': 'Title '+str(num),
-            'content' : {
-                'label_1' : '',
-                'label_2' : '',
-                'label_3' : '',
-                'label_4' : '',
-                'label_5' : '',
-                'label_6' : '',
-                'label_7' : ''
-            }
+            'content' : [
+                { 'label' : 'label_1' , 'value' : '' },
+                { 'label' : 'label_2' , 'value' : '' },
+                { 'label' : 'label_3' , 'value' : '' },
+                { 'label' : 'label_4' , 'value' : '' },
+                { 'label' : 'label_5' , 'value' : '' },
+                { 'label' : 'label_6' , 'value' : '' },
+                { 'label' : 'label_7' , 'value' : '' },
+                { 'label' : 'label_8' , 'value' : '' }
+            ]
         }
         g.db.pages.update( { 'name' : 'Page '+str(num) }, page, True)
         

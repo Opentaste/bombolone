@@ -19,7 +19,7 @@
     	<tbody>
     		{% for x in pages %}
     		<tr>
-    			<td>{{ x['name'] }}</td>
+    			<td><a href="{{ admin }}/pages/{{ str(x['_id']) }}/">{{ x['name'] }}</a></td>
     			<td>{{ x['_id'] }}</td>
     		</tr>
     		{% endfor %}

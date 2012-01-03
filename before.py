@@ -11,7 +11,7 @@
 """
 from flask import g
 
-from shared import db
+from shared import db, PATH
 
 def core_before_request():
 	"""
@@ -25,4 +25,6 @@ def core_inject_user():
 	to inject new values into the template context. A context processor is a function 
 	that returns a dictionary."""
 	b = {}
+	b['path'] = PATH
+	b['admin'] = PATH + '/admin'
 	return b
