@@ -4,6 +4,25 @@
 {% endblock %}
 {% block content %}
     <h2>Languages</h2>
-    <table>
+    <table class="list">
+    	<thead>
+    		<tr>	
+    			<th style="width:40%;">Lingua</th>
+    			<th style="width:40%;">Codice</th>
+    		</tr>
+    	</thead>
+    	<tfoot>
+    		<tr>
+    			<td colspan="2"></td>
+    		</tr>
+    	</tfoot>
+    	<tbody>
+    		{% for x in lan %}
+    		<tr>
+    			<td>{{ x['name'] }}</td>
+    			<td>{{ x['code'] }}</td>
+    		</tr>
+    		{% endfor %}
+    	</tbody>
     </table>
 {% endblock %}
