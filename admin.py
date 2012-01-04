@@ -27,7 +27,7 @@ def check_authentication(function_to_decorate):
     def wrapped_function():
         if g.my_id is None or g.my['rank'] != 10:
             abort(401)
-        function_to_decorate()
+        return function_to_decorate()
        
     return wrapped_function
 
