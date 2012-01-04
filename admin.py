@@ -55,6 +55,7 @@ def logout_page():
 	"""
 
 	"""
+	session.pop('user_id', None)
 	return redirect(url_for('home'))
 	
 @check_authentication
