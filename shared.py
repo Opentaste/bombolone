@@ -13,11 +13,14 @@
 from flask import Flask
 from pymongo import Connection
 
-VERSION = '0.0.25'
+VERSION = '0.0.28'
 
 DEBUG = True
 PATH = 'http://0.0.0.0:5000'
 PORT = 5000
+
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG', 'bmp'])
+EXTENSIONS_REQUEST = {'png', 'jpg', 'jpeg', 'gif', 'css', 'js'}
 
 SECRET_KEY = '\xfb\x12\xdf\xa1@i\xd6>V\xc0\xbb\x8fp\x16#Z\x0b\x81\xeb\x16'
 

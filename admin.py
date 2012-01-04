@@ -23,6 +23,14 @@ dict_login = {
     }
 }
 
+def check_authentication(function_to_decorate):
+    def wrapped_function():
+        if g.my_id is None or g.my['rank'] != 10:
+            abort(401)
+        function_to_decorate()
+       
+    return wrapped_function
+
 
 def login_page():
 	"""
@@ -49,31 +57,34 @@ def logout_page():
 	"""
 	return redirect(url_for('home'))
 	
+@check_authentication
 def admin_page():
     """
     
     """
     #init_mongodb()
     return render_template('admin/dashboard.html')
-    
+ 
+@check_authentication   
 def profile_page():
     """
 
     """
     return render_template('admin/profile.html')
-    
+
+@check_authentication     
 def pages_page():
     """
 
     """
     list_pages = g.db.pages.find()
     return render_template('admin/pages.html', pages=list_pages)
-    
+ 
+@check_authentication   
 def pages_content_page(_id):
     """
 
     """
-    
     if request.method == 'POST':
         name = request.form['name']
         title_it = request.form['title_it']
@@ -101,6 +112,7 @@ def pages_content_page(_id):
     page_content = g.db.pages.find_one({ '_id' : ObjectId(_id) })
     return render_template('admin/pages_content.html', page=page_content)
     
+@check_authentication 
 def languages_page():
     """
 
