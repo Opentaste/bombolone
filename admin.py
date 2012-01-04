@@ -6,6 +6,7 @@
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
 """ 
+import re
 from flask import request, session, g, Response, render_template, url_for, redirect, abort, Markup
 from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
@@ -14,18 +15,81 @@ from helpers import init_mongodb, create_password
 
 dict_login = {
     'error_1' : {
-        'en' : 'error 1',
-        'it' : 'errore 1'
+        'it' : 'errore 1',
+        'en' : 'error 1'
     },
     'error_2' : {
-        'en' : 'error 2',
-        'it' : 'errore 2'
+        'it' : 'errore 2',
+        'en' : 'error 2'      
     }
+}
+
+setting_message = {
+    'account_error_1': {
+		    'it': 'Devi inserire l\'username',
+		    'en': 'You must enter the username',
+		    'fr': '',
+		    'es': '',
+            'pt': ''},
+    'account_error_2': {
+		    'it': 'L\'username inserito deve essere almeno di due caratteri',
+			'en': 'The username entered must be at least two characters',
+			'fr': '',
+			'es': '',
+            'pt': ''},
+    'account_error_3': {
+		    'it': u'L\'username inserito non è disponibile',
+			'en': 'The entered username is not available',
+			'fr': '',
+			'es': '',
+            'pt': ''},
+    'account_error_4': {
+		    'it': u'L\'username inserito non è disponibile',
+			'en': 'The entered username is not available',
+			'fr': '',
+			'es': '',
+            'pt': ''},
+    'account_error_5': {
+		    'it': u'Il formato dell\'email non è corretto',
+			'en': 'The format of the email is incorrect',
+			'fr': '',
+			'es': '',
+            'pt': ''},
+    'account_error_6': {
+		    'it': u'L\'email scritta è già utilizzata da un altro account',
+		    'en': 'The email written is already used by another account',
+		    'fr': '',
+		    'es': '',
+            'pt': ''},
+    'account_error_7': {
+		    'it': u'L\'username deve essere alfanumerico senza spazi',
+		    'en': u'The username must be alphanumeric with no spaces',
+		    'fr': '',
+		    'es': '',
+            'pt': ''},
+    'account_ok': {
+		    'it': 'Account modificato correttamente',
+		    'en': 'Account changed successfully',
+		    'fr': '',
+		    'es': '',
+            'pt': ''},
+    'password_error_1': {
+		    'it': 'La nuova password inserita deve essere almeno di 6 caratteri',
+			'en': 'The new password entered must be at least 6 characters',
+			'fr': '',
+			'es': '',
+            'pt': ''},
+    'password_error_2': {
+		    'it': 'Le nuove password inserite non sono uguali',
+			'en': 'The new passwords entered do not match',
+			'fr': '',
+			'es': '',
+            'pt': ''}
 }
 
 def check_authentication(function_to_decorate):
     def wrapped_function():
-        if g.my_id is None or g.my['rank'] != 10:
+        if g.my_id is None:
             abort(401)
         return function_to_decorate()
        
@@ -71,6 +135,45 @@ def profile_page():
     """
 
     """
+    if request.method == 'POST':
+		# get request ot_name
+		username = request.form['username']
+		password = request.form['password']
+		password_check = request.form['password_check']
+		regx = re.compile('^'+username+'$', re.IGNORECASE)
+		result = g.db.users.find_one({"username" : regx })
+		old_username = g.my['username']
+		
+		if len(password) < 6 and len(password) > 0:
+		    g.message = setting_message['password_error_1']	
+		    g.status = 'mes-red'
+		elif password != password_check and len(password) > 0:
+		    g.message = setting_message['password_error_2']	
+		    g.status = 'mes-red'
+		# control several things:
+		# - username wrote
+		# - username's length is greater than 2
+		# - username is available and it is not the same as 
+		# - the format of username is incorrect
+		elif not len(username):
+		    g.message = setting_message['account_error_1']
+		    g.status = 'mes-red'
+		elif len(username) < 2:
+		    g.message = setting_message['account_error_2']
+		    g.status = 'mes-red'
+		elif result is not None and username != old_username:
+		    g.message = setting_message['account_error_4']
+		    g.status = 'mes-red'
+		elif not re.match(r'^[a-zA-Z0-9_]+$', username):
+		    g.message = setting_message['account_error_7']
+		    g.status = 'mes-red'
+		else:
+		    g.my['username'] = username
+		    g.my['password'] = create_password(password)
+		    g.db.users.update({"_id": g.my['_id']}, g.my)
+		    g.message = setting_message['account_ok']
+		    g.status = 'mes-green'
+
     return render_template('admin/profile.html')
 
 @check_authentication     

@@ -4,6 +4,26 @@
 {% endblock %}
 {% block content %}
     <h2>Profile</h2>
-    <table>
-    </table>
+    {% if g.status %}<div id="{{ g.status }}">{{ g.message[lan] }}</div>{% endif %}
+    <form action="#" method="post">
+        <div class="form_container">
+            <section>
+                <label>Username</label>
+                <input type="text" name="username" value="{{ g.my['username'] }}" tabindex="1" maxlength="20" />
+            </section>
+            <section>
+                <label>Password</label>
+                <input type="password" name="password" value="" tabindex="2" maxlength="20" />
+            </section>
+            <section>
+                <label>Check Password</label>
+                <input type="password" name="password_check" value="" tabindex="3" maxlength="20" />
+            </section>
+        </div>
+        <div>
+            <button tabindex="200" type="submit" class="submit" tabindex="4">
+                <span>Update profile</span>
+            </button>
+        </div>
+    </form>
 {% endblock %}

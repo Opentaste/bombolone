@@ -15,7 +15,7 @@
 		<img src="" alt="Web Site" />
         <ul>
             <li>
-                <a>Amministratore</a>
+                <a>{{ g.my['username'] }}</a>
                 <ul class="header_menu">
                     <li><a href="{{ url_for('profile') }}" title="" >Modifica profilo</a></li>
                     <li><a href="{{ url_for('home') }}" title="" >Sito Web</a></li>
