@@ -12,15 +12,35 @@ from pymongo.objectid import ObjectId
 
 from helpers import init_mongodb
 
+dict_login = {
+    'error_1' : {
+        'en' : 'error',
+        'it' : 'errore'
+    },
+    'error_2' : {
+        'en' : 'error',
+        'it' : 'errore'
+    }
+}
+
 
 def login_page():
 	"""
 	
 	"""
 	if request.method == 'POST':
-	    username = request.form['username']
+	    username = request.form['username'].lower()
 	    password = request.form['password']
-	    return redirect(url_for('admin'))
+	    user = g.db.users.find_one({'username' : username})
+	    if not username and not password:
+	        g.status = 'mes-red'
+	        g.message = dict_login['error_1']
+	    elif user is None or user['password'] != create_password(password):
+	        g.status = 'mes-red'
+	        g.message = dict_login['error_2']
+	    else:
+	        session['user_id'] = user['_id']
+	        return redirect(url_for('admin'))
 	return render_template('admin/login.html')
 	
 def logout_page():
