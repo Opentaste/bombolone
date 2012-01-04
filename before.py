@@ -6,7 +6,7 @@
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
 """
-from flask import g, request, session
+from flask import g, request, session, abort
 from urlparse import urlparse
 from pymongo.objectid import ObjectId
 
@@ -30,10 +30,13 @@ def core_inject_user():
 	"""Context processors run before the template is rendered and have the ability 
 	to inject new values into the template context. A context processor is a function 
 	that returns a dictionary."""
+	url = urlparse(request.url)
+	page_url_list = { x['name'] : x['url'] for x in g.db.pages.find()}
 	b = {}
 	b['path'] = PATH
-	b['admin'] = PATH + '/admin'
-	b['lan'] = 'en'
+	b['admin'] = PATH + '/static/admin'
+	b['layout'] = PATH + '/static/layout'
+	b['page'] = page_url_list
 	return b
 	
 def core_bombolone():

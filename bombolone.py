@@ -16,7 +16,7 @@ from jinja2 import contextfunction
 from admin import (login_page, logout_page, admin_page, profile_page, pages_page, 
                     pages_content_page, languages_page)
 from before import core_before_request, core_inject_user
-from page import home_page, page_two_base, page_three_base, page_four_base, page_five_base
+from page import home_page, page_base
 from shared import app, PORT
 
                   
@@ -31,26 +31,7 @@ def inject_user():
 @app.route('/', methods=['POST', 'GET'])
 def home():
     return home_page()
-    
-# ========================================================================	
-# Pages zone
-
-@app.route('/page_two/')
-def page_two():
-    return page_two_base()
-    
-@app.route('/page_three/')
-def page_three():
-    return page_three_base()
-    
-@app.route('/page_four/')
-def page_four():
-    return page_four_base()
-    
-@app.route('/page_five/')
-def page_five():
-    return page_five_base()
-    
+        
 # ========================================================================	
 # Admin zone
     
@@ -81,6 +62,17 @@ def pages_content(_id):
 @app.route('/admin/languages/')
 def languages():
     return languages_page()
+    
+# ========================================================================	
+# Pages zone
+
+@app.route('/<lan>/')
+def home_two(lan):
+    return home_page(lan)
+
+@app.route('/<lan>/<title>/')
+def page(lan, title):
+    return page_base(lan, title)
 	
 # ========================================================================	
 # Error zone
@@ -91,28 +83,28 @@ def bad_request(error):
     Raise if the browser sends something to the application the 
     application or server cannot handle.
     """
-    return 'Raise if the browser sends something to the application the application or server cannot handle.', 400
+    return 'Raise if the browser sends something to the application the application or server cannot handle. 400', 400
 
 @app.errorhandler(401)
 def unauthorized(error):
     """Raise if the user is not authorized. Also used if you want 
     to use HTTP basic auth."""
-    return 'Raise if the user is not authorized. Also used if you want to use HTTP basic auth.', 401
+    return 'Raise if the user is not authorized. Also used if you want to use HTTP basic auth. 401', 401
 
 @app.errorhandler(404)
 def not_found(error):
     """Raise if a resource does not exist and never existed."""
-    return 'Raise if a resource does not exist and never existed.', 404
+    return 'Raise if a resource does not exist and never existed. 404', 404
     
 @app.errorhandler(408)
 def request_timeout(error):
     """Raise to signalize a timeout."""
-    return 'Raise to signalize a timeout.', 408
+    return 'Raise to signalize a timeout. 408', 408
     
 @app.errorhandler(413)
 def request_too_large(error):
     """Like 413 but for too long URLs."""
-    return 'Like 413 but for too long URLs.', 413
+    return 'Like 413 but for too long URLs. 413', 413
     
     
 @app.errorhandler(500)

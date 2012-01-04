@@ -14,11 +14,11 @@
     <header>
         <nav>
             <ul>
-                <li><a href="{{ url_for('home') }}" title="">Home</a></li>
-                <li><a href="{{ url_for('page_two') }}" title="">Page two</a></li>
-                <li><a href="{{ url_for('page_three') }}" title="">Page three</a></li>
-                <li><a href="{{ url_for('page_four') }}" title="">Page four</a></li>
-                <li><a href="{{ url_for('page_five') }}" title="">Page five</a></li>
+                <li><a href="{{ path+'/'+lan+'/' }}" title="">Home</a></li>
+                <li><a href="{{ '/'+lan+'/'+page['page_2'][lan] }}/" title="">Page two</a></li>
+                <li><a href="{{ '/'+lan+'/'+page['page_3'][lan] }}/" title="">Page three</a></li>
+                <li><a href="{{ '/'+lan+'/'+page['page_4'][lan] }}/" title="">Page four</a></li>
+                <li><a href="{{ '/'+lan+'/'+page['page_5'][lan] }}/" title="">Page five</a></li>
             </ul>
         </nav>
     </header>
@@ -29,11 +29,20 @@
 	<footer>
 	    <p>© 2012 Bombolone Web Site </p>
 	    <p>
-	        <a href="{{ url_for('home') }}" title="">Home</a> |
-	        <a href="{{ url_for('page_two') }}" title="">Page two</a> | 
-	        <a href="{{ url_for('page_three') }}" title="">Page three</a> | 
-	        <a href="{{ url_for('page_four') }}" title="">Page four</a> | 
-	        <a href="{{ url_for('page_five') }}" title="">Page five</a>
+	        <a href="{{ path+'/'+lan+'/' }}" title="">Home</a> |
+	        <a href="{{ '/'+lan+'/'+page['page_2'][lan] }}/" title="">Page two</a> | 
+	        <a href="{{ '/'+lan+'/'+page['page_3'][lan] }}/" title="">Page three</a> | 
+	        <a href="{{ '/'+lan+'/'+page['page_4'][lan] }}/" title="">Page four</a> | 
+	        <a href="{{ '/'+lan+'/'+page['page_5'][lan] }}/" title="">Page five</a>
+	    </p>
+	    <p>
+	        <a href="{{ url['it'] }}" title="Bombolone | ">
+                <img src="{{ layout }}/flag/it.png" alt="Sito in Italiano" />Sito in Italiano
+            </a>
+            <br />     
+            <a href="{{ url['en'] }}" title="Bombolone | ">
+                <img src="{{ layout }}/flag/gb.png" alt="Web site in English" />Web site in English
+            </a>
 	    </p>
     </footer>
 	<script src="{{ url_for('static', filename='js/tiramisu-0.1.5-min.js') }}"></script>

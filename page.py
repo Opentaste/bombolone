@@ -7,39 +7,33 @@
     :license: BSD (See LICENSE for details)
 """ 
 from flask import request, session, g, Response, render_template, url_for, redirect, abort, Markup
-
 from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 
+from shared import PATH
 
-def home_page():
+
+def home_page(lan):
 	"""
 	
 	"""
 	content = g.db.pages.find_one({ "name" : 'home_page' }) #{ "_id" : 'blablablablalba' }
-	return render_template('pages/home.html', content=content)
+	page_url = { 'it' : PATH+'/it/', 'en' : PATH+'/en/' }
+	return render_template('pages/home.html', content=content, url=page_url, lan=lan)
 	
-def page_two_base():
-	"""
+def page_base(lan, title):
+    content = g.db.pages.find_one({ "url.it" : title })
+    lan = 'it'
+    if content is None:
+        content = g.db.pages.find_one({ "url.en" : title })
+        lan = 'en'
+    if content is None:
+        abort(404)
+    else:
+        page_url = { 'it' : PATH+'/it/'+content['url']['it']+'/', 'en' : PATH+'/en/'+content['url']['en']+'/' }
+        return render_template('pages/'+content['file']+'.html', content=content, url=page_url, lan=lan)
+        
 
-	"""
-	content = g.db.pages.find_one({ "name" : 'page_2' })
-	return render_template('pages/page_two.html', content=content)
-	
-def page_three_base():
-	"""
-
-	"""
-	content = g.db.pages.find_one({ "name" : 'page_3' })
-	return render_template('pages/page_three.html', content=content)
-	
-def page_four_base():
-	"""
-
-	"""
-	content = g.db.pages.find_one({ "name" : 'page_4' })
-	return render_template('pages/page_four.html', content=content)
-	
 def page_five_base():
 	"""
 

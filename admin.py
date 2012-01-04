@@ -127,7 +127,7 @@ def admin_page():
     """
     
     """
-    #init_mongodb()
+    init_mongodb()
     return render_template('admin/dashboard.html')
  
 @check_authentication   

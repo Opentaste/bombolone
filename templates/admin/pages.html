@@ -7,8 +7,9 @@
     <table class="table_items">
     	<thead>
     		<tr>	
-    			<th style="width:40%;">Name</th>
-    			<th style="width:40%;">_id</th>
+    			<th style="width:30%;">Name</th>
+    			<th style="width:30%;">Url</th>
+    			<th style="width:30%;">_id</th>
     		</tr>
     	</thead>
     	<tfoot>
@@ -20,6 +21,7 @@
     		{% for x in pages %}
     		<tr>
     			<td><a href="{{ admin }}/pages/{{ str(x['_id']) }}/">{{ x['name'] }}</a></td>
+    			<td>{{ x['url']['en'] }}</td>
     			<td>{{ x['_id'] }}</td>
     		</tr>
     		{% endfor %}

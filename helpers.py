@@ -11,8 +11,7 @@ from hashlib import md5, sha1
 
 def init_mongodb():
     """ fixtures MongoDB
-    """
-    
+    """    
     admin_pass = create_password('admin')
     user_pass = create_password('user')
     
@@ -24,9 +23,14 @@ def init_mongodb():
     for num in range(1,6):
         page = {
             'name' : 'page_'+str(num),
+            'file' : 'page_'+str(num),
             'title': {
                 'en' : 'Title '+str(num),
                 'it' : 'Titolo '+str(num)
+            },
+            'url': {
+                'en' : 'page_'+str(num),
+                'it' : 'pagina_'+str(num)
             },
             'content' : {
                 'en' : [
@@ -51,7 +55,9 @@ def init_mongodb():
         }
         if num == 1:
             page['name'] = 'home_page'
+            page['file'] = 'home'
             page['title'] = { 'en' : 'Home Page', 'it' : 'Home' }
+            page['url'] = None
             g.db.pages.update( { 'name' : 'home_page' }, page, True)
         else:
             g.db.pages.update( { 'name' : 'page_'+str(num) }, page, True)
