@@ -10,16 +10,16 @@ from flask import request, session, g, Response, render_template, url_for, redir
 from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 
-from helpers import init_mongodb
+from helpers import init_mongodb, create_password
 
 dict_login = {
     'error_1' : {
-        'en' : 'error',
-        'it' : 'errore'
+        'en' : 'error 1',
+        'it' : 'errore 1'
     },
     'error_2' : {
-        'en' : 'error',
-        'it' : 'errore'
+        'en' : 'error 2',
+        'it' : 'errore 2'
     }
 }
 
