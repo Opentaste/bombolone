@@ -28,31 +28,30 @@ def init_mongodb():
                 'en' : 'Title '+str(num),
                 'it' : 'Titolo '+str(num)
             },
+            'description': {
+                'en' : 'Description '+str(num),
+                'it' : 'Descrizione '+str(num)
+            },
             'url': {
                 'en' : 'page_'+str(num),
                 'it' : 'pagina_'+str(num)
             },
             'content' : {
                 'en' : [
-                    { 'label' : 'label_1' , 'value' : '1' },
-                    { 'label' : 'label_2' , 'value' : '2' },
-                    { 'label' : 'label_3' , 'value' : '3' },
-                    { 'label' : 'label_4' , 'value' : '4' },
-                    { 'label' : 'label_5' , 'value' : '5' },
-                    { 'label' : 'label_6' , 'value' : '6' },
-                    { 'label' : 'label_7' , 'value' : '7' },
-                    { 'label' : 'label_8' , 'value' : '8' }],
+                    { 'label' : 'label_1' , 'value' : '1', 'type' : 0 },
+                    { 'label' : 'label_2' , 'value' : '2', 'type' : 0 },
+                    { 'label' : 'label_3' , 'value' : '3', 'type' : 0 },
+                    { 'label' : 'label_4' , 'value' : '4', 'type' : 0 },
+                    { 'label' : 'label_5' , 'value' : '5', 'type' : 0 }],
                 'it' : [
-                    { 'label' : 'label_1' , 'value' : '1' },
-                    { 'label' : 'label_2' , 'value' : '2' },
-                    { 'label' : 'label_3' , 'value' : '3' },
-                    { 'label' : 'label_4' , 'value' : '4' },
-                    { 'label' : 'label_5' , 'value' : '5' },
-                    { 'label' : 'label_6' , 'value' : '6' },
-                    { 'label' : 'label_7' , 'value' : '7' },
-                    { 'label' : 'label_8' , 'value' : '8' }]
+                    { 'label' : 'label_1' , 'value' : '1', 'type' : 0 },
+                    { 'label' : 'label_2' , 'value' : '2', 'type' : 0 },
+                    { 'label' : 'label_3' , 'value' : '3', 'type' : 0 },
+                    { 'label' : 'label_4' , 'value' : '4', 'type' : 0 },
+                    { 'label' : 'label_5' , 'value' : '5', 'type' : 0 }]
             }
         }
+        
         if num == 1:
             page['name'] = 'home_page'
             page['file'] = 'home'

@@ -19,24 +19,32 @@
                     <label>Page title</label>
                     <input type="text" name="title_it" value="{{ page['title']['it'] }}" tabindex="2" maxlength="200" />
                 </section>
+                <section>
+                    <label>Url pagina</label>
+                    <input type="text" name="url_it" value="{{ page['url']['it'] }}" tabindex="3" maxlength="40" />
+                </section>
+                <section>
+                    <label>Name file</label>
+                    <input type="text" name="name_file" value="{{ page['file'] }}" tabindex="3" maxlength="20" />
+                </section>
                 <br />
                 <br />
                 {% for i, x in enumerate(page['content']['it']) %}
                 <section class="label_form section_num_{{ i }}">
                     <label>{{ x['label'] }}</label>
-                    <input type="text" name="label_it_{{ i }}" value="{{ x['value'] }}" 
-                    tabindex="{{ (i+2) }}" class="label_it_{{ i }}_1" />
+                    <input type="text" name="label_{{ i }}" value="{{ x['value'] }}" 
+                    tabindex="{{ (i+3) }}" class="label_{ i }}_1" />
                     
-                    <textarea rows="4" cols="50" name="label_it_{{ i }}" 
-                    tabindex="{{ (i+2) }}" class="label_it_{{ i }}_2" style="display:none">{{ x['value'] }}</textarea>
+                    <textarea rows="4" cols="50" name="label_{{ i }}" 
+                    tabindex="{{ (i+3) }}" class="label_{{ i }}_2" style="display:none">{{ x['value'] }}</textarea>
                     
-                    <input type="file" name="label_it_{{ i }}" tabindex="{{ (i+2) }}" 
-                    class="label_it_{{ i }}_3" style="display:none" />
+                    <input type="file" name="label_{{ i }}" tabindex="{{ (i+3) }}" 
+                    class="label_{{ i }}_3" style="display:none" />
                     
-                    <select class="label_it_{{ i }}_0">
-                        <option value="{{ i }}_1">text</option>
-                        <option value="{{ i }}_2">textarea</option>
-                        <option value="{{ i }}_3">image</option>
+                    <select class="label_{{ i }}_0" name="input_label_{{ i }}">
+                        <option value="{{ i }}_1" {% if page['input_label'] == '1' %}selected="selected"{% endif %}>text</option>
+                        <option value="{{ i }}_2" {% if page['input_label'] == '2' %}selected="selected"{% endif %}>textarea</option>
+                        <option value="{{ i }}_3" {% if page['input_label'] == '3' %}selected="selected"{% endif %}>image</option>
                     </select>
                 </section>
                 {% endfor %}
@@ -48,10 +56,27 @@
                     <label>Page title</label>
                     <input type="text" name="title_en" value="{{ page['title']['en'] }}" tabindex="2" maxlength="200" />
                 </section>
-                {% for i, x in enumerate(page['content']['en']) %}
                 <section>
+                    <label>Url pagina</label>
+                    <input type="text" name="url_en" value="{{ page['url']['en'] }}" tabindex="3" maxlength="40" />
+                </section>
+                {% for i, x in enumerate(page['content']['en']) %}
+                <section class="label_form section_num_{{ i }}">
                     <label>{{ x['label'] }}</label>
-                    <input type="text" name="label_en_{{ i }}" value="{{ x['value'] }}" tabindex="{{ (i+2) }}" />
+                    <input type="text" name="label_{{ i }}" value="{{ x['value'] }}" 
+                    tabindex="{{ (i+3) }}" class="label_{{ i }}_1" />
+                    
+                    <textarea rows="4" cols="50" name="label_{{ i }}" 
+                    tabindex="{{ (i+3) }}" class="label_{{ i }}_2" style="display:none">{{ x['value'] }}</textarea>
+                    
+                    <input type="file" name="label_{{ i }}" tabindex="{{ (i+3) }}" 
+                    class="label_{{ i }}_3" style="display:none" />
+                    
+                    <select class="label_{{ i }}_0" name="input_label_{{ i }}">
+                        <option value="{{ i }}_1" {% if page['input_label'] == '1' %}selected="selected"{% endif %}>text</option>
+                        <option value="{{ i }}_2" {% if page['input_label'] == '2' %}selected="selected"{% endif %}>textarea</option>
+                        <option value="{{ i }}_3" {% if page['input_label'] == '3' %}selected="selected"{% endif %}>image</option>
+                    </select>
                 </section>
                 {% endfor %}
             </div>

@@ -30,6 +30,7 @@ def inject_user():
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
+    g.lan = 'en'
     return home_page()
         
 # ========================================================================	
@@ -68,7 +69,8 @@ def languages():
 
 @app.route('/<lan>/')
 def home_two(lan):
-    return home_page(lan)
+    g.lan = lan
+    return home_page()
 
 @app.route('/<lan>/<title>/')
 def page(lan, title):

@@ -13,13 +13,16 @@ from pymongo.objectid import ObjectId
 from shared import PATH
 
 
-def home_page(lan):
+def home_page():
 	"""
 	
 	"""
-	content = g.db.pages.find_one({ "name" : 'home_page' }) #{ "_id" : 'blablablablalba' }
-	page_url = { 'it' : PATH+'/it/', 'en' : PATH+'/en/' }
-	return render_template('pages/home.html', content=content, url=page_url, lan=lan)
+	page_data = g.db.pages.find_one({ "name" : 'home_page' }) #{ "_id" : 'blablablablalba' }
+	content = page_data['content']
+	lan = g.lan
+	title = page_data['title']
+	url = { 'it' : PATH+'/it/', 'en' : PATH+'/en/' }
+	return render_template('pages/home.html', **locals())
 	
 def page_base(lan, title):
     content = g.db.pages.find_one({ "url.it" : title })

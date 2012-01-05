@@ -30,13 +30,15 @@ def core_inject_user():
 	"""Context processors run before the template is rendered and have the ability 
 	to inject new values into the template context. A context processor is a function 
 	that returns a dictionary."""
+	
 	url = urlparse(request.url)
-	page_url_list = { x['name'] : x['url'] for x in g.db.pages.find()}
+	
 	b = {}
 	b['path'] = PATH
 	b['admin'] = PATH + '/admin'
 	b['layout'] = PATH + '/static/layout'
-	b['page'] = page_url_list
+	b['page'] = { x['name'] : x['url'] for x in g.db.pages.find()}
+	
 	return b
 	
 def core_bombolone():
