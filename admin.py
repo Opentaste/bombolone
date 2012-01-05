@@ -183,12 +183,13 @@ def pages_page():
     """
     list_pages = g.db.pages.find()
     return render_template('admin/pages.html', pages=list_pages)
- 
-@check_authentication   
+  
 def pages_content_page(_id):
     """
 
     """
+    if g.my_id is None:
+        abort(401)
     if request.method == 'POST':
         name = request.form['name']
         title_it = request.form['title_it']

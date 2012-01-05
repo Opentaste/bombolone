@@ -13,11 +13,25 @@
 			    t.get('.one').css({ 'display' : 'none' });
 				t.get('.two').css({ 'display' : 'inline' });
 			});
+		},
+		init_change_label : function(){
+		    var len = t.get('.label_form').length;
+		    for (var i = len; i--;){
+		        t.get('.label_it_'+i+'_0').on('change', function(e){
+                    var chosen = e.currentTarget.value;
+                    var chosen_base = chosen.split('_')[0]
+                    t.get('.label_it_'+chosen_base+'_1').css({ 'display' : 'none' })
+                    t.get('.label_it_'+chosen_base+'_2').css({ 'display' : 'none' })
+                    t.get('.label_it_'+chosen_base+'_3').css({ 'display' : 'none' })
+                    t.get('.label_it_'+chosen).css({ 'display' : 'inline' })
+		        })
+		    }
 		}
 	}
 	
 	t.get(document).ready(function(){
 		pages.init();
+		pages.init_change_label();
 	})
 		
 })();

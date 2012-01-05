@@ -19,10 +19,25 @@
                     <label>Page title</label>
                     <input type="text" name="title_it" value="{{ page['title']['it'] }}" tabindex="2" maxlength="200" />
                 </section>
+                <br />
+                <br />
                 {% for i, x in enumerate(page['content']['it']) %}
-                <section>
+                <section class="label_form section_num_{{ i }}">
                     <label>{{ x['label'] }}</label>
-                    <input type="text" name="label_it_{{ i }}" value="{{ x['value'] }}" tabindex="{{ (i+2) }}" />
+                    <input type="text" name="label_it_{{ i }}" value="{{ x['value'] }}" 
+                    tabindex="{{ (i+2) }}" class="label_it_{{ i }}_1" />
+                    
+                    <textarea rows="4" cols="50" name="label_it_{{ i }}" 
+                    tabindex="{{ (i+2) }}" class="label_it_{{ i }}_2" style="display:none">{{ x['value'] }}</textarea>
+                    
+                    <input type="file" name="label_it_{{ i }}" tabindex="{{ (i+2) }}" 
+                    class="label_it_{{ i }}_3" style="display:none" />
+                    
+                    <select class="label_it_{{ i }}_0">
+                        <option value="{{ i }}_1">text</option>
+                        <option value="{{ i }}_2">textarea</option>
+                        <option value="{{ i }}_3">image</option>
+                    </select>
                 </section>
                 {% endfor %}
             </div>

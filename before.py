@@ -34,7 +34,7 @@ def core_inject_user():
 	page_url_list = { x['name'] : x['url'] for x in g.db.pages.find()}
 	b = {}
 	b['path'] = PATH
-	b['admin'] = PATH + '/static/admin'
+	b['admin'] = PATH + '/admin'
 	b['layout'] = PATH + '/static/layout'
 	b['page'] = page_url_list
 	return b
