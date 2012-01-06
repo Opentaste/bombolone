@@ -142,9 +142,10 @@ def pages_content_page(_id):
             }
         }
         
-        page['input_label'] = [x for x in request.form if x.startswith('input_label_')]
-        
         len_of_label = len([int(x.split('_')[2]) for x in request.form if x.startswith('label_it_')])
+        
+        page['input_label'] = [ int(request.form['input_label_'+str(i)]) for i in range(len_of_label)]
+        
         for i in range(len_of_label):
             page['content']['it'].append( { 'label' : 'label_it_'+str(i) , 'value' : request.form['label_it_'+str(i)] })
         for i in range(len_of_label):
@@ -153,6 +154,7 @@ def pages_content_page(_id):
         g.db.pages.update( { '_id' : ObjectId(_id) }, page)
         
     page_content = g.db.pages.find_one({ '_id' : ObjectId(_id) })
+    
     return render_template('admin/pages_content.html', page=page_content)
     
 @check_authentication 

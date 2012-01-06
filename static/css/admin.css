@@ -305,6 +305,9 @@ button.submit:hover span {
     width:180px!important;
 }
 
+.label_form input, .label_form textarea {
+    display:none;
+}
 
 /* Table =================================================================================== */
 .table_items{

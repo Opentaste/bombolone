@@ -49,7 +49,8 @@ def init_mongodb():
                     { 'label' : 'label_3' , 'value' : '3', 'type' : 0 },
                     { 'label' : 'label_4' , 'value' : '4', 'type' : 0 },
                     { 'label' : 'label_5' , 'value' : '5', 'type' : 0 }]
-            }
+            },
+            'input_label': [ 1, 1, 1, 1, 1 ]
         }
         
         if num == 1:
