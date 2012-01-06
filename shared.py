@@ -13,7 +13,7 @@
 from flask import Flask
 from pymongo import Connection
 
-VERSION = '0.0.4'
+VERSION = '0.0.5'
 
 DEBUG = True
 PATH = 'http://0.0.0.0:5000'

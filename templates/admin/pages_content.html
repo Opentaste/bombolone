@@ -44,6 +44,7 @@
                     <span>Alias :</span><input type="text" name="alias_en_name_{{ i }}" value="{{ x['alias'] }}" class="alias_label" />
                     {% else %}
                     <label>{{ x['alias'] }}</label>
+                    <input type="text" name="alias_en_name_{{ i }}" value="{{ x['alias'] }}" />
                     {% endif %}
                     
                     {% if g.my['rank'] == 10 %}
@@ -90,6 +91,7 @@
                     <span>Alias :</span><input type="text" name="alias_it_name_{{ i }}" value="{{ x['alias'] }}" class="alias_label" />
                     {% else %}
                     <label>{{ x['alias'] }}</label>
+                    <input type="text" name="alias_it_name_{{ i }}" value="{{ x['alias'] }}" />
                     {% endif %}
                     
                     {% if g.my['rank'] == 10 %}

@@ -33,9 +33,11 @@
             <li>
                 <p><a href="{{ url_for('pages') }}" title="" >Pages</a></p>
             </li>
+            {% if g.my['rank'] == 10 %}
             <li>
                 <p><a href="{{ url_for('languages') }}" title="" >Languages</a></p>
             </li>
+            {% endif %}
         </ul>
     </nav><!-- nav -->
     
