@@ -16,10 +16,10 @@
         <nav>
             <ul>
                 <li><a href="{{ path+'/'+lan+'/' }}" title="">Home</a></li>
-                <li><a href="{{ '/'+lan+'/'+page['page_2'][lan] }}/" title="">Page two</a></li>
-                <li><a href="{{ '/'+lan+'/'+page['page_3'][lan] }}/" title="">Page three</a></li>
-                <li><a href="{{ '/'+lan+'/'+page['page_4'][lan] }}/" title="">Page four</a></li>
-                <li><a href="{{ '/'+lan+'/'+page['page_5'][lan] }}/" title="">Page five</a></li>
+                <li><a href="{{ '/'+lan+'/'+pages['page_2']['url'][lan] }}/" title="">{{ pages['page_2']['title'][lan] }}</a></li>
+                <li><a href="{{ '/'+lan+'/'+pages['page_3']['url'][lan] }}/" title="">{{ pages['page_3']['title'][lan] }}</a></li>
+                <li><a href="{{ '/'+lan+'/'+pages['page_4']['url'][lan] }}/" title="">{{ pages['page_4']['title'][lan] }}</a></li>
+                <li><a href="{{ '/'+lan+'/'+pages['page_5']['url'][lan] }}/" title="">{{ pages['page_5']['title'][lan] }}</a></li>
             </ul>
         </nav>
     </header>
@@ -31,10 +31,10 @@
 	    <p>© 2012 Bombolone Web Site </p>
 	    <p>
 	        <a href="{{ path+'/'+lan+'/' }}" title="">Home</a> |
-	        <a href="{{ '/'+lan+'/'+page['page_2'][lan] }}/" title="">Page two</a> | 
-	        <a href="{{ '/'+lan+'/'+page['page_3'][lan] }}/" title="">Page three</a> | 
-	        <a href="{{ '/'+lan+'/'+page['page_4'][lan] }}/" title="">Page four</a> | 
-	        <a href="{{ '/'+lan+'/'+page['page_5'][lan] }}/" title="">Page five</a>
+	        <a href="{{ '/'+lan+'/'+pages['page_2']['url'][lan] }}/" title="">{{ pages['page_2']['title'][lan] }}</a> | 
+	        <a href="{{ '/'+lan+'/'+pages['page_3']['url'][lan] }}/" title="">{{ pages['page_3']['title'][lan] }}</a> | 
+	        <a href="{{ '/'+lan+'/'+pages['page_4']['url'][lan] }}/" title="">{{ pages['page_4']['title'][lan] }}</a> | 
+	        <a href="{{ '/'+lan+'/'+pages['page_5']['url'][lan] }}/" title="">{{ pages['page_5']['title'][lan] }}</a>
 	    </p>
 	    <p>
 	        <a href="{{ url['it'] }}" title="Bombolone | ">
