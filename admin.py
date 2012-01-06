@@ -13,6 +13,7 @@ from pymongo.objectid import ObjectId
 
 from helpers import init_mongodb, create_password
 from language import dict_login, setting_message
+from upload import upload_file
 
 
 def check_authentication(function_to_decorate):
@@ -147,7 +148,12 @@ def pages_content_page(_id):
         page['input_label'] = [ int(request.form['input_label_'+str(i)]) for i in range(len_of_label)]
         
         for i in range(len_of_label):
-            page['content']['it'].append( { 'label' : 'label_it_'+str(i) , 'value' : request.form['label_it_'+str(i)] })
+            if page['input_label'][i] is 3:
+                name_file = upload_file('it_'+str(i), 'page')
+                page['content']['it'].append( { 'label' : 'label_it_'+str(i) , 'value' : name_file })
+            else:
+                page['content']['it'].append( { 'label' : 'label_it_'+str(i) , 'value' : request.form['label_it_'+str(i)] })
+            
         for i in range(len_of_label):
             page['content']['en'].append( { 'label' : 'label_en_'+str(i) , 'value' : request.form['label_en_'+str(i)] })
                 
@@ -155,7 +161,7 @@ def pages_content_page(_id):
         
     page_content = g.db.pages.find_one({ '_id' : ObjectId(_id) })
     
-    return render_template('admin/pages_content.html', page=page_content)
+    return render_template('admin/pages_content.html', page=page_content, _id=_id)
     
 @check_authentication 
 def languages_page():

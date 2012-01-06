@@ -13,10 +13,11 @@
 from flask import Flask
 from pymongo import Connection
 
-VERSION = '0.0.32'
+VERSION = '0.0.34'
 
 DEBUG = True
 PATH = 'http://0.0.0.0:5000'
+UP_FOLDER = '/Users/leo/Desktop/git/bombolone/static/image/'
 PORT = 5000
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG', 'bmp'])

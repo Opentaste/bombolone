@@ -305,8 +305,12 @@ button.submit:hover span {
     width:180px!important;
 }
 
-.label_form input, .label_form textarea {
+.label_form input, .label_form textarea, .label_form img {
     display:none;
+}
+.label_form img {
+    max-width:200px;
+    max-height:200px;
 }
 
 /* Table =================================================================================== */

@@ -37,6 +37,7 @@ def core_inject_user():
 	b['path'] = PATH
 	b['admin'] = PATH + '/admin'
 	b['layout'] = PATH + '/static/layout'
+	b['image'] = PATH + '/static/image'
 	b['page'] = { x['name'] : x['url'] for x in g.db.pages.find()}
 	
 	return b

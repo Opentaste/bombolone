@@ -9,6 +9,8 @@
 from flask import g
 from hashlib import md5, sha1
 
+from shared import ALLOWED_EXTENSIONS
+
 def init_mongodb():
     """ fixtures MongoDB
     """    
@@ -73,3 +75,8 @@ def create_password(word):
     new_pass_right.update(word + 'magic_string')
     new_pass = new_pass_right.hexdigest() + 'f9eAf$2' + new_pass_left.hexdigest() + 'dY!sFd'
     return new_pass
+    
+def allowed_file(filename):
+    """Check if the file has correct extension.
+    Return True or False"""
+    return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS

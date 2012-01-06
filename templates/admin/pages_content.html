@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
     <h2>Pages content</h2>
-    <form action="#" method="post">
+    <form action="{{ url_for('pages_content', _id=_id) }}" enctype="multipart/form-data" method="post" >
         <ul class="menu_languages">
             <li class="section_one">Italiano</li>
             <li class="section_two">English</li>
@@ -38,7 +38,9 @@
                     <textarea rows="4" cols="50" name="label_it_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_2" 
                     {% if page['input_label'][i] == 2 %} style="display:inline" {% endif %}>{{ x['value'] }}</textarea>
                     
-                    <input type="file" name="label_it_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_3" 
+                    
+                    <img src="{{ image+'/'+x['value'] }}" {% if page['input_label'][i] == 3 %} style="display:inline" {% endif %}>
+                    <input type="file" name="file_upload_it_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_3" 
                     {% if page['input_label'][i] == 3 %} style="display:inline" {% endif %} />
                     
                     <select class="label_{{ i }}_0" name="input_label_{{ i }}">
@@ -69,7 +71,8 @@
                     <textarea rows="4" cols="50" name="label_en_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_2" 
                     {% if page['input_label'][i] == 2 %} style="display:inline" {% endif %}>{{ x['value'] }}</textarea>
                     
-                    <input type="file" name="label_en_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_3" 
+                    <img src="{{ image+'/'+x['value'] }}" {% if page['input_label'][i] == 3 %} style="display:inline" {% endif %}>
+                    <input type="file" name="file_upload_en_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_3" 
                     {% if page['input_label'][i] == 3 %} style="display:inline" {% endif %} />
                     
                     <select class="label_{{ i }}_0" name="input_label_{{ i }}">
