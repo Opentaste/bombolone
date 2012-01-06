@@ -17,6 +17,10 @@ def home_page():
 	"""
 	
 	"""
+	# It's important to leave the commentary below, 
+	# the first launch of the web application
+	#init_mongodb()
+	
 	page_data = g.db.pages.find_one({ "name" : 'home_page' }) #{ "_id" : 'blablablablalba' }
 	content = page_data['content']
 	lan = g.lan
