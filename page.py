@@ -21,9 +21,10 @@ def home_page():
 	#init_mongodb()
 	
 	page_data = g.db.pages.find_one({ "name" : 'home_page' }) #{ "_id" : 'blablablablalba' }
-	content = page_data['content']
 	lan = g.lan
 	title = page_data['title']
+	description = page_data['description']
+	content = page_data['content']
 	url = { 'it' : PATH+'/it/', 'en' : PATH+'/en/' }
 	
 	return render_template('pages/home.html', **locals())
@@ -61,11 +62,3 @@ def page_base(lan, title):
         # For every page you must specify the file where you want 
         # to use the contents stored in the database.
         return render_template('pages/'+page_data['file']+'.html', **locals())
-        
-
-def page_five_base():
-	"""
-
-	"""
-	content = g.db.pages.find_one({ "name" : 'page_5' })
-	return render_template('pages/page_five.html', content=content)
