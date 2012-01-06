@@ -10,6 +10,7 @@ from flask import request, session, g, Response, render_template, url_for, redir
 from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 
+from helpers import init_mongodb
 from shared import PATH
 
 

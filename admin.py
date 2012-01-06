@@ -11,7 +11,7 @@ from flask import request, session, g, Response, render_template, url_for, redir
 from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 
-from helpers import init_mongodb, create_password
+from helpers import create_password
 from language import dict_login, setting_message
 from upload import upload_file
 
