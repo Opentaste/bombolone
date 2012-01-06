@@ -319,7 +319,8 @@ button.submit:hover span {
 
 .alias_label {
     display: inline !important;
-    width: 230px !important;
+    font-size:1em!important;
+    width: 104px !important;
 }
 
 /* Table =================================================================================== */

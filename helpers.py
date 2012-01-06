@@ -40,17 +40,17 @@ def init_mongodb():
             },
             'content' : {
                 'en' : [
-                    { 'label' : 'label_1' , 'value' : '1', 'type' : 0 },
-                    { 'label' : 'label_2' , 'value' : '2', 'type' : 0 },
-                    { 'label' : 'label_3' , 'value' : '3', 'type' : 0 },
-                    { 'label' : 'label_4' , 'value' : '4', 'type' : 0 },
-                    { 'label' : 'label_5' , 'value' : '5', 'type' : 0 }],
+                    { 'label' : 'label_1' , 'alias' : 'Label 1', 'value' : '1', 'type' : 0 },
+                    { 'label' : 'label_2' , 'alias' : 'Label 2', 'value' : '2', 'type' : 0 },
+                    { 'label' : 'label_3' , 'alias' : 'Label 3', 'value' : '3', 'type' : 0 },
+                    { 'label' : 'label_4' , 'alias' : 'Label 4', 'value' : '4', 'type' : 0 },
+                    { 'label' : 'label_5' , 'alias' : 'Label 5', 'value' : '5', 'type' : 0 }],
                 'it' : [
-                    { 'label' : 'label_1' , 'value' : '1', 'type' : 0 },
-                    { 'label' : 'label_2' , 'value' : '2', 'type' : 0 },
-                    { 'label' : 'label_3' , 'value' : '3', 'type' : 0 },
-                    { 'label' : 'label_4' , 'value' : '4', 'type' : 0 },
-                    { 'label' : 'label_5' , 'value' : '5', 'type' : 0 }]
+                    { 'label' : 'label_1' , 'alias' : 'Campo 1', 'value' : '1', 'type' : 0 },
+                    { 'label' : 'label_2' , 'alias' : 'Campo 2', 'value' : '2', 'type' : 0 },
+                    { 'label' : 'label_3' , 'alias' : 'Campo 3', 'value' : '3', 'type' : 0 },
+                    { 'label' : 'label_4' , 'alias' : 'Campo 4', 'value' : '4', 'type' : 0 },
+                    { 'label' : 'label_5' , 'alias' : 'Campo 5', 'value' : '5', 'type' : 0 }]
             },
             'input_label': [ 1, 1, 1, 1, 1 ]
         }
