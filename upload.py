@@ -26,7 +26,6 @@ def upload_file(index, type_upload):
         return ''
     file = request.files['file_upload_'+index]
     name = file.filename.rsplit('.', 1)[0]
-    print name
     extension = file.filename.rsplit('.', 1)[1]
     name = str(int(time.time())) + '_' + index + '_' + name + '.' + extension
     name = name.lower()

@@ -242,7 +242,7 @@ nav a {
     text-align: left;
 }
 
-.form_container section input {
+.form_container section input, .form_container section textarea {
     border: 1px solid #d8d8d8;
     font-family: Arial,sans-serif;
     font-size: 1.5em;
@@ -254,7 +254,11 @@ nav a {
    	border-radius: 3px;
 }
 
-.form_container section input:focus {
+.form_container section textarea {
+    width: 400px;
+}
+
+.form_container section input:focus, .form_container section textarea:focus {
     border: 1px solid #E28223;
 }
 
@@ -311,6 +315,11 @@ button.submit:hover span {
 .label_form img {
     max-width:200px;
     max-height:200px;
+}
+
+.alias_label {
+    display: inline !important;
+    width: 230px !important;
 }
 
 /* Table =================================================================================== */

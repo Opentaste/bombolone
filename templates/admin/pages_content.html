@@ -6,22 +6,15 @@
     <h2>Pages content</h2>
     <form action="{{ url_for('pages_content', _id=_id) }}" enctype="multipart/form-data" method="post" >
         <ul class="menu_languages">
-            <li class="section_one">Italiano</li>
-            <li class="section_two">English</li>
+            <li class="section_one">English</li>
+            <li class="section_two">Italiano</li>
         </ul>
         <section class="one">
             <div class="form_container">
+                {% if g.my['rank'] == 10 %}
                 <section>
-                    <label>Page name</label>
+                    <label>Pagina name</label>
                     <input type="text" name="name" value="{{ page['name'] }}" tabindex="1" maxlength="20" />
-                </section>
-                <section>
-                    <label>Page title</label>
-                    <input type="text" name="title_it" value="{{ page['title']['it'] }}" tabindex="2" maxlength="200" />
-                </section>
-                <section>
-                    <label>Url pagina</label>
-                    <input type="text" name="url_it" value="{{ page['url']['it'] }}" tabindex="3" maxlength="40" />
                 </section>
                 <section>
                     <label>Name file</label>
@@ -29,9 +22,72 @@
                 </section>
                 <br />
                 <br />
+                {% endif %}
+                <section>
+                    <label>Title</label>
+                    <input type="text" name="title_en" value="{{ page['title']['en'] }}" tabindex="2" maxlength="200" />
+                </section>
+                <section>
+                    <label>Description</label>
+                    <textarea rows="4" cols="50" name="description_en">{{ page['description']['it'] }}</textarea>
+                </section>
+                <section>
+                    <label>Url page</label>
+                    <input type="text" name="url_en" value="{{ page['url']['en'] }}" tabindex="3" maxlength="40" />
+                </section>
+                <br />
+                <br />
+                {% for i, x in enumerate(page['content']['en']) %}
+                <section class="label_form section_num_{{ i }}">
+                    {% if g.my['rank'] == 10 %}
+                    <span>Name label :</span><input type="text" name="label_en_name_{{ i }}" value="{{ x['label'] }}" class="alias_label" />
+                    {% else %}
+                    <label>{{ x['label'] }}</label>
+                    {% endif %}
+                    <input type="text" name="label_en_{{ i }}" value="{{ x['value'] }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_1"
+                    {% if page['input_label'][i] == 1 %} style="display:inline" {% endif %} />
+                    
+                    <textarea rows="4" cols="50" name="label_en_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_2" 
+                    {% if page['input_label'][i] == 2 %} style="display:inline" {% endif %}>{{ x['value'] }}</textarea>
+                    
+                    <img src="{{ image+'/'+x['value'] }}" {% if page['input_label'][i] == 3 %} style="display:inline" {% endif %}>
+                    <input type="file" name="file_upload_en_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_3" 
+                    {% if page['input_label'][i] == 3 %} style="display:inline" {% endif %} />
+                    
+                    {% if g.my['rank'] == 10 %}
+                    <select class="label_{{ i }}_0" name="input_label_{{ i }}">
+                        <option value="1" {% if page['input_label'][i] == 1 %}selected="selected"{% endif %}>text</option>
+                        <option value="2" {% if page['input_label'][i] == 2 %}selected="selected"{% endif %}>textarea</option>
+                        <option value="3" {% if page['input_label'][i] == 3 %}selected="selected"{% endif %}>image</option>
+                    </select>
+                    {% endif %}
+                </section>
+                {% endfor %}
+            </div>
+        </section>
+        <section class="two">
+            <div class="form_container">
+                <section>
+                    <label>Titolo</label>
+                    <input type="text" name="title_it" value="{{ page['title']['it'] }}" tabindex="2" maxlength="200" />
+                </section>
+                <section>
+                    <label>Descrizione</label>
+                    <textarea rows="4" cols="50" name="description_it">{{ page['description']['it'] }}</textarea>
+                </section>
+                <section>
+                    <label>Url pagina</label>
+                    <input type="text" name="url_it" value="{{ page['url']['it'] }}" tabindex="3" maxlength="40" />
+                </section>
+                <br />
+                <br />
                 {% for i, x in enumerate(page['content']['it']) %}
                 <section class="label_form section_num_{{ i }}">
+                    {% if g.my['rank'] == 10 %}
+                    <span>Name label :</span><input type="text" name="label_it_name_{{ i }}" value="{{ x['label'] }}" class="alias_label" />
+                    {% else %}
                     <label>{{ x['label'] }}</label>
+                    {% endif %}
                     <input type="text" name="label_it_{{ i }}" value="{{ x['value'] }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_1" 
                     {% if page['input_label'][i] == 1 %} style="display:inline" {% endif %} />
                     
@@ -43,43 +99,13 @@
                     <input type="file" name="file_upload_it_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_3" 
                     {% if page['input_label'][i] == 3 %} style="display:inline" {% endif %} />
                     
+                    {% if g.my['rank'] == 10 %}
                     <select class="label_{{ i }}_0" name="input_label_{{ i }}">
                         <option value="1" {% if page['input_label'][i] == 1 %}selected="selected"{% endif %}>text</option>
                         <option value="2" {% if page['input_label'][i] == 2 %}selected="selected"{% endif %}>textarea</option>
                         <option value="3" {% if page['input_label'][i] == 3 %}selected="selected"{% endif %}>image</option>
                     </select>
-                </section>
-                {% endfor %}
-            </div>
-        </section>
-        <section class="two">
-            <div class="form_container">
-                <section>
-                    <label>Page title</label>
-                    <input type="text" name="title_en" value="{{ page['title']['en'] }}" tabindex="2" maxlength="200" />
-                </section>
-                <section>
-                    <label>Url pagina</label>
-                    <input type="text" name="url_en" value="{{ page['url']['en'] }}" tabindex="3" maxlength="40" />
-                </section>
-                {% for i, x in enumerate(page['content']['en']) %}
-                <section class="label_form section_num_{{ i }}">
-                    <label>{{ x['label'] }}</label>
-                    <input type="text" name="label_en_{{ i }}" value="{{ x['value'] }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_1"
-                    {% if page['input_label'][i] == 1 %} style="display:inline" {% endif %} />
-                    
-                    <textarea rows="4" cols="50" name="label_en_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_2" 
-                    {% if page['input_label'][i] == 2 %} style="display:inline" {% endif %}>{{ x['value'] }}</textarea>
-                    
-                    <img src="{{ image+'/'+x['value'] }}" {% if page['input_label'][i] == 3 %} style="display:inline" {% endif %}>
-                    <input type="file" name="file_upload_en_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_3" 
-                    {% if page['input_label'][i] == 3 %} style="display:inline" {% endif %} />
-                    
-                    <select class="label_{{ i }}_0" name="input_label_{{ i }}">
-                        <option value="1" {% if page['input_label'][i] == 1 %}selected="selected"{% endif %}>text</option>
-                        <option value="2" {% if page['input_label'][i] == 2 %}selected="selected"{% endif %}>textarea</option>
-                        <option value="3" {% if page['input_label'][i] == 3 %}selected="selected"{% endif %}>image</option>
-                    </select>
+                    {% endif %}
                 </section>
                 {% endfor %}
             </div>
