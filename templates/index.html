@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	{% block head %}
+    {% block head %}
 	<title>Bombolone | {{ title[lan] }}</title>
+	<meta name="description" content="{{ description[lan] }}" />
 	{% endblock %}
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
 	<!--[if IE]>

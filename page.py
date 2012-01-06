@@ -15,9 +15,7 @@ from shared import PATH
 
 
 def home_page():
-	"""
-	
-	"""
+	""" Manages the contents of the home page """
 	# It's important to leave the commentary below, 
 	# the first launch of the web application
 	#init_mongodb()
@@ -27,19 +25,42 @@ def home_page():
 	lan = g.lan
 	title = page_data['title']
 	url = { 'it' : PATH+'/it/', 'en' : PATH+'/en/' }
+	
 	return render_template('pages/home.html', **locals())
 	
 def page_base(lan, title):
-    content = g.db.pages.find_one({ "url.it" : title })
-    lan = 'it'
-    if content is None:
-        content = g.db.pages.find_one({ "url.en" : title })
-        lan = 'en'
-    if content is None:
+    """ Manages the deployment of the contents 
+    of the pages of Bombolone.
+    """
+    
+    # Save a part of the query into a variable.
+    query_pages = g.db.pages
+    
+    # If the page is Italian I verify that the 
+    # title is listed in the Italian pages
+    if lan == 'it':
+        page_data = query_pages.find_one({ "url.it" : title })
+    
+    # If the page is English I verify that the 
+    # title is listed in the English pages
+    if lan == 'en':
+        page_data = query_pages.find_one({ "url.en" : title })
+        
+    # If page_data is None then there doesn't exist 
+    # the page for that title
+    if page_data is None:
         abort(404)
     else:
-        page_url = { 'it' : PATH+'/it/'+content['url']['it']+'/', 'en' : PATH+'/en/'+content['url']['en']+'/' }
-        return render_template('pages/'+content['file']+'.html', content=content, url=page_url, lan=lan)
+        # To simplify access to different content, 
+        # I have divided the content into different variables.
+        title = page_data['title']
+        description = page_data['description']
+        content = page_data['content']
+        url = { 'it' : PATH+'/it/'+page_data['url']['it']+'/', 'en' : PATH+'/en/'+page_data['url']['en']+'/' }
+        
+        # For every page you must specify the file where you want 
+        # to use the contents stored in the database.
+        return render_template('pages/'+page_data['file']+'.html', **locals())
         
 
 def page_five_base():
