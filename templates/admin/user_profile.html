@@ -1,0 +1,20 @@
+{% extends "admin/index.html" %}
+{% block head %}
+    <title>User profile</title>
+{% endblock %}
+{% block content %}
+    <h2>Pages content</h2>
+    <form action="{{ url_for('user_profile', _id=_id) }}" enctype="multipart/form-data" method="post" >
+        <div class="form_container">
+            <section>
+                <label>Username</label>
+                <input type="text" name="name" value="{{ user['username'] }}" tabindex="1" maxlength="20" />
+            </section>
+        </div>
+        <div>
+            <button tabindex="200" type="submit" class="submit">
+                <span>Update user</span>
+            </button>
+        </div>
+    </form>
+{% endblock %}

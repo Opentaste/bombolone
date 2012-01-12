@@ -169,11 +169,28 @@ def pages_content_page(_id):
     page_content = g.db.pages.find_one({ '_id' : ObjectId(_id) })
     
     return render_template('admin/pages_content.html', page=page_content, _id=_id)
+
+@check_authentication 
+def users_page():
+    """
+
+    """
+    users_list = g.db.users.find()
+    return render_template('admin/users.html', **locals())
+     
+def user_profile_page(_id):
+    """
+
+    """
+    if g.my_id is None:
+        abort(401)
+    user = g.db.users.find_one({ '_id' : ObjectId(_id) })
+    return render_template('admin/user_profile.html', **locals())
     
 @check_authentication 
 def languages_page():
     """
 
     """
-    list_languages = g.db.languages.find()
-    return render_template('admin/languages.html', lan=list_languages)
+    languages_list = g.db.languages.find()
+    return render_template('admin/languages.html', **locals())

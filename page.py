@@ -22,9 +22,9 @@ def home_page():
 	
 	page_data = g.db.pages.find_one({ "name" : 'home_page' }) #{ "_id" : 'blablablablalba' }
 	lan = g.lan
-	title = page_data['title']
-	description = page_data['description']
-	content = page_data['content']
+	title = page_data['title'][lan]
+	description = page_data['description'][lan]
+	content = page_data['content'][lan]
 	url = { 'it' : PATH+'/it/', 'en' : PATH+'/en/' }
 	
 	return render_template('pages/home.html', **locals())
@@ -54,9 +54,9 @@ def page_base(lan, title):
     else:
         # To simplify access to different content, 
         # I have divided the content into different variables.
-        title = page_data['title']
-        description = page_data['description']
-        content = page_data['content']
+        title = page_data['title'][lan]
+        description = page_data['description'][lan]
+        content = page_data['content'][lan]
         url = { 'it' : PATH+'/it/'+page_data['url']['it']+'/', 'en' : PATH+'/en/'+page_data['url']['en']+'/' }
         
         # For every page you must specify the file where you want 

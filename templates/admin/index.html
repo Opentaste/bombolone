@@ -35,6 +35,9 @@
             </li>
             {% if g.my['rank'] == 10 %}
             <li>
+                <p><a href="{{ url_for('users') }}" title="" >Users</a></p>
+            </li>
+            <li>
                 <p><a href="{{ url_for('languages') }}" title="" >Languages</a></p>
             </li>
             {% endif %}

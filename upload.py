@@ -25,6 +25,8 @@ def upload_file(index, type_upload):
     if not 'file_upload_'+index in request.files:
         return ''
     file = request.files['file_upload_'+index]
+    if len(file.filename) < 2:
+        return ''
     name = file.filename.rsplit('.', 1)[0]
     extension = file.filename.rsplit('.', 1)[1]
     name = str(int(time.time())) + '_' + index + '_' + name + '.' + extension

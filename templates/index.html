@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8" />
     {% block head %}
-	<title>Bombolone | {{ title[lan] }}</title>
-	<meta name="description" content="{{ description[lan] }}" />
+	<title>Bombolone | {{ title }}</title>
+	<meta name="description" content="{{ description }}" />
 	{% endblock %}
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
 	<!--[if IE]>
