@@ -13,6 +13,7 @@
         <option value="2" {% if page['input_label'][i] == 2 %}selected="selected"{% endif %}>textarea</option>
         <option value="3" {% if page['input_label'][i] == 3 %}selected="selected"{% endif %}>image</option>
     </select>
+    <button class="page_remove_label num_{{ i }}">- Remove label</button>
     {% endif %}
     
     <input type="text" name="label_en_{{ i }}" value="{{ x['value'] }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_1"
