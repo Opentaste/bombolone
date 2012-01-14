@@ -14,8 +14,8 @@ from jinja2 import contextfunction
 
 # Imports inside bombolone
 from admin import (login_page, logout_page, admin_page, profile_page, pages_page, 
-                    page_new_page, pages_content_page, add_label_page, languages_page, 
-                    users_page, user_profile_page)
+                    pages_new_page, pages_remove_page, pages_content_page, add_label_page, 
+                    languages_page, users_page, user_profile_page)
 from before import core_before_request, core_inject_user
 from page import home_page, page_base
 from shared import app, PORT
@@ -58,8 +58,12 @@ def pages():
     return pages_page()	
     
 @app.route('/admin/pages/new/', methods=['POST', 'GET'])
-def page_new():
-    return page_new_page()
+def pages_new():
+    return pages_new_page()
+    
+@app.route('/admin/pages/remove/<_id>/')
+def pages_remove(_id):
+    return pages_remove_page(_id)
     
 @app.route('/admin/pages/<_id>/', methods=['POST', 'GET'])
 def pages_content(_id):

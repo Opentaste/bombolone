@@ -161,18 +161,18 @@ def page_request_form(page):
     return page
 
 @check_authentication    
-def page_new_page():
+def pages_new_page():
     """
     
     """
     if g.my['rank'] is not 10:
         abort(401)
+        
     if request.method == 'POST':
-        page = {}
-        
+        page = {} 
         page = page_request_form(page)
-        
         g.db.pages.insert( page )
+        return redirect(url_for('pages'))
         
     return render_template('admin/pages_new.html')
   
@@ -182,17 +182,25 @@ def pages_content_page(_id):
     """
     if g.my_id is None:
         abort(401)
-    if request.method == 'POST':
         
-        page = g.db.pages.find_one({ '_id' : ObjectId(_id) })
-        
-        page = page_request_form(page)
-        
-        g.db.pages.update( { '_id' : ObjectId(_id) }, page)
-        
-    page_content = g.db.pages.find_one({ '_id' : ObjectId(_id) })
+    page = g.db.pages.find_one({ '_id' : ObjectId(_id) })
     
-    return render_template('admin/pages_content.html', page=page_content, _id=_id)
+    if request.method == 'POST':       
+        page = page_request_form(page)
+        g.db.pages.update( { '_id' : ObjectId(_id) }, page)
+            
+    return render_template('admin/pages_content.html', **locals())
+       
+def pages_remove_page(_id):
+    """
+
+    """
+    if g.my_id is None and g.my['rank'] is not 10:
+        abort(401)
+    
+    g.db.pages.remove({ '_id' : ObjectId(_id) })
+    
+    return 'ok'
     
 def add_label_page(number_label):
     """
@@ -200,11 +208,14 @@ def add_label_page(number_label):
     """
     if g.my_id is None:
         abort(401)
+        
     i = number_label
     j = str( int(i) + 3)
+    
     result = ''
     for lan_label in ['en','it']:
         result += render_template('admin/label.html', **locals()) + '__Bombolone__'
+        
     return result
 
 @check_authentication 

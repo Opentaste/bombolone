@@ -80,7 +80,7 @@
     	}
 	}
 	
-	t.get(document).ready(function(){
+	t.get(d).ready(function(){
 	    
 		pages.init();
 		pages.init_change_label();

@@ -85,6 +85,11 @@ a:hover {
     border-bottom:none
 }
 
+/* Color =================================================================================== */
+.first_light { 
+    background-color:#F3E2CF!important;
+}
+
 /* Header ================================================================================== */
 header {
     background: none repeat scroll 0 0 #93645A;
@@ -389,4 +394,13 @@ a:hover.button {
     border-top:1px solid #FFFFFF;
     font-size:11px;
     padding:1px 7px 2px;
+}
+
+span.remove_item {
+    cursor:pointer;
+    text-decoration:underline;
+}
+
+span:hover.remove_item {
+    color:red;
 }

@@ -22,11 +22,11 @@
     	</tfoot>
     	<tbody>
     		{% for x in pages %}
-    		<tr>
+    		<tr class="item_{{ str(x['_id']) }}">
     			<td><a href="{{ admin }}/pages/{{ str(x['_id']) }}/">{{ x['name'] }}</a></td>
     			<td>{{ x['url']['en'] }}</td>
     			<td>{{ x['_id'] }}</td>
-    			<td></td>
+    			<td><span class="remove_item item_{{ str(x['_id']) }}">remove page</span></td>
     		</tr>
     		{% endfor %}
     	</tbody>
@@ -52,4 +52,7 @@
     	</tbody>
     </table>
     {% endif %}
+{% endblock %}
+{% block javascript_file %}
+<script src="{{ url_for('static', filename='js/pages_dashboard.js') }}"></script>
 {% endblock %}
