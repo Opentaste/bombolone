@@ -14,7 +14,7 @@ from pymongo.objectid import ObjectId
 from helpers import create_password
 from language import dict_login, setting_message
 from upload import upload_file
-
+from helpers import init_mongodb
 
 def check_authentication(function_to_decorate):
     def wrapped_function():
@@ -29,6 +29,7 @@ def login_page():
 	"""
 	
 	"""
+	init_mongodb()
 	if request.method == 'POST':
 	    username = request.form['username'].lower()
 	    password = request.form['password']

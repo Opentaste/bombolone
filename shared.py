@@ -9,7 +9,7 @@
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
 """
-
+import os
 from flask import Flask
 from pymongo import Connection
 
@@ -17,7 +17,8 @@ VERSION = '0.0.6'
 
 DEBUG = True
 PATH = 'http://0.0.0.0:5000'
-UP_FOLDER = '/Users/leo/Desktop/git/bombolone/static/image/'
+PROJECT_DIR = os.path.dirname(__file__)
+UP_FOLDER = os.path.join(PROJECT_DIR,'/static/image/')
 PORT = 5000
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG', 'bmp'])
