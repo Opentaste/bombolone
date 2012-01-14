@@ -111,12 +111,11 @@ def users_page():
     users_list = g.db.users.find()
     return render_template('admin/users.html', **locals())
 
+@check_authentication
 def user_profile_page(_id):
     """
 
     """
-    if g.my_id is None:
-        abort(401)
     user = g.db.users.find_one({ '_id' : ObjectId(_id) })
     return render_template('admin/user_profile.html', **locals())
 

@@ -86,14 +86,12 @@ def pages_new_page():
         return redirect(url_for('pages'))
         
     return render_template('admin/pages_new.html')
-  
+ 
+@check_authentication 
 def pages_content_page(_id):
     """
 
     """
-    if g.my_id is None:
-        abort(401)
-        
     page = g.db.pages.find_one({ '_id' : ObjectId(_id) })
     
     if request.method == 'POST':       
@@ -101,25 +99,24 @@ def pages_content_page(_id):
         g.db.pages.update( { '_id' : ObjectId(_id) }, page)
             
     return render_template('admin/pages_content.html', **locals())
-       
+ 
+@check_authentication      
 def pages_remove_page(_id):
     """
 
     """
-    if g.my_id is None and g.my['rank'] is not 10:
+    if g.my['rank'] is not 10:
         abort(401)
     
     g.db.pages.remove({ '_id' : ObjectId(_id) })
     
     return 'ok'
-    
+
+@check_authentication  
 def add_label_page(number_label):
     """
 
-    """
-    if g.my_id is None:
-        abort(401)
-        
+    """ 
     i = number_label
     j = str( int(i) + 3)
     
