@@ -13,11 +13,11 @@ from flask import request, session, g, redirect, url_for, abort, render_template
 from jinja2 import contextfunction 
 
 # Imports inside bombolone
-from admin import (login_page, logout_page, admin_page, profile_page, pages_page, 
-                    pages_new_page, pages_remove_page, pages_content_page, add_label_page, 
-                    languages_page, users_page, user_profile_page)
+from admin import (login_page, logout_page, admin_page, profile_page, languages_page, users_page, 
+                   user_profile_page)
 from before import core_before_request, core_inject_user
 from page import home_page, page_base
+from pages import (pages_page, pages_new_page, pages_remove_page, pages_content_page, add_label_page)
 from shared import app, PORT
 
                   

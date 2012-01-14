@@ -1,0 +1,73 @@
+{% extends "admin/index.html" %}
+{% block head %}
+    <title>Add new page</title>
+{% endblock %}
+{% block content %}
+    <h2>Add new page</h2>
+    <form action="{{ url_for('pages_new') }}" enctype="multipart/form-data" method="post" >
+        <ul class="menu_languages">
+            <li class="section_one language_selected">English</li>
+            <li class="section_two">Italiano</li>
+        </ul>
+        <section class="form_container first_light">
+            <section>
+                <label>Page name</label>
+                <input type="text" name="name" value="" tabindex="1" maxlength="20" />
+            </section>
+            <section>
+                <label>Name file</label>
+                <input type="text" name="name_file" value="" tabindex="3" maxlength="20" />
+            </section>
+        </section>
+        <section class="one">
+            <div class="form_container">
+                <section>
+                    <label>Title</label>
+                    <input type="text" name="title_en" value="" tabindex="2" maxlength="200" />
+                </section>
+                <section>
+                    <label>Description</label>
+                    <textarea rows="4" cols="50" name="description_en"></textarea>
+                </section>
+                <section>
+                    <label>Url page</label>
+                    <input type="text" name="url_en" value="" tabindex="3" maxlength="40" />
+                </section>
+                <br />
+                <br />
+                <button class="page_add_label submit_one">
+                    <span>+ Add new label</span>
+                </button>
+            </div>
+        </section>
+        <section class="two">
+            <div class="form_container">
+                <section>
+                    <label>Titolo</label>
+                    <input type="text" name="title_it" value="" tabindex="2" maxlength="200" />
+                </section>
+                <section>
+                    <label>Descrizione</label>
+                    <textarea rows="4" cols="50" name="description_it"></textarea>
+                </section>
+                <section>
+                    <label>Url pagina</label>
+                    <input type="text" name="url_it" value="" tabindex="3" maxlength="40" />
+                </section>
+                <br />
+                <br />
+                <button class="page_add_label submit_two">
+                    <span>+ Aggiungi nuovo label</span>
+                </button>
+            </div>
+        </section>
+        <div>
+            <button tabindex="200" type="submit" class="submit">
+                <span>Create page</span>
+            </button>
+        </div>
+    </form>
+{% endblock %}
+{% block javascript_file %}
+<script src="{{ url_for('static', filename='js/pages.js') }}"></script>
+{% endblock %}
