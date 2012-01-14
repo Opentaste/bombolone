@@ -17,10 +17,10 @@ from upload import upload_file
 from helpers import init_mongodb
 
 def check_authentication(function_to_decorate):
-    def wrapped_function():
+    def wrapped_function(*args,**kwargs):
         if g.my_id is None:
             abort(401)
-        return function_to_decorate()
+        return function_to_decorate(*args,**kwargs)
        
     return wrapped_function
 
