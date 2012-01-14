@@ -21,6 +21,8 @@ def home_page():
 	#init_mongodb()
 	
 	page_data = g.db.pages.find_one({ "name" : 'home_page' }) #{ "_id" : 'blablablablalba' }
+	if not page_data:
+	    return redirect(url_for('login'))
 	lan = g.lan
 	title = page_data['title'][lan]
 	description = page_data['description'][lan]
