@@ -169,6 +169,17 @@ def pages_content_page(_id):
     page_content = g.db.pages.find_one({ '_id' : ObjectId(_id) })
     
     return render_template('admin/pages_content.html', page=page_content, _id=_id)
+    
+def add_label_page(number_label):
+    """
+
+    """
+    if g.my_id is None:
+        abort(401)
+    i = number_label
+    j = str( int(i) + 3)
+    lan_label = 'en'
+    return render_template('admin/label.html', **locals())
 
 @check_authentication 
 def users_page():

@@ -1,0 +1,27 @@
+<section class="label_form section_num_{{ i }}">
+    {% if g.my['rank'] == 10 %}
+    <span>Label :</span><input type="text" name="label_en_name_{{ i }}" value="{{ x['label'] }}" class="alias_label" />
+    <span>Alias :</span><input type="text" name="alias_en_name_{{ i }}" value="{{ x['alias'] }}" class="alias_label" />
+    {% else %}
+    <label>{{ x['alias'] }}</label>
+    <input type="text" name="alias_en_name_{{ i }}" value="{{ x['alias'] }}" />
+    {% endif %}
+    
+    {% if g.my['rank'] == 10 %}
+    <select class="label_{{ i }}_0" name="input_label_{{ i }}">
+        <option value="1" {% if page['input_label'][i] == 1 %}selected="selected"{% endif %}>text</option>
+        <option value="2" {% if page['input_label'][i] == 2 %}selected="selected"{% endif %}>textarea</option>
+        <option value="3" {% if page['input_label'][i] == 3 %}selected="selected"{% endif %}>image</option>
+    </select>
+    {% endif %}
+    
+    <input type="text" name="label_en_{{ i }}" value="{{ x['value'] }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_1"
+    {% if page['input_label'][i] == 1 %} style="display:inline" {% endif %} />
+    
+    <textarea rows="4" cols="50" name="label_en_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_2" 
+    {% if page['input_label'][i] == 2 %} style="display:inline" {% endif %}>{{ x['value'] }}</textarea>
+    
+    <img src="{{ image+'/'+x['value'] }}" {% if page['input_label'][i] == 3 %} style="display:inline" {% endif %}>
+    <input type="file" name="file_upload_en_{{ i }}" tabindex="{{ (i+3) }}" class="label_{{ i }}_3" 
+    {% if page['input_label'][i] == 3 %} style="display:inline" {% endif %} />
+</section>

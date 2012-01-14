@@ -14,7 +14,8 @@ from jinja2 import contextfunction
 
 # Imports inside bombolone
 from admin import (login_page, logout_page, admin_page, profile_page, pages_page, 
-                    pages_content_page, languages_page, users_page, user_profile_page)
+                    pages_content_page, add_label_page, languages_page, users_page, 
+                    user_profile_page)
 from before import core_before_request, core_inject_user
 from page import home_page, page_base
 from shared import app, PORT
@@ -59,6 +60,10 @@ def pages():
 @app.route('/admin/pages/<_id>/', methods=['POST', 'GET'])
 def pages_content(_id):
     return pages_content_page(_id)
+
+@app.route('/admin/pages/add_label/<number_label>/')
+def add_label(number_label):
+    return add_label_page(number_label)    
     
 @app.route('/admin/users/')
 def users():
