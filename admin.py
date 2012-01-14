@@ -144,6 +144,7 @@ def pages_content_page(_id):
 
         for i in range(len_of_label):
             label = 'label_it_'+str(i)
+            print label
             if 'label_it_name_0' in request.form:
                 label = request.form['label_it_name_'+str(i)]
             alias = request.form['alias_it_name_'+str(i)]
@@ -178,8 +179,10 @@ def add_label_page(number_label):
         abort(401)
     i = number_label
     j = str( int(i) + 3)
-    lan_label = 'en'
-    return render_template('admin/label.html', **locals())
+    result = ''
+    for lan_label in ['en','it']:
+        result += render_template('admin/label.html', **locals()) + '__Bombolone__'
+    return result
 
 @check_authentication 
 def users_page():

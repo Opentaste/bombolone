@@ -1,6 +1,6 @@
 <section class="label_form section_num_{{ i }}">
     {% if g.my['rank'] == 10 %}
-    <span>Label :</span><input type="text" name="label_it_name_{{ i }}" value="{{ x['label'] }}" class="alias_label" />
+    <span>Label :</span><input type="text" name="label_it_name_{{ i }}" value="{{ x['label'] }}" class="name_label label_it_name_{{ i }}" />
     <span>Alias :</span><input type="text" name="alias_it_name_{{ i }}" value="{{ x['alias'] }}" class="alias_label" />
     {% else %}
     <label>{{ x['alias'] }}</label>

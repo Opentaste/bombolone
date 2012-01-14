@@ -37,8 +37,8 @@
 		        t.ajax({
 		            'url' : '/admin/pages/add_label/'+pages.number_of_label+'/',
 		            'success' : function(data){
-		                    t.get('.submit_one').before(data);
-		                    t.get('.submit_two').before(data);
+		                    t.get('.submit_one').before(data.split('__Bombolone__')[0]);
+		                    t.get('.submit_two').before(data.split('__Bombolone__')[1]);
 		                    pages.add_on_change(pages.number_of_label);
 		            }
 		        });		            
@@ -52,6 +52,17 @@
                 var button_click = e.currentTarget.value;
                 var num_label = t.get(this).attr('class').split('_')[3];
                 t.get('.section_num_'+num_label).destroy() 
+	        });
+    	    
+    	},
+    	init_change_name_label : function(){
+    	    
+    	    t.get('.name_label').on('keyup', function(e){
+                var label_press = e.currentTarget
+                var label_value = label_press.value
+                var label_num = label_press.className.split('_')[4]
+                t.get('.label_en_name_'+label_num).value(label_value);
+                t.get('.label_it_name_'+label_num).value(label_value);
 	        });
     	    
     	},
@@ -75,6 +86,7 @@
 		pages.init_change_label();
 		pages.init_add_label();
 		pages.init_remove_label();
+		pages.init_change_name_label();
 		
 	})
 		
