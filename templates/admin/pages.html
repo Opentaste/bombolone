@@ -5,17 +5,19 @@
 {% block content %}
     <h2>Pages</h2>
     {% if g.my['rank'] == 10 %}
+    <a href="{{ admin }}/pages/new/" title="" class="button">Add new page</a>
     <table class="table_items">
     	<thead>
     		<tr>	
     			<th style="width:30%;">Name</th>
     			<th style="width:30%;">Url</th>
     			<th style="width:30%;">_id</th>
+    			<th style="width:10%;">Delete</th>
     		</tr>
     	</thead>
     	<tfoot>
     		<tr>
-    			<td colspan="2"></td>
+    			<td colspan="4"></td>
     		</tr>
     	</tfoot>
     	<tbody>
@@ -24,6 +26,7 @@
     			<td><a href="{{ admin }}/pages/{{ str(x['_id']) }}/">{{ x['name'] }}</a></td>
     			<td>{{ x['url']['en'] }}</td>
     			<td>{{ x['_id'] }}</td>
+    			<td></td>
     		</tr>
     		{% endfor %}
     	</tbody>
