@@ -28,7 +28,6 @@ def login_page():
 	"""
 	
 	"""
-	init_mongodb()
 	if request.method == 'POST':
 	    username = request.form['username'].lower()
 	    password = request.form['password']

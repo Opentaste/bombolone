@@ -9,7 +9,7 @@
 from flask import g
 from hashlib import md5, sha1
 
-from shared import ALLOWED_EXTENSIONS
+from shared import db, ALLOWED_EXTENSIONS
 
 def init_mongodb():
     """ fixtures MongoDB
@@ -17,10 +17,8 @@ def init_mongodb():
     admin_pass = create_password('admin')
     user_pass = create_password('user')
     
-    g.db.users.update( { 'username' : 'admin' }, { 'username' : 'admin', 'password' : admin_pass, 'rank' : 10 }, True)
-    g.db.users.update( { 'username' : 'user' }, { 'username' : 'user', 'password' : user_pass, 'rank' : 20 }, True)
-    
-    g.db.pages.remove()
+    db.users.update( { 'username' : 'admin' }, { 'username' : 'admin', 'password' : admin_pass, 'rank' : 10 }, True)
+    db.users.update( { 'username' : 'user' }, { 'username' : 'user', 'password' : user_pass, 'rank' : 20 }, True)
     
     for num in range(1,6):
         page = {
@@ -60,15 +58,23 @@ def init_mongodb():
             page['file'] = 'home'
             page['title'] = { 'en' : 'Home Page', 'it' : 'Home' }
             page['url'] = None
-            g.db.pages.update( { 'name' : 'home_page' }, page, True)
+            db.pages.update( { 'name' : 'home_page' }, page, True)
         else:
-            g.db.pages.update( { 'name' : 'page_'+str(num) }, page, True)
+            db.pages.update( { 'name' : 'page_'+str(num) }, page, True)
         
-    g.db.languages.update( { 'code' : 'it' }, { 'name' : 'Italiano', 'code' : 'it' }, True)
-    g.db.languages.update( { 'code' : 'en' }, { 'name' : 'English', 'code' : 'en' }, True)
+    db.languages.update( { 'code' : 'it' }, { 'name' : 'Italiano', 'code' : 'it' }, True)
+    db.languages.update( { 'code' : 'en' }, { 'name' : 'English', 'code' : 'en' }, True)
     
+def clean_database():
+    """
+    """
+    db.languages.remove()
+    db.pages.remove()
+    db.users.remove()
     
 def create_password(word):
+    """
+    """
     new_pass_left = md5() 
     new_pass_right = sha1()
     new_pass_left.update(word)

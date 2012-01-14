@@ -10,20 +10,15 @@ from flask import request, session, g, Response, render_template, url_for, redir
 from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 
-from helpers import init_mongodb
 from shared import PATH
 
-
 def home_page():
-	""" Manages the contents of the home page """
-	# It's important to leave the commentary below, 
-	# the first launch of the web application
-	#init_mongodb()
+	""" Manages the contents of the home page 
+	"""
 	
-	page_data = g.db.pages.find_one({ "name" : 'home_page' }) #{ "_id" : 'blablablablalba' }
-	if not page_data:
-	    return redirect(url_for('login'))
+	page_data = g.db.pages.find_one({ "name" : 'home_page' }) #{ "_id" : ObjectId('blablablablalba') }
 	lan = g.lan
+	
 	title = page_data['title'][lan]
 	description = page_data['description'][lan]
 	content = page_data['content'][lan]
