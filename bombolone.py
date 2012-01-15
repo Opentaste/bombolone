@@ -21,7 +21,7 @@ from shared import app, PORT
 # Imports modules bombolone
 from pages import pages_page, pages_new_page, pages_remove_page, pages_content_page, add_label_page
 from languages import languages_page
-from users import users_page, users_new_page, user_profile_page
+from users import users_page, users_new_page, users_remove_page, user_profile_page
 
 
                   
@@ -56,7 +56,8 @@ def admin():
 @app.route('/admin/profile/', methods=['POST', 'GET'])
 def profile():
     return profile_page()
-	
+
+# Start pages module	
 @app.route('/admin/pages/')
 def pages():
     return pages_page()	
@@ -77,6 +78,7 @@ def pages_content(_id):
 def add_label(number_label):
     return add_label_page(number_label)    
     
+# Start users module
 @app.route('/admin/users/')
 def users():
     return users_page()	
@@ -84,11 +86,16 @@ def users():
 @app.route('/admin/users/new/', methods=['POST', 'GET'])
 def users_new():
     return users_new_page()
+    
+@app.route('/admin/users/remove/<_id>/')
+def users_remove(_id):
+    return users_remove_page(_id)
 
 @app.route('/admin/users/<_id>/', methods=['POST', 'GET'])
 def user_profile(_id):
     return user_profile_page(_id)
 
+# Start languages module
 @app.route('/admin/languages/')
 def languages():
     return languages_page()
