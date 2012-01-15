@@ -38,7 +38,7 @@
                 <br />
                 <br />
                 {% for i, x in enumerate(page['content']['en']) %}
-                    {% include 'admin/label_en.html' %}
+                    {% include 'admin/pages/label_en.html' %}
                 {% endfor %}
                 {% if g.my['rank'] == 10 %}
                 <button class="page_add_label submit_one">
@@ -64,7 +64,7 @@
                 <br />
                 <br />
                 {% for i, x in enumerate(page['content']['it']) %}
-                    {% include 'admin/label_it.html' %}
+                    {% include 'admin/pages/label_it.html' %}
                 {% endfor %}
                 {% if g.my['rank'] == 10 %}
                 <button class="page_add_label submit_two">

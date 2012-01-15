@@ -16,13 +16,15 @@ from helpers import create_password
 from language import dict_login, setting_message
 from upload import upload_file
 
+MODULE_DIR = 'admin/pages'
+
 @check_authentication     
 def pages_page():
     """
 
     """
     pages = g.db.pages.find()
-    return render_template('admin/pages.html', **locals())
+    return render_template( MODULE_DIR+'/index.html', **locals() )
     
 def page_request_form(page):
     """
@@ -85,7 +87,7 @@ def pages_new_page():
         g.db.pages.insert( page )
         return redirect(url_for('pages'))
         
-    return render_template('admin/pages_new.html')
+    return render_template( MODULE_DIR+'/new.html' )
  
 @check_authentication 
 def pages_content_page(_id):
@@ -98,7 +100,7 @@ def pages_content_page(_id):
         page = page_request_form(page)
         g.db.pages.update( { '_id' : ObjectId(_id) }, page)
             
-    return render_template('admin/pages_content.html', **locals())
+    return render_template( MODULE_DIR+'/update.html', **locals() )
  
 @check_authentication      
 def pages_remove_page(_id):
@@ -122,6 +124,6 @@ def add_label_page(number_label):
     
     result = ''
     for lan_label in ['en','it']:
-        result += render_template('admin/label.html', **locals()) + '__Bombolone__'
+        result += render_template( MODULE_DIR+'/label.html', **locals() ) + '__Bombolone__'
         
     return result

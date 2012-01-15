@@ -1,0 +1,35 @@
+{% extends "admin/index.html" %}
+{% block head %}
+    <title>New user</title>
+{% endblock %}
+{% block content %}
+    <h2>New user</h2>
+    <form action="{{ url_for('users_new') }}" enctype="multipart/form-data" method="post" >
+        <div class="form_container">
+            <section>
+                <label>Username</label>
+                <input type="text" name="name" value="" tabindex="1" maxlength="20" />
+            </section>
+            <section>
+                <label>Rank</label>
+                <select name="rank">
+                    <option value="10">Admin</option>
+                    <option value="20">User</option>
+                </select>
+            </section>
+            <section>
+                <label>Password</label>
+                <input type="password" name="password" value="" tabindex="2" maxlength="20" />
+            </section>
+            <section>
+                <label>Check Password</label>
+                <input type="password" name="password_check" value="" tabindex="3" maxlength="20" />
+            </section>
+        </div>
+        <div>
+            <button tabindex="200" type="submit" class="submit">
+                <span>Create user</span>
+            </button>
+        </div>
+    </form>
+{% endblock %}

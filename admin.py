@@ -14,7 +14,6 @@ from pymongo.objectid import ObjectId
 from helpers import create_password
 from language import dict_login, setting_message
 from upload import upload_file
-from helpers import init_mongodb
 
 def check_authentication(function_to_decorate):
     def wrapped_function(*args,**kwargs):
@@ -102,27 +101,3 @@ def profile_page():
 		    g.status = 'mes-green'
 
     return render_template('admin/profile.html')
-    
-@check_authentication 
-def users_page():
-    """
-
-    """
-    users_list = g.db.users.find()
-    return render_template('admin/users.html', **locals())
-
-@check_authentication
-def user_profile_page(_id):
-    """
-
-    """
-    user = g.db.users.find_one({ '_id' : ObjectId(_id) })
-    return render_template('admin/user_profile.html', **locals())
-
-@check_authentication 
-def languages_page():
-    """
-
-    """
-    languages_list = g.db.languages.find()
-    return render_template('admin/languages.html', **locals())
