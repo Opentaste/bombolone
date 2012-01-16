@@ -22,6 +22,14 @@ def check_authentication(function_to_decorate):
         return function_to_decorate(*args,**kwargs)
        
     return wrapped_function
+    
+def check_admin(function_to_decorate):
+    def wrapped_function(*args,**kwargs):
+        if g.my['rank'] is not 10:
+            abort(401)
+        return function_to_decorate(*args,**kwargs)
+
+    return wrapped_function
 
 def login_page():
 	"""

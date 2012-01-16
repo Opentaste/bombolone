@@ -23,10 +23,10 @@ def upload_file(index, type_upload):
     """
     """ 
     if not 'file_upload_'+index in request.files:
-        return ''
+        return None
     file = request.files['file_upload_'+index]
     if len(file.filename) < 2:
-        return ''
+        return None
     name = file.filename.rsplit('.', 1)[0]
     extension = file.filename.rsplit('.', 1)[1]
     name = str(int(time.time())) + '_' + index + '_' + name + '.' + extension
@@ -38,4 +38,4 @@ def upload_file(index, type_upload):
         image_path = type_upload + '/' + name	
         return image_path
     else:
-        return 'error1'
+        return None

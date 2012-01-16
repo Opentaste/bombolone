@@ -1,18 +1,23 @@
 <section class="label_form section_num_{{ i }}">
-    <span>Label :</span><input type="text" name="label_{{ lan_label }}_name_{{ i }}" value="" class="name_label label_{{ lan_label }}_name_{{ i }}" />
-    <span>Alias :</span><input type="text" name="alias_{{ lan_label }}_name_{{ i }}" value="" class="alias_label" />
+    <span>Label :</span>
+    <input type="text" name="label_{{ lan_label }}_name_{{ i }}" value="" class="name_label label_{{ lan_label }}_name_{{ i }}" />
+    <span>Alias :</span>
+    <input type="text" name="alias_{{ lan_label }}_name_{{ i }}" value="" class="alias_label" />
     
     <select class="label_{{ i }}_0" name="input_label_{{ i }}">
         <option value="1">text</option>
         <option value="2">textarea</option>
         <option value="3">image</option>
     </select>
-    <button class="page_remove_label num_{{ i }}">- Remove label</button>
+    <span class="button page_remove_label num_{{ i }}">- Remove label</span>
     
-    <input type="text" name="label_{{ lan_label }}_{{ i }}" value="" tabindex="{{ j }}" style="display:inline" class="label_{{ i }}_1" />
+    <input type="text" name="label_{{ lan_label }}_{{ i }}" value="" tabindex="{{ j }}" 
+    style="display:inline" class="label_{{ i }}_1" />
     
-    <textarea rows="4" cols="50" name="label_{{ lan_label }}_{{ i }}" tabindex="{{ j }}" class="label_{{ i }}_2"></textarea>
+    <textarea rows="4" cols="50" name="label_{{ lan_label }}_{{ i }}" 
+    tabindex="{{ j }}" class="label_{{ i }}_2"></textarea>
     
     <img src="">
+    <input type="hidden" name="label_{{ lan_label }}_{{ i }}_hidden" value="">
     <input type="file" name="file_upload_{{ lan_label }}_{{ i }}" tabindex="{{ j }}" class="label_{{ i }}_3"/>
 </section>

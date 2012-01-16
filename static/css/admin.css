@@ -293,7 +293,7 @@ button.submit:hover span  {
     background-position: 0 -30px;
 }
 
-a.button {
+a.button, span.button {
     background: none repeat scroll 0 0 #7C97C4;
     color:#fff;
     display:inline-block;
@@ -305,8 +305,14 @@ a.button {
    	border-radius: 4px;
 }
 
-a:hover.button {
+a:hover.button, span:hover.button {
+    cursor:pointer;
     background:#97B2CF;
+}
+
+span.button {
+    padding:6px 12px;
+    margin:;
 }
 
 .field_error {
@@ -330,6 +336,11 @@ a:hover.button {
 .label_form input, .label_form textarea, .label_form img {
     display:none;
 }
+
+.label_form input[type="hidden"] {
+    display:inline;
+}
+
 .label_form img {
     max-width:200px;
     max-height:200px;
