@@ -21,8 +21,11 @@ def home_page():
 	
 	title = page_data['title'][lan]
 	description = page_data['description'][lan]
-	content = page_data['content'][lan]
-	url = { 'it' : PATH+'/it/', 'en' : PATH+'/en/' }
+	content = { x['label'] : x['value'] for x in page_data['content'][lan]}
+	url = { 
+	    'it' : PATH+'/it/', 
+	    'en' : PATH+'/en/' 
+	}
 	
 	return render_template('pages/home.html', **locals())
 	
@@ -53,8 +56,11 @@ def page_base(lan, title):
         # I have divided the content into different variables.
         title = page_data['title'][lan]
         description = page_data['description'][lan]
-        content = page_data['content'][lan]
-        url = { 'it' : PATH+'/it/'+page_data['url']['it']+'/', 'en' : PATH+'/en/'+page_data['url']['en']+'/' }
+        content = { x['label'] : x['value'] for x in page_data['content'][lan]}
+        url = { 
+            'it' : PATH+'/it/'+page_data['url']['it']+'/', 
+            'en' : PATH+'/en/'+page_data['url']['en']+'/' 
+        }
         
         # For every page you must specify the file where you want 
         # to use the contents stored in the database.

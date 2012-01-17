@@ -72,10 +72,11 @@
     	    t.get('.label_'+i+'_0').on('change', function(e){
                 var chosen = e.currentTarget.value;
                 var chosen_num = e.currentTarget.name.split('_')[2];
-                t.get('.label_'+chosen_num+'_1').css({ 'display' : 'none' })
-                t.get('.label_'+chosen_num+'_2').css({ 'display' : 'none' })
-                t.get('.label_'+chosen_num+'_3').css({ 'display' : 'none' })
-                t.get('.label_'+chosen_num+'_'+chosen).css({ 'display' : 'inline' })
+                t.get('.label_'+chosen_num+'_1').css({ 'display' : 'none' });
+                t.get('.label_'+chosen_num+'_2').css({ 'display' : 'none' });
+                t.get('.label_'+chosen_num+'_3').css({ 'display' : 'none' });
+                t.get('.label_'+chosen_num+'_'+chosen).css({ 'display' : 'inline' });
+                t.get('.label_'+i+'_0').value(chosen)
 	        });
 	        
     	}

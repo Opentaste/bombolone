@@ -47,6 +47,9 @@ def page_request_form(page):
         }
         page['input_label'] = [ int(form['input_label_'+str(i)]) for i in range(len_of_label) if 'input_label_'+str(i) in form ]
         type_label = { str(i) : int(form['input_label_'+str(i)]) for i in range(len_of_label) if 'input_label_'+str(i) in form }
+        
+        print page['input_label']
+        print type_label
 
     page['title'] = { 
         'it' : form['title_it'], 
