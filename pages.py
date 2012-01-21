@@ -7,7 +7,7 @@
     :license: BSD (See LICENSE for details)
 """ 
 import re
-from flask import request, session, g, Response, render_template, url_for, redirect, abort, Markup
+from flask import Blueprint, request, session, g, Response, render_template, url_for, redirect
 from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 
@@ -18,15 +18,20 @@ from upload import upload_file
 
 MODULE_DIR = 'admin/pages'
 
-@check_authentication     
-def pages_page():
+pages = Blueprint('pages', __name__)
+
+
+@check_authentication 
+@pages.route('/admin/pages/')    
+def overview():
     """
 
     """
     pages = g.db.pages.find()
     return render_template( MODULE_DIR+'/index.html', **locals() )
     
-def page_request_form(page):
+    
+def request_form(page):
     """
     """
     len_label = [ int(x.split('_')[3]) for x in request.form if x.startswith('label_it_name_') ]
@@ -90,36 +95,42 @@ def page_request_form(page):
             
     return page
 
+
 @check_authentication 
 @check_admin   
-def pages_new_page():
+@pages.route('/admin/pages/new/', methods=['POST', 'GET'])
+def new():
     """
     
     """
     if request.method == 'POST':
         page = {} 
-        page = page_request_form(page)
+        page = request_form(page)
         g.db.pages.insert( page )
-        return redirect(url_for('pages'))
+        return redirect(url_for('pages.overview'))
         
     return render_template( MODULE_DIR+'/new.html' )
  
+ 
 @check_authentication 
-def pages_content_page(_id):
+@pages.route('/admin/pages/<_id>/', methods=['POST', 'GET'])
+def content(_id):
     """
 
     """
     page = g.db.pages.find_one({ '_id' : ObjectId(_id) })
     
     if request.method == 'POST': 
-        page = page_request_form(page)
+        page = request_form(page)
         g.db.pages.update( { '_id' : ObjectId(_id) }, page)
             
     return render_template( MODULE_DIR+'/update.html', **locals() )
  
+ 
 @check_authentication  
-@check_admin     
-def pages_remove_page(_id):
+@check_admin 
+@pages.route('/admin/pages/remove/<_id>/')    
+def remove(_id):
     """
 
     """
@@ -127,8 +138,10 @@ def pages_remove_page(_id):
     
     return 'ok'
 
+
 @check_authentication  
-def add_label_page(number_label):
+@pages.route('/admin/pages/add_label/<number_label>/')
+def add_label(number_label):
     """
 
     """ 

@@ -18,7 +18,7 @@ VERSION = '0.0.65'
 DEBUG = True
 PATH = 'http://0.0.0.0:5000'
 PROJECT_DIR = os.path.dirname(__file__)
-UP_FOLDER = os.path.join(PROJECT_DIR,'/static/image/')
+UP_FOLDER = os.path.join(PROJECT_DIR,'static/image/')
 PORT = 5000
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG', 'bmp'])

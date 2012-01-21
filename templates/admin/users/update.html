@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
     <h2>Pages content</h2>
-    <form action="{{ url_for('user_profile', _id=_id) }}" enctype="multipart/form-data" method="post" >
+    <form action="{{ url_for('user.profile', _id=_id) }}" enctype="multipart/form-data" method="post" >
         <div class="form_container">
             <section>
                 <label>Username</label>

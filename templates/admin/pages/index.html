@@ -25,7 +25,7 @@
     		<tr class="item_{{ str(x['_id']) }}">
     			<td><a href="{{ admin }}/pages/{{ str(x['_id']) }}/">{{ x['name'] }}</a></td>
     			<td>{{ x['url']['en'] }}</td>
-    			<td>{{ x['_id'] }}</td>
+    			<td><a href="{{ admin }}/pages/{{ str(x['_id']) }}/">{{ x['_id'] }}</a></td>
     			<td><span class="remove_item item_{{ str(x['_id']) }}">remove page</span></td>
     		</tr>
     		{% endfor %}

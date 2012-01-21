@@ -17,28 +17,28 @@
             <li>
                 <a>{{ g.my['username'] }}</a>
                 <ul class="header_menu">
-                    <li><a href="{{ url_for('profile') }}" title="" >Modifica profilo</a></li>
+                    <li><a href="{{ url_for('admin.profile') }}" title="" >Modifica profilo</a></li>
                     <li><a href="{{ url_for('home') }}" title="" >Sito Web</a></li>
                 </ul>
             </li>
-            <li><a href="{{ url_for('logout') }}" title="" >Esci</a></li>
+            <li><a href="{{ url_for('admin.logout') }}" title="" >Esci</a></li>
         </ul>
     </header><!-- header -->
     
     <nav>
         <ul>
     		<li>
-            	<p><a href="{{ url_for('admin') }}" title="" >Dashboard</a></p>
+            	<p><a href="{{ url_for('admin.dashboard') }}" title="" >Dashboard</a></p>
             </li>
             <li>
-                <p><a href="{{ url_for('pages') }}" title="" >Pages</a></p>
+                <p><a href="{{ url_for('pages.overview') }}" title="" >Pages</a></p>
             </li>
             {% if g.my['rank'] == 10 %}
             <li>
-                <p><a href="{{ url_for('users') }}" title="" >Users</a></p>
+                <p><a href="{{ url_for('users.overview') }}" title="" >Users</a></p>
             </li>
             <li>
-                <p><a href="{{ url_for('languages') }}" title="" >Languages</a></p>
+                <p><a href="{{ url_for('languages.overview') }}" title="" >Languages</a></p>
             </li>
             {% endif %}
         </ul>

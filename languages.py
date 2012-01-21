@@ -6,17 +6,18 @@
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
 """ 
-import re
-from flask import request, session, g, Response, render_template, url_for, redirect, abort, Markup
-from pymongo import ASCENDING, DESCENDING
-from pymongo.objectid import ObjectId
+from flask import Blueprint, g, render_template, url_for
 
 from admin import check_authentication
 
 MODULE_DIR = 'admin/languages'
 
+languages = Blueprint('languages', __name__)
+
+
 @check_authentication 
-def languages_page():
+@languages.route('/admin/languages/')
+def overview():
     """
 
     """

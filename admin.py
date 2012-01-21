@@ -7,13 +7,15 @@
     :license: BSD (See LICENSE for details)
 """ 
 import re
-from flask import request, session, g, Response, render_template, url_for, redirect, abort, Markup
+from flask import Blueprint, request, session, g, Response, render_template, url_for, redirect, abort
 from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 
 from helpers import create_password
 from language import dict_login, setting_message
 from upload import upload_file
+
+admin = Blueprint('admin', __name__)
 
 def check_authentication(function_to_decorate):
     def wrapped_function(*args,**kwargs):
@@ -31,7 +33,9 @@ def check_admin(function_to_decorate):
 
     return wrapped_function
 
-def login_page():
+
+@admin.route('/login/', methods=['POST', 'GET'])
+def login():
 	"""
 	
 	"""
@@ -47,25 +51,31 @@ def login_page():
 	        g.message = dict_login['error_2']
 	    else:
 	        session['user_id'] = user['_id']
-	        return redirect(url_for('admin'))
+	        return redirect(url_for('admin.dashboard'))
 	return render_template('admin/login.html')
 	
-def logout_page():
+	
+@admin.route('/logout/')
+def logout():
 	"""
 
 	"""
 	session.pop('user_id', None)
 	return redirect(url_for('home'))
 	
+	
 @check_authentication
-def admin_page():
+@admin.route('/admin/')
+def dashboard():
     """
     
     """
     return render_template('admin/dashboard.html')
  
-@check_authentication   
-def profile_page():
+ 
+@check_authentication 
+@admin.route('/admin/profile/', methods=['POST', 'GET'])  
+def profile():
     """
 
     """

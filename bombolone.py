@@ -13,17 +13,16 @@ from flask import request, session, g, redirect, url_for, abort, render_template
 from jinja2 import contextfunction 
 
 # Imports inside bombolone
-from admin import login_page, logout_page, admin_page, profile_page
 from before import core_before_request, core_inject_user
 from page import home_page, page_base
 from shared import app, PORT
 
 # Imports modules bombolone
-from pages import pages_page, pages_new_page, pages_remove_page, pages_content_page, add_label_page
-from languages import languages_page
-from users import users_page, users_new_page, users_remove_page, user_profile_page
-
-
+from admin import admin
+from pages import pages
+from users import users
+from languages import languages
+LIST_MODULES = [admin, pages, users, languages]
                   
 @app.before_request
 def before_request():
@@ -37,72 +36,7 @@ def inject_user():
 def home():
     g.lan = 'en'
     return home_page()
-        
-# ========================================================================	
-# Admin zone
     
-@app.route('/login/', methods=['POST', 'GET'])
-def login():
-    return login_page()
-    
-@app.route('/logout/')
-def logout():
-    return logout_page()
-    
-@app.route('/admin/')
-def admin():
-    return admin_page()
-    
-@app.route('/admin/profile/', methods=['POST', 'GET'])
-def profile():
-    return profile_page()
-
-# Start pages module	
-@app.route('/admin/pages/')
-def pages():
-    return pages_page()	
-    
-@app.route('/admin/pages/new/', methods=['POST', 'GET'])
-def pages_new():
-    return pages_new_page()
-    
-@app.route('/admin/pages/remove/<_id>/')
-def pages_remove(_id):
-    return pages_remove_page(_id)
-    
-@app.route('/admin/pages/<_id>/', methods=['POST', 'GET'])
-def pages_content(_id):
-    return pages_content_page(_id)
-
-@app.route('/admin/pages/add_label/<number_label>/')
-def add_label(number_label):
-    return add_label_page(number_label)    
-    
-# Start users module
-@app.route('/admin/users/')
-def users():
-    return users_page()	
-    
-@app.route('/admin/users/new/', methods=['POST', 'GET'])
-def users_new():
-    return users_new_page()
-    
-@app.route('/admin/users/remove/<_id>/')
-def users_remove(_id):
-    return users_remove_page(_id)
-
-@app.route('/admin/users/<_id>/', methods=['POST', 'GET'])
-def user_profile(_id):
-    return user_profile_page(_id)
-
-# Start languages module
-@app.route('/admin/languages/')
-def languages():
-    return languages_page()
-    
-# ========================================================================	
-# Pages zone
-
 @app.route('/<lan>/')
 def home_two(lan):
     g.lan = lan
@@ -154,7 +88,6 @@ def bad_request(error):
     return 'Raise if the browser sends something to the application the application or server cannot handle.', 500
      
      
-     
 # ========================================================================	
 # Jinja zone   
             
@@ -190,4 +123,6 @@ app.jinja_env.globals['len'] = contextfunction(len_thing)
 app.jinja_env.globals['enumerate'] = contextfunction(enumerate_thing) 
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', port=PORT)
+    for module in LIST_MODULES:
+        app.register_blueprint(module)
+    app.run(host='0.0.0.0', port=PORT)
