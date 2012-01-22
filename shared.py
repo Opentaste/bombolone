@@ -13,7 +13,7 @@ import os
 from flask import Flask
 from pymongo import Connection
 
-VERSION = '0.0.65'
+VERSION = '0.0.66'
 
 DEBUG = True
 PATH = 'http://0.0.0.0:5000'
@@ -24,7 +24,14 @@ PORT = 5000
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG', 'bmp'])
 EXTENSIONS_REQUEST = {'png', 'jpg', 'jpeg', 'gif', 'css', 'js'}
 
-SECRET_KEY = '\xfb\x12\xdf\xa1@i\xd6>V\xc0\xbb\x8fp\x16#Z\x0b\x81\xeb\x16'
+
+"""
+Is important generate a good secret key:  http://flask.pocoo.org/docs/quickstart/#sessions
+    >>> import os
+    >>> os.urandom(24)
+    "\xef\xb3\xe3\x07\x1c\xf0V2\x11\x8bx\x8b\xf0\x9b\xac\xe3'v)\xa4^\xbb\x1e\xf6"
+"""
+SECRET_KEY = '\xc4\nE\xcc\x87\xbe]\xb9kf\xe9\xd3\x9e\xdcF\x9f\x8f\xc9\xaf\x1e-+\x88\xa2'
 
 # Create application and configuration
 app = Flask(__name__)
