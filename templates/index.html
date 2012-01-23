@@ -1,76 +1,45 @@
-<!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="{{ g.lan }}"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="{{ g.lan }}"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="{{ g.lan }}"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="{{ g.lan }}"> <!--<![endif]-->
-<head>
-    
-	<meta charset="utf-8">
-	
-    {% block head %}
-	<title>Bombolone | {{ title }}</title>
-	<meta name="description" content="{{ description }}">
-	{% endblock %}
-	
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-	{% block css %}{% endblock %}
+{% extends "base.html" %}
+{% block header %}
+<nav>
+    <ul>
+        <li><a href="{{ path }}" title="">Home</a></li>
+        <li><a href="{{ urls['page_2'] }}/" title="">{{ titles['page_2'] }}</a></li>
+        <li><a href="{{ urls['page_3'] }}/" title="">{{ titles['page_3'] }}</a></li>
+        <li><a href="{{ urls['page_4'] }}/" title="">{{ titles['page_4'] }}</a></li>
+        <li><a href="{{ urls['page_5'] }}/" title="">{{ titles['page_5'] }}</a></li>
+    </ul>
+</nav>
+{% endblock %}
 
-    <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-    <script src="{{ url_for('static', filename='js/libs/modernizr-1.7.min.js') }}"></script>
-</head>
-<body>
-    
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{{ path }}" title="">Home</a></li>
-                <li><a href="{{ urls['page_2'] }}/" title="">{{ titles['page_2'] }}</a></li>
-                <li><a href="{{ urls['page_3'] }}/" title="">{{ titles['page_3'] }}</a></li>
-                <li><a href="{{ urls['page_4'] }}/" title="">{{ titles['page_4'] }}</a></li>
-                <li><a href="{{ urls['page_5'] }}/" title="">{{ titles['page_5'] }}</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <div class="main">
-	    {% block content %}{% endblock %}
-	</div>
-	
-	<footer>
-	    <p>© 2012 Bombolone Web Site </p>
-	    <p>
-	        <a href="{{ path }}" title="">Home</a> |
-	        <a href="{{ urls['page_2'] }}/" title="">{{ titles['page_2'] }}</a> | 
-	        <a href="{{ urls['page_3'] }}/" title="">{{ titles['page_3'] }}</a> | 
-	        <a href="{{ urls['page_4'] }}/" title="">{{ titles['page_4'] }}</a> | 
-	        <a href="{{ urls['page_5'] }}/" title="">{{ titles['page_5'] }}</a>
-	    </p>
-	    <p>
-	        {% if url %}
-	        <a href="{{ url['it'] }}" title="Bombolone | ">
-                <img src="{{ layout }}/flag/it.png" alt="Sito in Italiano" />Sito in Italiano
-            </a>
-            <br />     
-            <a href="{{ url['en'] }}" title="Bombolone | ">
-                <img src="{{ layout }}/flag/gb.png" alt="Web site in English" />Web site in English
-            </a>
-            {% else %}
-            <a href="{{ path }}/it/" title="Bombolone | ">
-                <img src="{{ layout }}/flag/it.png" alt="Sito in Italiano" />Sito in Italiano
-            </a>
-            <br />     
-            <a href="{{ path }}/en/" title="Bombolone | ">
-                <img src="{{ layout }}/flag/gb.png" alt="Web site in English" />Web site in English
-            </a>
-            {% endif %}
-	    </p>
-    </footer>
-    
-    <!-- JavaScript at the bottom for fast page loading -->
-	<script src="{{ url_for('static', filename='js/tiramisu-0.1.5-min.js') }}"></script>
-	{% block js %}{% endblock %}
-	
-</body>
-</html>
+{% block main %}
+{% endblock %}
+
+{% block footer %}
+<p>© 2012 Bombolone Web Site </p>
+<p>
+    <a href="{{ path }}" title="">Home</a> |
+    <a href="{{ urls['page_2'] }}/" title="">{{ titles['page_2'] }}</a> | 
+    <a href="{{ urls['page_3'] }}/" title="">{{ titles['page_3'] }}</a> | 
+    <a href="{{ urls['page_4'] }}/" title="">{{ titles['page_4'] }}</a> | 
+    <a href="{{ urls['page_5'] }}/" title="">{{ titles['page_5'] }}</a>
+</p>
+<p>
+    {% if url %}
+    <a href="{{ url['it'] }}" title="Bombolone | ">
+        <img src="{{ layout }}/flag/it.png" alt="Sito in Italiano" />Sito in Italiano
+    </a>
+    <br />     
+    <a href="{{ url['en'] }}" title="Bombolone | ">
+        <img src="{{ layout }}/flag/gb.png" alt="Web site in English" />Web site in English
+    </a>
+    {% else %}
+    <a href="{{ path }}/it/" title="Bombolone | ">
+        <img src="{{ layout }}/flag/it.png" alt="Sito in Italiano" />Sito in Italiano
+    </a>
+    <br />     
+    <a href="{{ path }}/en/" title="Bombolone | ">
+        <img src="{{ layout }}/flag/gb.png" alt="Web site in English" />Web site in English
+    </a>
+    {% endif %}
+</p>
+{% endblock %}
