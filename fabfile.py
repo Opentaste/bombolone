@@ -2,28 +2,41 @@
 """
     fabfile.py
     ~~~~~~
+    It provides a basic suite of operations for executing local or remote shell commands, 
+    as well as auxiliary functionality such as prompting the running user for input, 
+    or aborting execution.
     
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
 """
-from flask import session
+from init import clean_database, init_mongodb
 
-from helpers import init_mongodb, clean_database
 
 def init():
+    """ Initialize the database MongoDB of Bombolone. """
     print 'Initialization Bombolone'
-    print '##########################'
-    print '\n'
+    print '##########################\n'
+
     init_mongodb()
-    print ' - Start Database'
-    print '\n'
+    print ' * Start Database\n'
+   
     
-def clean_db():
+def clean():
+    """ Clean and Initialize the database MongoDB of Bombolone. """
     print 'Clean database'
     print '##########################'
-    print '\n'
+
     clean_database()
-    print ' - Clean Database'
+    print ' * Clean Database\n'
+
+    
+def restore():
+    """ Clean and Initialize the database MongoDB of Bombolone. """
+    print 'Restore database'
+    print '##########################'
+
+    clean_database()
+    print ' * Clean Database\n'
+
     init_mongodb()
-    print ' - Start Database'
-    print '\n'
+    print ' * Start Database\n'
