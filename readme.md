@@ -1,6 +1,6 @@
 # [PyBombolone]
 
-### version 0.0.66 ###
+### version 0.0.68 ###
 
 Bombolone is a tasty Content Management System for Python based 
 on Flask, MongoDB, Tiramisu and html5 boilerplate.
