@@ -21,7 +21,8 @@ from admin import admin
 from pages import pages
 from users import users
 from languages import languages
-LIST_MODULES = [content, admin, pages, users, languages]
+from hash_table import hash_table
+LIST_MODULES = [content, admin, pages, users, languages, hash_table]
    
    
 # ========================================================================	

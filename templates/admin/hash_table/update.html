@@ -1,0 +1,11 @@
+{% extends "admin/index.html" %}
+{% block head %}
+    <title>Document update</title>
+{% endblock %}
+{% block content %}
+    <h2>Document update</h2>
+    <form action="{{ url_for('hash_table.update', _id=_id) }}" enctype="multipart/form-data" method="post" >
+        <div class="form_container">
+        </div>
+    </form>
+{% endblock %}

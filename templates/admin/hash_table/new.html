@@ -1,0 +1,11 @@
+{% extends "admin/index.html" %}
+{% block head %}
+    <title>New document in hash_table</title>
+{% endblock %}
+{% block content %}
+    <h2>New document in hash_table</h2>
+    <form action="{{ url_for('hash_table.new') }}" enctype="multipart/form-data" method="post" >
+        <div class="form_container">
+            
+    </form>
+{% endblock %}

@@ -50,8 +50,7 @@ sup { top: -0.5em; }
 sub { bottom: -0.25em; }
 
 /* Lists ==================================================================== */
-ul, ol { margin: 1em 0; padding: 0 0 0 40px; }
-dd { margin: 0 0 0 40px; }
+ul, ol, dd { margin: 0; padding: 0; }
 nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0; }
 
 /* Embedded content ========================================================= */
