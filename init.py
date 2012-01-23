@@ -141,20 +141,36 @@ def init_languages():
         db.languages.insert( { 'code' : lan, 'value' : dict_languages[lan] })
 
 
+def init_users():
+    """ Initializes the base two users: Admin and Users """
+    
+    list_users = [
+        {
+            'username' : 'admin', 
+            'password' : create_password('admin'), # Create passwords in md5 and sha1
+            'rank' : 10 
+        },
+        {
+            'username' : 'admin', 
+            'password' : create_password('user'), 
+            'rank' : 10 
+        }
+    ]
+    
+    # Insert the users list 
+    for user in dict_languages:
+        db.users.insert( user )
+        
+
 def init_mongodb():
     """ Initialize the database MongoDB of Bombolone. """
     init_languages()
+    init_users()
 
 
 def init_mongodb_two():
     """ fixtures MongoDB
-    """    
-    admin_pass = create_password('admin')
-    user_pass = create_password('user')
-    
-    db.users.update( { 'username' : 'admin' }, { 'username' : 'admin', 'password' : admin_pass, 'rank' : 10 }, True)
-    db.users.update( { 'username' : 'user' }, { 'username' : 'user', 'password' : user_pass, 'rank' : 20 }, True)
-    
+    """   
     for num in range(1,6):
         page = {
             'name' : 'page_'+str(num),
