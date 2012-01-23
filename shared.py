@@ -24,6 +24,7 @@ PORT = 5000
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif', 'PNG', 'JPG', 'bmp'])
 EXTENSIONS_REQUEST = {'png', 'jpg', 'jpeg', 'gif', 'css', 'js'}
 
+LIST_LANGUAGES = ['ar','cn','de','en','es','fr','gr','it','jp','pt','ru','tr']
 
 """
 Is important generate a good secret key:  http://flask.pocoo.org/docs/quickstart/#sessions

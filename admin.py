@@ -6,32 +6,20 @@
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
 """ 
+# Imports outside bombolone
 import re
 from flask import Blueprint, request, session, g, Response, render_template, url_for, redirect, abort
 from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 
+# Imports inside bombolone
+from decorators import check_authentication
 from helpers import create_password
 from language import dict_login, setting_message
 from upload import upload_file
 
+
 admin = Blueprint('admin', __name__)
-
-def check_authentication(function_to_decorate):
-    def wrapped_function(*args,**kwargs):
-        if g.my_id is None:
-            abort(401)
-        return function_to_decorate(*args,**kwargs)
-       
-    return wrapped_function
-    
-def check_admin(function_to_decorate):
-    def wrapped_function(*args,**kwargs):
-        if g.my['rank'] is not 10:
-            abort(401)
-        return function_to_decorate(*args,**kwargs)
-
-    return wrapped_function
 
 
 @admin.route('/login/', methods=['POST', 'GET'])

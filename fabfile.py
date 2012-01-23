@@ -24,7 +24,7 @@ def init():
 def clean():
     """ Clean and Initialize the database MongoDB of Bombolone. """
     print 'Clean database'
-    print '##########################'
+    print '##########################\n'
 
     clean_database()
     print ' * Clean Database\n'
@@ -33,7 +33,7 @@ def clean():
 def restore():
     """ Clean and Initialize the database MongoDB of Bombolone. """
     print 'Restore database'
-    print '##########################'
+    print '##########################\n'
 
     clean_database()
     print ' * Clean Database\n'

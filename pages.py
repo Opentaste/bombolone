@@ -6,12 +6,14 @@
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
 """ 
+# Imports outside bombolone
 import re
 from flask import Blueprint, request, session, g, Response, render_template, url_for, redirect
 from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 
-from admin import check_authentication, check_admin 
+# Imports inside bombolone
+from decorators import check_authentication, check_admin 
 from helpers import create_password
 from language import dict_login, setting_message
 from upload import upload_file

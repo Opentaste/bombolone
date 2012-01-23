@@ -2,24 +2,44 @@
 """
     languages.py
     ~~~~~~
+    The language module manages the languages you want to use within Bombolone.
     
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
 """ 
-from flask import Blueprint, g, render_template, url_for
+# Imports outside bombolone
+from flask import Blueprint, g, request, render_template, url_for
 
-from admin import check_authentication
+# Imports inside bombolone
+from decorators import check_admin, check_authentication
+from shared import LIST_LANGUAGES
 
 MODULE_DIR = 'admin/languages'
-
 languages = Blueprint('languages', __name__)
 
 
 @check_authentication 
-@languages.route('/admin/languages/')
+@check_admin
+@languages.route('/admin/languages/', methods=['POST', 'GET'])
 def overview():
-    """
-
-    """
-    languages_list = g.db.languages.find()
+    """ Overview and tool update of all languages supported!"""
+    
+    # Update the list of languages allowed on the site, 
+    # except for the language used by your users at that time.
+    if request.method == 'POST':
+        for code in LIST_LANGUAGES:
+            if code != g.lan:
+                if code in request.form and 'on' == request.form[code]:
+                    check = True
+                else:
+                    check = False
+                
+                # Update the permissions of the languages 
+                # and prepares the message of operation success
+                g.db.languages.update( {'code' : code}, {'$set' : { 'check' : check } } )
+                message = { 'it' : 'ok update', 'en' : 'ok update' }	
+                status = 'mes_green'
+                
+    # Gets documents from the collections of all languages 
+    languages_list = g.db.languages.find().sort('code')
     return render_template( MODULE_DIR+'/index.html', **locals())

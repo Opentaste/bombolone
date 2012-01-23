@@ -4,25 +4,41 @@
 {% endblock %}
 {% block content %}
     <h2>Languages</h2>
-    <table class="table_items">
-    	<thead>
-    		<tr>	
-    			<th style="width:40%;">Lingua</th>
-    			<th style="width:40%;">Codice</th>
-    		</tr>
-    	</thead>
-    	<tfoot>
-    		<tr>
-    			<td colspan="2"></td>
-    		</tr>
-    	</tfoot>
-    	<tbody>
-    		{% for lan in languages_list %}
-    		<tr>
-    			<td>{{ lan['name'] }}</td>
-    			<td>{{ lan['code'] }}</td>
-    		</tr>
-    		{% endfor %}
-    	</tbody>
-    </table>
+    {% if status %}<div class="{{ status }}">{{ message[lan] }}</div>{% endif %}
+    <form action="{{ url_for('languages.overview') }}" method="post" >
+        <table class="table_items">
+        	<thead>
+        		<tr>	
+        		    <th style="width:5%;"></th>
+        			<th style="width:15%;">Codice</th>
+        			<th style="width:40%;">Lingua</th>
+        			<th style="width:40%;">_id</th>
+        		</tr>
+        	</thead>
+        	<tfoot>
+        		<tr>
+        			<td colspan="4"></td>
+        		</tr>
+        	</tfoot>
+        	<tbody>
+        		{% for language in languages_list %}
+        		<tr>
+        		    <td>
+        		        <input type="checkbox" name="{{ language['code'] }}" 
+        		        {% if language['code'] == lan %} disabled="disabled" {% endif %}
+        		        {% if language['check'] %} checked="checked" {% endif %}>
+        		    </td>
+        			<td>{{ language['code'] }}</td>
+        			<td>{{ language['value'][lan] }}</td>
+        			<td>{{ language['_id'] }}</td>
+        		</tr>
+        		{% endfor %}
+        	</tbody>
+        </table>
+        <div>
+            <button tabindex="20" type="submit" class="submit">
+                <span>Update Check</span>
+            </button>
+        </div>
+    </form>
 {% endblock %}

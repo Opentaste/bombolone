@@ -8,6 +8,7 @@
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
 """
+from helpers import create_password
 from shared import db
 
 
@@ -26,119 +27,165 @@ def init_languages():
     dict_languages = {
         'it' : {
             'it' : 'Italiano',
-            'en' : '',
-            'pt' : '',
-            'fr' : '',
-            'de' : '',
-            'jp' : '',
-            'cn' : '',
-            'ru' : '',
-            'tr' : ''
+            'en' : 'Inglese',
+            'pt' : 'Portoghese',
+            'fr' : 'Francese',
+            'de' : 'Tedesco',
+            'jp' : 'Giapponese',
+            'cn' : 'Cinese',
+            'ru' : 'Russo',
+            'tr' : 'Turco',
+            'gr' : 'Greco',
+            'ar' : 'Arabo'
         },
         'en' : {
-            'it' : 'Italiano',
-            'en' : '',
-            'pt' : '',
-            'fr' : '',
-            'de' : '',
-            'jp' : '',
-            'cn' : '',
-            'ru' : '',
-            'tr' : ''
+            'it' : 'Italian',
+            'en' : 'English',
+            'pt' : 'Portuguese',
+            'fr' : 'French',
+            'de' : 'German',
+            'jp' : 'Japanese',
+            'cn' : 'Chinese',
+            'ru' : 'Russian',
+            'tr' : 'Turkish',
+            'gr' : 'Greek',
+            'ar' : 'Arabic'
         },
         'es' : {
             'it' : 'Italiano',
-            'en' : '',
-            'pt' : '',
-            'fr' : '',
-            'de' : '',
-            'jp' : '',
-            'cn' : '',
-            'ru' : '',
-            'tr' : ''
+            'en' : 'Inglés',
+            'pt' : 'Portugués',
+            'fr' : 'Francés',
+            'de' : 'Alemán',
+            'jp' : 'Japonés',
+            'cn' : 'Chino',
+            'ru' : 'Ruso',
+            'tr' : 'Turco',
+            'gr' : 'Griego',
+            'ar' : ''
         },
         'pt' : {
             'it' : 'Italiano',
-            'en' : '',
-            'pt' : '',
-            'fr' : '',
-            'de' : '',
-            'jp' : '',
-            'cn' : '',
-            'ru' : '',
-            'tr' : ''
+            'en' : 'Inglês',
+            'pt' : 'Português',
+            'fr' : 'Francês',
+            'de' : 'Alemão',
+            'jp' : 'Japonês',
+            'cn' : 'Chinês',
+            'ru' : 'Russo',
+            'tr' : 'Turco',
+            'gr' : 'Grego',
+            'ar' : ''
         },
         'fr' : {
-            'it' : 'Italiano',
-            'en' : '',
-            'pt' : '',
-            'fr' : '',
-            'de' : '',
-            'jp' : '',
-            'cn' : '',
-            'ru' : '',
-            'tr' : ''
+            'it' : 'Italienne',
+            'en' : 'Anglaise',
+            'pt' : 'Portugaise',
+            'fr' : 'Française',
+            'de' : 'Allemande',
+            'jp' : 'Japonaise',
+            'cn' : 'Chinoise',
+            'ru' : 'Russes',
+            'tr' : 'Turque',
+            'gr' : 'Grecs',
+            'ar' : ''
         },
         'de' : {
-            'it' : 'Italiano',
-            'en' : '',
-            'pt' : '',
-            'fr' : '',
-            'de' : '',
-            'jp' : '',
-            'cn' : '',
-            'ru' : '',
-            'tr' : ''
+            'it' : 'Italienisch',
+            'en' : 'Englisch',
+            'pt' : 'Portugiesisch',
+            'fr' : 'Französisch',
+            'de' : 'Deutsch',
+            'jp' : 'Japanisch',
+            'cn' : 'Chinesisch',
+            'ru' : 'Russisch',
+            'tr' : 'Türkisch',
+            'gr' : 'Griechisch',
+            'ar' : 'Arabisch'
         },
         'jp' : {
-            'it' : 'Italiano',
-            'en' : '',
-            'pt' : '',
-            'fr' : '',
-            'de' : '',
-            'jp' : '',
-            'cn' : '',
-            'ru' : '',
-            'tr' : ''
+            'it' : 'イタリア',
+            'en' : 'スペイン',
+            'pt' : 'ポルトガル',
+            'fr' : 'フランス',
+            'de' : 'ドイツ',
+            'jp' : '日本',
+            'cn' : '中国',
+            'ru' : 'ロシア語',
+            'tr' : 'トルコ',
+            'gr' : 'ギリシャ',
+            'ar' : ''
         },
         'cn' : {
-            'it' : 'Italiano',
-            'en' : '',
-            'pt' : '',
-            'fr' : '',
-            'de' : '',
-            'jp' : '',
-            'cn' : '',
-            'ru' : '',
-            'tr' : ''
+            'it' : '意大利',
+            'en' : '西班牙',
+            'pt' : '葡萄牙文',
+            'fr' : '法国',
+            'de' : '德国',
+            'jp' : '日语',
+            'cn' : '中国',
+            'ru' : '俄罗斯',
+            'tr' : '土耳其',
+            'gr' : '希腊',
+            'ar' : ''
         },
         'ru' : {
-            'it' : 'Italiano',
-            'en' : '',
-            'pt' : '',
-            'fr' : '',
-            'de' : '',
-            'jp' : '',
-            'cn' : '',
-            'ru' : '',
-            'tr' : ''
+            'it' : 'итальянский',
+            'en' : 'испанский',
+            'pt' : 'португальский',
+            'fr' : 'французский',
+            'de' : 'немецкий',
+            'jp' : 'японский',
+            'cn' : 'китайский',
+            'ru' : 'русский',
+            'tr' : 'турецкий',
+            'gr' : 'греческий',
+            'ar' : ''
         },
         'tr' : {
-            'it' : 'Italiano',
-            'en' : '',
-            'pt' : '',
-            'fr' : '',
-            'de' : '',
-            'jp' : '',
-            'cn' : '',
-            'ru' : '',
-            'tr' : ''
+            'it' : 'İtalyan',
+            'en' : 'İngilizce',
+            'pt' : 'Portekizce',
+            'fr' : 'Fransız',
+            'de' : 'Alman',
+            'jp' : 'Japon',
+            'cn' : 'Çin',
+            'ru' : 'Rus',
+            'tr' : 'Türk',
+            'gr' : 'Yunan',
+            'ar' : ''
+        },
+        'gr' : {
+            'it' : 'ιταλικά',
+            'en' : 'ισπανικά',
+            'pt' : 'Πορτογαλικά',
+            'fr' : 'γαλλικά',
+            'de' : 'γερμανικά',
+            'jp' : 'Ιαπωνικά',
+            'cn' : 'κινέζικα',
+            'ru' : 'Ρωσική',
+            'tr' : 'Τουρκικά',
+            'gr' : 'ελληνικά',
+            'ar' : ''
+        },
+        'ar' : {
+            'it' : 'إيطالي',
+            'en' : 'الأسبانية',
+            'pt' : 'البرتغالية',
+            'fr' : 'فرنسي',
+            'de' : 'ألماني',
+            'jp' : 'اليابانية',
+            'cn' : 'الصينية',
+            'ru' : 'الروسية',
+            'tr' : 'تركي',
+            'gr' : 'يوناني',
+            'ar' : 'العربية'
         }
     }
     
     # Insert the languages dictionaries 
     for lan in dict_languages:
-        db.languages.insert( { 'code' : lan, 'value' : dict_languages[lan] })
+        db.languages.insert( { 'code' : lan, 'value' : dict_languages[lan], 'check' : True })
 
 
 def init_users():
@@ -158,7 +205,7 @@ def init_users():
     ]
     
     # Insert the users list 
-    for user in dict_languages:
+    for user in list_users:
         db.users.insert( user )
         
 

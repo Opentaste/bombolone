@@ -6,7 +6,7 @@
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
 """
-# Imports outside opentaste
+# Imports outside bombolone
 from __future__ import with_statement
 from flask import abort, render_template
 from jinja2 import contextfunction 
