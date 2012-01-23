@@ -8,13 +8,12 @@
 """
 # Imports outside opentaste
 from __future__ import with_statement
-import re
-from flask import request, session, g, redirect, url_for, abort, render_template
+from flask import abort, render_template
 from jinja2 import contextfunction 
 
 # Imports inside bombolone
 from before import core_before_request, core_inject_user
-from page import home_page, page_base
+from content import content
 from shared import app, PORT
 
 # Imports modules bombolone
@@ -22,7 +21,11 @@ from admin import admin
 from pages import pages
 from users import users
 from languages import languages
-LIST_MODULES = [admin, pages, users, languages]
+LIST_MODULES = [content, admin, pages, users, languages]
+   
+   
+# ========================================================================	
+# Before zone
                   
 @app.before_request
 def before_request():
@@ -31,20 +34,6 @@ def before_request():
 @app.context_processor
 def inject_user():
     return core_inject_user()
-
-@app.route('/', methods=['POST', 'GET'])
-def home():
-    g.lan = 'en'
-    return home_page()
-    
-@app.route('/<lan>/')
-def home_two(lan):
-    g.lan = lan
-    return home_page()
-
-@app.route('/<lan>/<title>/')
-def page(lan, title):
-    return page_base(lan, title)
 	
 # ========================================================================	
 # Error zone
@@ -65,8 +54,10 @@ def unauthorized(error):
 
 @app.errorhandler(404)
 def not_found(error):
-    """Raise if a resource does not exist and never existed."""
-    return 'Raise if a resource does not exist and never existed. 404', 404
+    """
+    Raise if a resource does not exist and never existed.
+    """
+    return render_template('404.html')
     
 @app.errorhandler(408)
 def request_timeout(error):

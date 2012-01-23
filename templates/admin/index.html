@@ -12,13 +12,13 @@
 </head>
 <body>
     <header>
-		<img src="{{ url_for('static', filename='admin/logo/bombolone_logo.png') }}" height="20" alt="Web Site" />
+		<img src="{{ url_for('static', filename='admin/logo/admin_logo_mini.png') }}" alt="Web Site" />
         <ul>
             <li>
                 <a>{{ g.my['username'] }}</a>
                 <ul class="header_menu">
                     <li><a href="{{ url_for('admin.profile') }}" title="" >Modifica profilo</a></li>
-                    <li><a href="{{ url_for('home') }}" title="" >Sito Web</a></li>
+                    <li><a href="{{ url_for('content.home') }}" title="" >Sito Web</a></li>
                 </ul>
             </li>
             <li><a href="{{ url_for('admin.logout') }}" title="" >Esci</a></li>

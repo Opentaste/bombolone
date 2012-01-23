@@ -45,9 +45,9 @@ body {
 /* Typography ============================================================================== */
 
 h1 {
-    background:transparent url(../admin/logo/bombolone_logo.png) no-repeat scroll center top;
+    background:transparent url(../admin/logo/login_logo.png) no-repeat scroll center top;
     display:block;
-    height:60px;
+    height:210px;
     overflow:hidden;
     text-indent:-9999px;
     width:340px;
@@ -63,7 +63,7 @@ p {
 }
 
 .login {
-    margin:10em auto;
+    margin:6em auto;
     width:340px;
 }
 

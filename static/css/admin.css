@@ -98,7 +98,8 @@ header {
 }
 
 header img{
-    float:left;
+    float: left;
+    margin: 2px 0 0 6px;
 }
 
 header ul {

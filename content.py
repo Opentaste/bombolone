@@ -6,30 +6,29 @@
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
 """ 
-from flask import request, session, g, Response, render_template, url_for, redirect, abort, Markup
+from flask import Blueprint, request, session, g, Response, render_template, url_for, redirect, abort, Markup
 from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 
 from shared import PATH
 
-def home_page():
+content = Blueprint('content', __name__)
+
+@content.route('/', defaults={'lan': 'en'})
+@content.route('/<lan>')
+def home(lan):
 	""" Manages the contents of the home page 
 	"""
 	
-	page_data = g.db.pages.find_one({ "name" : 'home_page' }) #{ "_id" : ObjectId('blablablablalba') }
-	lan = g.lan
+	page_data = g.db.pages.find_one({ "name" : 'home_page' }) # or find page with _id
 	
 	title = page_data['title'][lan]
 	description = page_data['description'][lan]
-	content = { x['label'] : x['value'] for x in page_data['content'][lan]}
-	url = { 
-	    'it' : PATH+'/it/', 
-	    'en' : PATH+'/en/' 
-	}
-	
+	content = { x['label'] : x['value'] for x in page_data['content'][lan]}	
 	return render_template('pages/home.html', **locals())
-	
-def page_base(lan, title):
+
+@content.route('/<lan>/<title>/')	
+def page(lan, title):
     """ Manages the deployment of the contents 
     of the pages of Bombolone.
     """

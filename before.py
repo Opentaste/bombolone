@@ -32,14 +32,21 @@ def core_inject_user():
 	that returns a dictionary."""
 	
 	url = urlparse(request.url)
-	
+		
 	b = {}
 	b['path'] = PATH
 	b['admin'] = PATH + '/admin'
 	b['layout'] = PATH + '/static/layout'
 	b['image'] = PATH + '/static/image'
 	
-	b['pages'] = { x['name'] : x for x in g.db.pages.find()}
+	b['lan'] = 'en'
+	if hasattr(g, 'lan'):
+	    b['lan'] = g.lan
+	
+	# Get menu value
+	path_lan = PATH+'/'+g.lan+'/'
+	b['urls'] = { x['name'] : path_lan+x['url'][g.lan] for x in g.db.pages.find() if x['url'] }
+	b['titles'] =  { x['name'] : x['title'][g.lan] for x in g.db.pages.find() }
 	
 	return b
 	
@@ -47,6 +54,7 @@ def core_bombolone():
     """
     """
     g.db = db
+    g.lan = 'en'
     g.my_id = None
     if 'user_id' in session:
 		user_id = session['user_id']
