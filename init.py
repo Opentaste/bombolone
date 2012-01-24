@@ -36,8 +36,7 @@ def init_languages():
             'ru' : 'Russo',
             'tr' : 'Turco',
             'gr' : 'Greco',
-            'ar' : 'Arabo'
-        },
+            'ar' : 'Arabo' },
         'en' : {
             'it' : 'Italian',
             'en' : 'English',
@@ -49,8 +48,7 @@ def init_languages():
             'ru' : 'Russian',
             'tr' : 'Turkish',
             'gr' : 'Greek',
-            'ar' : 'Arabic'
-        },
+            'ar' : 'Arabic' },
         'es' : {
             'it' : 'Italiano',
             'en' : 'Inglés',
@@ -62,8 +60,7 @@ def init_languages():
             'ru' : 'Ruso',
             'tr' : 'Turco',
             'gr' : 'Griego',
-            'ar' : ''
-        },
+            'ar' : '' },
         'pt' : {
             'it' : 'Italiano',
             'en' : 'Inglês',
@@ -75,8 +72,7 @@ def init_languages():
             'ru' : 'Russo',
             'tr' : 'Turco',
             'gr' : 'Grego',
-            'ar' : ''
-        },
+            'ar' : '' },
         'fr' : {
             'it' : 'Italienne',
             'en' : 'Anglaise',
@@ -88,8 +84,7 @@ def init_languages():
             'ru' : 'Russes',
             'tr' : 'Turque',
             'gr' : 'Grecs',
-            'ar' : ''
-        },
+            'ar' : '' },
         'de' : {
             'it' : 'Italienisch',
             'en' : 'Englisch',
@@ -101,8 +96,7 @@ def init_languages():
             'ru' : 'Russisch',
             'tr' : 'Türkisch',
             'gr' : 'Griechisch',
-            'ar' : 'Arabisch'
-        },
+            'ar' : 'Arabisch' },
         'jp' : {
             'it' : 'イタリア',
             'en' : 'スペイン',
@@ -114,8 +108,7 @@ def init_languages():
             'ru' : 'ロシア語',
             'tr' : 'トルコ',
             'gr' : 'ギリシャ',
-            'ar' : ''
-        },
+            'ar' : '' },
         'cn' : {
             'it' : '意大利',
             'en' : '西班牙',
@@ -127,8 +120,7 @@ def init_languages():
             'ru' : '俄罗斯',
             'tr' : '土耳其',
             'gr' : '希腊',
-            'ar' : ''
-        },
+            'ar' : '' },
         'ru' : {
             'it' : 'итальянский',
             'en' : 'испанский',
@@ -140,8 +132,7 @@ def init_languages():
             'ru' : 'русский',
             'tr' : 'турецкий',
             'gr' : 'греческий',
-            'ar' : ''
-        },
+            'ar' : '' },
         'tr' : {
             'it' : 'İtalyan',
             'en' : 'İngilizce',
@@ -153,8 +144,7 @@ def init_languages():
             'ru' : 'Rus',
             'tr' : 'Türk',
             'gr' : 'Yunan',
-            'ar' : ''
-        },
+            'ar' : '' },
         'gr' : {
             'it' : 'ιταλικά',
             'en' : 'ισπανικά',
@@ -166,8 +156,7 @@ def init_languages():
             'ru' : 'Ρωσική',
             'tr' : 'Τουρκικά',
             'gr' : 'ελληνικά',
-            'ar' : ''
-        },
+            'ar' : '' },
         'ar' : {
             'it' : 'إيطالي',
             'en' : 'الأسبانية',
@@ -207,17 +196,195 @@ def init_users():
     # Insert the users list 
     for user in list_users:
         db.users.insert( user )
-        
-
-def init_mongodb():
-    """ Initialize the database MongoDB of Bombolone. """
-    init_languages()
-    init_users()
-
-
-def init_mongodb_two():
-    """ fixtures MongoDB
-    """   
+   
+def init_hash_table():
+    """ Initialize a document for each module within the MongoDB
+    hash_table collection, each document contains a dictionary like hash map. """
+    
+    dict_languages = { 
+        'name' : 'languages', 
+        'value': {}
+    }
+    
+    dict_hash_map = { 
+        'name' : 'hash_map', 
+        'value': {}
+    }
+    
+    dict_users = { 
+        'name' : 'users', 
+        'value': {
+            'account_error_1': {
+    		    'it': 'Devi inserire l\'username',
+    		    'en': 'You must enter the username',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'account_error_2': {
+    		    'it': 'L\'username inserito deve essere almeno di due caratteri',
+    			'en': 'The username entered must be at least two characters',
+    			'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'account_error_3': {
+    		    'it': u'L\'username inserito non è disponibile',
+    			'en': 'The entered username is not available',
+    			'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'account_error_4': {
+    		    'it': u'L\'username inserito non è disponibile',
+    			'en': 'The entered username is not available',
+    			'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'account_error_5': {
+    		    'it': u'Il formato dell\'email non è corretto',
+    			'en': 'The format of the email is incorrect',
+    			'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'account_error_6': {
+    		    'it': u'L\'email scritta è già utilizzata da un altro account',
+    		    'en': 'The email written is already used by another account',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'account_error_7': {
+    		    'it': u'L\'username deve essere alfanumerico senza spazi',
+    		    'en': u'The username must be alphanumeric with no spaces',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'account_ok': {
+    		    'it': 'Account modificato correttamente',
+    		    'en': 'Account changed successfully',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'password_error_1': {
+    		    'it': 'La nuova password inserita deve essere almeno di 6 caratteri',
+    			'en': 'The new password entered must be at least 6 characters',
+    			'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'password_error_2': {
+    		    'it': 'Le nuove password inserite non sono uguali',
+    			'en': 'The new passwords entered do not match',
+    			'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : ''
+            }
+        }
+    }
+    
+    dict_pages = { 
+        'name' : 'pages', 
+        'value': {}
+    }
+    
+    dict_login = { 
+        'name' : 'login', 
+        'value': {
+            'error_1' : {
+                'it' : 'errore 1',
+                'en' : 'error 1',
+                'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : ''
+            },
+            'error_2' : {
+                'it' : 'errore 2',
+                'en' : 'error 2',
+                'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : ''      
+            }
+        }
+    }
+    
+    # Insert 
+    db.hash_table.insert( dict_languages )
+    db.hash_table.insert( dict_hash_map )
+    db.hash_table.insert( dict_users )
+    db.hash_table.insert( dict_pages )
+    db.hash_table.insert( dict_login )
+    
+    
+def init_pages():
+    """ fixtures MongoDB """   
     for num in range(1,6):
         page = {
             'name' : 'page_'+str(num),
@@ -250,7 +417,7 @@ def init_mongodb_two():
             },
             'input_label': [ 1, 1, 1, 1, 1 ]
         }
-        
+
         if num == 1:
             page['name'] = 'home_page'
             page['file'] = 'home'
@@ -259,4 +426,12 @@ def init_mongodb_two():
             db.pages.update( { 'name' : 'home_page' }, page, True)
         else:
             db.pages.update( { 'name' : 'page_'+str(num) }, page, True)
+         
+
+def init_mongodb():
+    """ Initialize the database MongoDB of Bombolone. """
+    init_languages()
+    init_users()
+    init_hash_table()
+    init_pages()
         

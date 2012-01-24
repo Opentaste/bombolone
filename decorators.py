@@ -24,4 +24,19 @@ def check_admin(function_to_decorate):
             abort(401)
         return function_to_decorate(*args,**kwargs)
 
+    return wrapped_function   
+ 
+def get_hash_login(function_to_decorate):
+    def wrapped_function(*args,**kwargs):
+        dict_login = g.db.hash_table.find_one({ 'name' : 'login' }, {'value': 1})
+        return function_to_decorate(*args,**kwargs)
+
+    return wrapped_function   
+    
+def get_hash_users(function_to_decorate):
+    def wrapped_function(*args,**kwargs):
+        dict_users = g.db.hash_table.find_one({ 'name' : 'users' }, {'value': 1})
+        return function_to_decorate(*args,**kwargs)
+
     return wrapped_function
+    

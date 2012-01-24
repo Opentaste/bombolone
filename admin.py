@@ -13,15 +13,14 @@ from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 
 # Imports inside bombolone
-from decorators import check_authentication
+from decorators import check_authentication, get_hash_login, get_hash_users
 from helpers import create_password
-from language import dict_login, setting_message
 from upload import upload_file
 
 
 admin = Blueprint('admin', __name__)
 
-
+@get_hash_login
 @admin.route('/login/', methods=['POST', 'GET'])
 def login():
 	"""
@@ -62,6 +61,7 @@ def dashboard():
  
  
 @check_authentication 
+@get_hash_users
 @admin.route('/admin/profile/', methods=['POST', 'GET'])  
 def profile():
     """
@@ -77,10 +77,10 @@ def profile():
 		old_username = g.my['username']
 		
 		if len(password) < 6 and len(password) > 0:
-		    g.message = setting_message['password_error_1']	
+		    g.message = dict_users['password_error_1']	
 		    g.status = 'mes-red'
 		elif password != password_check and len(password) > 0:
-		    g.message = setting_message['password_error_2']	
+		    g.message = dict_users['password_error_2']	
 		    g.status = 'mes-red'
 		# control several things:
 		# - username wrote
@@ -88,22 +88,22 @@ def profile():
 		# - username is available and it is not the same as 
 		# - the format of username is incorrect
 		elif not len(username):
-		    g.message = setting_message['account_error_1']
+		    g.message = dict_users['account_error_1']
 		    g.status = 'mes-red'
 		elif len(username) < 2:
-		    g.message = setting_message['account_error_2']
+		    g.message = dict_users['account_error_2']
 		    g.status = 'mes-red'
 		elif result is not None and username != old_username:
-		    g.message = setting_message['account_error_4']
+		    g.message = dict_users['account_error_4']
 		    g.status = 'mes-red'
 		elif not re.match(r'^[a-zA-Z0-9_]+$', username):
-		    g.message = setting_message['account_error_7']
+		    g.message = dict_users['account_error_7']
 		    g.status = 'mes-red'
 		else:
 		    g.my['username'] = username
 		    g.my['password'] = create_password(password)
 		    g.db.users.update({"_id": g.my['_id']}, g.my)
-		    g.message = setting_message['account_ok']
+		    g.message = dict_users['account_ok']
 		    g.status = 'mes-green'
 
     return render_template('admin/profile.html')

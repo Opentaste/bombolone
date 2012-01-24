@@ -15,7 +15,6 @@ from pymongo.objectid import ObjectId
 # Imports inside bombolone
 from decorators import check_authentication, check_admin 
 from helpers import create_password
-from language import dict_login, setting_message
 from upload import upload_file
 
 MODULE_DIR = 'admin/pages'
