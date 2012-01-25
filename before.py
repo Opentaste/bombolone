@@ -51,15 +51,32 @@ def core_inject_user():
 	return b
 	
 def core_bombolone():
-    """
-    """
+    """ Here are obtained the personal data. """
+    
+    # Assign different attributes to the global variable.
+    # - access to the database, 
+    # - language used
+    # - _id user when it's logged in.
     g.db = db
     g.lan = 'en'
     g.my_id = None
+    
     if 'user_id' in session:
+        
+        # get the user_id from session
 		user_id = session['user_id']
+		
+		# get the user's personal data.
 		g.my = g.db.users.find_one({ '_id' : ObjectId(user_id) })
+		
+		# get the hash map for the administration
+		admin_map = g.db.hash_table.find_one({ 'name' : 'admin' })
+		g.admin = { x : y[g.lan] for x, y in admin_map['value'].iteritems() }
+		
+		# If user_id not exist in the user list g.my is None
 		if g.my is None:
 			abort(401)
 		else:
 		    g.my_id = user_id
+		    
+		    

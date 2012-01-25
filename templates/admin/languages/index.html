@@ -1,17 +1,17 @@
 {% extends "admin/index.html" %}
-{% block head %}
-    <title>Languages</title>
-{% endblock %}
+
+{% block title %} {{ g.languages.title }} {% endblock %}
+
 {% block content %}
-    <h2>Languages</h2>
-    {% if status %}<div class="{{ status }}">{{ message[lan] }}</div>{% endif %}
+    <h2>{{ g.languages.name }}</h2>
+    {% if status %}<div class="{{ status }}">{{ message }}</div>{% endif %}
     <form action="{{ url_for('languages.overview') }}" method="post" >
         <table class="table_items">
         	<thead>
         		<tr>	
         		    <th style="width:5%;"></th>
-        			<th style="width:15%;">Codice</th>
-        			<th style="width:40%;">Lingua</th>
+        			<th style="width:15%;">{{ g.languages.code }}</th>
+        			<th style="width:40%;">{{ g.languages.language }}</th>
         			<th style="width:40%;">_id</th>
         		</tr>
         	</thead>
@@ -29,7 +29,7 @@
         		        {% if language['check'] %} checked="checked" {% endif %}>
         		    </td>
         			<td>{{ language['code'] }}</td>
-        			<td>{{ language['value'][lan] }}</td>
+        			<td>{{ language_chosen['value'][language['code']] }}</td>
         			<td>{{ language['_id'] }}</td>
         		</tr>
         		{% endfor %}
@@ -37,7 +37,7 @@
         </table>
         <div>
             <button tabindex="20" type="submit" class="submit">
-                <span>Update Check</span>
+                <span>{{ g.admin['save'] }}</span>
             </button>
         </div>
     </form>

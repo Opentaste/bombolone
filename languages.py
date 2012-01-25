@@ -16,13 +16,17 @@ from shared import LIST_LANGUAGES
 
 MODULE_DIR = 'admin/languages'
 languages = Blueprint('languages', __name__)
+    
 
-
+@languages.route('/admin/languages/', methods=['POST', 'GET'])
 @check_authentication 
 @check_admin
-@languages.route('/admin/languages/', methods=['POST', 'GET'])
 def overview():
     """ Overview and tool update of all languages supported!"""
+    
+    # get the hash map for the languages
+    languages_map = g.db.hash_table.find_one({ 'name' : 'languages' })
+    g.languages = { x : y[g.lan] for x, y in languages_map['value'].iteritems() }
     
     # Update the list of languages allowed on the site, 
     # except for the language used by your users at that time.
@@ -34,12 +38,17 @@ def overview():
                 else:
                     check = False
                 
-                # Update the permissions of the languages 
-                # and prepares the message of operation success
-                g.db.languages.update( {'code' : code}, {'$set' : { 'check' : check } } )
-                message = { 'it' : 'ok update', 'en' : 'ok update' }	
-                status = 'mes_green'
+                try:
+                    # Update the permissions of the languages 
+                    # and prepares the message of operation success
+                    g.db.languages.update( {'code' : code}, {'$set' : { 'check' : check } } )
+                    message = g.languages['update_ok']	
+                    status = 'mes_green'
+                except:
+                    message = g.languages['update_no']
+                    status = 'mes_red'
                 
     # Gets documents from the collections of all languages 
     languages_list = g.db.languages.find().sort('code')
+    language_chosen = g.db.languages.find_one({ 'code' : g.lan })
     return render_template( MODULE_DIR+'/index.html', **locals())

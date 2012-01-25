@@ -1,27 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="{{ g.lan }}"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="{{ g.lan }}"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="{{ g.lan }}"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="{{ lan }}"> <!--<![endif]-->
 <head>
-	<meta charset="utf-8" />
-	{% block head %}
-	<title>Home | Bombolone</title>
-	{% endblock %}
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/admin.css') }}" />
-	<!--[if IE]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+	<meta charset="utf-8">
+	
+	<title>{{ g.admin.title }} {% block title %} {% endblock %}</title>
+	<meta name="description" content="{% block description %} {% endblock %}">
+	
+	<!-- Mobile viewport optimized: h5bp.com/viewport -->
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+	{% block css %}{% endblock %}
+
+    <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+    <script src="{{ url_for('static', filename='js/libs/modernizr-1.7.min.js') }}"></script>
 </head>
 <body>
     <header>
-		<img src="{{ url_for('static', filename='admin/logo/admin_logo_mini.png') }}" alt="Web Site" />
+		<img src="{{ url_for('static', filename='admin/logo/admin_logo_mini.png') }}" alt="{{ g.admin.name }}" />
         <ul>
             <li>
                 <a>{{ g.my['username'] }}</a>
                 <ul class="header_menu">
-                    <li><a href="{{ url_for('admin.profile') }}" title="" >Modifica profilo</a></li>
-                    <li><a href="{{ url_for('content.home') }}" title="" >Sito Web</a></li>
+                    <li><a href="{{ url_for('admin.profile') }}" title="" >{{ g.admin.profile }}</a></li>
+                    <li><a href="{{ url_for('content.home') }}" title="" >{{ g.admin.web_site }}</a></li>
                 </ul>
             </li>
-            <li><a href="{{ url_for('admin.logout') }}" title="" >Esci</a></li>
+            <li><a href="{{ url_for('admin.logout') }}" title="" >{{ g.admin.logout }}</a></li>
         </ul>
     </header><!-- header -->
     
@@ -51,10 +59,12 @@
         {% block content %}
     	{% endblock %}
     </div><!-- .content -->
-    
+
+    <!-- JavaScript at the bottom for fast page loading -->
     <script src="{{ url_for('static', filename='js/tiramisu-0.1.5-min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
     {% block javascript_file %}
 	{% endblock %}
+
 </body>
 </html>

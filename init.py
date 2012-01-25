@@ -15,6 +15,7 @@ from shared import db
 def clean_database():
     """ Removes all the collections in the database. """
     db.languages.remove()
+    db.hash_table.remove()
     db.pages.remove()
     db.users.remove()
 
@@ -28,6 +29,7 @@ def init_languages():
         'it' : {
             'it' : 'Italiano',
             'en' : 'Inglese',
+            'es' : 'Spagnolo',
             'pt' : 'Portoghese',
             'fr' : 'Francese',
             'de' : 'Tedesco',
@@ -40,6 +42,7 @@ def init_languages():
         'en' : {
             'it' : 'Italian',
             'en' : 'English',
+            'es' : 'Spanish',
             'pt' : 'Portuguese',
             'fr' : 'French',
             'de' : 'German',
@@ -52,6 +55,7 @@ def init_languages():
         'es' : {
             'it' : 'Italiano',
             'en' : 'Inglés',
+            'es' : '',
             'pt' : 'Portugués',
             'fr' : 'Francés',
             'de' : 'Alemán',
@@ -64,6 +68,7 @@ def init_languages():
         'pt' : {
             'it' : 'Italiano',
             'en' : 'Inglês',
+            'es' : '',
             'pt' : 'Português',
             'fr' : 'Francês',
             'de' : 'Alemão',
@@ -76,6 +81,7 @@ def init_languages():
         'fr' : {
             'it' : 'Italienne',
             'en' : 'Anglaise',
+            'es' : '',
             'pt' : 'Portugaise',
             'fr' : 'Française',
             'de' : 'Allemande',
@@ -88,6 +94,7 @@ def init_languages():
         'de' : {
             'it' : 'Italienisch',
             'en' : 'Englisch',
+            'es' : '',
             'pt' : 'Portugiesisch',
             'fr' : 'Französisch',
             'de' : 'Deutsch',
@@ -100,6 +107,7 @@ def init_languages():
         'jp' : {
             'it' : 'イタリア',
             'en' : 'スペイン',
+            'es' : '',
             'pt' : 'ポルトガル',
             'fr' : 'フランス',
             'de' : 'ドイツ',
@@ -112,6 +120,7 @@ def init_languages():
         'cn' : {
             'it' : '意大利',
             'en' : '西班牙',
+            'es' : '',
             'pt' : '葡萄牙文',
             'fr' : '法国',
             'de' : '德国',
@@ -124,6 +133,7 @@ def init_languages():
         'ru' : {
             'it' : 'итальянский',
             'en' : 'испанский',
+            'es' : '',
             'pt' : 'португальский',
             'fr' : 'французский',
             'de' : 'немецкий',
@@ -136,6 +146,7 @@ def init_languages():
         'tr' : {
             'it' : 'İtalyan',
             'en' : 'İngilizce',
+            'es' : '',
             'pt' : 'Portekizce',
             'fr' : 'Fransız',
             'de' : 'Alman',
@@ -148,6 +159,7 @@ def init_languages():
         'gr' : {
             'it' : 'ιταλικά',
             'en' : 'ισπανικά',
+            'es' : '',
             'pt' : 'Πορτογαλικά',
             'fr' : 'γαλλικά',
             'de' : 'γερμανικά',
@@ -160,6 +172,7 @@ def init_languages():
         'ar' : {
             'it' : 'إيطالي',
             'en' : 'الأسبانية',
+            'es' : '',
             'pt' : 'البرتغالية',
             'fr' : 'فرنسي',
             'de' : 'ألماني',
@@ -201,9 +214,160 @@ def init_hash_table():
     """ Initialize a document for each module within the MongoDB
     hash_table collection, each document contains a dictionary like hash map. """
     
+    dict_admin = { 
+        'name' : 'admin', 
+        'value': {
+            'name': {
+    		    'it': 'Bombolone',
+    		    'en': 'Bombolone',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'title': {
+    		    'it': 'Bombolone |',
+    		    'en': 'Bombolone |',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'logout': {
+    		    'it': 'Logout',
+    		    'en': 'Logout',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'web_site': {
+    		    'it': 'Sito web',
+    		    'en': 'Web site',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'profile': {
+    		    'it': 'Profilo',
+    		    'en': 'Profile',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'save': {
+    		    'it': 'Salva',
+    		    'en': 'Save',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' }
+        }
+    }
+    
     dict_languages = { 
         'name' : 'languages', 
-        'value': {}
+        'value': {
+            'name': {
+    		    'it' : 'Lingue',
+    		    'en' : 'Languages',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'title': {
+    		    'it' : 'Lingue',
+    		    'en' : 'Languages',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'code': {
+    		    'it' : 'codice',
+    		    'en' : 'code',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'language': {
+    		    'it' : 'lingua',
+    		    'en' : 'language',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'update_ok': {
+    		    'it' : 'Salvataggio delle lingue riuscito.',
+    		    'en' : 'Languages saved successfully.',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'update_no': {
+    		    'it' : 'Si è verificato un errore durante il salvataggio delle lingue.',
+    		    'en' : 'There was an error while saving languages.',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' }       
+        }
     }
     
     dict_hash_map = { 
@@ -215,8 +379,8 @@ def init_hash_table():
         'name' : 'users', 
         'value': {
             'account_error_1': {
-    		    'it': 'Devi inserire l\'username',
-    		    'en': 'You must enter the username',
+    		    'it' : 'Devi inserire l\'username',
+    		    'en' : 'You must enter the username',
     		    'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -227,8 +391,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'account_error_2': {
-    		    'it': 'L\'username inserito deve essere almeno di due caratteri',
-    			'en': 'The username entered must be at least two characters',
+    		    'it' : 'L\'username inserito deve essere almeno di due caratteri',
+    			'en' : 'The username entered must be at least two characters',
     			'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -239,8 +403,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'account_error_3': {
-    		    'it': u'L\'username inserito non è disponibile',
-    			'en': 'The entered username is not available',
+    		    'it' : u'L\'username inserito non è disponibile',
+    			'en' : 'The entered username is not available',
     			'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -251,8 +415,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'account_error_4': {
-    		    'it': u'L\'username inserito non è disponibile',
-    			'en': 'The entered username is not available',
+    		    'it' : u'L\'username inserito non è disponibile',
+    			'en' : 'The entered username is not available',
     			'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -263,8 +427,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'account_error_5': {
-    		    'it': u'Il formato dell\'email non è corretto',
-    			'en': 'The format of the email is incorrect',
+    		    'it' : u'Il formato dell\'email non è corretto',
+    			'en' : 'The format of the email is incorrect',
     			'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -275,8 +439,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'account_error_6': {
-    		    'it': u'L\'email scritta è già utilizzata da un altro account',
-    		    'en': 'The email written is already used by another account',
+    		    'it' : u'L\'email scritta è già utilizzata da un altro account',
+    		    'en' : 'The email written is already used by another account',
     		    'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -287,8 +451,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'account_error_7': {
-    		    'it': u'L\'username deve essere alfanumerico senza spazi',
-    		    'en': u'The username must be alphanumeric with no spaces',
+    		    'it' : u'L\'username deve essere alfanumerico senza spazi',
+    		    'en' : u'The username must be alphanumeric with no spaces',
     		    'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -299,8 +463,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'account_ok': {
-    		    'it': 'Account modificato correttamente',
-    		    'en': 'Account changed successfully',
+    		    'it' : 'Account modificato correttamente',
+    		    'en' : 'Account changed successfully',
     		    'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -311,8 +475,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'password_error_1': {
-    		    'it': 'La nuova password inserita deve essere almeno di 6 caratteri',
-    			'en': 'The new password entered must be at least 6 characters',
+    		    'it' : 'La nuova password inserita deve essere almeno di 6 caratteri',
+    			'en' : 'The new password entered must be at least 6 characters',
     			'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -323,8 +487,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'password_error_2': {
-    		    'it': 'Le nuove password inserite non sono uguali',
-    			'en': 'The new passwords entered do not match',
+    		    'it' : 'Le nuove password inserite non sono uguali',
+    			'en' : 'The new passwords entered do not match',
     			'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -376,6 +540,7 @@ def init_hash_table():
     }
     
     # Insert 
+    db.hash_table.insert( dict_admin )
     db.hash_table.insert( dict_languages )
     db.hash_table.insert( dict_hash_map )
     db.hash_table.insert( dict_users )

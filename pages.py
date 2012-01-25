@@ -22,8 +22,8 @@ MODULE_DIR = 'admin/pages'
 pages = Blueprint('pages', __name__)
 
 
-@check_authentication 
 @pages.route('/admin/pages/')    
+@check_authentication
 def overview():
     """
 
@@ -97,9 +97,9 @@ def request_form(page):
     return page
 
 
-@check_authentication 
-@check_admin   
 @pages.route('/admin/pages/new/', methods=['POST', 'GET'])
+@check_authentication 
+@check_admin
 def new():
     """
     
@@ -112,9 +112,9 @@ def new():
         
     return render_template( MODULE_DIR+'/new.html' )
  
- 
-@check_authentication 
+
 @pages.route('/admin/pages/<_id>/', methods=['POST', 'GET'])
+@check_authentication 
 def content(_id):
     """
 
@@ -128,9 +128,9 @@ def content(_id):
     return render_template( MODULE_DIR+'/update.html', **locals() )
  
  
+@pages.route('/admin/pages/remove/<_id>/')  
 @check_authentication  
-@check_admin 
-@pages.route('/admin/pages/remove/<_id>/')    
+@check_admin  
 def remove(_id):
     """
 
@@ -140,8 +140,8 @@ def remove(_id):
     return 'ok'
 
 
-@check_authentication  
 @pages.route('/admin/pages/add_label/<number_label>/')
+@check_authentication 
 def add_label(number_label):
     """
 

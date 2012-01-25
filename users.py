@@ -20,9 +20,9 @@ MODULE_DIR = 'admin/users'
 
 users = Blueprint('users', __name__)
 
-
-@check_authentication 
+ 
 @users.route('/admin/users/')
+@check_authentication
 def overview():
     """
 
@@ -30,9 +30,10 @@ def overview():
     users_list = g.db.users.find()
     return render_template( MODULE_DIR+'/index.html', **locals() )
  
-
-@check_admin  
+  
 @users.route('/admin/users/new/', methods=['POST', 'GET'])
+@check_authentication
+@check_admin
 def new():
     """
     
@@ -52,9 +53,9 @@ def new():
     return render_template( MODULE_DIR+'/new.html' )
  
  
-@check_authentication 
-@check_admin 
 @users.route('/admin/users/remove/<_id>/')      
+@check_authentication 
+@check_admin
 def remove(_id):
     """
 
@@ -65,8 +66,8 @@ def remove(_id):
     return 'nada'
 
 
-@check_authentication
 @users.route('/admin/users/<_id>/', methods=['POST', 'GET'])
+@check_authentication
 def profile(_id):
     """
 
