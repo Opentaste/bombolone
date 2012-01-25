@@ -304,6 +304,54 @@ def init_hash_table():
                 'ru' : '',
                 'tr' : '',
                 'gr' : '',
+                'ar' : '' },
+            'name_val': {
+    		    'it': 'Nome',
+    		    'en': 'Name',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'number': {
+    		    'it': 'Numero',
+    		    'en': 'Number',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'remove': {
+    		    'it': 'Rimuovi',
+    		    'en': 'Remove',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'remove_item': {
+    		    'it': 'Rimuovi elemento',
+    		    'en': 'Remove item',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
                 'ar' : '' }
         }
     }
@@ -386,8 +434,8 @@ def init_hash_table():
         }
     }
     
-    dict_hash_map = { 
-        'name' : 'hash_map', 
+    dict_hash_table = { 
+        'name' : 'hash_table', 
         'value': {
             'name': {
     		    'it' : 'Hash Table',
@@ -412,7 +460,19 @@ def init_hash_table():
                 'ru' : '',
                 'tr' : '',
                 'gr' : '',
-                'ar' : '' }
+                'ar' : '' },
+            'add_new_hash_map': {
+    		    'it' : 'Aggiungi nuova hash map',
+    		    'en' : 'Add new hash map',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' }   
         }
     }
     
@@ -596,7 +656,7 @@ def init_hash_table():
     # Insert 
     db.hash_table.insert( dict_admin )
     db.hash_table.insert( dict_languages )
-    db.hash_table.insert( dict_hash_map )
+    db.hash_table.insert( dict_hash_table )
     db.hash_table.insert( dict_users )
     db.hash_table.insert( dict_pages )
     db.hash_table.insert( dict_login )

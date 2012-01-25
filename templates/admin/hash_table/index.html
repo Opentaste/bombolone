@@ -4,14 +4,14 @@
 {% endblock %}
 {% block content %}
     <h2>{{ g.hash_table.name }}</h2>
-    <a href="{{ admin }}/hash_table/new/" title="" class="button">Add new document</a>
+    <a href="{{ admin }}/hash_table/new/" title="" class="button">{{ g.hash_table.add_new_hash_map }}</a>
     <table class="table_items">
     	<thead>
     		<tr>	
-    			<th style="width:30%;">Name document</th>
-    			<th style="width:20%;">Number</th>
+    			<th style="width:30%;">{{ g.admin.name_val }}</th>
+    			<th style="width:20%;">{{ g.admin.number }}</th>
     			<th style="width:30%;">_id</th>
-    			<th style="width:20%;">Remove</th>
+    			<th style="width:20%;">{{ g.admin.remove }}</th>
     		</tr>
     	</thead>
     	<tfoot>
@@ -25,7 +25,7 @@
     			<td><a href="{{ admin }}/hash_table/{{ str(document['_id']) }}/">{{ document['name'] }}</a></td>
     			<td>{{ len(document['value']) }}</td>
     			<td><a href="{{ admin }}/hash_table/{{ str(document['_id']) }}/">{{ document['_id'] }}</a></td>
-    			<td><span class="remove_item item_{{ str(document['_id']) }}">remove document</span></td>
+    			<td><span class="remove_item item_{{ str(document['_id']) }}">{{ g.admin.remove_item }}</span></td>
     		</tr>
     		{% endfor %}
     	</tbody>
