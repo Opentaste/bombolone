@@ -49,5 +49,15 @@ def get_hash_users(function_to_decorate):
         users_map = g.db.hash_table.find_one({ 'name' : 'users' })
         g.users = { x : y[g.lan] for x, y in users_map['value'].iteritems() }
         return function_to_decorate(*args, **kwargs)
-    return decorated_function      
+    return decorated_function 
+   
+    
+def get_hash_table(function_to_decorate):
+    """ Requires admin login credentials """
+    @wraps(function_to_decorate)
+    def decorated_function(*args, **kwargs):
+        hash_table_map = g.db.hash_table.find_one({ 'name' : 'hash_table' })
+        g.hash_table = { x : y[g.lan] for x, y in hash_table_map['value'].iteritems() }
+        return function_to_decorate(*args, **kwargs)
+    return decorated_function     
     

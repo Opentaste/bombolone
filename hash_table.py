@@ -14,7 +14,8 @@ from flask import Blueprint, request, session, g, Response, render_template, url
 from pymongo.objectid import ObjectId
 
 # Imports inside bombolone
-from decorators import check_authentication, check_admin
+from decorators import check_authentication, check_admin, get_hash_table
+from shared import LIST_LANGUAGES
     
 MODULE_DIR = 'admin/hash_table'
 hash_table = Blueprint('hash_table', __name__)
@@ -22,6 +23,7 @@ hash_table = Blueprint('hash_table', __name__)
 
 @hash_table.route('/admin/hash_table/')
 @check_authentication 
+@get_hash_table
 def overview():
     """ List all the documents, each has a name that identifies it, and an hash map. """
     
@@ -33,10 +35,9 @@ def overview():
 @check_authentication
 @check_admin
 def new():
-    """
-    
-    """            
-    return render_template( MODULE_DIR+'/new.html' )
+    """ Create a new document within the hash table. """
+    list_lan = LIST_LANGUAGES            
+    return render_template( MODULE_DIR+'/new.html', **locals())
  
  
 @hash_table.route('/admin/hash_table/remove/<_id>/')  

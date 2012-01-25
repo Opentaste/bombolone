@@ -12,12 +12,28 @@ from helpers import create_password
 from shared import db
 
 
-def clean_database():
+def clean_database(all_item=1):
     """ Removes all the collections in the database. """
+    
+    if int(all_item):
+        print all_item
+        db.users.remove()
+        
     db.languages.remove()
     db.hash_table.remove()
     db.pages.remove()
-    db.users.remove()
+    
+    
+def init_mongodb(all_item=1):
+    """ Initialize the database MongoDB of Bombolone. """
+
+    if int(all_item):
+        print all_item
+        init_users()
+
+    init_languages()
+    init_hash_table()
+    init_pages()
 
 
 def init_languages():
@@ -372,7 +388,32 @@ def init_hash_table():
     
     dict_hash_map = { 
         'name' : 'hash_map', 
-        'value': {}
+        'value': {
+            'name': {
+    		    'it' : 'Hash Table',
+    		    'en' : 'Hash Table',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'title': {
+    		    'it' : 'Hash Table',
+    		    'en' : 'Hash Table',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' }
+        }
     }
     
     dict_users = { 
@@ -511,8 +552,8 @@ def init_hash_table():
         'name' : 'login', 
         'value': {
             'error_1' : {
-                'it' : 'errore 1',
-                'en' : 'error 1',
+                'it' : 'Devi completare tutti i campi',
+                'en' : 'You must complete every field',
                 'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -524,9 +565,22 @@ def init_hash_table():
                 'ar' : ''
             },
             'error_2' : {
-                'it' : 'errore 2',
-                'en' : 'error 2',
+                'it' : u'L\'username o l\'email è errata',
+                'en' : 'Wrong Username/Email and password combination.',
                 'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : ''      
+            },
+            'send': {
+				'it': 'Email inviata al tuo indirizzo di posta',
+				'en': 'Email sent to your email address',
+				'pt' : '',
                 'fr' : '',
                 'de' : '',
                 'jp' : '',
@@ -592,11 +646,3 @@ def init_pages():
         else:
             db.pages.update( { 'name' : 'page_'+str(num) }, page, True)
          
-
-def init_mongodb():
-    """ Initialize the database MongoDB of Bombolone. """
-    init_languages()
-    init_users()
-    init_hash_table()
-    init_pages()
-        

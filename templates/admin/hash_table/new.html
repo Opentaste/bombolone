@@ -5,7 +5,20 @@
 {% block content %}
     <h2>New document in hash_table</h2>
     <form action="{{ url_for('hash_table.new') }}" enctype="multipart/form-data" method="post" >
-        <div class="form_container">
-            
+        <section class="form_container first_light">
+            <section>
+                <label>Document name</label>
+                <input type="text" name="name" value="" tabindex="1" maxlength="20" />
+            </section>
+        </section>
+        {% for x in list_lan %}
+        <section class="lan_{{ x }}">
+            <div class="form_container">
+                <button class="page_add_label submit_one">
+                    <span>+ Add new label</span>
+                </button>
+            </div>
+        </section>
+        {% endfor %}
     </form>
 {% endblock %}

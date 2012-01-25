@@ -1,9 +1,9 @@
 {% extends "admin/index.html" %}
 {% block head %}
-    <title>Hash Table</title>
+    <title>{{ g.hash_table.title }}</title>
 {% endblock %}
 {% block content %}
-    <h2>Hash Table</h2>
+    <h2>{{ g.hash_table.name }}</h2>
     <a href="{{ admin }}/hash_table/new/" title="" class="button">Add new document</a>
     <table class="table_items">
     	<thead>
