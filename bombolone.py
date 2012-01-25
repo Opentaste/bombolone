@@ -51,7 +51,7 @@ def bad_request(error):
 def unauthorized(error):
     """Raise if the user is not authorized. Also used if you want 
     to use HTTP basic auth."""
-    return 'Raise if the user is not authorized. Also used if you want to use HTTP basic auth. 401', 401
+    return render_template('401.html')
 
 @app.errorhandler(404)
 def not_found(error):
@@ -77,7 +77,7 @@ def bad_request(error):
     Raise if the browser sends something to the application the 
     application or server cannot handle.
     """
-    return 'Raise if the browser sends something to the application the application or server cannot handle.', 500
+    return render_template('500.html')
      
      
 # ========================================================================	
