@@ -145,43 +145,6 @@ a:hover {
 
 
 /* Button ================================================================================== */
-.button {
-    display: inline-block;
-    min-width: 46px;
-    text-align: center;
-    color: #444;
-    font:81.25%/1 arial,helvetica,sans-serif;
-    font-size: 11px;
-    font-weight: bold;
-    height: 27px;
-    padding: 0 8px;
-    line-height: 27px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    -webkit-transition: all 0.218s;
-    -moz-transition: all 0.218s;
-    -ms-transition: all 0.218s;
-    -o-transition: all 0.218s;
-    transition: all 0.218s;
-    border: 1px solid #dcdcdc;
-    background-color: #f5f5f5;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#f5f5f5),to(#f1f1f1));
-    background-image: -webkit-linear-gradient(top,#f5f5f5,#f1f1f1);
-    background-image: -moz-linear-gradient(top,#f5f5f5,#f1f1f1);
-    background-image: -ms-linear-gradient(top,#f5f5f5,#f1f1f1);
-    background-image: -o-linear-gradient(top,#f5f5f5,#f1f1f1);
-    background-image: linear-gradient(top,#f5f5f5,#f1f1f1);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    cursor: default;
-}
-
-*+html .button {
-    min-width: 70px;
-}
-
 button.button, input[type=submit].button {
     height: 29px;
     line-height: 29px;
@@ -193,8 +156,41 @@ button.button, input[type=submit].button {
     overflow: visible;
 }
 
+.button {
+    display: inline-block;
+    min-width: 50px;
+    text-align: center;
+    color: #424242;
+    font:81.25%/1 arial,helvetica,sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    height: 24px;
+    padding: 0 8px;
+    line-height: 24px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-transition: all 0.218s;
+    -moz-transition: all 0.218s;
+    -ms-transition: all 0.218s;
+    -o-transition: all 0.218s;
+    transition: all 0.218s;
+    border: 1px solid #d9dfe5;
+    background-color: #F6F6F6;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#F6F6F6),to(#f0ede5));
+    background-image: -webkit-linear-gradient(top,#F6F6F6,#f0ede5);
+    background-image: -moz-linear-gradient(top,#F6F6F6,#f0ede5);
+    background-image: -ms-linear-gradient(top,#F6F6F6,#f0ede5);
+    background-image: -o-linear-gradient(top,#F6F6F6,#f0ede5);
+    background-image: linear-gradient(top,#F6F6F6,#f0ede5);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
 .button:hover {
-    border: 1px solid #c6c6c6;
+    border: 1px solid #d9dfe5;
     color: #333;
     text-decoration: none;
     -webkit-transition: all 0.0s;
@@ -202,29 +198,16 @@ button.button, input[type=submit].button {
     -ms-transition: all 0.0s;
     -o-transition: all 0.0s;
     transition: all 0.0s;
-    background-color: #f8f8f8;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#f8f8f8),to(#f1f1f1));
-    background-image: -webkit-linear-gradient(top,#f8f8f8,#f1f1f1);
-    background-image: -moz-linear-gradient(top,#f8f8f8,#f1f1f1);
-    background-image: -ms-linear-gradient(top,#f8f8f8,#f1f1f1);
-    background-image: -o-linear-gradient(top,#f8f8f8,#f1f1f1);
-    background-image: linear-gradient(top,#f8f8f8,#f1f1f1);
+    background-color: #dee0e0;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#F6F6F6),to(#dee0e0));
+    background-image: -webkit-linear-gradient(top,#F6F6F6,#dee0e0);
+    background-image: -moz-linear-gradient(top,#F6F6F6,#dee0e0);
+    background-image: -ms-linear-gradient(top,#F6F6F6,#dee0e0);
+    background-image: -o-linear-gradient(top,#F6F6F6,#dee0e0);
+    background-image: linear-gradient(top,#F6F6F6,#dee0e0);
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-}
-
-.button:active {
-    background-color: #f6f6f6;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#f6f6f6),to(#f1f1f1));
-    background-image: -webkit-linear-gradient(top,#f6f6f6,#f1f1f1);
-    background-image: -moz-linear-gradient(top,#f6f6f6,#f1f1f1);
-    background-image: -ms-linear-gradient(top,#f6f6f6,#f1f1f1);
-    background-image: -o-linear-gradient(top,#f6f6f6,#f1f1f1);
-    background-image: linear-gradient(top,#f6f6f6,#f1f1f1);
-    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .button:visited {
@@ -271,7 +254,7 @@ button.button, input[type=submit].button {
     border: 1px solid #5f80b3;
     color: #fff!important;
     font-size: 13px;
-    height: 30px;
+    height: 27px;
     margin: 0 1.5em 1.2em 0;
     text-shadow: 0 1px rgba(0,0,0,0.1);
 }
@@ -289,7 +272,36 @@ button.button, input[type=submit].button {
     background-image: linear-gradient(top,#7C97C4,#6481ae);
 }
 
-.button-submit:active, .button-blu:active {
+.button-red, a.button-red {
+    background-color: #F25F54;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#F25F54),to(#ec5643)); 
+    background-image: -webkit-linear-gradient(top,#F25F54,#ec5643);
+    background-image: -moz-linear-gradient(top,#F25F54,#ec5643);
+    background-image: -ms-linear-gradient(top,#F25F54,#ec5643);
+    background-image: -o-linear-gradient(top,#F25F54,#ec5643);
+    background-image: linear-gradient(top,#F25F54,#ec5643);
+    border: 1px solid #d54843;
+    color: #fff!important;
+    font-size: 13px;
+    height: 27px;
+    margin: 0 1.5em 1.2em 0;
+    text-shadow: 0 1px rgba(0,0,0,0.1);
+}
+
+.button-red:hover, a.button-red:hover {
+    border: 1px solid #d42a0d; 
+    color: #fff;
+    text-shadow: 0 1px rgba(0,0,0,0.3);
+    background-color: #da493e; 
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#F25F54),to(#da493e));
+    background-image: -webkit-linear-gradient(top,#F25F54,#da493e);
+    background-image: -moz-linear-gradient(top,#F25F54,#da493e);
+    background-image: -ms-linear-gradient(top,#F25F54,#da493e);
+    background-image: -o-linear-gradient(top,#F25F54,#da493e);
+    background-image: linear-gradient(top,#F25F54,#da493e);
+}
+
+.button:active, .button-submit:active, .button-blu:active, .button-red:active {
     -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
     -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
@@ -455,9 +467,10 @@ nav a {
 
 /* Form ==================================================================================== */
 .form_container {
-    background: none repeat scroll 0 0 #f0f0f0;
+    background: none repeat scroll 0 0 #F0F0F0;
     font: 13px/18px "Helvetica Neue",Helvetica,Arial,sans-serif !important;
     margin: 0 0 10px;
+    overflow: hidden;
     padding: 16px 5px;
     width: 650px;
 }
@@ -515,8 +528,29 @@ nav a {
    	border-radius: 4px;
 }
 
+.width120 {
+    width: 120px !important;
+}
+
 .width180 {
-    width:180px!important;
+    margin-right: 14px !important;
+    width: 120px !important;
+}
+
+.width200 {
+    width: 230px !important;
+}
+
+.button_remove {
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 0 0 1em;
+}
+
+.button_right {
+    float:right;
+    margin: 0 1em 0 0;
 }
 
 .label_form input, .label_form textarea, .label_form img {
@@ -538,6 +572,35 @@ nav a {
     width: 104px !important;
 }
 
+.list_language{
+    -webkit-transition: opacity 0.218s ease 0s;
+    -moz-transition: opacity 0.218s ease 0s;
+    -ms-transition: opacity 0.218s ease 0s;
+    -o-transition: opacity 0.218s ease 0s;
+    transition: opacity 0.218s ease 0s;
+    background: none repeat scroll 0 0 #F6F6F6;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: default;
+    display:none;
+    font-size: 13px;
+    list-style: none outside none;
+    margin: 0;
+    min-width: 100px;
+    outline: medium none;
+    padding:0;
+    position: absolute;
+}
+
+.list_language li {
+    line-height:20px;
+    padding:0 0 0 15px;
+}
+
+.list_language li:hover {
+    background: none repeat scroll 0 0 #f0ede5;
+}
+    
 
 /* Table =================================================================================== */
 .table_items{

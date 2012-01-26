@@ -33,7 +33,6 @@
     	    
 		    t.get('.page_add_label').on('click', function(e){
 		        pages.number_of_label += 1; 
-		        console.log(pages.number_of_label)
 		        t.ajax({
 		            'url' : '/admin/pages/add_label/'+pages.number_of_label+'/',
 		            'success' : function(data){

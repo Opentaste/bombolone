@@ -7,16 +7,22 @@
     <form action="{{ url_for('hash_table.new') }}" enctype="multipart/form-data" method="post" >
         <section class="form_container first_light">
             <section>
-                <label>Document name</label>
+                <label class="width120">Document name</label>
                 <input type="text" name="name" value="" tabindex="1" maxlength="20" />
             </section>
         </section>
+        <section>
+            <span class="button list_language_button">{{ g.lan }}</span>
+            <ul class="list_language">
+                {% for x in list_lan %}
+                <li>{{ x }}</li>
+                {% endfor %}
+            </ul>
+        </section>
         {% for x in list_lan %}
-        <section class="lan_{{ x }}">
+        <section class="section_{{ x }}" {% if x != g.lan %}style="display:none"{% endif %}>
             <div class="form_container">
-                <button class="page_add_label submit_one">
-                    <span>+ Add new label</span>
-                </button>
+                <span class="hash_add_label button button_right button-blu span_{{ x }}">+ Add new label</span>
             </div>
         </section>
         {% endfor %}
