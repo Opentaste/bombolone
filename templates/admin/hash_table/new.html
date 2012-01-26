@@ -22,3 +22,6 @@
         {% endfor %}
     </form>
 {% endblock %}
+{% block javascript_file %}
+<script src="{{ url_for('static', filename='js/hash_table.js') }}"></script>
+{% endblock %}
