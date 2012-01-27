@@ -51,14 +51,14 @@ def bad_request(error):
 def unauthorized(error):
     """Raise if the user is not authorized. Also used if you want 
     to use HTTP basic auth."""
-    return render_template('401.html')
+    return render_template('error/401.html')
 
 @app.errorhandler(404)
 def not_found(error):
     """
     Raise if a resource does not exist and never existed.
     """
-    return render_template('404.html')
+    return render_template('error/404.html')
     
 @app.errorhandler(408)
 def request_timeout(error):
@@ -77,7 +77,7 @@ def bad_request(error):
     Raise if the browser sends something to the application the 
     application or server cannot handle.
     """
-    return render_template('500.html')
+    return render_template('error/500.html')
      
      
 # ========================================================================	

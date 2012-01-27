@@ -75,7 +75,6 @@ td { vertical-align: top; }
 /* Forms ==================================================================== */
 form { margin: 0; }
 fieldset { border: 0; margin: 0; padding: 0; }
-label { cursor: pointer; }
 
 
 
@@ -489,7 +488,7 @@ nav a {
     margin: 0 0 10px;
     overflow: hidden;
     padding: 16px 5px;
-    width: 700px;
+    width: 800px;
 }
 
 .form_container section {

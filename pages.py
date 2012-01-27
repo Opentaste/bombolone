@@ -35,14 +35,14 @@ def overview():
 def request_form(page):
     """
     """
-    len_label = [ int(x.split('_')[3]) for x in request.form if x.startswith('label_it_name_') ]
+    form = request.form
+    
+    len_label = [ int(x.split('_')[3]) for x in form if x.startswith('label_it_name_') ]
     len_of_label = 0
     
     # there are label
     if len(len_label) > 0:
         len_of_label = max(len_label) + 1
-    
-    form = request.form
     
     if g.my['rank'] is 10:
         page['name'] = form['name']

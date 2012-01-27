@@ -15,19 +15,31 @@
         </ul>
     </section>
     
-    <form action="{{ url_for('hash_table.new') }}" enctype="multipart/form-data" method="post">
+    {% if status %}<div class="{{ status }}">{{ message }}</div>{% endif %}
+    <form action="{{ url_for('hash_table.new') }}" class="hash_form" enctype="multipart/form-data" method="post">
         
         <section class="form_container first_light">
             <section>
                 <label class="width120">Document name</label>
-                <input type="text" name="name" value="" tabindex="1" maxlength="20" />
+                <input type="text" name="name" value="{{ hash_map['name'] }}" tabindex="1" maxlength="20" />
             </section>
         </section>
         
         {% for code, name in language_check.iteritems() %}
-        <h3 class="h3_{{ code }}" {% if code != g.lan %}style="display:none"{% endif %}>Document in {{ name }}</h3>
+        <h3 class="h3_{{ code }}" {% if code != g.lan %}style="display:none"{% endif %}>Document in {{ name }}</h3>  
         <section class="section_{{ code }}" {% if code != g.lan %}style="display:none"{% endif %}>
             <div class="form_container">
+                
+            {% for i, key in enumerate(sorted(hash_map.value)) %}
+                <section class="section_num_{{ i }}"><label class="width120">Key/Value :</label>
+                    <input type="text" name="label_name_{{ code }}_{{ i }}" value="{{ key }}" 
+                    class="width180 name_key label_name_{{ code }}_{{ i }}">
+                    <input type="text" name="label_{{ code }}_{{ i }}" value="{{ hash_map.value[key][code] }}" 
+                    class="width200 label_{{ code }}_{{ i }}">
+                    <span class="hash_remove_label button button_remove button-red num_{{ i }}">- Remove label</span>
+                </section>
+            {% endfor %}
+            
                 <span class="hash_add_label button button_right button-blu span_{{ code }}">+ Add new label</span>
             </div>
         </section>
