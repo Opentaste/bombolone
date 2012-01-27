@@ -2,13 +2,35 @@
 	var hash_Table = {
 		init : function(){
 		    
+		    t.get('.list_language').css({ 'display' : 'none' });
+		    
 		    t.get('.list_language_button').on('click', function(){
 		        var display = t.get('.list_language').css('display');
 		        if (display == 'none') {
-		            t.get('.list_language').css({ 'display' : 'inherit' });
+		            t.get('.list_language').css({ 'display' : 'block' });
 		        } else {
 		            t.get('.list_language').css({ 'display' : 'none' });
 		        }
+		    });
+		    
+		    t.get('ul.list_language li').on('click', function(e){
+		        var li_press = e.currentTarget;
+                var code = li_press.className.split('_')[0];
+                
+                for (var i = 12; i--;) {
+		            var lan = hash_Table.list_languages[i];
+		            t.get('.h3_'+lan).css({ 'display' : 'none' });
+                    t.get('.section_'+lan).css({ 'display' : 'none' });
+                    t.get('li.'+lan+'_lan').attr('class' , lan+'_lan' );
+                }
+                
+                t.get('.h3_'+code).css({ 'display' : 'block' });
+                t.get('.section_'+code).css({ 'display' : 'block' });
+                t.get('.list_language').css({ 'display' : 'none' });
+                t.get('li.'+code+'_lan').attr('class' , code+'_lan language_selected' );
+                var val = t.get('li.'+code+'_lan').html();
+                t.get('.list_language_button').html(val);
+                
 		    });
 			
 		},

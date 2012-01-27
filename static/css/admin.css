@@ -255,7 +255,7 @@ button.button, input[type=submit].button {
     color: #fff!important;
     font-size: 13px;
     height: 27px;
-    margin: 0 1.5em 1.2em 0;
+    margin: 0 1.2em 0.4em 0;
     text-shadow: 0 1px rgba(0,0,0,0.1);
 }
 
@@ -307,6 +307,7 @@ button.button, input[type=submit].button {
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
 }
 
+
 /* Header ================================================================================== */
 header {
     background: #93645A;
@@ -320,6 +321,16 @@ header {
     height: 38px;
 }
 
+.head_left {
+    float:left;
+    width:300px;
+}
+
+.head_right {
+    float:left;
+    width:720px;
+}
+
 header img{
     float: left;
     margin: 2px 0 0 6px;
@@ -327,7 +338,6 @@ header img{
 
 header ul {
     float:right;
-    margin-right:100px;
 }
 
 header li {
@@ -335,13 +345,14 @@ header li {
     float: left;
     font-size: 13px;
     position: relative;
+    text-align:right;
 }
 
 header li a {
     color: #fff;
     display: block;
     float: none;
-    line-height: 19px;
+    line-height: 18px;
     padding: 10px;
     text-decoration: none;
 }
@@ -360,13 +371,14 @@ header li:hover ul {
     background-color: #7C97C4;
     border: 0 none;
     display: none;
-    float: left;
-    margin-left: 0;
+    margin: 0;
     padding: 5px 0;
     position: absolute;
+    right: 0;
     text-align: left;
     top: 38px;
     width: 160px;
+    z-index: 99;
 }
 
 .header_menu li{
@@ -398,7 +410,7 @@ header li:hover ul {
 nav {
     float:left;
     font-size:1.4em;
-    width: 18%;
+    min-width: 180px;
 }
 
 nav li {
@@ -431,16 +443,21 @@ nav a {
     color:#fff!important;
     display:block;
     line-height:2.2em;
-    padding-left:30px;
+    padding: 0 0 0 20px;
     width:100%;
 }
 
 
 /* Content ================================================================================= */
 .content { 
-    float:left;
+    float: left;
     padding: 0 0 0 30px;
-    width:76%;
+    width: 814px;
+}
+
+.content h2 {
+    display:inline-block;
+    width:80%;
 }
 
 .menu_languages li {
@@ -472,7 +489,7 @@ nav a {
     margin: 0 0 10px;
     overflow: hidden;
     padding: 16px 5px;
-    width: 650px;
+    width: 700px;
 }
 
 .form_container section {
@@ -538,7 +555,7 @@ nav a {
 }
 
 .width200 {
-    width: 230px !important;
+    width: 296px !important;
 }
 
 .button_remove {
@@ -572,6 +589,14 @@ nav a {
     width: 104px !important;
 }
 
+.hash_languages {
+    display: inline-block;
+    padding: 0;
+    position: relative;
+    text-align: right;
+    width: 19%;
+}
+
 .list_language{
     -webkit-transition: opacity 0.218s ease 0s;
     -moz-transition: opacity 0.218s ease 0s;
@@ -589,6 +614,7 @@ nav a {
     min-width: 100px;
     outline: medium none;
     padding:0;
+    right:0;
     position: absolute;
 }
 

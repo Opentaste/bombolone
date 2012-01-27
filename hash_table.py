@@ -15,7 +15,6 @@ from pymongo.objectid import ObjectId
 
 # Imports inside bombolone
 from decorators import check_authentication, check_admin, get_hash_table
-from shared import LIST_LANGUAGES
     
 MODULE_DIR = 'admin/hash_table'
 hash_table = Blueprint('hash_table', __name__)
@@ -36,7 +35,11 @@ def overview():
 @check_admin
 def new():
     """ Create a new document within the hash table. """
-    list_lan = LIST_LANGUAGES            
+    language_name = g.db.languages.find_one({ 'code' : g.lan })
+    
+    # Finding the available languages
+    language_check = { x : y for x, y in language_name['value'].iteritems() if x in g.languages} 
+    
     return render_template( MODULE_DIR+'/new.html', **locals())
  
  

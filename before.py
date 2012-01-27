@@ -61,6 +61,8 @@ def core_bombolone():
     g.lan = 'en'
     g.my_id = None
     
+    g.languages = { x['code'] : x['value'][x['code']] for x in g.db.languages.find({ 'check' : True })}
+    
     if 'user_id' in session:
         
         # get the user_id from session

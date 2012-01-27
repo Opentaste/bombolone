@@ -3,29 +3,39 @@
     <title>New document in hash_table</title>
 {% endblock %}
 {% block content %}
+
     <h2>New document in hash_table</h2>
-    <form action="{{ url_for('hash_table.new') }}" enctype="multipart/form-data" method="post" >
+    
+    <section class="hash_languages">
+        <span class="button list_language_button">{{ language_check[g.lan] }}</span>
+        <ul class="list_language">
+            {% for code, name in language_check.iteritems() %}
+            <li class="{{ code }}_lan {% if g.lan == code %}language_selected{% endif %}">{{ name }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+    
+    <form action="{{ url_for('hash_table.new') }}" enctype="multipart/form-data" method="post">
+        
         <section class="form_container first_light">
             <section>
                 <label class="width120">Document name</label>
                 <input type="text" name="name" value="" tabindex="1" maxlength="20" />
             </section>
         </section>
-        <section>
-            <span class="button list_language_button">{{ g.lan }}</span>
-            <ul class="list_language">
-                {% for x in list_lan %}
-                <li>{{ x }}</li>
-                {% endfor %}
-            </ul>
-        </section>
-        {% for x in list_lan %}
-        <section class="section_{{ x }}" {% if x != g.lan %}style="display:none"{% endif %}>
+        
+        {% for code, name in language_check.iteritems() %}
+        <h3 class="h3_{{ code }}" {% if code != g.lan %}style="display:none"{% endif %}>Document in {{ name }}</h3>
+        <section class="section_{{ code }}" {% if code != g.lan %}style="display:none"{% endif %}>
             <div class="form_container">
-                <span class="hash_add_label button button_right button-blu span_{{ x }}">+ Add new label</span>
+                <span class="hash_add_label button button_right button-blu span_{{ code }}">+ Add new label</span>
             </div>
         </section>
         {% endfor %}
+        
+        <div>
+            <button tabindex="200" type="submit" class="button button-submit">Create document</button>
+        </div>
     </form>
 {% endblock %}
 {% block javascript_file %}
