@@ -41,7 +41,7 @@
                     {% include 'admin/pages/label_en.html' %}
                 {% endfor %}
                 {% if g.my['rank'] == 10 %}
-                <span class="page_add_label submit_one button">+ Add new label</span>
+                <span class="page_add_label submit_one button">{{ g.admin.add_field }}</span>
                 {% endif %}
             </div>
         </section>
@@ -65,14 +65,12 @@
                     {% include 'admin/pages/label_it.html' %}
                 {% endfor %}
                 {% if g.my['rank'] == 10 %}
-                <span class="page_add_label submit_two button">+ Aggiungi nuovo label</span>
+                <span class="page_add_label submit_two button">{{ g.admin.add_field }}</span>
                 {% endif %}
             </div>
         </section>
         <div>
-            <button tabindex="200" type="submit" class="submit">
-                <span>Update page</span>
-            </button>
+            <button tabindex="200" type="submit" class="button button-submit">{{ g.admin.save }}</button>
         </div>
     </form>
 {% endblock %}

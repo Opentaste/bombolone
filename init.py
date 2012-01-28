@@ -216,9 +216,9 @@ def init_users():
             'rank' : 10 
         },
         {
-            'username' : 'admin', 
+            'username' : 'user', 
             'password' : create_password('user'), 
-            'rank' : 10 
+            'rank' : 20 
         }
     ]
     
@@ -232,6 +232,7 @@ def init_hash_table():
     
     dict_admin = { 
         'name' : 'admin', 
+        'module' : True, 
         'value': {
             'name': {
     		    'it': 'Bombolone',
@@ -352,12 +353,37 @@ def init_hash_table():
                 'ru' : '',
                 'tr' : '',
                 'gr' : '',
+                'ar' : '' },
+            'add_field': {
+    		    'it': '+ Aggiungi campo',
+    		    'en': '+ Add field',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'remove_field': {
+    		    'it': '- Rimuovi campo',
+    		    'en': '- Remove field',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
                 'ar' : '' }
         }
     }
     
     dict_languages = { 
         'name' : 'languages', 
+        'module' : True, 
         'value': {
             'name': {
     		    'it' : 'Lingue',
@@ -435,7 +461,8 @@ def init_hash_table():
     }
     
     dict_hash_table = { 
-        'name' : 'hash_table', 
+        'name' : 'hash_table',
+        'module' : True,  
         'value': {
             'name': {
     		    'it' : 'Hash Table',
@@ -478,6 +505,7 @@ def init_hash_table():
     
     dict_users = { 
         'name' : 'users', 
+        'module' : True, 
         'value': {
             'account_error_1': {
     		    'it' : 'Devi inserire l\'username',
@@ -605,11 +633,13 @@ def init_hash_table():
     
     dict_pages = { 
         'name' : 'pages', 
+        'module' : True, 
         'value': {}
     }
     
     dict_login = { 
         'name' : 'login', 
+        'module' : True, 
         'value': {
             'error_1' : {
                 'it' : 'Devi completare tutti i campi',

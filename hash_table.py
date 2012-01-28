@@ -55,7 +55,7 @@ def request_form(hash_map):
             
             i = str(i)
             if 'label_name_'+g.lan+'_'+i in form:
-                key = form['label_name_'+g.lan+'_'+i]
+                key = form['label_name_'+g.lan+'_'+i].strip()
                 
                 if not length(key, 2, 20):
                     message = 'nada 3'
@@ -71,9 +71,7 @@ def request_form(hash_map):
 
                     else:
                         hash_map['value'][key][code] = ''
-                        
-    print hash_map
-    
+
     if message is None:
         return (message, hash_map)
     return (message, hash_map) 
@@ -118,9 +116,26 @@ def remove(_id):
 
 @hash_table.route('/admin/hash_table/<_id>/', methods=['POST', 'GET'])
 @check_authentication
-def profile(_id):
+def update(_id):
     """
 
     """
-    user = g.db.hash_table.find_one({ '_id' : ObjectId(_id) })
+    language_name = g.db.languages.find_one({ 'code' : g.lan })
+    
+    hash_map = g.db.hash_table.find_one({ '_id' : ObjectId(_id) })
+    
+    if request.method == 'POST': 
+        hash_map = request_form(hash_map)
+        if hash_map[0] is None:
+            g.db.hash_table.update({ '_id' : ObjectId(_id)}, hash_map[1] )
+            status = 'mes_green'
+            message = 'tutto ok'
+        else:
+            status = 'mes_red'
+            message = hash_map[0]
+            
+        hash_map = hash_map[1]
+    
+    # Finding the available languages
+    language_check = { x : y for x, y in language_name['value'].iteritems() if x in g.languages } 
     return render_template( MODULE_DIR+'/update.html', **locals() )

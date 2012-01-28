@@ -554,7 +554,7 @@ nav a {
 }
 
 .width200 {
-    width: 296px !important;
+    width: 374px !important;
 }
 
 .button_remove {
@@ -718,8 +718,24 @@ span:hover.remove_item {
     padding: 8px 6px 7px 10px;
 }
 
-
-
+.check_remove {
+    background-color: #FFF4C7;
+    border: 1px solid #E5AD6B;
+    font-size: 13px;
+    line-height: 18px;
+    padding: 16px;
+    position: absolute;
+    right: 35%;
+    top:40%;
+    vertical-align: middle;
+    width: 280px;
+    z-index: 6000;
+    -moz-border-radius:2px;
+    border-radius:2px;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
 
 

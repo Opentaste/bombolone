@@ -26,7 +26,11 @@
     			<td><a href="{{ admin }}/hash_table/{{ str(document['_id']) }}/">{{ document['name'] }}</a></td>
     			<td>{{ len(document['value']) }}</td>
     			<td><a href="{{ admin }}/hash_table/{{ str(document['_id']) }}/">{{ document['_id'] }}</a></td>
-    			<td><span class="remove_item item_{{ str(document['_id']) }}">{{ g.admin.remove_item }}</span></td>
+    			<td>
+    			    {% if not document['module'] or len(document['value']) == 0 %}
+    			    <span class="remove_item item_{{ str(document['_id']) }}">{{ g.admin.remove_item }}</span>
+    			    {% endif %}
+    			</td>
     		</tr>
     		{% endfor %}
     	</tbody>

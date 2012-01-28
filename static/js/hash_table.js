@@ -52,7 +52,7 @@
 		                label += '<input type="text" name="label_name_'+lan+'_'+num+'" value="" ';
     		            label += 'class="width180 name_key label_name_'+lan+'_'+num+'" /><input type="text" name="label_'+lan+'_'+num+'"';
     		            label += 'value="" tabindex="{{ j }}" class="width200 label_'+lan+'_'+num+'" />';
-    		            label += '<span class="hash_remove_label button button_remove button-red num_'+num+'">- Remove label</span></section>';
+    		            label += '<span class="hash_remove_label button button_remove button-red num_'+num+'">- Remove field</span></section>';
 		            
     		        t.get('.span_'+lan).before(label);
     		    }
@@ -93,6 +93,7 @@
 		hash_table.init();
 		hash_table.init_num_field();
 		hash_table.init_add_label();
+		hash_table.init_remove_label();
 		hash_table.init_change_name_label();
 		
 	})
