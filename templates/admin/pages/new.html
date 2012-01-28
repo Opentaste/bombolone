@@ -5,7 +5,7 @@
 {% block content %}
     <h2>Add new page</h2>
     <form action="{{ url_for('pages.new') }}" enctype="multipart/form-data" method="post" >
-        <ul class="menu_languages">
+        <ul class="menu_section">
             <li class="section_one language_selected">English</li>
             <li class="section_two">Italiano</li>
         </ul>
@@ -35,7 +35,7 @@
                 </section>
                 <br />
                 <br />
-                <button class="page_add_label submit_one button button-blu">+ Add new label</button>
+                <span class="page_add_label submit_one button button-blu">+ Add new label</span>
             </div>
         </section>
         <section class="two">

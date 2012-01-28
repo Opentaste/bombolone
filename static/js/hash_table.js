@@ -51,7 +51,7 @@
 		            var label = '<section class="section_num_'+num+'"><label class="width120">Key/Value :</label>';
 		                label += '<input type="text" name="label_name_'+lan+'_'+num+'" value="" ';
     		            label += 'class="width180 name_key label_name_'+lan+'_'+num+'" /><input type="text" name="label_'+lan+'_'+num+'"';
-    		            label += 'value="" tabindex="{{ j }}" class="width200 label_'+lan+'_'+num+'" />';
+    		            label += 'value="" tabindex="{{ j }}" class="width374 label_'+lan+'_'+num+'" />';
     		            label += '<span class="hash_remove_label button button_remove button-red num_'+num+'">- Remove field</span></section>';
 		            
     		        t.get('.span_'+lan).before(label);

@@ -52,3 +52,9 @@ def overview():
     languages_list = g.db.languages.find().sort('code')
     language_chosen = g.db.languages.find_one({ 'code' : g.lan })
     return render_template( MODULE_DIR+'/index.html', **locals())
+    
+def language_check():
+    """ Finding the available languages """
+    language_name = g.db.languages.find_one({ 'code' : g.lan })
+    return [ (x , y) for x, y in sorted(language_name['value'].iteritems()) if x in g.languages ]
+    

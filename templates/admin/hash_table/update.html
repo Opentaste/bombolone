@@ -6,9 +6,9 @@
     <h2>Update hash_map</h2>
     
     <section class="hash_languages">
-        <span class="button list_language_button">{{ language_check[g.lan] }}</span>
+        <span class="button list_language_button">{{ language }}</span>
         <ul class="list_language">
-            {% for code, name in language_check.iteritems() %}
+            {% for code, name in language_name %}
             <li class="{{ code }}_lan {% if g.lan == code %}language_selected{% endif %}">{{ name }}</li>
             {% endfor %}
         </ul>
@@ -24,7 +24,7 @@
             </section>
         </section>
         
-        {% for code, name in language_check.iteritems() %}
+        {% for code, name in language_name %}
         <h3 class="h3_{{ code }}" {% if code != g.lan %}style="display:none"{% endif %}>Document in {{ name }}</h3>  
         <section class="section_{{ code }}" {% if code != g.lan %}style="display:none"{% endif %}>
             <div class="form_container">
@@ -34,7 +34,7 @@
                     <input type="text" name="label_name_{{ code }}_{{ i }}" value="{{ key }}" 
                     class="width180 name_key label_name_{{ code }}_{{ i }}">
                     <input type="text" name="label_{{ code }}_{{ i }}" value="{{ hash_map.value[key][code] }}" 
-                    class="width200 label_{{ code }}_{{ i }}">
+                    class="width374 label_{{ code }}_{{ i }}">
                     <span class="hash_remove_label button button_remove button-red num_{{ i }}">{{ g.admin.remove_field }}</span>
                 </section>
             {% endfor %}

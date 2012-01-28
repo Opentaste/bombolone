@@ -15,6 +15,7 @@ from pymongo.objectid import ObjectId
 
 # Imports inside bombolone
 from decorators import check_authentication, check_admin, get_hash_table
+from languages import language_check
 from shared import LIST_LANGUAGES
 from validators import length, username
     
@@ -82,7 +83,7 @@ def request_form(hash_map):
 @check_admin
 def new():
     """ Create a new document within the hash table. """
-    language_name = g.db.languages.find_one({ 'code' : g.lan })
+    language_name = language_check()
     
     hash_map = { 'name' : '', 'value' : {} }
     
@@ -95,9 +96,7 @@ def new():
         status = 'mes_red'
         message = hash_map[0]
         hash_map = hash_map[1]
-    
-    # Finding the available languages
-    language_check = { x : y for x, y in language_name['value'].iteritems() if x in g.languages } 
+       
     return render_template( MODULE_DIR+'/new.html', **locals())
  
  
@@ -120,7 +119,7 @@ def update(_id):
     """
 
     """
-    language_name = g.db.languages.find_one({ 'code' : g.lan })
+    language_name = language_check()
     
     hash_map = g.db.hash_table.find_one({ '_id' : ObjectId(_id) })
     
@@ -136,6 +135,4 @@ def update(_id):
             
         hash_map = hash_map[1]
     
-    # Finding the available languages
-    language_check = { x : y for x, y in language_name['value'].iteritems() if x in g.languages } 
     return render_template( MODULE_DIR+'/update.html', **locals() )

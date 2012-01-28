@@ -14,6 +14,7 @@ from pymongo.objectid import ObjectId
 
 # Imports inside bombolone
 from decorators import check_authentication, check_admin
+from languages import language_check
 from helpers import create_password
     
 MODULE_DIR = 'admin/users'
@@ -37,7 +38,23 @@ def overview():
 def new():
     """
     
-    """        
+    """       
+    language_name = language_check()
+    
+    my = { 
+         'username' : '', 
+            'email' : '',
+         'password' : '', 
+             'rank' : 20,
+         'language' : '',
+              'lan' : '',
+        'time_zone' : 'Europe/London',
+             'name' : '',
+      'description' : '',
+         'location' : '',
+              'web' : ''
+    }
+     
     if request.method == 'POST':
         username = request.form['username']
         rank = int(request.form['rank'])
@@ -50,7 +67,7 @@ def new():
         g.db.users.insert(user)
         return redirect(url_for('users.overview'))
         
-    return render_template( MODULE_DIR+'/new.html' )
+    return render_template( MODULE_DIR+'/new.html', **locals())
  
  
 @users.route('/admin/users/remove/<_id>/')      

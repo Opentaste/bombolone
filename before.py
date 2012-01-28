@@ -42,6 +42,7 @@ def core_inject_user():
 	b['lan'] = 'en'
 	if hasattr(g, 'lan'):
 	    b['lan'] = g.lan
+	    b['language'] = g.language
 	
 	# Get menu value
 	path_lan = PATH+'/'+g.lan+'/'
@@ -59,6 +60,7 @@ def core_bombolone():
     # - _id user when it's logged in.
     g.db = db
     g.lan = 'en'
+    g.language = 'English'
     g.my_id = None
     
     g.languages = { x['code'] : x['value'][x['code']] for x in g.db.languages.find({ 'check' : True })}
@@ -79,6 +81,8 @@ def core_bombolone():
 		if g.my is None:
 			abort(401)
 		else:
+		    g.lan = 'en'
+		    g.language = 'English'
 		    g.my_id = user_id
 		    
 		    

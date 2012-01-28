@@ -57,7 +57,8 @@ nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0
 img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
 svg:not(:root) { overflow: hidden; }
 legend { border: 0; *margin-left: -7px; padding: 0; white-space: normal; }
-button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
+label, button, input, select, textarea { 
+font:13px/20px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif; margin: 0; vertical-align: baseline; *vertical-align: middle; }
 button, input { line-height: normal; }
 button, input[type="button"], input[type="reset"], input[type="submit"] { cursor: pointer; -webkit-appearance: button; *overflow: visible; }
 input[type="checkbox"], input[type="radio"] { box-sizing: border-box; padding: 0; *width: 13px; *height: 13px; }
@@ -459,8 +460,14 @@ nav a {
     width:80%;
 }
 
-.menu_languages li {
-    background: none repeat scroll 0 0 #7C97C4;
+.menu_section li {
+    background: #7C97C4;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#7C97C4),to(#768eb3));
+    background-image: -webkit-linear-gradient(top,#7C97C4,#768eb3);
+    background-image: -moz-linear-gradient(top,#7C97C4,#768eb3);
+    background-image: -ms-linear-gradient(top,#7C97C4,#768eb3);
+    background-image: -o-linear-gradient(top,#7C97C4,#768eb3);
+    background-image: linear-gradient(top,#7C97C4,#768eb3);
     color:#fff;
     display:inline-block;
     font-size:1.5em;
@@ -468,15 +475,21 @@ nav a {
     margin:4px 10px 10px 0;
 }
 
-.menu_languages li {
+.menu_section li {
     cursor:pointer;
 }
 
-.menu_languages li:hover, .language_selected {
-    background:#97B2CF!important;
+.menu_section li:hover, .language_selected, .section_selected {
+    background: #5e627d!important;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#6481ae),to(#5e627d))!important;
+    background-image: -webkit-linear-gradient(top,#6481ae,#5e627d)!important;
+    background-image: -moz-linear-gradient(top,#6481ae,#5e627d)!important;
+    background-image: -ms-linear-gradient(top,#6481ae,#5e627d)!important;
+    background-image: -o-linear-gradient(top,#6481ae,#5e627d)!important;
+    background-image: linear-gradient(top,#6481ae,#5e627d)!important;
 }
 
-.two {
+.two, .sec_profile, .sec_password {
     display:none;
 }
 
@@ -484,7 +497,6 @@ nav a {
 /* Form ==================================================================================== */
 .form_container {
     background: none repeat scroll 0 0 #F0F0F0;
-    font: 13px/18px "Helvetica Neue",Helvetica,Arial,sans-serif !important;
     margin: 0 0 10px;
     overflow: hidden;
     padding: 16px 5px;
@@ -493,41 +505,83 @@ nav a {
 
 .form_container section {
     clear: both;
-    margin: 0 0 5px;
+    margin: 0 0 12px;
     min-height: 28px;
 }
 
-.form_container section label {
+.form_container section p{
+    color:#878787;
+    font-size:12px;
+    line-height:18px;
+    margin:-left:180px;
+    padding:0;
+}
+.form_container section p+p{
+    margin-top:9px;
+}
+
+label {
     color: #474747;
     display: block;
     float: left; 
     padding: 2px 13px 1px 4px;
+    margin-bottom:5px;
     text-align: right;
     width: 150px;
     color: #3C3C3C;
     display: block;
 }
 
-.form_container section input, .form_container section textarea {
+input, textarea, select {
    	border: 1px solid #CCCCCC;
     color: #555555;
+    display:inline-block;
     margin: 0;
-    padding: 3px 4px;
+    padding:4px;
+    outline:none;
     width: 460px;
     -webkit-border-radius: 3px;
-   	-moz-border-radius: 3px;
-   	border-radius: 3px;
-    transition:border linear .2s, box-shadow linear .2s;
-    -moz-transition:border linear .2s,-moz-box-shadow linear .2s;
+   	   -moz-border-radius: 3px;
+   	        border-radius: 3px;
+   	-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,.05),0 1px 0 rgba(255,255,255,.075);
+       -moz-box-shadow:inset 0 1px 3px rgba(0,0,0,.05),0 1px 0 rgba(255,255,255,.075);
+            box-shadow:inset 0 1px 3px rgba(0,0,0,.05),0 1px 0 rgba(255,255,255,.075);
     -webkit-transition:border linear .2s,-webkit-box-shadow linear.2s;
+       -moz-transition:border linear .2s,-moz-box-shadow linear .2s;
+            transition:border linear .2s, box-shadow linear .2s;  
 }
 
-.form_container section input:focus, .form_container section textarea:focus {
-    outline:none;
-    border-color:rgba(226,130,35,.75)!important;
-    box-shadow:0 0 8px rgba(226,130,35,.5);
-    -moz-box-shadow:0 0 8px rgba(226,130,35,.5);
-    -webkit-box-shadow:0 0 8px rgba(226,130,35,.5);
+select {
+    width:auto;
+}
+
+input:focus, textarea:focus {
+    outline:0;
+    border-color:#E7A86B!important;
+    box-shadow:inset 0 1px 3px rgba(0,0,0,.05), 0 0 8px rgba(226,130,35,.5);
+    -moz-box-shadow:inset 0 1px 3px rgba(0,0,0,.05), 0 0 8px rgba(226,130,35,.5);
+    -webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,.05), 0 0 8px rgba(226,130,35,.5);
+}
+
+input[type=checkbox], input[type=radio]{
+    width:auto;
+    height:auto;
+    padding:0;
+    margin:3px 0;
+    line-height:normal;
+    border:none;
+    background-color:transparent;
+    cursor:pointer;
+}
+
+textarea{
+    height:auto;
+}
+
+input[readonly], select[readonly], textarea[readonly]{
+    background:#f2f2f2;
+    border-color:#ccc;
+    cursor:not-allowed;
 }
 
 .field_error {
@@ -547,15 +601,18 @@ nav a {
 .width120 {
     width: 120px !important;
 }
-
 .width180 {
     margin-right: 14px !important;
     width: 120px !important;
 }
-
-.width200 {
+.width220 {
+    width: 220px;
+}
+.width374 {
     width: 374px !important;
 }
+
+
 
 .button_remove {
     font-size: 12px;
