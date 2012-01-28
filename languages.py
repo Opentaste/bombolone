@@ -12,6 +12,7 @@ from flask import Blueprint, g, request, render_template, url_for
 
 # Imports inside bombolone
 from decorators import check_admin, check_authentication
+from hash_table import get_hash_map
 from shared import LIST_LANGUAGES
 
 MODULE_DIR = 'admin/languages'
@@ -25,8 +26,7 @@ def overview():
     """ Overview and tool update of all languages supported!"""
     
     # get the hash map for the languages
-    languages_map = g.db.hash_table.find_one({ 'name' : 'languages' })
-    g.languages = { x : y[g.lan] for x, y in languages_map['value'].iteritems() }
+    g.languages = get_hash_map('languages')
     
     # Update the list of languages allowed on the site, 
     # except for the language used by your users at that time.
@@ -52,9 +52,4 @@ def overview():
     languages_list = g.db.languages.find().sort('code')
     language_chosen = g.db.languages.find_one({ 'code' : g.lan })
     return render_template( MODULE_DIR+'/index.html', **locals())
-    
-def language_check():
-    """ Finding the available languages """
-    language_name = g.db.languages.find_one({ 'code' : g.lan })
-    return [ (x , y) for x, y in sorted(language_name['value'].iteritems()) if x in g.languages ]
     

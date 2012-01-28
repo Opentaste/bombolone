@@ -59,3 +59,29 @@ def username(data):
     if regex.match(data):
         return True
     return False
+    
+    
+def email(data):
+    """
+    Validates the email 
+
+    :param email:
+        The string  
+    """
+    regex = re.compile(r'^.+@[^.].*\.[a-z]{2,10}$', re.IGNORECASE)
+    if regex.match(data):
+        return True
+    return False
+    
+    
+def url(data):
+    """
+    Validates the url 
+
+    :param url:
+        The string  
+    """
+    regex = re.compile(ur'^[a-z]+://([^/:]+%s|([0-9]{1,3}\.){3}[0-9]{1,3})(:[0-9]+)?(\/.*)?$', re.IGNORECASE)
+    if regex.match(data):
+        return True
+    return False

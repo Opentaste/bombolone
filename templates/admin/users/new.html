@@ -10,30 +10,31 @@
             <li class="li_profile">Profile</li>
             <li class="li_password">Password</li>
         </ul>
+        {% if status %}<div class="{{ status }}">{{ message }}</div>{% endif %}
         <section class="sec_account">
             <div class="form_container">
                 <section>
                     <label>Username</label>
-                    <input type="text" name="username" value="" tabindex="1" maxlength="20">
+                    <input type="text" name="username" value="{{ my.username or '' }}" tabindex="1" maxlength="20">
                     <p>Write username</p>
                 </section>
                 <section>
         			<label>Email</label>
-        			<input type="text" name="email" value="" tabindex="2" maxlength="200">
+        			<input type="text" name="email" value="{{ my.email or '' }}" tabindex="2" maxlength="200">
         			<p>Write email</p>
         		</section>
                 <section>
                     <label>Rank</label>
                     <select name="rank" class="width220">
-                        <option value="10">Admin</option>
-                        <option value="20">User</option>
+                        <option value="10" {% if my.rank == 10 %}selected="selected"{% endif %}>Admin</option>
+                        <option value="20" {% if my.rank == 20 %}selected="selected"{% endif %}>User</option>
                     </select>
                 </section>
                 <section>
                     <label>Language</label>
                     <select name="language" class="width220">
                         {% for code, name in language_name %}
-                        <option value="{{ code }}">{{ name }}</option>
+                        <option value="{{ code }}" {% if my.language == code %}selected="selected"{% endif %} >{{ name }}</option>
                         {% endfor %}
                     </select>
                 </section>
@@ -270,20 +271,20 @@
         		</section>
         		<section>
         			<label>Name</label>
-        			<input name="name" type="text" maxlength="100" value="{{ my.name }}" class="wid50">
+        			<input name="name" type="text" maxlength="100" value="{{ my.name or '' }}" class="wid50">
         		</section>
         		<section>
         			<label>Location</label>
-        			<input name="location" type="text" maxlength="100" value="{{ my.location }}" class="wid50">
+        			<input name="location" type="text" maxlength="100" value="{{ my.location or '' }}" class="wid50">
         		</section>
         		<section>
         			<label>Web</label>
-        			<input name="url" type="text" maxlength="200" value="{{ my.web }}" class="wid50">
+        			<input name="web" type="text" maxlength="200" value="{{ my.web or '' }}" class="wid50">
         		</section>
         		<section style="position:relative">
         			<label>Description</label>
         			<textarea name="description" maxlength="200" onkeyup="return textareaLenght(this, 'word-des')"  
-        			cols="10" rows="3">{{ my.description }}</textarea>
+        			cols="10" rows="3">{{ my.description or '' }}</textarea>
         		    <span id="word-des" class="word-count">200</span>
         		</section>
             </div>

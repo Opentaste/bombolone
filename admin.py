@@ -61,7 +61,7 @@ def dashboard():
     """
     return render_template('admin/dashboard.html')
  
- 
+
 @admin.route('/admin/profile/', methods=['POST', 'GET'])  
 @check_authentication 
 @get_hash_users

@@ -14,8 +14,10 @@ from pymongo.objectid import ObjectId
 
 # Imports inside bombolone
 from decorators import check_authentication, check_admin
-from languages import language_check
-from helpers import create_password
+from helpers import create_password, language_check
+from hash_table import get_hash_map
+from not_allowed import NAME_LIST
+from validators import email, length, username
     
 MODULE_DIR = 'admin/users'
 
@@ -40,6 +42,9 @@ def new():
     
     """       
     language_name = language_check()
+    # get the hash map for the users
+    g.users = get_hash_map('users')
+    message = None
     
     my = { 
          'username' : '', 
@@ -54,20 +59,83 @@ def new():
          'location' : '',
               'web' : ''
     }
-     
+
     if request.method == 'POST':
-        username = request.form['username']
-        rank = int(request.form['rank'])
-        password = request.form['password']
-        user = { 
-            'username' : username, 
-            'password' : create_password(password), 
-            'rank' : rank 
+        form = request.form    
+        my = { 
+             'username' : form['username'], 
+                'email' : form['email'],
+             'password' : form['password'], 
+       'password_check' : form['password_check'], 
+                 'rank' : form['rank'],
+                  'lan' : form['language'],
+            'time_zone' : form['time_zone'],
+                 'name' : form['name'],
+          'description' : form['description'],
+             'location' : form['location'],
+                  'web' : form['web']
         }
-        g.db.users.insert(user)
-        return redirect(url_for('users.overview'))
+        message = request_account_form(my, '', '')
+        if message is None:
+            my['password'] = create_password(my['password'])
+            del(my['password_check'])
+            g.db.users.insert(my)			
+            return redirect(url_for('users.overview'))
+			
+	if not message is None:
+	    status = 'mes_red'
         
     return render_template( MODULE_DIR+'/new.html', **locals())
+    
+def request_account_form(my, old_username, old_email):
+    """
+    """
+    check_result = check_username(my['username'])
+    res_email = None
+    message = None
+    
+    # ~~~~~
+    if my['email'] != old_email:
+        res_email = g.db.users.find_one({"email" : my['email'] })
+    
+    # ~~~~~
+    if not len(my['username']):
+        message = g.users['account_error_1']
+    
+    # ~~~~~
+    if not length(my['username'], 2, 20):
+        message = g.users['account_error_2']
+    
+    # ~~~~~
+    if check_result is not None:
+        message = g.users['account_error_4']
+    
+    # ~~~~~
+    if my['username'] in NAME_LIST:
+        message = g.users['account_error_3']
+    
+    # ~~~~~
+    if not username(my['username']):
+        message = g.users['account_error_7']
+    
+    # ~~~~~
+    if not email(my['email']):
+        message = g.users['account_error_5']
+    
+    # ~~~~~
+    if not check_result is None:
+        message = g.users['account_error_6']
+    
+    # ~~~~~    
+    return message
+    
+    
+def check_username(new_username):
+    """
+    """
+    new_username = str.lower(str(new_username))
+    regx = re.compile('^'+new_username+'$', re.IGNORECASE)
+    return g.db.user.find_one({"username" : regx })
  
  
 @users.route('/admin/users/remove/<_id>/')      

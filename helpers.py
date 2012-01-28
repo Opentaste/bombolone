@@ -27,3 +27,9 @@ def allowed_file(filename):
     """Check if the file has correct extension.
     Return True or False"""
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+ 
+    
+def language_check():
+    """ Finding the available languages """
+    language_name = g.db.languages.find_one({ 'code' : g.lan })
+    return [ (x , y) for x, y in sorted(language_name['value'].iteritems()) if x in g.languages ]
