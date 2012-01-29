@@ -254,7 +254,7 @@ button.button, input[type=submit].button {
     border: 1px solid #5f80b3;
     color: #fff!important;
     font-size: 13px;
-    height: 27px;
+    height: 23px;
     margin: 0 1.2em 0.4em 0;
     text-shadow: 0 1px rgba(0,0,0,0.1);
 }
@@ -329,6 +329,14 @@ header {
 .head_right {
     float:left;
     width:720px;
+}
+
+header a{
+    color:#fff!important;
+}
+
+header a:hover{
+    color:#eee!important;
 }
 
 header img{
@@ -752,6 +760,10 @@ span:hover.remove_item {
     color:red;
 }
 
+tr.gray td {
+    background-color: #F0F0F0;
+}
+
 
 /* Message ================================================================================= */
 .mes_red {
@@ -824,8 +836,8 @@ span:hover.remove_item {
     overflow: hidden; 
     padding: 0; 
     position: absolute; 
-    width: 1px; }
-
+    width: 1px; 
+}
 
 /* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
 .visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { 

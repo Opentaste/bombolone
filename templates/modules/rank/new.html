@@ -1,0 +1,14 @@
+{% extends "modules/admin/index.html" %}
+{% block head %}
+    <title>New user</title>
+{% endblock %}
+{% block content %}
+    <h2>{{ g.users.add_user }}</h2>
+    <form action="{{ url_for('rank.new') }}" enctype="multipart/form-data" method="post" >
+        {% if status %}<div class="{{ status }}">{{ message }}</div>{% endif %}
+
+        <div>
+            <button tabindex="200" type="submit" class="button button-submit">{{ g.rank.create_rank }}</button>
+        </div>
+    </form>
+{% endblock %}

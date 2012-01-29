@@ -11,6 +11,9 @@
 from flask import g, abort
 from functools import wraps
 
+# Imports inside bombolone modules
+from helpers import get_hash_map
+
 
 def check_authentication(function_to_decorate):
     """ Requires standard login credentials """
@@ -32,12 +35,38 @@ def check_admin(function_to_decorate):
     return decorated_function   
     
     
+def get_hash_languages(function_to_decorate):
+    """  """
+    @wraps(function_to_decorate)
+    def decorated_function(*args, **kwargs):
+        g.languages = get_hash_map('languages')
+        return function_to_decorate(*args, **kwargs)
+    return decorated_function    
+
+    
 def get_hash_login(function_to_decorate):
     """  """
     @wraps(function_to_decorate)
     def decorated_function(*args, **kwargs):
-        login_map = g.db.hash_table.find_one({ 'name' : 'login' })
-        g.login = { x : y[g.lan] for x, y in login_map['value'].iteritems() }
+        g.login = get_hash_map('login')
+        return function_to_decorate(*args, **kwargs)
+    return decorated_function
+    
+    
+def get_hash_rank(function_to_decorate):
+    """ Requires admin login credentials """
+    @wraps(function_to_decorate)
+    def decorated_function(*args, **kwargs):
+        g.rank = get_hash_map('rank')
+        return function_to_decorate(*args, **kwargs)
+    return decorated_function
+
+
+def get_hash_table(function_to_decorate):
+    """ Requires admin login credentials """
+    @wraps(function_to_decorate)
+    def decorated_function(*args, **kwargs):
+        g.hash_table = get_hash_map('hash_table')
         return function_to_decorate(*args, **kwargs)
     return decorated_function
 
@@ -46,18 +75,7 @@ def get_hash_users(function_to_decorate):
     """ Requires admin login credentials """
     @wraps(function_to_decorate)
     def decorated_function(*args, **kwargs):
-        users_map = g.db.hash_table.find_one({ 'name' : 'users' })
-        g.users = { x : y[g.lan] for x, y in users_map['value'].iteritems() }
+        g.users = get_hash_map('users')
         return function_to_decorate(*args, **kwargs)
     return decorated_function 
-   
-    
-def get_hash_table(function_to_decorate):
-    """ Requires admin login credentials """
-    @wraps(function_to_decorate)
-    def decorated_function(*args, **kwargs):
-        hash_table_map = g.db.hash_table.find_one({ 'name' : 'hash_table' })
-        g.hash_table = { x : y[g.lan] for x, y in hash_table_map['value'].iteritems() }
-        return function_to_decorate(*args, **kwargs)
-    return decorated_function     
-    
+      

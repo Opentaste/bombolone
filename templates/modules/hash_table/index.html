@@ -1,4 +1,4 @@
-{% extends "admin/index.html" %}
+{% extends "modules/admin/index.html" %}
 {% block head %}
     <title>{{ g.hash_table.title }}</title>
 {% endblock %}
@@ -21,13 +21,13 @@
     		</tr>
     	</tfoot>
     	<tbody>
-    		{% for document in hash_table_list %}
-    		<tr class="item_{{ str(document['_id']) }}">
+    		{% for i, document in enumerate(hash_table_list) %}
+    		<tr class="item_{{ str(document['_id']) }} {% if i % 2 == 1 %}gray{% endif %}">
     			<td><a href="{{ admin }}/hash_table/{{ str(document['_id']) }}/">{{ document['name'] }}</a></td>
     			<td>{{ len(document['value']) }}</td>
     			<td><a href="{{ admin }}/hash_table/{{ str(document['_id']) }}/">{{ document['_id'] }}</a></td>
     			<td>
-    			    {% if not document['module'] or len(document['value']) == 0 %}
+    			    {% if not document['module'] and len(document['value']) == 0 %}
     			    <span class="remove_item item_{{ str(document['_id']) }}">{{ g.admin.remove_item }}</span>
     			    {% endif %}
     			</td>

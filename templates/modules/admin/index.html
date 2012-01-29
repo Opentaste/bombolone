@@ -6,8 +6,10 @@
 <head>
 	<meta charset="utf-8">
 	
+	{% block head %}
 	<title>{{ g.admin.title }} {% block title %} {% endblock %}</title>
 	<meta name="description" content="{% block description %} {% endblock %}">
+	{% endblock %}
 	
 	<!-- Mobile viewport optimized: h5bp.com/viewport -->
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -50,6 +52,9 @@
             {% if g.my['rank'] == 10 %}
             <li>
                 <p><a href="{{ url_for('users.overview') }}" title="" >Users</a></p>
+            </li>
+            <li>
+                <p><a href="{{ url_for('rank.overview') }}" title="" >Rank</a></p>
             </li>
             <li>
                 <p><a href="{{ url_for('languages.overview') }}" title="" >Languages</a></p>

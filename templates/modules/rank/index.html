@@ -1,0 +1,29 @@
+{% extends "modules/admin/index.html" %}
+{% block title %} {{ g.rank.title }} {% endblock %}
+{% block description %} {{ g.rank.description }} {% endblock %}
+{% block content %}
+    <h2>{{ g.rank.name }}</h2>
+    <br />
+    <a href="{{ admin }}/rank/new/" title="" class="button button-blu">{{ g.rank.add_rank }}</a>
+    <table class="table_items">
+    	<thead>
+    		<tr>	
+    			<th style="width:40%;">Rank</th>
+    			<th style="width:20%;">Number permit</th>
+    			<th style="width:40%;">_id</th>
+    			<th style="width:20%;">{{ g.rank.remove }}</th>
+    		</tr>
+    	</thead>
+    	<tfoot>
+    		<tr>
+    			<td colspan="4"></td>
+    		</tr>
+    	</tfoot>
+    	<tbody>
+    	
+    	</tbody>
+    </table>
+{% endblock %}
+{% block javascript_file %}
+<script src="{{ url_for('static', filename='js/rank_overview.js') }}"></script>
+{% endblock %}

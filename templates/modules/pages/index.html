@@ -1,4 +1,4 @@
-{% extends "admin/index.html" %}
+{% extends "modules/admin/index.html" %}
 {% block head %}
     <title>Pages</title>
 {% endblock %}
@@ -22,8 +22,8 @@
     		</tr>
     	</tfoot>
     	<tbody>
-    		{% for x in pages %}
-    		<tr class="item_{{ str(x['_id']) }}">
+    		{% for i, x in enumerate(pages) %}
+    		<tr class="item_{{ str(x['_id']) }} {% if i % 2 == 1 %}gray{% endif %}">
     			<td><a href="{{ admin }}/pages/{{ str(x['_id']) }}/">{{ x['name'] }}</a></td>
     			<td>{{ x['url']['en'] }}</td>
     			<td><a href="{{ admin }}/pages/{{ str(x['_id']) }}/">{{ x['_id'] }}</a></td>

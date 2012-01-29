@@ -1,13 +1,13 @@
-{% extends "admin/index.html" %}
+{% extends "modules/admin/index.html" %}
 {% block head %}
     <title>New user</title>
 {% endblock %}
 {% block content %}
-    <h2>New user</h2>
+    <h2>{{ g.users.add_user }}</h2>
     <form action="{{ url_for('users.new') }}" enctype="multipart/form-data" method="post" >
         <ul class="menu_section">
             <li class="li_account section_selected">Account</li>
-            <li class="li_profile">Profile</li>
+            <li class="li_profile">{{ g.admin.profile }}</li>
             <li class="li_password">Password</li>
         </ul>
         {% if status %}<div class="{{ status }}">{{ message }}</div>{% endif %}
@@ -24,22 +24,22 @@
         			<p>Write email</p>
         		</section>
                 <section>
-                    <label>Rank</label>
+                    <label>{{ g.users.rank }}</label>
                     <select name="rank" class="width220">
                         <option value="10" {% if my.rank == 10 %}selected="selected"{% endif %}>Admin</option>
                         <option value="20" {% if my.rank == 20 %}selected="selected"{% endif %}>User</option>
                     </select>
                 </section>
                 <section>
-                    <label>Language</label>
+                    <label>{{ g.users.language }}</label>
                     <select name="language" class="width220">
                         {% for code, name in language_name %}
-                        <option value="{{ code }}" {% if my.language == code %}selected="selected"{% endif %} >{{ name }}</option>
+                        <option value="{{ code }}" {% if my.lan == code %}selected="selected"{% endif %} >{{ name }}</option>
                         {% endfor %}
                     </select>
                 </section>
                 <section>
-        			<label>Time zone</label>
+        			<label>{{ g.users.time_zone }}</label>
         			<select name="time_zone" class="width220">
         			     <option {% if my.time_zone == 'US/Hawaii' %}selected="selected"{% endif %} 
         			     value="US/Hawaii">(UTC-10:00) Hawaii</option>
@@ -60,7 +60,7 @@
                          <option {% if my.time_zone == 'Canada/Newfoundland'%}selected="selected"{% endif %} 
               			 value="Canada/Newfoundland">(UTC-3) Newfoundland</option>
 
-                         <option disabled="disabled" value="">-- End Time Zone Usa &amp; Canada --</option>
+                         <option disabled="disabled" value="">-- {{ g.users.time_zone_end_1 }} --</option>
 
                          <option {% if my.time_zone=='Pacific/Midway' %}selected="selected"{% endif %} 
                          value="Pacific/Midway">(UTC-11) Midway Island</option>
@@ -266,23 +266,23 @@
         <section class="sec_profile">
             <div class="form_container">
                 <section>
-        			<label>Picture... later</label>
+        			<label>{{ g.users.picture }}</label>
                 	<img src="{{ url_for('static', filename='image/avatar/default.jpg') }}" alt="">
         		</section>
         		<section>
-        			<label>Name</label>
+        			<label>{{ g.users.setting_name }}</label>
         			<input name="name" type="text" maxlength="100" value="{{ my.name or '' }}" class="wid50">
         		</section>
         		<section>
-        			<label>Location</label>
+        			<label>{{ g.location }}</label>
         			<input name="location" type="text" maxlength="100" value="{{ my.location or '' }}" class="wid50">
         		</section>
         		<section>
-        			<label>Web</label>
+        			<label>{{ g.users.web }}</label>
         			<input name="web" type="text" maxlength="200" value="{{ my.web or '' }}" class="wid50">
         		</section>
         		<section style="position:relative">
-        			<label>Description</label>
+        			<label>{{ g.users.description }}</label>
         			<textarea name="description" maxlength="200" onkeyup="return textareaLenght(this, 'word-des')"  
         			cols="10" rows="3">{{ my.description or '' }}</textarea>
         		    <span id="word-des" class="word-count">200</span>
@@ -293,16 +293,16 @@
             <div class="form_container">
                 <section>
                     <label>Password</label>
-                    <input type="password" name="password" value="" tabindex="3" maxlength="20" />
+                    <input type="password" name="new_password" value="" tabindex="3" maxlength="20" />
                 </section>
                 <section>
-                    <label>Check Password</label>
-                    <input type="password" name="password_check" value="" tabindex="4" maxlength="20" />
+                    <label>{{ g.users.check_password }}</label>
+                    <input type="password" name="check_password" value="" tabindex="4" maxlength="20" />
                 </section>
             </div>
         </section>
         <div>
-            <button tabindex="200" type="submit" class="button button-submit">Create user</button>
+            <button tabindex="200" type="submit" class="button button-submit">{{ g.users.create_user }}</button>
         </div>
     </form>
 {% endblock %}

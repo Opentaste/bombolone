@@ -2,6 +2,7 @@
 """
     admin.py
     ~~~~~~
+    The admin module allows users to register, log in, log out...
     
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
@@ -17,7 +18,7 @@ from decorators import check_authentication, get_hash_login, get_hash_users
 from helpers import create_password
 from upload import upload_file
 
-
+MODULE_DIR = 'modules/admin'
 admin = Blueprint('admin', __name__)
 
 
@@ -40,7 +41,7 @@ def login():
 	    else:
 	        session['user_id'] = user['_id']
 	        return redirect(url_for('admin.dashboard'))
-	return render_template('admin/login.html')
+	return render_template(MODULE_DIR+'/login.html', **locals())
 	
 	
 @admin.route('/logout/')
@@ -59,7 +60,7 @@ def dashboard():
     """
     
     """
-    return render_template('admin/dashboard.html')
+    return render_template(MODULE_DIR+'/dashboard.html')
  
 
 @admin.route('/admin/profile/', methods=['POST', 'GET'])  
@@ -108,4 +109,4 @@ def profile():
 		    g.message = g.users['account_ok']
 		    g.status = 'mes-green'
 
-    return render_template('admin/profile.html')
+    return render_template(MODULE_DIR+'/profile.html', **locals())

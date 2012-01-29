@@ -11,23 +11,19 @@
 from flask import Blueprint, g, request, render_template, url_for
 
 # Imports inside bombolone
-from decorators import check_admin, check_authentication
-from hash_table import get_hash_map
+from decorators import check_admin, check_authentication, get_hash_languages 
 from shared import LIST_LANGUAGES
 
-MODULE_DIR = 'admin/languages'
+MODULE_DIR = 'modules/languages'
 languages = Blueprint('languages', __name__)
     
 
 @languages.route('/admin/languages/', methods=['POST', 'GET'])
 @check_authentication 
 @check_admin
+@get_hash_languages
 def overview():
-    """ Overview and tool update of all languages supported!"""
-    
-    # get the hash map for the languages
-    g.languages = get_hash_map('languages')
-    
+    """ Overview and tool update of all languages supported!"""    
     # Update the list of languages allowed on the site, 
     # except for the language used by your users at that time.
     if request.method == 'POST':

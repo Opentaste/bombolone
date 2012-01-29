@@ -61,6 +61,19 @@ def username(data):
     return False
     
     
+def full_name(data):
+    """
+    Validates the full name 
+
+    :param full_name:
+        The string  
+    """
+    regex = re.compile(r'^[a-z\' ]+$', re.I)
+    if regex.match(data):
+        return True
+    return False
+    
+    
 def email(data):
     """
     Validates the email 

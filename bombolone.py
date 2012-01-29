@@ -20,9 +20,10 @@ from shared import app, PORT
 from admin import admin
 from pages import pages
 from users import users
+from rank import rank
 from languages import languages
 from hash_table import hash_table
-LIST_MODULES = [content, admin, pages, users, languages, hash_table]
+LIST_MODULES = [content, admin, pages, users, rank, languages, hash_table]
    
    
 # ========================================================================	

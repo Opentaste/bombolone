@@ -12,7 +12,7 @@
 from init import clean_database, init_mongodb
 
 
-def init(all_item=True):
+def init(all_item=1):
     """ Initialize the database MongoDB of Bombolone. """
     print 'Initialization Bombolone'
     print '##########################\n'
@@ -21,16 +21,16 @@ def init(all_item=True):
     print ' * Start Database\n'
    
     
-def clean(all_item=True):
+def clean(all_item=1):
     """ Clean and Initialize the database MongoDB of Bombolone. """
     print 'Clean database'
     print '##########################\n'
 
-    clean_database(all)
+    clean_database(all_item)
     print ' * Clean Database\n'
 
     
-def restore(all_item=True):
+def restore(all_item=1):
     """ Clean and Initialize the database MongoDB of Bombolone. """
     print 'Restore database'
     print '##########################\n'

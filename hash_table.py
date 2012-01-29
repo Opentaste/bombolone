@@ -19,7 +19,7 @@ from helpers import language_check
 from shared import LIST_LANGUAGES
 from validators import length, username
     
-MODULE_DIR = 'admin/hash_table'
+MODULE_DIR = 'modules/hash_table'
 hash_table = Blueprint('hash_table', __name__)
 
 
@@ -136,9 +136,3 @@ def update(_id):
         hash_map = hash_map[1]
     
     return render_template( MODULE_DIR+'/update.html', **locals() )
-    
-def get_hash_map(module):
-    """
-    """
-    module_map = g.db.hash_table.find_one({ 'name' : module })
-    return { x : y[g.lan] for x, y in module_map['value'].iteritems() }

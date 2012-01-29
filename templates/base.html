@@ -2,13 +2,13 @@
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="{{ g.lan }}"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="{{ g.lan }}"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="{{ g.lan }}"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="{{ g.lan }}"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="{{ lan }}"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
 	
-    {% block head %}
-	<title>Bombolone | {{ title }}</title>
-	<meta name="description" content="{{ description }}">
+	{% block head %}
+	<title>{{ g.admin.title }} {% block title %} {% endblock %}</title>
+	<meta name="description" content="{% block description %} {% endblock %}">
 	{% endblock %}
 	
 	<!-- Mobile viewport optimized: h5bp.com/viewport -->

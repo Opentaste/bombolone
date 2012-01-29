@@ -17,7 +17,7 @@ from decorators import check_authentication, check_admin
 from helpers import create_password
 from upload import upload_file
 
-MODULE_DIR = 'admin/pages'
+MODULE_DIR = 'modules/pages'
 
 pages = Blueprint('pages', __name__)
 

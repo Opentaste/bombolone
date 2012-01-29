@@ -1,4 +1,4 @@
-{% extends "admin/index.html" %}
+{% extends "modules/admin/index.html" %}
 
 {% block title %} {{ g.languages.title }} {% endblock %}
 
@@ -21,8 +21,8 @@
         		</tr>
         	</tfoot>
         	<tbody>
-        		{% for language in languages_list %}
-        		<tr>
+        		{% for i, language in enumerate(languages_list) %}
+        		<tr class="{% if i % 2 == 1 %}gray{% endif %}">
         		    <td>
         		        <input type="checkbox" name="{{ language['code'] }}" 
         		        {% if language['code'] == lan %} disabled="disabled" {% endif %}

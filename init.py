@@ -16,7 +16,6 @@ def clean_database(all_item=1):
     """ Removes all the collections in the database. """
     
     if int(all_item):
-        print all_item
         db.users.remove()
         
     db.languages.remove()
@@ -28,7 +27,6 @@ def init_mongodb(all_item=1):
     """ Initialize the database MongoDB of Bombolone. """
 
     if int(all_item):
-        print all_item
         init_users()
 
     init_languages()
@@ -211,14 +209,32 @@ def init_users():
     
     list_users = [
         {
-            'username' : 'admin', 
-            'password' : create_password('admin'), # Create passwords in md5 and sha1
-            'rank' : 10 
+             'username' : 'admin', 
+                'email' : '',
+             'password' : create_password('admin'), # Create passwords in md5 and sha1
+                 'rank' : 10,
+             'language' : 'English',
+                  'lan' : 'en',
+            'time_zone' : 'Europe/London',
+                'image' : '',
+                 'name' : '',
+          'description' : '',
+             'location' : '',
+                  'web' : ''
         },
         {
-            'username' : 'user', 
-            'password' : create_password('user'), 
-            'rank' : 20 
+             'username' : 'user', 
+                'email' : '',
+             'password' : create_password('user'), 
+                 'rank' : 20,
+             'language' : 'English',
+                  'lan' : 'en',
+            'time_zone' : 'Europe/London',
+                'image' : '',
+                 'name' : '',
+          'description' : '',
+             'location' : '',
+                  'web' : ''
         }
     ]
     
@@ -235,8 +251,8 @@ def init_hash_table():
         'module' : True, 
         'value': {
             'name': {
-    		    'it': 'Bombolone',
-    		    'en': 'Bombolone',
+    		    'it' : 'Bombolone',
+    		    'en' : 'Bombolone',
     		    'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -247,8 +263,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'title': {
-    		    'it': 'Bombolone |',
-    		    'en': 'Bombolone |',
+    		    'it' : 'Bombolone |',
+    		    'en' : 'Bombolone |',
     		    'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -259,8 +275,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'logout': {
-    		    'it': 'Logout',
-    		    'en': 'Logout',
+    		    'it' : 'Logout',
+    		    'en' : 'Logout',
     		    'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -271,8 +287,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'web_site': {
-    		    'it': 'Sito web',
-    		    'en': 'Web site',
+    		    'it' : 'Sito web',
+    		    'en' : 'Web site',
     		    'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -283,8 +299,20 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'profile': {
-    		    'it': 'Profilo',
-    		    'en': 'Profile',
+    		    'it' : 'Profilo',
+    		    'en' : 'Profile',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'settings': {
+    		    'it' : 'Impostazioni',
+    		    'en' : 'Settings',
     		    'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -507,6 +535,186 @@ def init_hash_table():
         'name' : 'users', 
         'module' : True, 
         'value': {
+            'name': {
+    		    'it' : 'Utenti',
+    		    'en' : 'Users',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'title': {
+    		    'it' : 'Amministrazione utenti',
+    		    'en' : 'Admin users',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'descritpion': {
+    		    'it' : '',
+    		    'en' : ' ',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'rank' : {
+    		    'it' : 'Rango',
+    		    'en' : 'Rank',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'language' : {
+    		    'it' : 'Lingua',
+    		    'en' : 'Language',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'time_zone' : {
+    		    'it' : 'Fuso orario',
+    		    'en' : 'Time zone',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'time_zone_end_1' : {
+    		    'it' : u'Fine fuso orario USA & Canada',
+    		    'en' : u'End Time Zone Usa & Canada',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'picture' : {
+    		    'it' : 'Immagine',
+    		    'en' : 'Picture',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },   
+            'setting_name' : {
+    		    'it' : 'Nome',
+    		    'en' : 'Name',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },       
+            'location' : {
+    		    'it' : 'Posizione',
+    		    'en' : 'Location',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },  
+            'web' : {
+    		    'it' : 'Web',
+    		    'en' : 'Web',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'description' : {
+    		    'it' : 'Descrizione',
+    		    'en' : 'Description',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'check_password' : {
+    		    'it' : 'Verifica password',
+    		    'en' : 'Check password',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'add_user': {
+    		    'it' : 'Aggiungi utente',
+    		    'en' : 'Add user',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'create_user': {
+    		    'it' : 'Crea utente',
+    		    'en' : 'Create user',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
             'account_error_1': {
     		    'it' : 'Devi inserire l\'username',
     		    'en' : 'You must enter the username',
@@ -626,8 +834,31 @@ def init_hash_table():
                 'ru' : '',
                 'tr' : '',
                 'gr' : '',
-                'ar' : ''
-            }
+                'ar' : ''},
+            'regex_full_name': {
+				'it' : 'Il nome deve essere composto da sole lettere e spazi.',
+				'en' : 'The name must consist of only letters and spaces.',
+                'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : ''},
+	        'regex_url': {
+				'it' : u'L\'url inserito non è scritto correttamente',
+				'en' : u'The url you entered is spelled incorrectly',
+                'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : ''}
         }
     }
     
