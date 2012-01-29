@@ -865,13 +865,62 @@ def init_hash_table():
     dict_pages = { 
         'name' : 'pages', 
         'module' : True, 
-        'value': {}
+        'value': {
+            'name': {
+    		    'it' : 'Pagine',
+    		    'en' : 'Pages',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'title': {
+    		    'it' : 'Amministrazione pagine',
+    		    'en' : 'Admin pages',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' }
+        }
     }
     
     dict_login = { 
         'name' : 'login', 
         'module' : True, 
         'value': {
+            'name': {
+    		    'it' : 'Utenti',
+    		    'en' : 'Users',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'title': {
+    		    'it' : 'Amministrazione utenti',
+    		    'en' : 'Admin users',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
             'error_1' : {
                 'it' : 'Devi completare tutti i campi',
                 'en' : 'You must complete every field',

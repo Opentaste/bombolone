@@ -13,7 +13,7 @@ from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 
 # Imports inside bombolone
-from decorators import check_authentication, check_admin 
+from decorators import check_authentication, check_admin, get_hash_pages
 from helpers import create_password
 from upload import upload_file
 
@@ -24,6 +24,7 @@ pages = Blueprint('pages', __name__)
 
 @pages.route('/admin/pages/')    
 @check_authentication
+@get_hash_pages
 def overview():
     """
 
@@ -100,6 +101,7 @@ def request_form(page):
 @pages.route('/admin/pages/new/', methods=['POST', 'GET'])
 @check_authentication 
 @check_admin
+@get_hash_pages
 def new():
     """
     
@@ -115,6 +117,7 @@ def new():
 
 @pages.route('/admin/pages/<_id>/', methods=['POST', 'GET'])
 @check_authentication 
+@get_hash_pages
 def content(_id):
     """
 

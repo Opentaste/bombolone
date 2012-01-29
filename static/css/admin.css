@@ -22,8 +22,8 @@
 html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 body { margin: 0; font-size: 1em; line-height: 1.4; }
 body, button, input, select, textarea { font-family: sans-serif; color: #222; }
-::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
-::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::-moz-selection { background: #E5AD6A; color: #fff; text-shadow: none; }
+::selection { background: #E5AD6A; color: #fff; text-shadow: none; }
 
 /* Link ===================================================================== */
 a { color: #00e; }
@@ -584,12 +584,6 @@ input[type=checkbox], input[type=radio]{
 
 textarea{
     height:auto;
-}
-
-input[readonly], select[readonly], textarea[readonly]{
-    background:#f2f2f2;
-    border-color:#ccc;
-    cursor:not-allowed;
 }
 
 .field_error {

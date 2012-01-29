@@ -15,8 +15,9 @@ from pymongo.objectid import ObjectId
 
 # Imports inside bombolone
 from decorators import check_authentication, get_hash_login, get_hash_users
-from helpers import create_password
+from helpers import create_password, language_check
 from upload import upload_file
+from users import request_account_form, upload_avatar
 
 MODULE_DIR = 'modules/admin'
 admin = Blueprint('admin', __name__)
@@ -32,15 +33,15 @@ def login():
 	    username = request.form['username'].lower()
 	    password = request.form['password']
 	    user = g.db.users.find_one({'username' : username})
+	    status = 'mes_red'
 	    if not username and not password:
-	        g.status = 'mes-red'
-	        g.message = g.login['error_1']
+	        message = g.login['error_1']
 	    elif user is None or user['password'] != create_password(password):
-	        g.status = 'mes-red'
-	        g.message = g.login['error_2']
+	        message = g.login['error_2']
 	    else:
 	        session['user_id'] = user['_id']
 	        return redirect(url_for('admin.dashboard'))
+	        
 	return render_template(MODULE_DIR+'/login.html', **locals())
 	
 	
@@ -70,43 +71,40 @@ def profile():
     """
 
     """
+    language_name = language_check()
+    message = None
+    
+    my = g.my
+
     if request.method == 'POST':
-		# get request ot_name
-		username = request.form['username']
-		password = request.form['password']
-		password_check = request.form['password_check']
-		regx = re.compile('^'+username+'$', re.IGNORECASE)
-		result = g.db.users.find_one({"username" : regx })
-		old_username = g.my['username']
-		
-		if len(password) < 6 and len(password) > 0:
-		    g.message = g.users['password_error_1']	
-		    g.status = 'mes-red'
-		elif password != password_check and len(password) > 0:
-		    g.message = g.users['password_error_2']	
-		    g.status = 'mes-red'
-		# control several things:
-		# - username wrote
-		# - username's length is greater than 2
-		# - username is available and it is not the same as 
-		# - the format of username is incorrect
-		elif not len(username):
-		    g.message = g.users['account_error_1']
-		    g.status = 'mes-red'
-		elif len(username) < 2:
-		    g.message = g.users['account_error_2']
-		    g.status = 'mes-red'
-		elif result is not None and username != old_username:
-		    g.message = g.users['account_error_4']
-		    g.status = 'mes-red'
-		elif not re.match(r'^[a-zA-Z0-9_]+$', username):
-		    g.message = g.users['account_error_7']
-		    g.status = 'mes-red'
-		else:
-		    g.my['username'] = username
-		    g.my['password'] = create_password(password)
-		    g.db.users.update({"_id": g.my['_id']}, g.my)
-		    g.message = g.users['account_ok']
-		    g.status = 'mes-green'
+        file = request.files['file']
+        form = request.form   
+        
+        old_username = my['username']
+        old_email = my['email']
+        
+        my['username'] = form['username']
+        my['email'] = form['email']
+        my['lan'] = form['language']
+        my['time_zone'] = form['time_zone']
+        my['name'] = form['name']
+        my['description'] = form['description']
+        my['location'] = form['location']
+        my['web'] = form['web']
+
+        message = request_account_form(my, old_username, old_email, form['password'], form['password_new'], form['password_check'])
+        if message is None:
+            
+            if len(form['password_new']):
+                my['password'] = create_password(form['password_new'])
+            
+            if file and allowed_file(file.filename):
+                my['image'] = upload_avatar(file, my)
+            
+            g.db.users.update({ '_id' : ObjectId(my['_id']) }, my)			
+            return redirect(url_for('admin.profile'))
+			
+	if not message is None:
+	    status = 'mes_red'
 
     return render_template(MODULE_DIR+'/profile.html', **locals())

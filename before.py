@@ -39,15 +39,16 @@ def core_inject_user():
 	b['layout'] = PATH + '/static/layout'
 	b['image'] = PATH + '/static/image'
 	
-	b['lan'] = 'en'
+	lan = 'en'
 	if hasattr(g, 'lan'):
-	    b['lan'] = g.lan
+	    lan = g.lan
 	    b['language'] = g.language
 	
+	b['lan'] = lan
 	# Get menu value
-	path_lan = PATH+'/'+g.lan+'/'
-	b['urls'] = { x['name'] : path_lan+x['url'][g.lan] for x in g.db.pages.find() if x['url'] }
-	b['titles'] =  { x['name'] : x['title'][g.lan] for x in g.db.pages.find() }
+	path_lan = PATH+'/'+lan+'/'
+	b['urls'] = { x['name'] : path_lan+x['url'][lan] for x in g.db.pages.find() if x['url'] }
+	b['titles'] =  { x['name'] : x['title'][lan] for x in g.db.pages.find() }
 	
 	return b
 	
@@ -81,8 +82,8 @@ def core_bombolone():
 		if g.my is None:
 			abort(401)
 		else:
-		    g.lan = 'en'
-		    g.language = 'English'
+		    g.lan = g.my['lan']
+		    g.language = g.languages[g.lan]
 		    g.my_id = user_id
 		    
 		    

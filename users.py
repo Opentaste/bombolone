@@ -54,7 +54,6 @@ def new():
             'email' : '',
          'password' : '', 
              'rank' : 20,
-         'language' : '',
               'lan' : '',
         'time_zone' : 'Europe/London',
              'name' : '',
@@ -69,7 +68,7 @@ def new():
              'username' : form['username'], 
                 'email' : form['email'],
              'password' : '', 
-                 'rank' : form['rank'],
+                 'rank' : int(form['rank']),
                   'lan' : form['language'],
             'time_zone' : form['time_zone'],
                 'image' : '',
@@ -80,7 +79,7 @@ def new():
         }
         message = request_account_form(my, '', '', '', form['new_password'], form['check_password'])
         if message is None:
-            my['password'] = create_password(my['new_password'])
+            my['password'] = create_password(form['new_password'])
             g.db.users.insert(my)			
             return redirect(url_for('users.overview'))
 			
@@ -89,82 +88,6 @@ def new():
         
     return render_template( MODULE_DIR+'/new.html', **locals())
     
-def request_account_form(my, old_username, old_email, password, new_password, check_password):
-    """ 
-    
-    :param my: 
-    :param old_username: 
-    :param old_email: 
-    """
-    check_result = check_username(my['username'])
-    res_email = None
-    message = None
-    
-    # ~~~~~
-    if my['email'] != old_email:
-        res_email = g.db.users.find_one({"email" : my['email'] })
-    
-    # ~~~~~
-    if not len(my['username']):
-        message = g.users['account_error_1']
-    
-    # ~~~~~
-    if not length(my['username'], 2, 20):
-        message = g.users['account_error_2']
-    
-    # ~~~~~
-    if check_result is not None:
-        message = g.users['account_error_4']
-    
-    # ~~~~~
-    if my['username'] in NAME_LIST:
-        message = g.users['account_error_3']
-    
-    # ~~~~~
-    if not username(my['username']):
-        message = g.users['account_error_7']
-    
-    # ~~~~~
-    if not email(my['email']):
-        message = g.users['account_error_5']
-    
-    # ~~~~~
-    if not check_result is None:
-        message = g.users['account_error_6']
-        
-    # ~~~~~
-    if not full_name(my['name']):
-        message = g.users['regex_full_name']
-        
-    # ~~~~~
-    if not url(my['web']):
-        message = g.users['regex_url']
-        
-    if len(new_password):
-        # ~~~~~
-        if not length(new_password, 6, 30):
-    		message = g.users['password_error_1']	
-	
-    	# ~~~~~
-    	if new_password != check_password:
-    		message = g.users['password_error_2']
-    		
-    	if len(password):			
-            # ~~~~~
-            if my['password'] != create_password(password): 
-            	message = g.users['password_error_3']	
-    
-    # ~~~~~    
-    return message
-    
-    
-def check_username(new_username):
-    """
-    """
-    new_username = str.lower(str(new_username))
-    regx = re.compile('^'+new_username+'$', re.IGNORECASE)
-    return g.db.user.find_one({"username" : regx })
- 
  
 @users.route('/admin/users/remove/<_id>/')      
 @check_authentication 
@@ -203,7 +126,7 @@ def update(_id):
         
         my['username'] = form['username']
         my['email'] = form['email']
-        my['rank'] = form['rank']
+        my['rank'] = int(form['rank'])
         my['lan'] = form['language']
         my['time_zone'] = form['time_zone']
         my['name'] = form['name']
@@ -214,13 +137,13 @@ def update(_id):
         message = request_account_form(my, old_username, old_email, form['password'], form['password_new'], form['password_check'])
         if message is None:
             
-            if len(new_password):
+            if len(form['password_new']):
                 my['password'] = create_password(form['password_new'])
             
             if file and allowed_file(file.filename):
                 my['image'] = upload_avatar(file, my)
             
-            g.db.update.insert({ '_id', ObjectId(my['_id']) }, my)			
+            g.db.users.update({ '_id' : ObjectId(my['_id']) }, my)			
             return redirect(url_for('users.overview'))
 			
 	if not message is None:
@@ -228,7 +151,86 @@ def update(_id):
     
     return render_template( MODULE_DIR+'/update.html', **locals() )
     
+
+def request_account_form(my, old_username, old_email, password, new_password, check_password):
+    """ 
+
+    :param my: 
+    :param old_username: 
+    :param old_email: 
+    """
+    check_result = check_username(my['username'])
+    res_email = None
+    message = None
     
+    old_username = str.lower(str(old_username))
+
+    # ~~~~~
+    if my['email'] != old_email:
+        res_email = g.db.users.find_one({"email" : my['email'] })
+
+    # ~~~~~
+    if not len(my['username']):
+        message = g.users['account_error_1']
+
+    # ~~~~~
+    elif not length(my['username'], 2, 20):
+        message = g.users['account_error_2']
+
+    # ~~~~~
+    elif check_result is not None and my['username'] != old_username:
+        message = g.users['account_error_4']
+
+    # ~~~~~
+    elif my['username'] in NAME_LIST and my['username'] != old_username:
+        message = g.users['account_error_3']
+
+    # ~~~~~
+    elif not username(my['username']):
+        message = g.users['account_error_7']
+
+    # ~~~~~
+    elif not email(my['email']):
+        message = g.users['account_error_5']
+
+    # ~~~~~
+    elif not check_result is None:
+        message = g.users['account_error_6']
+
+    # ~~~~~
+    elif not full_name(my['name']) and len(my['name']):
+        message = g.users['regex_full_name']
+
+    # ~~~~~
+    elif not url(my['web']) and len(my['web']):
+        message = g.users['regex_url']
+
+    elif len(new_password) or not 'password' in request.form:
+        # ~~~~~
+        if not length(new_password, 6, 30):
+    		message = g.users['password_error_1']	
+
+    	# ~~~~~
+    	elif new_password != check_password:
+    		message = g.users['password_error_2']
+
+    	elif len(password):			
+            # ~~~~~
+            if my['password'] != create_password(password): 
+            	message = g.users['password_error_3']	
+
+    # ~~~~~    
+    return message
+
+
+def check_username(new_username):
+    """
+    """
+    new_username = str.lower(str(new_username))
+    regx = re.compile('^'+new_username+'$', re.IGNORECASE)
+    return g.db.user.find_one({"username" : regx })
+
+
 def upload_avatar(my):
     """ """
     name = my['username'].lower()

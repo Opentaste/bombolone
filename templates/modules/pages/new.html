@@ -4,11 +4,15 @@
 {% endblock %}
 {% block content %}
     <h2>Add new page</h2>
-    <form action="{{ url_for('pages.new') }}" enctype="multipart/form-data" method="post" >
-        <ul class="menu_section">
-            <li class="section_one language_selected">English</li>
-            <li class="section_two">Italiano</li>
+    <section class="hash_languages">
+        <span class="button list_language_button">{{ language }}</span>
+        <ul class="list_language">
+            {% for code, name in language_name %}
+            <li class="{{ code }}_lan {% if g.lan == code %}language_selected{% endif %}">{{ name }}</li>
+            {% endfor %}
         </ul>
+    </section>
+    <form action="{{ url_for('pages.new') }}" enctype="multipart/form-data" method="post" >
         <section class="form_container first_light">
             <section>
                 <label>Page name</label>
@@ -19,7 +23,9 @@
                 <input type="text" name="name_file" value="" tabindex="3" maxlength="20" />
             </section>
         </section>
-        <section class="one">
+        {% for code, name in language_name %}
+        <h3 class="h3_{{ code }}" {% if code != g.lan %}style="display:none"{% endif %}>Document in {{ name }}</h3>  
+        <section class="section_{{ code }}" {% if code != g.lan %}style="display:none"{% endif %}>
             <div class="form_container">
                 <section>
                     <label>Title</label>
@@ -38,25 +44,7 @@
                 <span class="page_add_label submit_one button button-blu">+ Add new label</span>
             </div>
         </section>
-        <section class="two">
-            <div class="form_container">
-                <section>
-                    <label>Titolo</label>
-                    <input type="text" name="title_it" value="" tabindex="2" maxlength="200" />
-                </section>
-                <section>
-                    <label>Descrizione</label>
-                    <textarea rows="4" cols="50" name="description_it"></textarea>
-                </section>
-                <section>
-                    <label>Url pagina</label>
-                    <input type="text" name="url_it" value="" tabindex="3" maxlength="40" />
-                </section>
-                <br />
-                <br />
-                <button class="page_add_label submit_two button button-blu">+ Aggiungi nuovo label</button>
-            </div>
-        </section>
+        {% endfor %}
         <div>
             <button tabindex="200" type="submit" class="button button-submit">Create page</button>
         </div>

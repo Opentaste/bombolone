@@ -24,14 +24,6 @@ def length(data, minimum=-1, maximum=-1):
         return False
     return True
             
-            
-def required(data):
-    """
-        Validates that the field contains data.
-        
-    """
-    pass
-    
     
 def regexp(data, regex, flags=0):
     """

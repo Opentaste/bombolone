@@ -51,6 +51,15 @@ def get_hash_login(function_to_decorate):
         g.login = get_hash_map('login')
         return function_to_decorate(*args, **kwargs)
     return decorated_function
+   
+    
+def get_hash_pages(function_to_decorate):
+    """ Requires admin login credentials """
+    @wraps(function_to_decorate)
+    def decorated_function(*args, **kwargs):
+        g.pages = get_hash_map('pages')
+        return function_to_decorate(*args, **kwargs)
+    return decorated_function
     
     
 def get_hash_rank(function_to_decorate):

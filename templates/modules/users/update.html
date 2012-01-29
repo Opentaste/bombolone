@@ -267,14 +267,19 @@
             <div class="form_container">
                 <section>
         			<label>{{ g.users.picture }}</label>
-                	<img src="{{ url_for('static', filename='image/avatar/default.jpg') }}" alt="">
+                	{% if g.my.image %}
+                	    <img src="{{ path }}/static/image/avatar/{{ g.my.image }}" alt="{{ g.my.username }}" />
+                	{% else %}
+                	    <img src="{{ url_for('static', filename='image/avatar/default.jpg') }}" alt="{{ g.my.username }}" />
+                	{% endif %}
+        			<input type="file" name="file" />
         		</section>
         		<section>
         			<label>{{ g.users.setting_name }}</label>
         			<input name="name" type="text" maxlength="100" value="{{ my.name or '' }}" >
         		</section>
         		<section>
-        			<label>{{ g.location }}</label>
+        			<label>{{ g.users.location }}</label>
         			<input name="location" type="text" maxlength="100" value="{{ my.location or '' }}">
         		</section>
         		<section>
@@ -291,10 +296,10 @@
         </section>
         <section class="sec_password">
             <div class="form_container">
-                <div>
+                <section>
         			<label>Password</label>
         			<input type="text" name="password" maxlength="30" value="" />
-        		</div>
+        		</section>
                 <section>
                     <label>New Password</label>
                     <input type="password" name="password_new" value="" tabindex="3" maxlength="30" />
@@ -309,4 +314,7 @@
             <button tabindex="200" type="submit" class="button button-submit">{{ g.admin.save }}</button>
         </div>
     </form>
+{% endblock %}
+{% block javascript_file %}
+<script src="{{ url_for('static', filename='js/users.js') }}"></script>
 {% endblock %}

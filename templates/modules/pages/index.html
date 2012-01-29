@@ -1,9 +1,9 @@
 {% extends "modules/admin/index.html" %}
 {% block head %}
-    <title>Pages</title>
+    <title>{{ g.pages.title }}</title>
 {% endblock %}
 {% block content %}
-    <h2>Pages</h2>
+    <h2>{{ g.pages.name }}</h2>
     {% if g.my['rank'] == 10 %}
     <br />
     <a href="{{ admin }}/pages/new/" title="" class="button button-blu">Add new page</a>

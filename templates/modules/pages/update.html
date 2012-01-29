@@ -4,11 +4,15 @@
 {% endblock %}
 {% block content %}
     <h2>Pages content</h2>
-    <form action="{{ url_for('pages.content', _id=_id) }}" enctype="multipart/form-data" method="post" >
-        <ul class="menu_section">
-            <li class="section_one language_selected">English</li>
-            <li class="section_two">Italiano</li>
+    <section class="hash_languages">
+        <span class="button list_language_button">{{ language }}</span>
+        <ul class="list_language">
+            {% for code, name in language_name %}
+            <li class="{{ code }}_lan {% if g.lan == code %}language_selected{% endif %}">{{ name }}</li>
+            {% endfor %}
         </ul>
+    </section>
+    <form action="{{ url_for('pages.content', _id=_id) }}" enctype="multipart/form-data" method="post" >
         {% if g.my['rank'] == 10 %}
         <section class="form_container first_light">
             <section>

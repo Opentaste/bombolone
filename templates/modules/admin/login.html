@@ -11,7 +11,7 @@
 <body>
 	<div class="login">
 		<h1><a href="{{ url_for('admin.login') }}" title="">Login</a></h1>
-		{% if g.status %}<div id="{{ g.status }}">{{ g.message[lan] }}</div>{% endif %}
+		{% if status %}<div class="{{ status }}">{{ message }}</div>{% endif %}
 		<form name="login" action="{{ url_for('admin.login') }}" method="post">
             <p>
                 <label>Username</label>
