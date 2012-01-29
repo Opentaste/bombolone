@@ -12,7 +12,7 @@
             {% endfor %}
         </ul>
     </section>
-    <form action="{{ url_for('pages.content', _id=_id) }}" enctype="multipart/form-data" method="post" >
+    <form action="{{ url_for('pages.update', _id=_id) }}" enctype="multipart/form-data" method="post" >
         {% if g.my['rank'] == 10 %}
         <section class="form_container first_light">
             <section>
@@ -25,54 +25,33 @@
             </section>
         </section>
         {% endif %}
-        <section class="one">
+        {% for code, name in language_name %}
+        <h3 class="h3_{{ code }}" {% if code != g.lan %}style="display:none"{% endif %}>Document in {{ name }}</h3>
+        <section class="section_{{ code }}" {% if code != g.lan %}style="display:none"{% endif %}>
             <div class="form_container">
                 <section>
                     <label>Title</label>
-                    <input type="text" name="title_en" value="{{ page['title']['en'] }}" tabindex="2" maxlength="200" />
+                    <input type="text" name="title_{{ code }}" value="{{ page['title'][code] }}" tabindex="2" maxlength="200" />
                 </section>
                 <section>
                     <label>Description</label>
-                    <textarea rows="4" cols="50" name="description_en">{{ page['description']['en'] }}</textarea>
+                    <textarea rows="4" cols="50" name="description_{{ code }}">{{ page['description'][code] }}</textarea>
                 </section>
                 <section>
                     <label>Url page</label>
-                    <input type="text" name="url_en" value="{{ page['url']['en'] }}" tabindex="3" maxlength="40" />
+                    <input type="text" name="url_{{ code }}" value="{{ page['url'][code] }}" tabindex="3" maxlength="40" />
                 </section>
                 <br />
                 <br />
-                {% for i, x in enumerate(page['content']['en']) %}
-                    {% include 'admin/pages/label_en.html' %}
+                {% for i, x in enumerate(page['content'][code]) %}
+                    {% include 'modules/pages/field.html' %}
                 {% endfor %}
                 {% if g.my['rank'] == 10 %}
-                <span class="page_add_label submit_one button">{{ g.admin.add_field }}</span>
+                <span class="page_add_label button button_right button-blu before_{{ code }}">{{ g.admin.add_field }}</span>
                 {% endif %}
             </div>
         </section>
-        <section class="two">
-            <div class="form_container">
-                <section>
-                    <label>Titolo</label>
-                    <input type="text" name="title_it" value="{{ page['title']['it'] }}" tabindex="2" maxlength="200" />
-                </section>
-                <section>
-                    <label>Descrizione</label>
-                    <textarea rows="4" cols="50" name="description_it">{{ page['description']['it'] }}</textarea>
-                </section>
-                <section>
-                    <label>Url pagina</label>
-                    <input type="text" name="url_it" value="{{ page['url']['it'] }}" tabindex="3" maxlength="40" />
-                </section>
-                <br />
-                <br />
-                {% for i, x in enumerate(page['content']['it']) %}
-                    {% include 'admin/pages/label_it.html' %}
-                {% endfor %}
-                {% if g.my['rank'] == 10 %}
-                <span class="page_add_label submit_two button">{{ g.admin.add_field }}</span>
-                {% endif %}
-            </div>
-        </section>
+        {% endfor %}
         <div>
             <button tabindex="200" type="submit" class="button button-submit">{{ g.admin.save }}</button>
         </div>

@@ -283,7 +283,7 @@ button.button, input[type=submit].button {
     border: 1px solid #d54843;
     color: #fff!important;
     font-size: 13px;
-    height: 27px;
+    height: 23px;
     margin: 0 1.5em 1.2em 0;
     text-shadow: 0 1px rgba(0,0,0,0.1);
 }
@@ -524,6 +524,7 @@ nav a {
     margin:-left:180px;
     padding:0;
 }
+
 .form_container section p+p{
     margin-top:9px;
 }
@@ -615,6 +616,13 @@ textarea{
 }
 
 
+.label_form{
+    margin-left: 166px !important;
+}
+
+.label_form select{
+    padding: 2px!important;
+}
 
 .button_remove {
     font-size: 12px;

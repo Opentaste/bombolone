@@ -28,7 +28,6 @@ from validators import email, full_name, length, url, username
     
 MODULE_DIR = 'modules/users'
 users = Blueprint('users', __name__)
-users_permits = ['overview','new','update','remove']
 
  
 @users.route('/admin/users/')

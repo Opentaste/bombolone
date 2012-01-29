@@ -21,7 +21,6 @@ from validators import length, username
     
 MODULE_DIR = 'modules/hash_table'
 hash_table = Blueprint('hash_table', __name__)
-hash_table_permits = ['overview','new','update','remove']
 
 
 @hash_table.route('/admin/hash_table/')
@@ -32,51 +31,6 @@ def overview():
     
     hash_table_list = g.db.hash_table.find()
     return render_template( MODULE_DIR+'/index.html', **locals() )
-    
-    
-def request_form(hash_map):
-    """
-    """
-    form = request.form
-    
-    message = None
-    name = form['name']
-    hash_map['name'] = name
-    hash_map['value'] = {}
-    
-    if not length(name, 2, 20):
-        message = 'nada 1'
-    elif not username(name):
-        message = 'nada 2'
-    
-    list_label = [ int(x.split('_')[3]) for x in form if x.startswith('label_name_') ]
-    
-    if len(list_label) > 0:    
-        len_label = max(list_label) + 1
-        for i in range(len_label):
-            
-            i = str(i)
-            if 'label_name_'+g.lan+'_'+i in form:
-                key = form['label_name_'+g.lan+'_'+i].strip()
-                
-                if not length(key, 2, 20):
-                    message = 'nada 3'
-                elif not username(key):
-                    message = 'nada 4'
-    
-                hash_map['value'][key] = {}
-
-                for code in LIST_LANGUAGES:
-                    if 'label_name_'+code+'_'+i in form:
-                        value = form['label_'+code+'_'+i]
-                        hash_map['value'][key][code] = value
-
-                    else:
-                        hash_map['value'][key][code] = ''
-
-    if message is None:
-        return (message, hash_map)
-    return (message, hash_map) 
     
    
 @hash_table.route('/admin/hash_table/new/', methods=['POST', 'GET'])
@@ -137,3 +91,49 @@ def update(_id):
         hash_map = hash_map[1]
     
     return render_template( MODULE_DIR+'/update.html', **locals() )
+    
+
+def request_form(hash_map):
+    """
+    """
+    form = request.form
+
+    message = None
+    name = form['name']
+    hash_map['name'] = name
+    hash_map['value'] = {}
+
+    if not length(name, 2, 20):
+        message = 'nada 1'
+    elif not username(name):
+        message = 'nada 2'
+        
+
+    list_label = [ int(x.split('_')[3]) for x in form if x.startswith('label_name_') ]
+
+    if len(list_label) > 0:    
+        len_label = max(list_label) + 1
+        for i in range(len_label):
+
+            i = str(i)
+            if 'label_name_'+g.lan+'_'+i in form:
+                key = form['label_name_'+g.lan+'_'+i].strip()
+
+                if not length(key, 2, 20):
+                    message = 'nada 3'
+                elif not username(key):
+                    message = 'nada 4'
+
+                hash_map['value'][key] = {}
+
+                for code in LIST_LANGUAGES:
+                    if 'label_name_'+code+'_'+i in form:
+                        value = form['label_'+code+'_'+i]
+                        hash_map['value'][key][code] = value
+
+                    else:
+                        hash_map['value'][key][code] = ''
+
+    if message is None:
+        return (message, hash_map)
+    return (message, hash_map)

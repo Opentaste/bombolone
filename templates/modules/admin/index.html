@@ -49,13 +49,15 @@
             <li>
                 <p><a href="{{ url_for('pages.overview') }}" title="" >Pages</a></p>
             </li>
-            {% if g.my['rank'] == 10 %}
+            {% if g.my['rank'] < 25 %}
             <li>
                 <p><a href="{{ url_for('users.overview') }}" title="" >Users</a></p>
             </li>
+            {% if g.my['rank'] < 15 %}
             <li>
                 <p><a href="{{ url_for('rank.overview') }}" title="" >Rank</a></p>
             </li>
+            {% endif %}
             <li>
                 <p><a href="{{ url_for('languages.overview') }}" title="" >Languages</a></p>
             </li>

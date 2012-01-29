@@ -25,16 +25,26 @@ def check_authentication(function_to_decorate):
     return decorated_function
     
     
-def check_admin(function_to_decorate):
+def check_chief(function_to_decorate):
     """ Requires admin login credentials """
     @wraps(function_to_decorate)
     def decorated_function(*args, **kwargs):
-        if g.my['rank'] is not 10:
+        if g.my['rank'] > 15:
             abort(401)
         return function_to_decorate(*args, **kwargs)
     return decorated_function   
     
     
+def check_admin(function_to_decorate):
+    """ Requires admin login credentials """
+    @wraps(function_to_decorate)
+    def decorated_function(*args, **kwargs):
+        if g.my['rank'] > 25:
+            abort(401)
+        return function_to_decorate(*args, **kwargs)
+    return decorated_function
+
+
 def get_hash_languages(function_to_decorate):
     """  """
     @wraps(function_to_decorate)

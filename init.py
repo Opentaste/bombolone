@@ -225,7 +225,7 @@ def init_users():
                   'web' : ''
         },
         {
-             'username' : 'user', 
+             'username' : 'admin', 
                 'email' : '',
              'password' : create_password('admin'), 
                  'rank' : 20,
@@ -999,8 +999,8 @@ def init_hash_table():
         'module' : True, 
         'value': {
             'name': {
-    		    'it' : 'Permessi',
-    		    'en' : 'Permits',
+    		    'it' : 'Ruoli',
+    		    'en' : 'Ranks',
     		    'pt' : '',
                 'fr' : '',
                 'de' : '',
@@ -1011,8 +1011,8 @@ def init_hash_table():
                 'gr' : '',
                 'ar' : '' },
             'title': {
-    		    'it' : 'Amministrazione permessi',
-    		    'en' : 'Admin permits',
+    		    'it' : 'Amministrazione ruoli',
+    		    'en' : 'Admin ranks',
     		    'pt' : '',
                 'fr' : '',
                 'de' : '',
