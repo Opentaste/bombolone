@@ -18,8 +18,8 @@ from helpers import create_password
 from upload import upload_file
 
 MODULE_DIR = 'modules/pages'
-
 pages = Blueprint('pages', __name__)
+pages_permits = ['overview','new','update','remove']
 
 
 @pages.route('/admin/pages/')    

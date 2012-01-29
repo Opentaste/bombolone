@@ -18,6 +18,7 @@ def clean_database(all_item=1):
     if int(all_item):
         db.users.remove()
         
+    db.ranks.remove()
     db.languages.remove()
     db.hash_table.remove()
     db.pages.remove()
@@ -29,6 +30,7 @@ def init_mongodb(all_item=1):
     if int(all_item):
         init_users()
 
+    init_ranks()
     init_languages()
     init_hash_table()
     init_pages()
@@ -209,9 +211,9 @@ def init_users():
     
     list_users = [
         {
-             'username' : 'admin', 
+             'username' : 'chief', 
                 'email' : '',
-             'password' : create_password('admin'), # Create passwords in md5 and sha1
+             'password' : create_password('chief'), # Create passwords in md5 and sha1
                  'rank' : 10,
              'language' : 'English',
                   'lan' : 'en',
@@ -225,8 +227,22 @@ def init_users():
         {
              'username' : 'user', 
                 'email' : '',
-             'password' : create_password('user'), 
+             'password' : create_password('admin'), 
                  'rank' : 20,
+             'language' : 'English',
+                  'lan' : 'en',
+            'time_zone' : 'Europe/London',
+                'image' : '',
+                 'name' : '',
+          'description' : '',
+             'location' : '',
+                  'web' : ''
+        },
+        {
+             'username' : 'user', 
+                'email' : '',
+             'password' : create_password('user'), 
+                 'rank' : 30,
              'language' : 'English',
                   'lan' : 'en',
             'time_zone' : 'Europe/London',
@@ -241,6 +257,21 @@ def init_users():
     # Insert the users list 
     for user in list_users:
         db.users.insert( user )
+        
+        
+def init_ranks():
+    """ Initializes the base three rank: Admin, Users, mode  """
+
+    list_ranks = [
+        { 'name' : 'chief', 'rank' : 10 },
+        { 'name' : 'admin', 'rank' : 20 },
+        { 'name' : 'user' , 'rank' : 30 }
+    ]
+
+    # Insert the users list 
+    for rank in list_ranks:
+        db.ranks.insert( rank )
+   
    
 def init_hash_table():
     """ Initialize a document for each module within the MongoDB
@@ -963,6 +994,37 @@ def init_hash_table():
         }
     }
     
+    dict_rank = { 
+        'name' : 'rank', 
+        'module' : True, 
+        'value': {
+            'name': {
+    		    'it' : 'Permessi',
+    		    'en' : 'Permits',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' },
+            'title': {
+    		    'it' : 'Amministrazione permessi',
+    		    'en' : 'Admin permits',
+    		    'pt' : '',
+                'fr' : '',
+                'de' : '',
+                'jp' : '',
+                'cn' : '',
+                'ru' : '',
+                'tr' : '',
+                'gr' : '',
+                'ar' : '' }
+        }
+    }
+    
     # Insert 
     db.hash_table.insert( dict_admin )
     db.hash_table.insert( dict_languages )
@@ -970,6 +1032,7 @@ def init_hash_table():
     db.hash_table.insert( dict_users )
     db.hash_table.insert( dict_pages )
     db.hash_table.insert( dict_login )
+    db.hash_table.insert( dict_rank )
     
     
 def init_pages():

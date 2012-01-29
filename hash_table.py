@@ -21,6 +21,7 @@ from validators import length, username
     
 MODULE_DIR = 'modules/hash_table'
 hash_table = Blueprint('hash_table', __name__)
+hash_table_permits = ['overview','new','update','remove']
 
 
 @hash_table.route('/admin/hash_table/')

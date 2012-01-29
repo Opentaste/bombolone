@@ -4,26 +4,33 @@
 {% block content %}
     <h2>{{ g.rank.name }}</h2>
     <br />
-    <a href="{{ admin }}/rank/new/" title="" class="button button-blu">{{ g.rank.add_rank }}</a>
+    {% for rank in sorted(list_ranks) %}
+    <h3>{{ rank['name'] }}</h3>
     <table class="table_items">
     	<thead>
     		<tr>	
-    			<th style="width:40%;">Rank</th>
-    			<th style="width:20%;">Number permit</th>
-    			<th style="width:40%;">_id</th>
-    			<th style="width:20%;">{{ g.rank.remove }}</th>
+    			<th style="width:20%;"></th>
+    			<th style="width:80%;">Permit</th>
     		</tr>
     	</thead>
     	<tfoot>
     		<tr>
-    			<td colspan="4"></td>
+    			<td colspan="2"></td>
     		</tr>
     	</tfoot>
     	<tbody>
-    	
+    		{% for i, permit in enumerate(sorted(list_permits.iteritems())) %}
+    		    {% for name in sorted(permit[1]) %}
+    		    <tr class="{% if i % 2 == 1 %}gray{% endif %}">
+        		    <td>
+        		        <input type="checkbox" name="{{ language['code'] }}" >
+        		    </td>
+        			<td>{{ permit[0]+'  '+name }}</td>
+        		</tr>
+        		{% endfor %}
+    		{% endfor %}
     	</tbody>
     </table>
-{% endblock %}
-{% block javascript_file %}
-<script src="{{ url_for('static', filename='js/rank_overview.js') }}"></script>
+    <br />
+    {% endfor %}
 {% endblock %}

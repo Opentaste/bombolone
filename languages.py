@@ -16,6 +16,7 @@ from shared import LIST_LANGUAGES
 
 MODULE_DIR = 'modules/languages'
 languages = Blueprint('languages', __name__)
+languages_permits = ['overview']
     
 
 @languages.route('/admin/languages/', methods=['POST', 'GET'])

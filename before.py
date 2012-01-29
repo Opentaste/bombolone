@@ -45,10 +45,15 @@ def core_inject_user():
 	    b['language'] = g.language
 	
 	b['lan'] = lan
-	# Get menu value
-	path_lan = PATH+'/'+lan+'/'
-	b['urls'] = { x['name'] : path_lan+x['url'][lan] for x in g.db.pages.find() if x['url'] }
-	b['titles'] =  { x['name'] : x['title'][lan] for x in g.db.pages.find() }
+	b['urls'] = {}
+	b['titles'] = {}
+	
+	url = urlparse(request.url)
+	extension = url.path.split('.')[-1]
+	if not extension.lower() in EXTENSIONS_REQUEST:
+	    path_lan = PATH+'/'+lan+'/'
+	    b['urls'] = { x['name'] : path_lan+x['url'][lan] for x in g.db.pages.find() if x['url'] }
+	    b['titles'] =  { x['name'] : x['title'][lan] for x in g.db.pages.find() }
 	
 	return b
 	
