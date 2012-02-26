@@ -1,0 +1,48 @@
+{% extends "content/home.html" %}
+
+{% block content %}
+<section class="row">
+    
+    <div class="span3">
+        <ul class="nav nav-tabs nav-stacked">
+    		<li {% block nav_active_1 %}{% endblock %}>
+            	<a href="{{ url_for('admin.dashboard') }}" title="" >Dashboard</a>
+            </li>
+            {% if g.my['rank'] < 25 %}
+            <li {% block nav_active_6 %}{% endblock %}>
+                <a href="{{ url_for('pages.overview') }}" title="" >Pages</a>
+            </li>
+            <li {% block nav_active_2 %}{% endblock %}>
+                <a href="{{ url_for('users.overview') }}" title="" >Users</a>
+            </li>
+            <li {% block nav_active_3 %}{% endblock %}>
+                <a href="{{ url_for('rank.overview') }}" title="" >Rank</a>
+            </li>
+            <li {% block nav_active_4 %}{% endblock %}>
+                <a href="{{ url_for('languages.overview') }}" title="" >Languages</a>
+            </li>
+            <li {% block nav_active_5 %}{% endblock %}>
+                <a href="{{ url_for('hash_table.overview') }}" title="" >Hash Table</a>
+            </li>
+            {% endif %}
+        </ul><!-- .nav -->
+    </div><!-- .span3 -->
+    
+    <div class="span9">
+        {% block content_right %}
+        <div class="content_right">
+            {% block content_admin %}
+            {% endblock %}
+    	</div><!-- .content_right -->
+    	{% endblock %}
+    </div>
+</section>
+{% endblock %}
+
+{% block js_admin_files %}
+<script src="{{ url_for('static', filename='js/%s.js' % js_version['admin']) }}"></script>
+
+{% block js_module_files %}
+{% endblock %}
+    
+{% endblock %}

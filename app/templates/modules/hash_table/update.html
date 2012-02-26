@@ -1,0 +1,85 @@
+{% extends "modules/admin/index.html" %}
+{% block head %}
+    <title>Document update</title>
+{% endblock %}
+{% block content_admin %}
+<section class="row-fluid">
+    <h2 class="span10">Update {{ hash_map['name'] }}</h2>
+    <div class="span2 dropdown-lng">
+        <a class="button dropdown-toggle button-lng" data-toggle="dropdown" href="#">
+            {{ language }}
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            {% for code, name in language_name %}
+            <li class="{{ code }}_lan {% if g.lan == code %}active{% endif %}">
+                <a>{{ name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+<section class="row-fluid hash_table_tools">
+    {% if status %}<div class="{{ status }}"><a class="close">×</a>{{ message }}</div>{% endif %}
+    <form action="{{ url_for('hash_table.update', _id=hash_map['_id']) }}" class="form-horizontal" method="post">
+        <fieldset>
+            <div class="control-group">
+                {% if my.rank > 15 %}
+                <span class="input-xlarge uneditable-input">{{ hash_map['name'] }}</span>
+                {% else %}
+                <input type="text" name="name" class="input-xlarge" value="{{ hash_map['name'] }}"
+                placeholder="Name Map..." tabindex="1" maxlength="20" />
+                {% endif %}
+            </div>
+            <div class="control-group legend">
+                <span class="span3"><h3>Key</h3></span>
+                <span class="span6"><h3>Value</h3></span>
+                {% if my.rank < 15 %}
+                <span class="hash_add_label button button_right button-blu span2">+ Add new label</span>
+                {% endif %}
+            </div>
+            {% for code, name in language_name %}
+            <div class="section_{{ code }}" {% if code != g.lan %}style="display:none"{% endif %}>
+                {% for i, key in enumerate(sorted(hash_map.value)) %}
+                <div class="control-group section_num_{{ i }} row-fluid">
+                        {% if my.rank > 15 %}
+                        <span class="span3 uneditable-input">{{ key }}</span>
+                        {% else %}
+                        <input type="text" name="label_name_{{ code }}_{{ i }}" value="{{ key }}" 
+                        class="span3 name_key label_name_{{ code }}_{{ i }}" maxlength="30">
+                        {% endif %}
+                        <textarea name="label_{{ code }}_{{ i }}" 
+                        class="span6 label_{{ code }}_{{ i }}">{{ hash_map.value[key][code] }}</textarea>
+                        {% if my.rank < 15 %}
+                        <span class="hash_remove_label button button_remove button-red span2" id="{{ i }}">- Remove label</span>
+                        {% endif %}
+                </div>
+                {% endfor %}
+                <div class="language_{{ code }}"></div>
+            </div>
+            {% endfor %}
+            <div class="form-actions">
+                <button tabindex="200" type="submit" class="button button-submit">{{ g.admin.save }}</button>
+            </div>
+        </fieldset>
+    </form>
+</section>
+{% endblock %}
+
+{% block js_module_files %}
+<script src="{{ url_for('static', filename='js/%s.js' % js_version['hash_table']) }}"></script>
+{% endblock %}
+
+{% block js_code %}
+<script type="text/javascript">
+    b.hash_table.list_languages = [{% for code in language_name %} '{{ code[0] }}', {% endfor %}]
+    t.get(d).ready(function() {
+        b.hash_table.init();
+        b.hash_table.init_num_field();
+        b.hash_table.init_add_label();
+        b.hash_table.init_remove_label();
+        b.hash_table.init_change_name_label();
+
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+
+{% block title %} Login {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="login box">
+    <h1>Accedi a Bombolone</h1>
+	{% if status %}<div class="{{ status }}"><a class="close">×</a>{{ message }}</div>{% endif %}
+    <section class="login_social">
+        <div id="fb-root"></div>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '226585584065766',
+              status     : true, 
+              cookie     : true,
+              xfbml      : true,
+              oauth      : true,
+            });
+          };
+          (function(d){
+             var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+             js = d.createElement('script'); js.id = id; js.async = true;
+             js.src = "//connect.facebook.net/en_US/all.js";
+             d.getElementsByTagName('head')[0].appendChild(js);
+           }(document));
+        </script>
+        <span class="button facebook_login" onlogin="window.location = '/status/'" data-scope="email,publish_stream,offline_access">
+            Accedi con Facebook
+        </span>
+    </section>
+    <section class="login_classic">
+	    <form name="login" action="{{ url_for('login.login_page') }}" method="post">
+            <p>
+                <label>{{ g.login.username }}</label>
+                <input type="text" name="username"  value="" size="50" tabindex="10" />
+            </p>
+            <p>
+                <label>{{ g.login.password }}</label>
+                <input type="password" name="password" value="" size="50" tabindex="20" />
+            </p>
+            <p class="submit">
+                <button tabindex="200" type="submit" class="button button-login">Accedi</button>
+            </p>
+        </form>
+    </section>
+</div>
+{% endblock %}

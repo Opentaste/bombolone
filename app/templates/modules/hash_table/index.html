@@ -1,0 +1,53 @@
+{% extends "modules/admin/index.html" %}
+{% block head %}
+    <title>{{ g.hash_table.title }}</title>
+{% endblock %}
+
+{% block nav_active_5 %}class="active"{% endblock %}
+
+{% block content_admin %}
+    <h2>{{ g.hash_table.name }}</h2>
+    <br />
+    {% if my.rank < 15 %}
+    <a href="{{ admin }}/hash_table/new/" title="" class="button button-blu">{{ g.hash_table.add_new_hash_map }}</a>
+    {% endif %}
+    <table class="table table-bordered table-striped">
+    	<thead>
+    		<tr>	
+    			<th style="width:45%;">{{ g.admin.name_val }}</th>
+    			<th style="width:35%;">{{ g.admin.number }}</th>
+    			<th style="width:20%;">{{ g.admin.remove }}</th>
+    		</tr>
+    	</thead>
+    	<tfoot>
+    		<tr>
+    			<td colspan="4"></td>
+    		</tr>
+    	</tfoot>
+    	<tbody>
+    		{% for i, document in enumerate(hash_map_list) %}
+    		<tr class="item_{{ str(document['_id']) }}">
+    			<td><a href="{{ admin }}/hash_table/{{ str(document['_id']) }}/">{{ document['name'] }}</a></td>
+    			<td>{{ len(document['value']) }}</td>
+    			<td>
+    			    {% if not document['module'] and len(document['value']) == 0 and my.rank < 15 %}
+    			    <span class="remove_item item_{{ str(document['_id']) }}">{{ g.admin.remove_item }}</span>
+    			    {% endif %}
+    			</td>
+    		</tr>
+    		{% endfor %}
+    	</tbody>
+    </table>
+{% endblock %}
+
+{% block js_module_files %}
+<script src="{{ url_for('static', filename='js/%s.js' % js_version['hash_table']) }}"></script>
+{% endblock %}
+
+{% block js_code %}
+<script type="text/javascript">
+    t.get(d).ready(function() {
+        b.hash_table.init_remove();
+    })
+</script>
+{% endblock %}

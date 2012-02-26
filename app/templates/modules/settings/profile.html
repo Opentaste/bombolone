@@ -1,0 +1,64 @@
+ {% extends "modules/settings/index.html" %}
+
+
+{% block title %} User profile {% endblock %}
+{% block description %}  {% endblock %}
+
+{% block nav_active_2 %}class="active"{% endblock %}
+
+{% block settings %}
+<form action="{{ url_for('settings.profile') }}" enctype="multipart/form-data" method="post" >
+    <div class="form-horizontal form-settings">
+        <fieldset>
+            <legend>Profile</legend>
+            {% if status %}<div class="{{ status }}"><a class="close">×</a>{{ message }}</div>{% endif %}
+            <div class="control-group">
+                <label>{{ g.users.picture }}</label>
+                <div class="controls">
+            	    {% if user.image %}
+                	    <img src="{{ path }}/static/avatars/{{ user.username.lower() }}/{{ user.image[2] }}" 
+                	    alt="{{ user.username }}" class="thumbnail" />
+                	{% else %}
+                	    <img src="{{ url_for('static', filename='layout/avatar/default.jpg') }}" 
+                	    alt="{{ user.username }}" class="thumbnail" />
+                	{% endif %}
+        			<input type="file" name="file" />
+        		</div>
+            </div>
+    		<div class="control-group">
+    			<label>{{ g.users.setting_name }}</label>
+    			<div class="controls">
+    			    <input name="name" type="text" maxlength="100" value="{{ user.name }}">
+    			</div>
+    		</div>
+    		<div class="control-group">
+    			<label>{{ g.users.location }}</label>
+    			<div class="controls">
+    			    <input name="location" type="text" maxlength="100" value="{{ user.location }}">
+    			</div>
+    		</div>
+    		<div class="control-group">
+    			<label>{{ g.users.web }}</label>
+    			<div class="controls">
+    			    <input name="web" type="text" maxlength="200" value="{{ user.web }}">
+    			</div>
+    		</div>
+    		<div class="control-group">
+    			<label>{{ g.users.description }}</label>
+    			<div class="controls">
+    			    <textarea name="description" maxlength="200" class="span4" 
+    			    onkeyup="return textareaLenght(this, 'word-des')"  
+    			    cols="10" rows="3">{{ user.description }}</textarea>
+    		        <span id="word-des" class="word-count">200</span>
+    		    </div>
+    		</div>
+            <div class="form-actions">
+                <button tabindex="200" type="submit" class="button button-submit">{{ g.admin.save }}</button>
+            </div>
+        </fieldset>
+    </div><!-- .form-horizontal -->
+</form>
+{% endblock %}
+{% block js_content_files %}
+<script src="{{ url_for('static', filename='js/users.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "index.html" %}
+
+{% block title %} {{ g.my.username }} {% endblock %}
+{% block description %} Desription {% endblock %}
+
+{% block header %}
+<nav>
+    <a href="{{ path }}" title="" class="brand">
+        <img src="{{ layout }}/logo/bombolone_header.png" alt="" />
+    </a>
+    <ul class="nav pull-right header-tabs">
+        <li>
+            <a href="{{ url_for('home.index') }}" title="">
+                {% if my.image %}
+                    <img src="{{ path }}/static/avatars/{{ my.username.lower() }}/{{ my.image[1] }}"
+            	    style="margin-right:2px;width:20px" alt="{{ my.username }}" />
+        	    {% endif %}
+        	    {{ g.my.username }}
+            </a>
+        </li>
+        <li class="menu_account dropdown">
+            <a>
+                <i class="icon-cog icon-white"></i>
+            </a>
+            <ul class="dropdown-menu open">
+                <li><a href="{{ url_for('settings.account') }}" title="" >Impostazioni</a></li>
+                {% if g.my['rank'] < 25 %}
+                <li><a href="{{ url_for('admin.dashboard') }}" title="" >Admin</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('login.logout') }}" title="" >Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+
+{% endblock %}
+
+{% block js_files %}
+<script src="{{ url_for('static', filename='js/%s.js' % js_version['home']) }}"></script>
+
+{% block js_admin_files %}
+{% endblock %}
+
+{% block js_content_files %}
+{% endblock %}
+
+{% endblock %}
+
+{% block js_code %}
+{% endblock %}
