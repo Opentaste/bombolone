@@ -7,21 +7,30 @@ Tiramisu and Designed based on html5 boilerplate and Twitter bootstrap.
 
 ## Quick start
 
-Clone the git repo - `git clone git@github.com:OwlStudios/bombolone.git` 
+1. Clone the git repo 
+    git clone git@github.com:OwlStudios/bombolone.git
 
-Move in Bombolone folder - `cd bombolone/`
+2. Move in Bombolone folder 
+    cd bombolone/
 
-Install requirements - `pip install -r requirements.txt`
+3. Install requirements - 
+    pip install -r requirements.txt
 
-Move in app folder - `cd app/`
+4. Move in app folder 
+    cd app/
 
-Restore last version Bombolone Mongodb - `fab mongodb_restore`
+5. Run Mongodb
+   mongod
 
-Run Bombolone - `python bombolone.py`
+5. Restore last version Bombolone Mongodb 
+    fab mongodb_restore
+
+6. Run Bombolone 
+    python bombolone.py
 
 Registered users are:
-- Admin with password 'admin123'
-- User with password 'user123'
+- Admin with username 'admin' and password 'admin123'
+- User with username 'user' and password 'user123'
 
 
 ## Features
