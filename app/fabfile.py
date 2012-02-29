@@ -18,6 +18,7 @@ from config import DATABASE
 
 LIST_JS_FILES = [x[:-3] for x in os.listdir('static/js/') if x[-3:] == '.js']
 
+
 # Database ========================================================================
 def local_backup():
     """ """
