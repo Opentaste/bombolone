@@ -10,31 +10,34 @@
     :copyright: (c) 2012 by Leonardo Zizzamia
     :license: BSD (See LICENSE for details)
 """
-import os
+import os, time
 import simplejson as json 
 from fabric.api import settings, run, env, cd, lcd, local
 
-LIST_JS_FILES = ['admin','app','home','hash_table','users','pages']
+from config import DATABASE
 
+LIST_JS_FILES = [x[:-3] for x in os.listdir('static/js/') if x[-3:] == '.js']
 
 # Database ========================================================================
 def local_backup():
     """ """
     print '\n####### Backup MongoDB App #######'
-    local('mongodump --db bombolone --out ../data/backup/mongodb/$(date +%F)')
+    local('mongodump --db %s --out ../data/backup/mongodb/$(date +%F)' % DATABASE)
         
 def mongodb_restore(date_backup=None):
+    """ """
     print '\n####### Restore MongoDB #######'
     # when date backup is None allows to update the database to the last backup
     if date_backup is None:
         list_backup = sorted([ x for x in os.listdir('../data/backup/mongodb') if x[0] != '.'])
         date_backup = list_backup[-1]
     
-    local('mongorestore --db bombolone --drop ../data/backup/mongodb/%s/bombolone' % date_backup)
+    local('mongorestore --db %s --drop ../data/backup/mongodb/%s/%s' % (DATABASE, date_backup, DATABASE))
     
 
 # Javascript tools ================================================================       
 def beautify_js():
+    """ """
     print '\n####### Beautifying js files #######'
     for name in LIST_JS_FILES:
         path = 'static/js/%s' % name
@@ -43,8 +46,8 @@ def beautify_js():
         local('rm -f %s-beautified.js' % path)
         
 def minify_js(name_js_file='',minify='yes'):
+    """ """
     print '\n####### Minify and change version js files #######'
-    import time
     version = int(time.time()*0.01)
     
     # read app.json
@@ -82,19 +85,20 @@ def minify_js(name_js_file='',minify='yes'):
 
 # Tests tools =====================================================================        
 def tests():
+    """ """
     print '\n####### Copy Database in Test Dev #######'
-    local('mongo --eval "db = db.getMongo().getDB(\'bombolone\'); db.copyDatabase(\'bombolone\', \'bombolone_test\')"')
-    local('mongo --eval "db = db.getMongo().getDB(\'bombolone_test\');"')
+    local('mongo --eval "db = db.getMongo().getDB(\'%s\'); db.copyDatabase(\'%s\', \'app_test\')"' % (DATABASE, DATABASE))
+    local('mongo --eval "db = db.getMongo().getDB(\'app_test\');"')
     print '\n####### Run Tests #######'
     try:
         with lcd('tests/'):
-            local('ls')
             local('python check_admin.py')
             local('python check_settings.py')
     finally:
         drop_db_tests()
     
 def drop_db_tests():
+    """ """
     print '\n####### Drop Test Database #######'
-    local('mongo --eval "db = db.getMongo().getDB(\'bombolone_test\'); db.dropDatabase()"')
+    local('mongo --eval "db = db.getMongo().getDB(\'app_test\'); db.dropDatabase()"')
     

@@ -12,7 +12,7 @@ sys.path.append('..')
 
 # Change Database
 import config
-config.DATABASE = 'bombolone_test'
+config.DATABASE = 'app_test'
 config.PROJECT_STATIC_FILES = 'data/test'
 
 # Run
@@ -38,7 +38,7 @@ PASSWORD = 'test123'
 
 # Save connectio test database
 connection = Connection()
-db = connection.bombolone_test
+db = connection.app_test
 db.users.remove({'username' : USERNAME})
 data = { "username" : USERNAME, "email" : "", "password" : create_password(PASSWORD),
          "name" : "", "description" : "", "rank" : 10, "lan" : "en", 
@@ -85,7 +85,7 @@ class CheckAdminPages(unittest.TestCase):
     
     def setUp(self):
         """Before each test, set up a database test"""
-        bombolone.app.config['DATABASE'] = 'bombolone_test'
+        bombolone.app.config['DATABASE'] = 'app_test'
         self.app = bombolone.app.test_client()
         
     ######## LOGIN #########
