@@ -122,7 +122,8 @@ class RegexConverter(BaseConverter):
 # regular expressions inside url routing
 app.url_map.converters['regex'] = RegexConverter
 
+for module in LIST_MODULES:
+    app.register_blueprint(module)
+    
 if __name__ == '__main__':
-    for module in LIST_MODULES:
-        app.register_blueprint(module)
     app.run(host='0.0.0.0', port=PORT)
