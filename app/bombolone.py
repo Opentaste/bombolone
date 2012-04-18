@@ -10,6 +10,7 @@
 from __future__ import with_statement
 from flask import render_template
 from jinja2 import contextfunction 
+from werkzeug.routing import BaseConverter
 
 # Imports inside Bombolone
 from before import core_before_request, core_inject_user
@@ -29,7 +30,7 @@ from settings import settings
 from users import users
 LIST_MODULES = [home, login, admin, pages, users, rank, languages, 
                 hash_table, settings, content]
-                
+
             
 # ========================================================================	
 # Before zone
@@ -112,6 +113,14 @@ app.jinja_env.globals['unicode'] = contextfunction(unicode_thing)
 app.jinja_env.globals['type'] = contextfunction(type_thing) 
 app.jinja_env.globals['len'] = contextfunction(len_thing) 
 app.jinja_env.globals['enumerate'] = contextfunction(enumerate_thing) 
+
+class RegexConverter(BaseConverter):
+    def __init__(self, url_map, *items):
+        super(RegexConverter, self).__init__(url_map)
+        self.regex = items[0]
+
+# regular expressions inside url routing
+app.url_map.converters['regex'] = RegexConverter
 
 if __name__ == '__main__':
     for module in LIST_MODULES:

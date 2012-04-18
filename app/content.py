@@ -50,26 +50,20 @@ def one(one):
 	lista = [one]
 	return render_content_page(1, lista)
 
-#
-# BIG ISSUE
-# This patter override the /stati/css/.... files
-#
-#  
-#
-#@content.route('/<one>/<two>/')	
-#def two(one, two):
-#    """ """
-#    lista = [one, two]
-#    return render_content_page(2, lista)
-# 
-#@content.route('/<one>/<two>/<three>/')	
-#def three(one, two, three):
-#    """ """
-#    lista = [one, two, three]
-#    return render_content_page(3, lista)
-#    
-#@content.route('/<one>/<two>/<three>/<four>/')	
-#def four(one, two, three, four):
-#    """ """
-#    lista = [one, two, three, four]
-#    return render_content_page(4, lista)
+@content.route('/<regex("((?!static).*)"):one>/<two>/')	
+def two(one, two):
+    """ """
+    lista = [one, two]
+    return render_content_page(2, lista)
+ 
+@content.route('/<regex("((?!static).*)"):one>/<two>/<three>/')	
+def three(one, two, three):
+    """ """
+    lista = [one, two, three]
+    return render_content_page(3, lista)
+    
+@content.route('/<regex("((?!static).*)"):one>/<two>/<three>/<four>/')	
+def four(one, two, three, four):
+    """ """
+    lista = [one, two, three, four]
+    return render_content_page(4, lista)
