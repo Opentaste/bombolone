@@ -15,11 +15,7 @@ class GetValue(object):
         self.dictionary = dictionary
         
     def check_key(self, key):
-        try:
-            value = self.dictionary[key]
-            return value
-        except KeyError:
-            return ''  
+        return self.dictionary.get(key, '')
              
 class CheckValue(object):
     
@@ -105,3 +101,19 @@ class CheckValue(object):
         if regex.match(data):
             return True
         return False
+        
+    def integer(self, data):
+        """ """
+        try:
+            tmp = int(data)
+            return True
+        except:
+            return False
+    
+    def float(self, data):
+        """ """
+        try:
+            tmp = float(data)
+            return True
+        except:
+            return False
