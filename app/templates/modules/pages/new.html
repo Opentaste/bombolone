@@ -15,8 +15,8 @@
             placeholder="{{ g.pages.label_name }}" maxlength="20" />
         </div>
         <div class="control-group">
-            <input type="text" name="from" value="" class="span4" placeholder="{{ g.pages.label_from }}" maxlength="20" />
-            <input type="text" name="import" value="" class="span4" placeholder="{{ g.pages.label_import }}" maxlength="20" />
+            <input type="text" name="from" value="{{ page['from'] }}" class="span4" placeholder="{{ g.pages.label_from }}" maxlength="20" />
+            <input type="text" name="import" value="{{ page['import'] }}" class="span4" placeholder="{{ g.pages.label_import }}" maxlength="20" />
             <p class="help-block">{{ g.pages.help_import }}</p>
         </div>
         <div class="control-group form-horizontal">

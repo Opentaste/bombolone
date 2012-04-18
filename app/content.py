@@ -19,12 +19,12 @@ content = Blueprint('content', __name__)
 
 languages_object = Languages()
 	    
-def render_content_page(num, lista):
+def render_content_page(num, path):
     """ """
     languages = languages_object.get_languages(4)
     for code in languages:
         url = "url_%s.%s" % (num, code)
-        page = g.db.pages.find_one({ url : lista })
+        page = g.db.pages.find_one({ url : path })
         if not page is None:
             break
         
@@ -33,10 +33,19 @@ def render_content_page(num, lista):
     if page is None:
         abort(404)
     else:
-        # TO DO
-        # print page['from']
-        # print page['import']
         
+        # 1) dinamic page
+        # ===============================================================
+        page_from = page['from']
+        page_import = page['import']
+        if page_from and page_import:
+            name = __import__(page_from, globals(), locals(), [], -1)
+            method_to_call = getattr(name, page_import)
+            url = "/".join(path)
+            return method_to_call(page, url, code)
+        
+        # 2) static page
+        # ===============================================================
         title       = page['title'][code]
         description = page['description'][code]
         content     = page['content'][code]
@@ -44,26 +53,27 @@ def render_content_page(num, lista):
         # to use the contents stored in the database.
         return render_template('pages/'+page['file']+'.html', **locals())
 	    
-@content.route('/<one>/')
+	    
+@content.route('/<regex("((?!static).*)"):one>/')
 def one(one):
 	""" """
-	lista = [one]
-	return render_content_page(1, lista)
+	path = [one]
+	return render_content_page(1, path)
 
 @content.route('/<regex("((?!static).*)"):one>/<two>/')	
 def two(one, two):
     """ """
-    lista = [one, two]
-    return render_content_page(2, lista)
+    path = [one, two]
+    return render_content_page(2, path)
  
 @content.route('/<regex("((?!static).*)"):one>/<two>/<three>/')	
 def three(one, two, three):
     """ """
-    lista = [one, two, three]
-    return render_content_page(3, lista)
+    path = [one, two, three]
+    return render_content_page(3, path)
     
 @content.route('/<regex("((?!static).*)"):one>/<two>/<three>/<four>/')	
 def four(one, two, three, four):
     """ """
-    lista = [one, two, three, four]
-    return render_content_page(4, lista)
+    path = [one, two, three, four]
+    return render_content_page(4, path)

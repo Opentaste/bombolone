@@ -131,7 +131,7 @@ class Pages(object):
         """ """
         form                = request.form
         old_name            = self.page['name']
-        self.page['name']   = form['name']
+        self.page['name']   = form['name'].lower()
         self.page['from']   = form['from']
         self.page['import'] = form['import']
         self.page['file']   = form['file']
@@ -141,7 +141,7 @@ class Pages(object):
             self.message = g.pages_msg('error_1')
 
         # If the name is changed
-        elif old_name != self.page['name']:
+        elif old_name.lower() != self.page['name'].lower():
             try:
                 new_name = str.lower(str(self.page['name']))
                 regx = re.compile('^'+new_name+'$', re.IGNORECASE)
@@ -195,60 +195,58 @@ class Pages(object):
             key = 'url_%s' % i
             if key in self.page:
                 del(self.page[key])
-        
-        if not self.message is None:
-            return False
-            
+             
         # Get URL, Title and Description in any languages
         for code in self.languages:
             self.page['url'][code]         = form['url_'+code]
             self.page['title'][code]       = form['title_'+code]
             self.page['description'][code] = form['description_'+code]
             
-            error_in = ' ( ' + code + ' )'
+            if self.message is None:
+                error_in = ' ( ' + code + ' )'
             
-            # Check that the url field is not empty
-            if not len(self.page['url'][code]):
-                self.message = g.pages_msg('error_b_1') + error_in
+                # Check that the url field is not empty
+                if not len(self.page['url'][code]):
+                    self.message = g.pages_msg('error_b_1') + error_in
     
-            # If the url is changed
-            elif old_url[code] != self.page['url'][code]:
-                lista_url = self.page['url'][code].split('/')
-                # Convert list with strings all to lowercase
-                map(lambda x:x.lower(),lista_url) 
-                if self.page['url'][code][-1] == '/':
-                    lista_url.pop()
-                num_urls = len(lista_url)
+                # If the url is changed
+                elif old_url[code] != self.page['url'][code]:
+                    lista_url = self.page['url'][code].split('/')
+                    # Convert list with strings all to lowercase
+                    map(lambda x:x.lower(),lista_url) 
+                    if self.page['url'][code][-1] == '/':
+                        lista_url.pop()
+                    num_urls = len(lista_url)
                 
-                try:
-                    for code_two in self.languages:
-                        field = "url_%s.%s" % (num_urls, code_two)
-                        available_url = g.db.pages.find_one({ field : lista_url })
-                except:
-                    available_url = 'Error invalid expression'
+                    try:
+                        for code_two in self.languages:
+                            field = "url_%s.%s" % (num_urls, code_two)
+                            available_url = g.db.pages.find_one({ field : lista_url })
+                    except:
+                        available_url = 'Error invalid expression'
         
-                # Check that the url is a maximum of 200 characters
-                if not check.length(self.page['url'][code], 0, 200):
-                    self.message = g.pages_msg('error_b_2') + error_in
+                    # Check that the url is a maximum of 200 characters
+                    if not check.length(self.page['url'][code], 0, 200):
+                        self.message = g.pages_msg('error_b_2') + error_in
 
-                # Verify that the format of the url is correct
-                elif not check.url_two(self.page['url'][code]):
-                    self.message = g.pages_msg('error_b_3') + error_in
+                    # Verify that the format of the url is correct
+                    elif not check.url_two(self.page['url'][code]):
+                        self.message = g.pages_msg('error_b_3') + error_in
 
-                # Raises an error message if url is not available.
-                elif not available_url is None:
-                    self.message = g.pages_msg('error_b_4') + error_in
-            else:
-                lista_url = old_url[code].split('/')
-                if old_url[code][-1] == '/':
-                    lista_url.pop()
-                num_urls = len(lista_url)
+                    # Raises an error message if url is not available.
+                    elif not available_url is None:
+                        self.message = g.pages_msg('error_b_4') + error_in
+                else:
+                    lista_url = old_url[code].split('/')
+                    if old_url[code][-1] == '/':
+                        lista_url.pop()
+                    num_urls = len(lista_url)
                 
                     
-            kind_of_url = 'url_%s' % num_urls
-            if not kind_of_url in self.page:
-                self.page[kind_of_url] = {}
-            self.page[kind_of_url][code] = lista_url
+                kind_of_url = 'url_%s' % num_urls
+                if not kind_of_url in self.page:
+                    self.page[kind_of_url] = {}
+                self.page[kind_of_url][code] = lista_url
             
     def __request_label_and_alias(self):
         """ """

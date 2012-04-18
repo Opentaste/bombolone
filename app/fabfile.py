@@ -23,7 +23,7 @@ LIST_JS_FILES = [x[:-3] for x in os.listdir('static/js/') if x[-3:] == '.js']
 def local_backup():
     """ """
     print '\n####### Backup MongoDB App #######'
-    local('mongodump --db %s --out ../data/backup/mongodb/$(date +%F)' % DATABASE)
+    local('mongodump --db '+DATABASE+' --out ../data/backup/mongodb/$(date +%F)')
         
 def mongodb_restore(date_backup=None):
     """ """
