@@ -68,7 +68,7 @@ fieldset { border: 0; margin: 0; padding: 0; }
    Main layout style
 ============================================================================= */
 body {
-	background: #efefef url(./layout/bg/bg.jpg) repeat scroll center top;
+	background-color: #efefef;
 	color: #424242;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 13px;
@@ -557,15 +557,16 @@ header .pull-right {
     text-align: right;
 }
 .header-tabs li:hover {              
-    background-color: #d47e26;
+    background-color: #AF7223;
     background-image: -webkit-gradient(linear,left top,left bottom,from(#EC943C),to(#d47e26));
     background-image: -webkit-linear-gradient(top,#EC943C,#d47e26);
     background-image: -moz-linear-gradient(top,#EC943C,#d47e26);
     background-image: -ms-linear-gradient(top,#EC943C,#d47e26);
     background-image: -o-linear-gradient(top,#EC943C,#d47e26);
     background-image: linear-gradient(top,#EC943C,#d47e26);
-    border-color:#ce5ef5;    
+    border-color:#AF7223;   
 }
+
 header .pull-right li .dropdown-menu li {
     background: transparent;
     border:none;
@@ -1649,7 +1650,15 @@ a.thumbnail:hover {
 
 /* Footer ================================================================================== */
 footer {
-    height:140px;
+    border-top: 4px double #DEDEDE;
+    margin: 30px auto 0;
+    padding: 20px;
+    text-align: center;
+    width: 940px;
+}
+footer p {
+    opacity: 0.6;
+    filter: alpha(opacity=60);
 }
 
 
