@@ -23,7 +23,7 @@
                 <i class="icon-cog icon-white"></i>
             </a>
             <ul class="dropdown-menu open">
-                <li><a href="{{ url_for('settings.account') }}" title="" >Impostazioni</a></li>
+                <li><a href="{{ url_for('settings.account') }}" title="" >{{ g.admin.settings }}</a></li>
                 {% if g.my['rank'] < 25 %}
                 <li><a href="{{ url_for('admin.dashboard') }}" title="" >Admin</a></li>
                 {% endif %}

@@ -5,8 +5,8 @@
     
     <div class="span3">
         <ul class="nav nav-tabs nav-stacked">
-    		<li {% block nav_active_1 %}{% endblock %}>
-            	<a href="{{ url_for('admin.dashboard') }}" title="" >Dashboard</a>
+            <li {% block nav_active_1 %}{% endblock %}>
+                <a href="{{ url_for('admin.dashboard') }}" title="" >Dashboard</a>
             </li>
             {% if g.my['rank'] < 25 %}
             <li {% block nav_active_6 %}{% endblock %}>
@@ -33,16 +33,16 @@
         <div class="content_right">
             {% block content_admin %}
             {% endblock %}
-    	</div><!-- .content_right -->
-    	{% endblock %}
+        </div><!-- .content_right -->
+        {% endblock %}
     </div>
 </section>
 {% endblock %}
 
 {% block js_admin_files %}
-<script src="{{ url_for('static', filename='js/%s.js' % js_version['admin']) }}"></script>
+<script src="{{ '/static/js/%s' % js_version['admin'] }}"></script>
 
 {% block js_module_files %}
 {% endblock %}
-    
+
 {% endblock %}

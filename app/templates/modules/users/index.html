@@ -16,7 +16,7 @@
     			<th style="width:32%;">Username</th>
     			<th style="width:20%;">Rank</th>
     			<th style="width:28%;">_id</th>
-    			<th style="width:15%;">{{ g.users.remove }}</th>
+    			<th style="width:15%;"></th>
     		</tr>
     	</thead>
     	<tfoot>
@@ -57,14 +57,10 @@
     </table>
 {% endblock %}
 
-{% block js_module_files %}
-<script src="{{ url_for('static', filename='js/%s.js' % js_version['users']) }}"></script>
-{% endblock %}
-
 {% block js_code %}
-<script type="text/javascript">
+<script>
     t.get(d).ready(function() {
-        b.users.init_remove();
+        b.admin.init_remove('users');
     })
 </script>
 {% endblock %}

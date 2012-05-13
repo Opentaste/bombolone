@@ -9,15 +9,17 @@
     
     <span class="pages_remove_label button button-red span2 button-little" id="{{ i }}">- Remove label</span>
     
-    <input type="text" name="label_{{ code }}_{{ i }}" value="{{ label['value'] }}"
-    style="display:inline" class="span9 label_{{ i }}_1 pages_tool" />
+    <input type="text" name="label_{{ code }}_{{ i }}_1" value="{{ label['value'] }}"
+    {% if page.label[i] == 1 %}style="display:inline"{% endif %} class="span9 label_{{ i }}_1 pages_tool"  />
     
-    <textarea rows="4" cols="50" name="label_{{ code }}_{{ i }}" 
-    class="span9 label_{{ i }}_2 pages_tool" >{{ label['value'] }}</textarea>
+    <textarea rows="4" cols="50" name="label_{{ code }}_{{ i }}_2" 
+    {% if page.label[i] == 2 %}style="display:inline"{% endif %} class="span9 label_{{ i }}_2 pages_tool" >{{ label['value'] }}</textarea>
     
     <img src="">
     <input type="hidden" name="label_{{ code }}_{{ i }}_hidden" value="{{ label['value'] }}">
-    <input type="file" name="file_upload_{{ code }}_{{ i }}" class="span9 label_{{ i }}_3 pages_tool"/>
+    <input type="file" name="file_upload_{{ code }}_{{ i }}_3" 
+    {% if page.label[i] == 3 %}style="display:inline"{% endif %} class="span9 label_{{ i }}_3 pages_tool"/>
+    
     
     <select class="label_{{ i }}_0" name="type_{{ i }}">
         <option value="1" {% if page.label[i] == 1 %}selected="selected"{% endif %}>text</option>

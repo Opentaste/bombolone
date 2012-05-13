@@ -82,20 +82,26 @@
 {% endblock %}
 
 {% block js_module_files %}
-<script src="{{ url_for('static', filename='js/%s.js' % js_version['pages']) }}"></script>
+<script src="{{ '/static/js/%s' % js_version['pages'] }}"></script>
 {% endblock %}
 
 {% block js_code %}
 <script type="text/javascript">
-    b.pages.list_languages = [{% for code in language_name %} '{{ code[0] }}', {% endfor %}];
     t.get(d).ready(function() {
-		b.pages.init_language();
-		b.pages.init_change_label();
-		b.pages.init_add_label();
-		b.pages.init_remove_label();
-		b.pages.init_change_name_label();
+        
+        // List with the name of any code language
+        b.pages.code_languages = [{% for code in language_name %} '{{ code[0] }}', {% endfor %}]
+        // Dictionary with the name of any code language
+        b.pages.name_languages = { {% for code, name in language_name %} '{{ code }}' : '{{ name }}', {% endfor %} 'last' : '' }
+        
+        b.pages.number_of_label = {{ len_of_label }};
+        
+        b.pages.init_language();
+        b.pages.init_change_label();
+        b.pages.init_add_label();
+        b.pages.init_remove_label();
+        b.pages.init_change_name_label();
     })
 </script>
 {% endblock %}
 
-      

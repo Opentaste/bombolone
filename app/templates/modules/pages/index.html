@@ -11,53 +11,53 @@
     <br />
     <a href="{{ admin }}/pages/new/" title="" class="button button-blu">{{ g.pages.add_new_page }}</a>
     <table class="table table-bordered table-striped">
-    	<thead>
-    		<tr>
-    		    <th style="width:25%">{{ g.admin.name_val }}</th>
-    			<th style="width:60%">Url</th>
-    			<th style="width:15%">{{ g.admin.remove }}</th>
-    		</tr>
-    	</thead>
-    	<tfoot>
-    		<tr>
-    			<td colspan="4"></td>
-    		</tr>
-    	</tfoot>
-    	<tbody>
-    		{% for page in pages_list %}
-    		<tr class="item_{{ str(page['_id']) }}">
-    			<td><a href="{{ admin }}/pages/{{ str(page['_id']) }}/">{{ page['name'] }}</a></td>
-    			<td>{{ lan }} : {{ page['url'][lan] }}</td>
-    			<td><span class="remove_item item_{{ str(page['_id']) }}">{{ g.admin.remove_item }}</span></td>
-    		</tr>
-    		{% endfor %}
-    	</tbody>
+        <thead>
+            <tr>
+                <th style="width:25%">{{ g.admin.name_val }}</th>
+                <th style="width:60%">Url</th>
+                <th style="width:15%">{{ g.admin.remove }}</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for page in pages_list %}
+            <tr class="item_{{ str(page['_id']) }}">
+                <td><a href="{{ admin }}/pages/{{ str(page['_id']) }}/">{{ page['name'] }}</a></td>
+                <td>{{ lan }} : {{ page['url'][lan] }}</td>
+                <td><span class="remove_item item_{{ str(page['_id']) }}">{{ g.admin.remove_item }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
     {% else %}
     <table class="table table-bordered table-striped">
-    	<thead>
-    		<tr>	
-    			<th style="width:100%;">{{ g.admin.name_val }}</th>
-    		</tr>
-    	</thead>
-    	<tfoot>
-    		<tr>
-    			<td colspan="1"></td>
-    		</tr>
-    	</tfoot>
-    	<tbody>
-    		{% for page in pages_list %}
-    		<tr>
-    			<td><a href="{{ admin }}/pages/{{ str(page['_id']) }}/">{{ page['name'] }}</a></td>
-    		</tr>
-    		{% endfor %}
-    	</tbody>
+        <thead>
+            <tr>
+                <th style="width:100%;">{{ g.admin.name_val }}</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="1"></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for page in pages_list %}
+            <tr>
+                <td><a href="{{ admin }}/pages/{{ str(page['_id']) }}/">{{ page['name'] }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
     {% endif %}
 {% endblock %}
 
 {% block js_module_files %}
-<script src="{{ url_for('static', filename='js/%s.js' % js_version['pages']) }}"></script>
+<script src="{{ '/static/js/%s' % js_version['pages'] }}"></script>
 {% endblock %}
 
 {% block js_code %}

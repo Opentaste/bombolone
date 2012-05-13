@@ -67,19 +67,22 @@
 {% endblock %}
 
 {% block js_module_files %}
-<script src="{{ url_for('static', filename='js/%s.js' % js_version['hash_table']) }}"></script>
+<script src="{{ '/static/js/%s' % js_version['hash_table'] }}"></script>
 {% endblock %}
 
 {% block js_code %}
 <script type="text/javascript">
-    b.hash_table.list_languages = [{% for code in language_name %} '{{ code[0] }}', {% endfor %}]
+    // List with the name of any code language
+    b.hash_table.code_languages = [{% for code in language_name %} '{{ code[0] }}', {% endfor %}]
+    // Dictionary with the name of any code language
+    b.hash_table.name_languages = { {% for code, name in language_name %} '{{ code }}' : '{{ name }}', {% endfor %} 'last' : '' }
+    
     t.get(d).ready(function() {
         b.hash_table.init();
         b.hash_table.init_num_field();
         b.hash_table.init_add_label();
         b.hash_table.init_remove_label();
         b.hash_table.init_change_name_label();
-
     })
 </script>
 {% endblock %}

@@ -18,10 +18,10 @@ home = Blueprint('home', __name__)
 
 @home.route('/')
 def index():
-	""" Manages the contents of the home page """
-		
-	# If exist my attribute means that user is login
-	if hasattr(g, "my"):
-	    return render_template('content/home.html', **locals())
-	else:
-	    return render_template('intro/home.html', **locals())
+    """ Manages the contents of the home page """
+    
+    # If exist my attribute means that user is login
+    if hasattr(g, "my"):
+        return render_template('content/home.html', **locals())
+    else:
+        return render_template('intro/home.html', **locals())

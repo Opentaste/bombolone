@@ -1,0 +1,13 @@
+<div class="control-group">
+    <label>{{ g.users.picture }}</label>
+    <div class="controls">
+        {% if user.image %}
+    	    <img src="{{ path }}/static/avatars/{{ user.username.lower() }}/{{ user.image[2] }}" 
+    	    alt="{{ user.username }}" class="thumbnail" />
+    	{% else %}
+    	    <img src="{{ url_for('static', filename='layout/avatar/default.jpg') }}" 
+    	    alt="{{ user.username }}" class="thumbnail" />
+    	{% endif %}
+    	<input type="file" name="file" />
+    </div>
+</div>
