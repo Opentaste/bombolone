@@ -20,7 +20,7 @@ MODULE_DIR = 'modules/settings'
 settings = Blueprint('settings', __name__)
 
 languages_object = Languages()
- 
+
 @settings.route('/settings/account/', methods=['POST', 'GET'])
 @check_authentication
 @get_hash_settings
@@ -29,22 +29,21 @@ def account():
     """  """
     language_name = languages_object.get_languages(3)
     g.list_ranks = g.db.ranks.find()
-
-    # Initial default user
+    
     user_object = User(g.my['_id'])
     user = user_object.user
-
+    
     if request.method == 'POST':
-        user_object.update_account()	
-
+        user_object.update_account()
+    
     # Come back a message when there is a message	
     if not user_object.message is None:
         message = user_object.message
         status = user_object.status
-
-    return render_template('%s/account.html' % MODULE_DIR, **locals() )
- 
     
+    return render_template('{}/account.html'.format(MODULE_DIR), **locals() )
+
+
 @settings.route('/settings/profile/', methods=['POST', 'GET'])
 @check_authentication
 @get_hash_settings
@@ -53,22 +52,21 @@ def profile():
     """  """
     language_name = languages_object.get_languages(3)
     g.list_ranks = g.db.ranks.find()
-
-    # Initial default user
+    
     user_object = User(g.my['_id'])
     user = user_object.user
-
+    
     if request.method == 'POST':
-        user_object.update_profile()	
-
+        user_object.update_profile()
+    
     # Come back a message when there is a message	
     if not user_object.message is None:
         message = user_object.message
         status = user_object.status
+    
+    return render_template('{}/profile.html'.format(MODULE_DIR), **locals() )
 
-    return render_template('%s/profile.html' % MODULE_DIR, **locals() )
-    
-    
+
 @settings.route('/settings/password/', methods=['POST', 'GET'])
 @check_authentication
 @get_hash_settings
@@ -77,18 +75,16 @@ def password():
     """  """
     language_name = languages_object.get_languages(3)
     g.list_ranks = g.db.ranks.find()
-
-    # Initial default user
+    
     user_object = User(g.my['_id'])
     user = user_object.user
-
+    
     if request.method == 'POST':
-        user_object.update_password()	
-
+        user_object.update_password()
+    
     # Come back a message when there is a message	
     if not user_object.message is None:
         message = user_object.message
         status = user_object.status
-
-    return render_template('%s/password.html' % MODULE_DIR, **locals() )
- 
+    
+    return render_template('{}/password.html'.format(MODULE_DIR), **locals() )
