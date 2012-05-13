@@ -1,22 +1,19 @@
 <!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="{{ g.lan }}"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="{{ g.lan }}"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="{{ g.lan }}"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="{{ lan }}"> <!--<![endif]-->
+<html lang="{{ lan }}">
 <head>
-	<meta charset="utf-8">
-	
-	{% block head %}
-	<title>Bombolone | {% block title %} {% endblock %}</title>
-	<meta name="description" content="{% block description %} {% endblock %}">
-	{% endblock %}
-	
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-	{% block css %}{% endblock %}
-	
-    <script src="{{ url_for('static', filename='js/libs/modernizr-1.7.min.js') }}"></script>
+    <meta charset="utf-8">
+    
+    {% block head %}
+    <title>Bombolone | {% block title %} {% endblock %}</title>
+    <meta name="description" content="{% block description %} {% endblock %}">
+    {% endblock %}
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    <link rel="stylesheet" href="/static/css/style.css?4">
+    {% block css %}{% endblock %}
+    
+    <script src="/static/js/libs/modernizr-1.7.min.js"></script>
 </head>
 <body>
     
@@ -25,21 +22,25 @@
     </header>
     
     <div class="content">
-	    {% block content %}{% endblock %}
-	</div>
-	
-	<footer>
-	    {% block footer %}{% endblock %}
+        {% block content %}{% endblock %}
+    </div>
+    
+    <footer>
+        {% block footer %}{% endblock %}
     </footer>
     
+    {% if my %}
+    <!-- In admin page load Tiramisu library -->
+    <script src="{{ '/static/js/%s' % js_version['tiramisu'] }}"></script>
+    {% endif %}
+    
     <!-- JavaScript at the bottom for fast page loading -->
-	<script src="{{ url_for('static', filename='js/libs/tiramisu.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/%s.js' % js_version['app']) }}"></script>
-	{% block js_files %}{% endblock %}
-	{% block js_code %}{% endblock %}
-	
-	<!-- Asynchronous Google Analytics snippet. -->
-	<script>
-	</script>
+    <script src="{{ '/static/js/%s' % js_version['app'] }}"></script>
+    {% block js_files %}{% endblock %}
+    {% block js_code %}{% endblock %}
+    
+    <!-- Asynchronous Google Analytics snippet. -->
+    <script>
+    </script>
 </body>
 </html>

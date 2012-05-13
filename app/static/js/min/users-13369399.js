@@ -45,15 +45,5 @@ b.users = {
                 'display': 'inline'
             });
         });
-    },
-
-    init_remove: function() {
-
-        t.get('.remove_item').on('click', function(e) {
-            var chosen = e.currentTarget.value;
-            var item_id = e.currentTarget.className.split('_')[2];
-            b.admin.check_remove( item_id, 'users' );
-        });
-
     }
 }

@@ -45,16 +45,15 @@ def beautify_js():
         local('python jsbeautifier.py %s.js > %s-beautified.js' % (path, path))
         local('mv %s-beautified.js %s.js' % (path, path))
         local('rm -f %s-beautified.js' % path)
-        
-def minify_js(name_js_file='',minify='yes'):
-    """ """
+
+def minify(name_js_file='',minify='yes'):
     print '\n####### Minify and change version js files #######'
+    import time
     version = int(time.time()*0.01)
     
     # read app.json
-    f = open('app.json', 'r')
-    app_json = json.load(f)
-    f.close()
+    with open('app.json', 'r') as f:
+        app_json = json.load(f)
     
     if len(name_js_file) == 0:
         local('rm -fr static/js/min/*')
@@ -77,18 +76,17 @@ def minify_js(name_js_file='',minify='yes'):
                 local('mv static/js/min/%s-%s-min.js static/js/min/%s-%s.js' % (name_js_file, version, name_js_file, version))
         else:
             print 'Name js file doesn\'t exist.'
-        
+    
     # write app.json
-    outfile = open("app.json", "w")
-    outfile.write(json.dumps(app_json))
-    outfile.close()
+    with open("app.json", "w") as outfile:
+        outfile.write(json.dumps(app_json))
 
 
 # Tests tools =====================================================================        
 def tests():
     """ """
     print '\n####### Copy Database in Test Dev #######'
-    local('mongo --eval "db = db.getMongo().getDB(\'%s\'); db.copyDatabase(\'%s\', \'app_test\')"' % (DATABASE, DATABASE))
+    local('mongo --eval "db = db.getMongo().getDB(\'{0}\'); db.copyDatabase(\'{0}\', \'app_test\')"'.format(DATABASE))
     local('mongo --eval "db = db.getMongo().getDB(\'app_test\');"')
     print '\n####### Run Tests #######'
     try:

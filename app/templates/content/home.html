@@ -1,6 +1,6 @@
 {% extends "index.html" %}
 
-{% block title %} {{ g.my.username }} {% endblock %}
+{% block title %} {{ my.username }} {% endblock %}
 {% block description %} Desription {% endblock %}
 
 {% block header %}
@@ -40,7 +40,7 @@
 {% endblock %}
 
 {% block js_files %}
-<script src="{{ url_for('static', filename='js/%s.js' % js_version['home']) }}"></script>
+<script src="{{ '/static/js/%s' % js_version['home'] }}"></script>
 
 {% block js_admin_files %}
 {% endblock %}

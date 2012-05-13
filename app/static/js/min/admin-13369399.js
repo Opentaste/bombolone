@@ -1,5 +1,14 @@
 var b = b || {};
 b.admin = {
+    init_remove: function(module) {
+
+        t.get('.remove_item').on('click', function(e) {
+            var chosen = e.currentTarget.value;
+            var item_id = e.currentTarget.className.split('_')[2];
+            b.admin.check_remove(item_id, module);
+        });
+
+    },
     check_remove: function(item_id, module) {
         var div = t.make('div');
         div.attr('class', 'check_remove');
@@ -26,5 +35,5 @@ b.admin = {
             });
         }
         b.admin.check_remove_hidden();
-    } 
+    }
 }

@@ -1,6 +1,6 @@
 # Bombolone
 
-### version 0.1.2 ###
+### version 0.1.3 ###
 
 Bombolone is a tasty Content Management System for Python based on Flask, MongoDB, 
 Tiramisu and Designed based on html5 boilerplate and Twitter bootstrap.
@@ -48,5 +48,4 @@ The logo was designed by Sam Gregory.
 
 ## License
 
-* 
-*
+* BSD

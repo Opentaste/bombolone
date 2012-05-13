@@ -1,7 +1,13 @@
 var b = b || {};
 b.hash_table = {
     init: function() {
-        t.get('.button-lng').on('click', function() {
+        
+        // Main element to change language
+        var button_languages = t.get('.button-lng');
+        var list_languages_in_menu = t.get('.dropdown-lng .dropdown-menu li');
+                    
+        // Open languages menu
+        button_languages.on('click', function() {
             var attr = t.get('.dropdown-lng').attr('class');
             if (attr == 'span2 dropdown-lng') {
                 t.get('.dropdown-lng').attr('class', 'open', true);
@@ -10,13 +16,14 @@ b.hash_table = {
             }
         });
 
-        t.get('ul.dropdown-menu li').on('click', function(e) {
-
+        // Change language
+        list_languages_in_menu.on('click', function(e) {
+            
             var li_press = e.currentTarget;
             var code = li_press.className.split('_')[0];
 
-            for (var i = b.hash_table.list_languages.length; i--;) {
-                var lan = b.hash_table.list_languages[i];
+            for (var i = b.hash_table.code_languages.length; i--;) {
+                var lan = b.hash_table.code_languages[i];
                 t.get('.section_' + lan).css({
                     'display': 'none'
                 });
@@ -28,7 +35,7 @@ b.hash_table = {
             });
             t.get('.dropdown-lng').attr('class', 'span2 dropdown-lng');
             t.get('li.' + code + '_lan').attr('class', code + '_lan active');
-
+            button_languages.html(b.hash_table.name_languages[code] + '<span class="caret"></span>');
         });
 
     },
@@ -47,14 +54,15 @@ b.hash_table = {
         this.number_document = parseInt(t.get('.name_key').length / 2);
 
     },
-    list_languages: [],
+    code_languages: [],
+    name_languages: {},
     init_add_label: function() {
 
         t.get('.hash_add_label').on('click', function(e) {
             b.hash_table.number_document += 1;
             var num = b.hash_table.number_document
-            for (var i = b.hash_table.list_languages.length; i--;) {
-                var lan = b.hash_table.list_languages[i];
+            for (var i = b.hash_table.code_languages.length; i--;) {
+                var lan = b.hash_table.code_languages[i];
                 var label = '<div class="control-group section_num_' + num + ' row-fluid">';
                 label += '<input type="text" name="label_name_' + lan + '_' + num + '" value="" ';
                 label += 'class="span3 name_key label_name_' + lan + '_' + num + '" maxlength="30" />';
@@ -88,8 +96,8 @@ b.hash_table = {
             var label_value = label_press.value
             var label_num = label_press.className.split('_')[4]
 
-            for (var i = b.hash_table.list_languages.length; i--;) {
-                var lan = b.hash_table.list_languages[i];
+            for (var i = b.hash_table.code_languages.length; i--;) {
+                var lan = b.hash_table.code_languages[i];
                 t.get('.label_name_' + lan + '_' + label_num).value(label_value);
             }
         });
