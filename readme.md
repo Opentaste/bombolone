@@ -31,18 +31,13 @@ Registered users are:
 * 
 * 
 
-## Project information
-
-* 
-*
-
 ## Who we are
 
 Lovers of the python and the web!
 
 The project was created by Leonardo Zizzamia and Gianluca Bargelli (or better known as the Tiramisu boys). 
 
-First Contributors: Giacomo Marinangeli, Paolo Bernardi.
+Contributors: Giacomo Marinangeli, Paolo Bernardi, Rafael Lucas.
 
 The logo was designed by Sam Gregory.
 
