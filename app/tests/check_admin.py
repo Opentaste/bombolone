@@ -133,7 +133,7 @@ class CheckAdminPages(unittest.TestCase):
         rv_5  = self.app.get('/admin/hash_table/')
         rv_6  = self.app.get('/admin/hash_table/new/')
         assert not 'Error 500' in rv_0.data
-        assert 'Software Engineer' in rv_1.data
+        assert 'Admin' in rv_1.data
         assert not 'Error 500' in rv_1.data
         assert not 'Error 500' in rv_2.data
         assert not 'Error 500' in rv_3.data
