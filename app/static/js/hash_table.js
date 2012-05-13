@@ -44,7 +44,7 @@ b.hash_table = {
     number_document: 0,
     init_num_field: function() {
 
-        this.number_document = t.get('.name_key').length / 2;
+        this.number_document = parseInt(t.get('.name_key').length / 2);
 
     },
     list_languages: [],

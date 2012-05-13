@@ -18,6 +18,13 @@ def get_hash_map(module):
     module_map = g.db.hash_table.find_one({ 'name' : module })
     return { x : y[g.lan] for x, y in module_map['value'].iteritems() }
 
+def get_hash_admin():
+    """  """
+    dictionary = get_hash_map('admin')
+    get_value = GetValue(dictionary)
+    g.admin_msg = get_value.check_key
+    g.admin = dictionary
+
 ### Authentication Zone ###
 def check_authentication(function_to_decorate):
     """ Requires standard login credentials """
@@ -33,20 +40,21 @@ def check_chief(function_to_decorate):
     """ Requires chief login credentials """
     @wraps(function_to_decorate)
     def decorated_function(*args, **kwargs):
-        if g.my['rank'] > 15:
-            abort(401)
-        return function_to_decorate(*args, **kwargs)
-    return decorated_function   
+    	if g.my['rank'] > 15:
+    		abort(401)
+    	return function_to_decorate(*args, **kwargs)
+    return decorated_function
 
 
 def check_admin(function_to_decorate):
-    """ Requires admin login credentials """
+    """ Requires chief login credentials """
     @wraps(function_to_decorate)
     def decorated_function(*args, **kwargs):
         if g.my['rank'] > 25:
             abort(401)
         return function_to_decorate(*args, **kwargs)
-    return decorated_function
+    return decorated_function   
+
 
 ### Zone ###
 def get_hash_languages(function_to_decorate):
@@ -119,20 +127,8 @@ def get_hash_users(function_to_decorate):
         g.users = dictionary
         return function_to_decorate(*args, **kwargs)
     return decorated_function
-    
-    
-def get_hash_pages(function_to_decorate):
-    """  """
-    @wraps(function_to_decorate)
-    def decorated_function(*args, **kwargs):
-        dictionary = get_hash_map('pages')
-        get_value = GetValue(dictionary)
-        g.pages_msg = get_value.check_key
-        g.pages = dictionary
-        return function_to_decorate(*args, **kwargs)
-    return decorated_function
-    
-    
+
+
 def get_hash_settings(function_to_decorate):
     """  """
     @wraps(function_to_decorate)

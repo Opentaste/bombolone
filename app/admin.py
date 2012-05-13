@@ -21,4 +21,4 @@ admin = Blueprint('admin', __name__)
 def dashboard():
     """ The dashboard contains a collection of information, 
     such as statistics and other useful stuff. """
-    return render_template('%s/dashboard.html' % MODULE_DIR)
+    return render_template('{}/dashboard.html'.format(MODULE_DIR))

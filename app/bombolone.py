@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-    flight_pooling.py
+    bombolone.py
     ~~~~~~
     
     :copyright: (c) 2012 by Leonardo Zizzamia
