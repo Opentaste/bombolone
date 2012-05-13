@@ -15,14 +15,14 @@ from decorators import check_authentication, check_admin, get_hash_rank
 MODULE_DIR = 'modules/rank'
 rank = Blueprint('rank', __name__)
 
-  
+
 @rank.route('/admin/rank/')
 @check_authentication 
 @check_admin
 @get_hash_rank
 def overview():
     """ Overview """    
-    list_ranks = list(g.db.ranks.find())
+    list_ranks = list(g.db.ranks.find().sort('rank'))
     number_user = {}
     
     # TO DO -> MAP REDUCE HERE
@@ -30,4 +30,4 @@ def overview():
         count = g.db.users.find({ 'rank' : x['rank'] }).count()
         number_user[x['rank']] = count
     
-    return render_template('%s/index.html' % MODULE_DIR, **locals())
+    return render_template('{}/index.html'.format(MODULE_DIR), **locals())
