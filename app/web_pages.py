@@ -27,5 +27,5 @@ def contact(page, url, code):
         send_email(title, text, text_email, email)
         g.message = 'email sent'
         g.status = 'mes-green'
-		
+    
     return render_template('pages/'+page['file']+'.html', **locals())
