@@ -2,8 +2,11 @@
 
 ### Bombolone version 0.1.6 ###
 
-Bombolone is a tasty Content Management System for Python based on Flask, MongoDB, 
-Tiramisu and Designed based on html5 boilerplate and Twitter bootstrap.
+Bombolone is a tasty Content Management System for Python based on [Flask](http://flask.pocoo.org/), [MongoDB](http://www.mongodb.org/), 
+[Tiramisu](http://www.tiramisujs.com/) and [Twitter Bootstrap](http://twitter.github.com/bootstrap/). 
+It's designed to be a simple, flexible toolset for projects of any size.
+
+
 
 ## Quick start
 
@@ -29,14 +32,14 @@ Registered users are:
 ## Overview
 
 Sometimes you simply don’t need to use all the features of an entire CMS. 
-Bombolone lets you have an good core, with five modules are essential 
+Bombolone lets you have a good core, with five modules are essential 
 for almost all web applications.
 
 You can control them from the administration panel, and each has 
 different tools to edit, create or delete.
-It 'important to note that beginning the application has two types 
+It's important to note that beginning the application has two types 
 of users: administrator and user classic. Administrator can do everything, 
-but you have only a limited set of tools to edit contents of other little things.
+but the User have only a limited set of tools to edit contents of other little things.
 
 The core modules are as follows:
 * Users
@@ -53,11 +56,7 @@ The User module allows administrators to create, modify and delete users.
 The User module supports user rank, which can be set up permissions 
 allowing each rank to do only what the administrator permits.
  
-By default there are two users:
-  username |  rank  |
--------------------------------
-  Admin    |   10   |
-  User     |   20   |
+By default there are two users: Admin ( rank 10 ) and User ( rank  20 ).
 
 ### Rank ###
 For now rank module only allows to see what rank they are available.
@@ -69,17 +68,19 @@ Allows you to quickly create dynamic and static pages.
 From here you decide which languages you want to use the site.
 
 ### HashTable ###
-With the HashTable module you can create different  hashmap be used inside modules or the site.
+With the HashTable module you can create different hashmap be used inside modules or the site.
+
 
 ## Who we are
 
 Lovers of the python and the web!
 
-The project was created by Leonardo Zizzamia and Gianluca Bargelli (or better known as the Tiramisu boys). 
+The project was created by [Leonardo Zizzamia](http://zizzamia.com/). 
 
-Contributors: Giacomo Marinangeli, Paolo Bernardi, Rafael Lucas.
+Contributors: Gianluca Bargelli, Giacomo Marinangeli, Paolo Bernardi, Rafael Lucas.
 
 The logo was designed by Sam Gregory.
+
 
 ## License
 
