@@ -31,15 +31,16 @@ Registered users are:
 
 ## Overview
 
-Sometimes you simply don’t need to use all the features of an entire CMS. 
+Sometimes you simply don’t need to use all the features of a CMS. 
 Bombolone lets you have a good core, with five modules are essential 
 for almost all web applications.
 
 You can control them from the administration panel, and each has 
 different tools to edit, create or delete.
 It's important to note that beginning the application has two types 
-of users: administrator and user classic. Administrator can do everything, 
-but the User have only a limited set of tools to edit contents of other little things.
+of users: administrators and users. Administrator can do everything. 
+Users can only edit content and other little things,
+but configurable to allow multiple levels of access depending on rank.
 
 The core modules are as follows:
 * Users
@@ -52,23 +53,29 @@ The core modules are as follows:
 ## Core Modules
 
 ### Users ###
-The User module allows administrators to create, modify and delete users.
-The User module supports user rank, which can be set up permissions 
-allowing each rank to do only what the administrator permits.
- 
-By default there are two users: Admin ( rank 10 ) and User ( rank  20 ).
+Allows user administration: 
+* Administrators : can create, modify or delete users.
+* Users : can only read the account list by default.
 
 ### Rank ###
-For now rank module only allows to see what rank they are available.
+The rank module allows you to see what ranks are available.
 
 ### Pages ###
 Allows you to quickly create dynamic and static pages.
+* Administrators : can create, edit, modify or delete pages.
+* Users : can edit any content pages by default.
 
 ### Languages ###
-From here you decide which languages you want to use the site.
+From here you can decide which languages you want the site to use.
 
 ### HashTable ###
 With the HashTable module you can create different hashmap be used inside modules or the site.
+* Administrators : can create, edit, modify or delete hash map.
+* Users : can edit any content of hash map by default.
+
+
+## Tests
+In Bombolone there is an environment for testing any module or webpage.
 
 
 ## Who we are
@@ -77,7 +84,7 @@ Lovers of the python and the web!
 
 The project was created by [Leonardo Zizzamia](http://zizzamia.com/). 
 
-Contributors: Gianluca Bargelli, Giacomo Marinangeli, Paolo Bernardi, Rafael Lucas.
+Contributors: Gianluca Bargelli, Giacomo Marinangeli, Paolo Bernardi, Rafael Lucas, Michael Cable.
 
 The logo was designed by Sam Gregory.
 
