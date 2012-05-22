@@ -20,7 +20,7 @@ class CheckValue(object):
     
     def __init__(self):
         pass
-        
+    
     def length(self, data, minimum=-1, maximum=-1):
         """
         Validates the length of a string
@@ -63,7 +63,7 @@ class CheckValue(object):
         
         :param full_name: The string  
         """
-        regex = re.compile(r'^[a-z\' ]+$', re.I)
+        regex = re.compile(r'^[^\W0-9_]+([ \-\'][^\W0-9_]+)*?$', re.U)
         if regex.match(data):
             return True
         return False
@@ -96,7 +96,7 @@ class CheckValue(object):
         if regex.match(data):
             return True
         return False
-        
+    
     def url_two(self, data):
         """
         Validates the url 
@@ -107,7 +107,7 @@ class CheckValue(object):
         if regex.match(data):
             return True
         return False
-        
+    
     def integer(self, data):
         """ """
         try:
