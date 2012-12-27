@@ -18,11 +18,11 @@
         	    {{ g.my.username }}
             </a>
         </li>
-        <li class="menu_account dropdown">
+        <li class="menu_account dropdown" ng-click="dropdown()" ng-class="{open: dropdown_status=='open'}">
             <a>
                 <i class="icon-cog icon-white"></i>
             </a>
-            <ul class="dropdown-menu open">
+            <ul class="dropdown-menu">
                 <li><a href="{{ url_for('settings.account') }}" title="" >{{ g.admin.settings }}</a></li>
                 {% if g.my['rank'] < 25 %}
                 <li><a href="{{ url_for('admin.dashboard') }}" title="" >Admin</a></li>
@@ -40,7 +40,6 @@
 {% endblock %}
 
 {% block js_files %}
-<script src="{{ '/static/js/%s' % js_version['home'] }}"></script>
 
 {% block js_admin_files %}
 {% endblock %}
@@ -48,7 +47,4 @@
 {% block js_content_files %}
 {% endblock %}
 
-{% endblock %}
-
-{% block js_code %}
 {% endblock %}
