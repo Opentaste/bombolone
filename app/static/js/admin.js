@@ -1,39 +1,34 @@
-var b = b || {};
-b.admin = {
-    init_remove: function(module) {
+function AdminCtrl($scope, $resource, $rootScope) {
 
-        t.get('.remove_item').on('click', function(e) {
-            var chosen = e.currentTarget.value;
-            var item_id = e.currentTarget.className.split('_')[2];
-            b.admin.check_remove(item_id, module);
-        });
+  $scope.tab_menu = {
+    "selected": "account"
+  }
 
-    },
-    check_remove: function(item_id, module) {
-        var div = t.make('div');
-        div.attr('class', 'check_remove');
-        var html = '<span>Are you sure you want to remove this item?</span>';
-        html += '<span style="width:49%;display:inline-block;cursor:pointer;" ';
-        html += 'onclick="b.admin.remove_item(true,\'' + item_id + '\', \'' + module + '\')">Yes</span>';
-        html += '<span style="width:49%;text-align:right;display:inline-block;cursor:pointer;" ';
-        html += 'onclick="b.admin.remove_item(false)">No</span>';
-        div.html(html);
-        t.get('.content').after(div);
-    },
-    check_remove_hidden: function() {
-        t.get('.check_remove').destroy();
-    },
-    remove_item: function(check, item_id, module) {
-        if (check) {
-            t.ajax({
-                'url': '/admin/' + module + '/remove/' + item_id + '/',
-                'success': function(data) {
-                    if (data == 'ok') {
-                        t.get('.item_' + item_id).destroy();
-                    }
-                }
-            });
+  $scope.select_tab = function(tab_selected){
+    $scope.tab_menu.selected = tab_selected;
+  }
+
+  $scope.remove = function(id_item) {
+    $scope.id_item = id_item;
+    $('.check_remove').removeClass('hidden');
+  }
+
+  $scope.remove_item = function(check) {
+    if (check) {
+      $.ajax({
+        'url': '/admin/' + $scope.module + '/remove/' + $scope.id_item + '/',
+        'success': function(data) {
+            if (data == 'ok') {
+              $('[data-item=' + $scope.id_item + ']').remove();
+            }
         }
-        b.admin.check_remove_hidden();
+      });
     }
+    check_remove_hidden();
+  }
+
+  var check_remove_hidden = function() {
+    $('.check_remove').addClass('hidden');
+  }
 }
+AdminCtrl.$inject = ['$scope', '$resource', '$rootScope'];

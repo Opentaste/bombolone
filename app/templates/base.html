@@ -10,8 +10,11 @@
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
+  {% if my %}
+  <link rel="stylesheet" href="/static/css/admin.css?1">
+  {% else %}
   <link rel="stylesheet" href="/static/css/style.css?4">
-  {% block css %}{% endblock %}
+  {% endif %}
 
   <script>
     // include angular loader, which allows the files to load in any order

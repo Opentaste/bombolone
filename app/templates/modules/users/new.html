@@ -6,26 +6,26 @@
 <h2>{{ g.users.add_user }}</h2>
 <form action="{{ url_for('users.new') }}" enctype="multipart/form-data" method="post" >
     <ul class="nav nav-tabs">
-        <li class="li_account active">
-            <a>Account</a>
+        <li class="li_account active" ng-class="{active:tab_menu.selected == 'account'}">
+            <a ng-click="select_tab('account')">Account</a>
         </li>
-        <li class="li_profile">
-            <a>{{ g.admin.profile }}</a>
+        <li class="li_profile" ng-class="{active:tab_menu.selected == 'profile'}">
+            <a ng-click="select_tab('profile')">{{ g.admin.profile }}</a>
         </li>
-        <li class="li_password">
-            <a>Password</a>
+        <li class="li_password" ng-class="{active:tab_menu.selected == 'password'}">
+            <a ng-click="select_tab('password')">Password</a>
         </li>
     </ul>
     {% if status %}<div class="{{ status }}"><a class="close">×</a>{{ message }}</div>{% endif %}
     <div class="form-horizontal">
         <fieldset>
-            <section class="sec_account">
+            <section class="sec_account" ng-class="{hidden:tab_menu.selected != 'account'}">
                 {% include "modules/users/account.html" %}
             </section>
-            <section class="sec_profile">
+            <section class="sec_profile hidden" ng-class="{hidden:tab_menu.selected != 'profile'}">
         		{% include "modules/users/profile.html" %}
             </section>
-            <section class="sec_password">
+            <section class="sec_password hidden" ng-class="{hidden:tab_menu.selected != 'password'}">
                 {% include "modules/users/new_password.html" %}
             </section>
             <div class="form-actions">
@@ -34,16 +34,4 @@
         </fieldset>
     </div><!-- .form-horizontal -->
 </form>
-{% endblock %}
-
-{% block js_module_files %}
-<script src="{{ '/static/js/%s' % js_version['users'] }}"></script>
-{% endblock %}
-
-{% block js_code %}
-<script type="text/javascript">
-    t.get(d).ready(function() {
-        b.users.init();
-    })
-</script>
 {% endblock %}

@@ -28,7 +28,7 @@
         </ul><!-- .nav -->
     </div><!-- .span3 -->
     
-    <div class="span9">
+    <div class="span9" ng-controller="AdminCtrl">
         {% block content_right %}
         <div class="content_right">
             {% block content_admin %}
@@ -40,7 +40,7 @@
 {% endblock %}
 
 {% block js_admin_files %}
-<script src="{{ '/static/js/%s' % js_version['admin'] }}"></script>
+"{{ '/static/js/%s' % js_version['admin'] }}",
 
 {% block js_module_files %}
 {% endblock %}

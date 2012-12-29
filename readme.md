@@ -3,7 +3,7 @@
 ### Bombolone version 0.1.6 ###
 
 Bombolone is a tasty Content Management System for Python based on [Flask](http://flask.pocoo.org/), [MongoDB](http://www.mongodb.org/), 
-[Tiramisu](http://www.tiramisujs.com/) and [Twitter Bootstrap](http://twitter.github.com/bootstrap/). 
+[AngularJS](http://angularjs.org), [jQuery](http://jquery.com), [Sass](http://sass-lang.com) and [Twitter Bootstrap](http://twitter.github.com/bootstrap/). 
 It's designed to be a simple, flexible toolset for projects of any size.
 
 
@@ -16,13 +16,17 @@ It's designed to be a simple, flexible toolset for projects of any size.
 
 3. Install requirements  `pip install -r REQUIREMENTS.txt`
 
-4. Move in app folder `cd app/`
+4. `gem install compass`
 
-5. Run Mongodb `mongod`
+5. Move in app folder `cd app/`
 
-5. Restore last version Bombolone Mongodb `fab mongodb_restore`
+6. Run Mongodb `mongod`
 
-6. Run Bombolone `python bombolone.py`
+7. Restore last version Bombolone Mongodb `fab mongodb_restore`
+
+8. Run Compass `compass watch`
+
+8. Run Bombolone `python bombolone.py`
 
 Registered users are:
 * Admin with username 'admin' and password 'admin123'

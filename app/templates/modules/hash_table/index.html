@@ -40,10 +40,6 @@
     </table>
 {% endblock %}
 
-{% block js_module_files %}
-<script src="{{ '/static/js/%s' % js_version['hash_table'] }}"></script>
-{% endblock %}
-
 {% block js_code %}
 <script type="text/javascript">
     t.get(d).ready(function() {

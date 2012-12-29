@@ -1,0 +1,103 @@
+/* Login  ================================================================================== */
+
+.login {
+  min-height: 260px;
+  padding: 5px 0 28px;
+  text-align: center;
+  h1 {
+    color: #363636;
+    font-size: 2em;
+    margin: 4px 0 8px 0; } }
+
+section {
+  &.login_social {
+    text-align: left;
+    float: left;
+    height: 160px;
+    margin: 0 0 0 100px;
+    padding: 0 30px;
+    width: 290px; }
+  &.login_classic {
+    text-align: left;
+    float: left;
+    height: 160px;
+    margin: 0 0 0 100px;
+    padding: 0 30px;
+    width: 290px;
+    border-left: 4px double rgba(0, 0, 0, 0.1);
+    margin: 0 0 0 0; } }
+
+.login label {
+  color: #777777;
+  display: block;
+  margin: 0;
+  padding: 0;
+  text-align: left; }
+
+input {
+  &[type='text'], &[type='password'] {
+    border: 1px solid #CCCCCC;
+    color: #555;
+    display: inline-block;
+    font-size: 18px;
+    height: auto;
+    padding: 4px;
+    outline: none;
+    width: 97%;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(255, 255, 255, 0.075);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(255, 255, 255, 0.075);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(255, 255, 255, 0.075);
+    -webkit-transition: border linear .2s,-webkit-box-shadow linear.2s;
+    -moz-transition: border linear .2s,-moz-box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s; }
+  &[type='text']:focus, &[type='password']:focus {
+    outline: 0;
+    border-color: #E7A86B!important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); } }
+
+.submit {
+  float: right; }
+
+span {
+  &.facebook_login {
+    background-color: #899ECB;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#899ecb), to(#6d8bc9));
+    background-image: -webkit-linear-gradient(top, #899ecb, #6d8bc9);
+    background-image: -moz-linear-gradient(top, #899ecb, #6d8bc9);
+    background-image: -ms-linear-gradient(top, #899ecb, #6d8bc9);
+    background-image: -o-linear-gradient(top, #899ecb, #6d8bc9);
+    background-image: linear-gradient(top, #899ecb, #6d8bc9);
+    border: 1px solid #6C87BA;
+    color: #fff;
+    margin: 30px 0 10px 20px;
+    padding: 1px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.125);
+    width: 75%; }
+  &:hover.facebook_login {
+    background-color: #7188b5;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#899ecb), to(#7188b5));
+    background-image: -webkit-linear-gradient(top, #899ecb, #7188b5);
+    background-image: -moz-linear-gradient(top, #899ecb, #7188b5);
+    background-image: -ms-linear-gradient(top, #899ecb, #7188b5);
+    background-image: -o-linear-gradient(top, #899ecb, #7188b5);
+    background-image: linear-gradient(top, #899ecb, #7188b5);
+    border: 1px solid #6B6984; } }
+
+/* Message ================================================================================= */
+
+.mes_red {
+  background-color: rgb(209, 115, 98);
+  background-color: rgba(209, 115, 98, 0.4);
+  border: 1px solid #D17362;
+  font-size: 1.2em;
+  margin: 10px 0 14px 150px;
+  padding: 8px 0 7px 10px;
+  text-align: left;
+  width: 67%;
+  -moz-border-radius: 4px;
+  border-radius: 4px; }
