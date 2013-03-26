@@ -13,15 +13,13 @@ from pymongo.objectid import ObjectId
 
 # Imports inside Bombolone
 from config import PATH
-from languages import Languages
 
 content = Blueprint('content', __name__)
-languages_object = Languages()
 	
 def render_content_page(num_of_path, path):
     """ Using the path of the url, look inside the collection of pages 
     that matches the page. If it matches, then it is rendered. """
-    languages = languages_object.get_languages(4)
+    languages = g.languages_object.get_languages(4)
     page_document = None
     
     # Search the page for any language code

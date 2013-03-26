@@ -198,7 +198,7 @@ body {
 }
 
 .content {
-  margin: 34px auto 5px;
+  margin: 54px auto 5px;
   min-height: 500px;
   padding: 15px 0;
   width: 940px; 
@@ -550,7 +550,8 @@ a {
     margin-bottom: 1px; } }
 
 .nav-tabs {
-  &.nav-stacked > .active > a {
+
+  &.nav-stacked .active  {
     color: #555555;
     background-color: #ffffff;
     border: 1px solid #ddd;
@@ -561,10 +562,15 @@ a {
       background-color: #ffffff;
       border: 1px solid #ddd;
       border-bottom-color: transparent;
-      cursor: default; } }
+      cursor: default; 
+    } 
+  }
+
   .dropdown-menu {
     margin-top: 1px;
-    border-width: 1px; } }
+    border-width: 1px; 
+  } 
+}
 
 .nav-pills .dropdown-menu {
   margin-top: 1px;

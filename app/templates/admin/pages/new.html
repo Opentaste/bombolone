@@ -1,0 +1,100 @@
+{% extends "admin/index.html" %}
+
+{% block head %}
+    <title>{{ g.pages.add_page }}</title>
+{% endblock %}
+
+{% block content_right %}
+<form action="{{ url_for('pages.new') }}" ng-controller="PagesCtrl" class="pages_table_tools" method="post">
+    
+    <div class="content_right row-fluid"> 
+        <legend>{{ g.pages.add_page }}</legend>
+        {% if status %}<div class="{{ status }}"><a class="close">×</a>{{ message }}</div>{% endif %}
+        <div class="control-group">
+            <input type="text" name="name" class="input-xlarge" value="{{ page['name'] }}" 
+            placeholder="{{ g.pages.label_name }}" maxlength="20" />
+        </div>
+        <div class="control-group">
+            <input type="text" name="from" value="{{ page['from'] }}" class="span4" placeholder="{{ g.pages.label_from }}" maxlength="20" />
+            <input type="text" name="import" value="{{ page['import'] }}" class="span4" placeholder="{{ g.pages.label_import }}" maxlength="20" />
+            <p class="help-block">{{ g.pages.help_import }}</p>
+        </div>
+        <div class="control-group form-horizontal">
+            <span>templates/pages/</span>
+            <input type="text" name="file" class="span3 input-little" 
+            value="{{ page['file'] }}" maxlength="200" style="margin: 0 2px;" />.html
+            <p class="help-block">{{ g.pages.help_file_templates }}</p>
+        </div>
+    </div><!-- .content_right -->
+    
+    <div class="control-group" style="margin-top:15px;text-align:right">
+        <div class="span2 dropdown-lng" style="margin-left:0" ng-class="{open:menu_language==true}">
+            <a class="button dropdown-toggle button-lng" ng-click="menu_reveal()" data-toggle="dropdown">
+                [[ name_language ]]<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                {% for code, name in language_name %}
+                <li class="{% if g.lan==code %}active{% endif %}" data-menu-lan="{{ code }}" ng-class="{active:tab_language=='{{code}}'}">
+                    <a ng-click="change_language('{{ code }}', '{{ name }}')">{{ name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <span class="pages_add_label button button-blu" ng-click="add_label()">{{ g.admin.add_field }}</span>
+    </div><!-- .control-group -->
+    
+    {% for code, name in language_name %}
+    <div class="content_right row-fluid {% if code!=lan %}hidden{% endif %}" style="margin-top:-8px;padding-top:18px;" 
+        ng-class="{hidden:tab_language!='{{ code }}'}"> 
+        <div class="control-group form-horizontal">
+            <span>{{ path }}/</span>
+            <input type="text" name="url_{{ code }}" class="span6 input-little" 
+            value="{{ page['url'][code] }}" maxlength="200" style="margin-left:4px" />
+            <p class="help-block">{{ g.pages.help_url }}</p>
+        </div>
+        <div class="control-group">
+            <input type="text" name="title_{{ code }}" class="span8" value="{{ page['title'][code] }}" 
+            placeholder="{{ g.pages.label_title }} ( {{ name }} )" maxlength="20" class="span8" />
+        </div>
+        <div class="control-group">
+            <textarea rows="4" cols="50" name="description_{{ code }}" class="span8" 
+            placeholder="{{ g.pages.label_description }} ( {{ name }} )">{{ page['description'][code] }}</textarea>
+        </div>
+    </div><!-- .content_right -->
+    {% endfor %}
+    
+    <div class="content_right row-fluid" style="margin-top:15px;padding-top:18px;"> 
+        {% for code, name in language_name %}
+        <div class="pages_field {% if code!=lan %}hidden{% endif %}" ng-class="{hidden: tab_language!='{{ code }}'}"
+            ng-repeat="label in list_labels">
+            {% include 'modules/pages/label.html' %}
+        </div>
+        {% endfor %}
+        <div class="form-actions">
+            <button tabindex="200" type="submit" class="button button-submit">{{ g.pages.create }}</button>
+        </div>
+    </div><!-- .content_right -->
+    
+</form><!-- .pages_table_tools -->
+{% endblock %}
+
+{% block js_module_files %}
+"{{ '/static/js/%s' % js_version['pages'] }}"
+{% endblock %}
+
+{% block js_code %}
+<script type="text/javascript">
+    // List with the name of any code language
+    b.pages.code_languages = [{% for code in language_name %} '{{ code[0] }}', {% endfor %}]
+    // Dictionary with the name of any code language
+    b.pages.name_languages = { {% for code, name in language_name %} '{{ code }}' : '{{ name }}', {% endfor %} 'last' : '' }
+    
+    t.get(d).ready(function() {
+        b.pages.init_language();
+        b.pages.init_change_label();
+        b.pages.init_add_label();
+        b.pages.init_remove_label();
+        b.pages.init_change_name_label();
+    })
+</script>
+{% endblock %}

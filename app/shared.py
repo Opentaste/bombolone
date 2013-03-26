@@ -1,22 +1,19 @@
 # -*- coding: utf-8 -*-
 """
-    shared.py
-    ~~~~~~
-    
-    Shared contains the variables that are shared with many modules.
-    by Leonardo Zizzamia
-    
-    :copyright: (c) 2012 by Leonardo Zizzamia
-    :license: BSD (See LICENSE for details)
+shared.py
+~~~~~~
+
+Shared contains the variables that are shared with many modules.
+
+:copyright: (c) 2012 by Leonardo Zizzamia
+:license: BSD (See LICENSE for details)
 """
 # Imports outside Bombolone
 from flask import Flask
 from pymongo import Connection
 
 # Imports inside Bombolone
-from config import (DATABASE, DEBUG, PATH, PATH_LAYOUT, UP_FOLDER,
-                    PROJECT_DIR, UP_AVATARS_FOLDER, UP_IMAGE_FOLDER, 
-                    PORT, PORT_DATABASE)
+from config import PORT_DATABASE, DATABASE
 
 # Create application and configuration
 app = Flask(__name__)

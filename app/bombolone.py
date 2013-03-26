@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-    bombolone.py
-    ~~~~~~
-    
-    :copyright: (c) 2012 by Leonardo Zizzamia
-    :license: BSD (See LICENSE for details)
+bombolone.py
+~~~~~~
+
+:copyright: (c) 2013 by Leonardo Zizzamia
+:license: BSD (See LICENSE for details)
 """
 # Imports outside Bombolone
 from __future__ import with_statement
@@ -17,19 +17,42 @@ from before import core_before_request, core_inject_user
 from config import PORT
 from shared import app
 
+from core.utils import msg_status
+
+# Imports api modules Bombolone
+from api.oas import oas
+
+# Imports Admin modules Bombolone
+from admin.admin import admin
+from admin.languages import languages
+from admin.hash_table import hash_table
+from admin.pages import pages
+from admin.test import test
+from admin.rank import rank
+from admin.users import users
+
+# Imports Users modules Bombolone
+from users.settings import settings
+
+# Imports Login modules Bombolone
+from login.login import login
+
 # Imports modules Bombolone
-from admin import admin
 from content import content
-from languages import languages
-from login import login
-from hash_table import hash_table
 from home import home
-from pages import pages
-from rank import rank
-from settings import settings
-from users import users
-LIST_MODULES = [home, login, admin, pages, users, rank, languages, 
-                hash_table, settings, content]
+
+LIST_MODULES = [home, 
+                login, 
+                admin,
+                oas, 
+                pages, 
+                test,
+                users, 
+                rank, 
+                languages, 
+                hash_table, 
+                settings, 
+                content]
 
             
 # ========================================================================	
@@ -105,6 +128,28 @@ def len_thing(context, key):
 def enumerate_thing(context, key):
     return enumerate(key)
 
+def date_time_format(value, format='%d-%m-%Y - %H:%M', localized=False):
+    if type(value) is unicode or type(value) is str:
+        return 'We need fix it'
+    
+    if localized:
+        utc_time = pytz.utc.localize(value)
+        if g.my:
+            nation = pytz.timezone(g.my['time_zone'])
+        else:
+            nation = pytz.timezone('Europe/Rome')
+        nation_time = utc_time.astimezone(nation)
+        return str(nation_time.day) + ' ' + dict_month[g.lan][nation_time.month] + ' ' + str(nation_time.year)
+    else:
+        return value.strftime(format)
+
+def split_word_format(value, letters=30):
+    if len(value) > (letters * 2):
+        return value[:letters] + '<br />' + value[letters:(letters*2)] + '<br />' + value[(letters*2):]
+    if len(value) > letters:
+        return value[:letters] + '<br />' + value[letters:]
+    return value
+
 # add some functions to jinja
 app.jinja_env.globals['sorted'] = contextfunction(sorted_thing)  
 app.jinja_env.globals['int'] = contextfunction(int_thing)   
@@ -113,6 +158,10 @@ app.jinja_env.globals['unicode'] = contextfunction(unicode_thing)
 app.jinja_env.globals['type'] = contextfunction(type_thing) 
 app.jinja_env.globals['len'] = contextfunction(len_thing) 
 app.jinja_env.globals['enumerate'] = contextfunction(enumerate_thing) 
+
+app.jinja_env.filters['date'] = date_time_format
+app.jinja_env.filters['split_word'] = split_word_format
+app.jinja_env.filters['msg'] = msg_status
 
 class RegexConverter(BaseConverter):
     def __init__(self, url_map, *items):

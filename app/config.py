@@ -16,22 +16,40 @@ DATABASE = 'bombolone'
 PATH = 'http://0.0.0.0:5000'
 
 # ~
+PATH_API = 'http://0.0.0.0:5000/api'
+
+# ~
 PATH_LAYOUT = 'http://0.0.0.0:5000/static/layout/'
 
 # ~
 PROJECT_DIR = os.path.dirname(__file__)
 
 # ~
+STATIC = os.path.join(PROJECT_DIR,'./static')
+
+# ~
+TEMPLATES = os.path.join(PROJECT_DIR,'./templates')
+
+# ~
+STATIC_FOLDER = os.path.join(PROJECT_DIR,'./static')
+
+# ~
 PROJECT_STATIC_FILES = 'data/upload'
 
 # ~
-UP_FOLDER = os.path.join(PROJECT_DIR,'../%s/' % PROJECT_STATIC_FILES)
+UP_FOLDER = os.path.join(PROJECT_DIR,'../{}/'.format(PROJECT_STATIC_FILES))
 
 # ~
-UP_AVATARS_FOLDER = os.path.join(PROJECT_DIR,'../%s/avatars/' % PROJECT_STATIC_FILES)
+UP_AVATARS_FOLDER = os.path.join(PROJECT_DIR,'../{}/avatars/'.format(PROJECT_STATIC_FILES))
 
 # ~
-UP_IMAGE_FOLDER = os.path.join(PROJECT_DIR,'../%s/images/' % PROJECT_STATIC_FILES)
+UP_AVATARS_TMP_FOLDER = os.path.join(PROJECT_DIR,'../{}/avatars/tmp/'.format(PROJECT_STATIC_FILES))
+
+# ~
+UP_IMAGE_FOLDER = os.path.join(PROJECT_DIR,'../{}/images/'.format(PROJECT_STATIC_FILES))
+
+# ~
+UP_IMAGE_TMP_FOLDER = os.path.join(PROJECT_DIR,'../{}/images/tmp/'.format(PROJECT_STATIC_FILES))
 
 # ~
 PORT = 5000

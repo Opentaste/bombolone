@@ -1,0 +1,55 @@
+ {% extends "admin/settings/index.html" %}
+
+
+{% block title %} User profile {% endblock %}
+{% block description %}  {% endblock %}
+
+{% block nav_active_1 %}class="active"{% endblock %}
+
+{% block settings %}
+<div class="form-horizontal form-settings" ng-controller="UsersCtrl">
+    <fieldset>
+        <legend>Profile</legend>
+        {% include "error/message.html" %}
+        {% include "admin/users/upload_image.html" %}
+        {% include "admin/users/profile.html" %}
+        <div class="form-actions">
+            <button tabindex="200" ng-click="stop_upload();update_profile()" data-test="submit"
+            class="button button-submit">{{ g.users.save }}</button>
+        </div>
+    </fieldset>
+</div><!-- .form-horizontal -->
+{% endblock %}     
+
+{% block js_files %}
+  {% if not sync %}
+    "{{ '/static/js/%s' % js_version['users'] }}",
+    "{{ '/static/js/%s' % js_version['upload'] }}",
+  {% endif %}
+{% endblock %}
+
+{% block js_files_sync %}
+  {% if sync %}
+    <script src="{{ '/static/js/%s' % js_version['users'] }}" ></script>
+    <script src="{{ '/static/js/%s' % js_version['upload'] }}" ></script>
+  {% endif %}
+{% endblock %}
+
+{% block js_data %}
+<script>
+page["user"] = {
+  _id: "{{ data.user._id }}",
+  ot_name: "{{ data.user.ot_name }}",
+  email: "{{ data.user.email }}",
+  rank: "{{ data.user.rank }}",
+  lan: "{{ data.user.lan }}",
+  time_zone: "{{ data.user.time_zone }}",
+  name: "{{ data.user.name }}",
+  location: "{{ data.user.location }}",
+  web: "{{ data.user.web }}",
+  description: "{{ data.user.description }}",
+  image_show: "{{ data.user.image_show }}",
+  status: "{{ data.user.status }}"
+}
+</script>
+{% endblock %} 

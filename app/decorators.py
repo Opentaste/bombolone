@@ -1,22 +1,75 @@
 # -*- coding: utf-8 -*-
 """
-    decorators.py
-    ~~~~~~
-    A collection of all the decorators
-    
-    :copyright: (c) 2012 by Leonardo Zizzamia
-    :license: BSD (See LICENSE for details)
+decorators.py
+~~~~~~
+A collection of all the decorators
+
+:copyright: (c) 2013 by Leonardo Zizzamia
+:license: BSD (See LICENSE for details)
 """ 
 # Imports outside Bombolone
-from flask import g, abort
+from flask import g, abort, request, current_app
 from functools import wraps
 
-# Imports inside Bombolone
-from validators import GetValue
+class GetValue(object):
+    """ """
+    def __init__(self, dictionary):
+        self.dictionary = dictionary
+        
+    def check_key(self, key):
+        return self.dictionary.get(key, 'Error not defined : {}'.format(key))
+
+def jsonp(f):
+    """Wraps JSONified output for JSONP"""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        callback = request.args.get('callback', False)
+        if callback:
+            content = str(callback) + '(' + str(f().data) + ')'
+            return current_app.response_class(content, mimetype='application/json')
+        else:
+            return f(*args, **kwargs)
+    return decorated_function
+
+def get_hash(hash_map_name):
+    """
+    Does everything done by the following piece of code, but in a generic way.
+    
+    def get_hash_tags(function_to_decorate):
+        @wraps(function_to_decorate)
+        def decorated_function(*args, **kwargs):
+            dictionary = get_hash_map('tags')
+            get_value = GetValue(dictionary)
+            g.tags_msg = get_value.check_key
+            g.tags = dictionary
+            return function_to_decorate(*args, **kwargs)
+        return decorated_function
+    
+    
+    It can be used like this:
+    
+    @get_hash('tags')
+    """
+    
+    def real_decorator(function_to_decorate):
+        @wraps(function_to_decorate)
+        def decorated_function(*args, **kwargs):
+            dictionary = get_hash_map(hash_map_name)
+            get_value = GetValue(dictionary)
+            setattr(g, hash_map_name + '_msg', get_value.check_key)
+            setattr(g, hash_map_name, dictionary)
+            return function_to_decorate(*args, **kwargs)
+        return decorated_function
+    
+    return real_decorator
 
 def get_hash_map(module):
-    module_map = g.db.hash_table.find_one({ 'name' : module })
-    return { x : y[g.lan] for x, y in module_map['value'].iteritems() }
+    """ """
+    try:
+        module_map = g.db.hash_table.find_one({ 'name' : module })
+        return { x : y[g.lan] for x, y in module_map['value'].iteritems() }
+    except:
+        print "Important, you have to restore last database!"
 
 def get_hash_admin():
     """  """
@@ -30,112 +83,36 @@ def check_authentication(function_to_decorate):
     """ Requires standard login credentials """
     @wraps(function_to_decorate)
     def decorated_function(*args, **kwargs):
-        if not hasattr(g, "my"):
+        if not g.my or 'status' not in g.my or g.my['status'] is 0:
             abort(401)
         return function_to_decorate(*args, **kwargs)
     return decorated_function
 
+def check_rank(rank):
+    """
+    Does everything done by the following piece of code, but in a generic way.
 
-def check_chief(function_to_decorate):
-    """ Requires chief login credentials """
-    @wraps(function_to_decorate)
-    def decorated_function(*args, **kwargs):
-    	if g.my['rank'] > 15:
-    		abort(401)
-    	return function_to_decorate(*args, **kwargs)
-    return decorated_function
+    def check_chief(function_to_decorate):
+        @wraps(function_to_decorate)
+        def decorated_function(*args, **kwargs):
+            if g.my['rank'] > 15:
+                abort(401)
+            return function_to_decorate(*args, **kwargs)
+        return decorated_function
 
+    It can be used like this:
 
-def check_admin(function_to_decorate):
-    """ Requires chief login credentials """
-    @wraps(function_to_decorate)
-    def decorated_function(*args, **kwargs):
-        if g.my['rank'] > 25:
-            abort(401)
-        return function_to_decorate(*args, **kwargs)
-    return decorated_function   
+    @check_rank(40)
+    """
 
+    def real_decorator(function_to_decorate):
+        @wraps(function_to_decorate)
+        def decorated_function(*args, **kwargs):
+            if not g.my or 'status' not in g.my or g.my['status'] is 0:
+                abort(401)
+            if g.my['rank'] > rank:
+                abort(401)
+            return function_to_decorate(*args, **kwargs)
+        return decorated_function
 
-### Zone ###
-def get_hash_languages(function_to_decorate):
-    """  """
-    @wraps(function_to_decorate)
-    def decorated_function(*args, **kwargs):
-        dictionary = get_hash_map('languages')
-        get_value = GetValue(dictionary)
-        g.languages_msg = get_value.check_key
-        g.languages = dictionary
-        return function_to_decorate(*args, **kwargs)
-    return decorated_function    
-
-
-def get_hash_login(function_to_decorate):
-    """  """
-    @wraps(function_to_decorate)
-    def decorated_function(*args, **kwargs):
-        dictionary = get_hash_map('login')
-        get_value = GetValue(dictionary)
-        g.login_msg = get_value.check_key
-        g.login = dictionary
-        return function_to_decorate(*args, **kwargs)
-    return decorated_function
-
-
-def get_hash_pages(function_to_decorate):
-    """  """
-    @wraps(function_to_decorate)
-    def decorated_function(*args, **kwargs):
-        dictionary = get_hash_map('pages')
-        get_value = GetValue(dictionary)
-        g.pages_msg = get_value.check_key
-        g.pages = dictionary
-        return function_to_decorate(*args, **kwargs)
-    return decorated_function
-
-
-def get_hash_rank(function_to_decorate):
-    """  """
-    @wraps(function_to_decorate)
-    def decorated_function(*args, **kwargs):
-        dictionary = get_hash_map('rank')
-        get_value = GetValue(dictionary)
-        g.rank_msg = get_value.check_key
-        g.rank = dictionary
-        return function_to_decorate(*args, **kwargs)
-    return decorated_function
-
-
-def get_hash_table(function_to_decorate):
-    """  """
-    @wraps(function_to_decorate)
-    def decorated_function(*args, **kwargs):
-        dictionary = get_hash_map('hash_table')
-        get_value = GetValue(dictionary)
-        g.hash_table_msg = get_value.check_key
-        g.hash_table = dictionary
-        return function_to_decorate(*args, **kwargs)
-    return decorated_function
-
-
-def get_hash_users(function_to_decorate):
-    """  """
-    @wraps(function_to_decorate)
-    def decorated_function(*args, **kwargs):
-        dictionary = get_hash_map('users')
-        get_value = GetValue(dictionary)
-        g.users_msg = get_value.check_key
-        g.users = dictionary
-        return function_to_decorate(*args, **kwargs)
-    return decorated_function
-
-
-def get_hash_settings(function_to_decorate):
-    """  """
-    @wraps(function_to_decorate)
-    def decorated_function(*args, **kwargs):
-        dictionary = get_hash_map('settings')
-        get_value = GetValue(dictionary)
-        g.settings_msg = get_value.check_key
-        g.settings = dictionary
-        return function_to_decorate(*args, **kwargs)
-    return decorated_function 
+    return real_decorator

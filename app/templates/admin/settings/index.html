@@ -1,0 +1,30 @@
+{% extends "content/home.html" %}
+
+{% block content %}
+<section class="row">
+
+  <div class="span3">
+    <ul class="nav nav-tabs nav-stacked">
+      <li>
+        <a href="{{ url_for('settings.profile') }}" 
+        {% block nav_active_1 %}{% endblock %} title="" >Profile</a>
+      </li>
+      <li>
+        <a href="{{ url_for('settings.account') }}" 
+        {% block nav_active_2 %}{% endblock %} title="" >Account</a>
+      </li>
+      <li>
+        <a href="{{ url_for('settings.password') }}" 
+        {% block nav_active_3 %}{% endblock %} title="" >Password</a>
+      </li>
+    </ul>
+  </div>
+  <div class="span9">
+    <div class="settings">
+      {% block settings %}
+      {% endblock %}
+    </div><!-- .settings -->
+  </div>
+
+</section>
+{% endblock %}

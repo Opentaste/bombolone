@@ -1,0 +1,3 @@
+<div class="{% if data %} {{ status or data.status }} {% else %} {{ status }} {% endif %}">
+  <span>{% if data %} {{ message or data.message }} {% else %} {{ message }} {% endif %}</span>
+</div>

@@ -1,2 +1,13 @@
+# Compiled files
 *.pyc
+
+# OSX
+.DS_Store
+
+# Eclipse & PyDev stuff
+.project
+.pydevproject
+.settings
+
+# Sass
 .sass-cache

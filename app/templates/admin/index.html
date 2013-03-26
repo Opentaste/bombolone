@@ -1,0 +1,58 @@
+{% extends "content/home.html" %}
+
+{% block content %}
+<section class="row">
+  <div class="span3">
+    <ul class="nav nav-tabs nav-stacked">
+      <li>
+        <a {% block nav_active_1 %}{% endblock %} 
+        href="{{ url_for('admin.dashboard') }}" title="" >Dashboard</a>
+      </li>
+      {% if g.my['rank'] < 15 %}
+      <li>
+        <a {% block nav_active_6 %}{% endblock %} 
+        href="{{ url_for('pages.overview') }}" title="" >Pages</a>
+      </li>
+      <li>
+        <a {% block nav_active_2 %}{% endblock %}
+        href="{{ url_for('users.overview') }}" title="" >Users</a>
+      </li>
+      <li>
+        <a {% block nav_active_3 %}{% endblock %}
+        href="{{ url_for('rank.overview') }}" title="" >Rank</a>
+      </li>
+      <li>
+        <a {% block nav_active_4 %}{% endblock %}
+        href="{{ url_for('languages.overview') }}" title="" >Languages</a>
+      </li>
+      <li>
+        <a {% block nav_active_5 %}{% endblock %}
+        href="{{ url_for('hash_table.overview') }}" title="" >Hash Table</a>
+      </li>
+      {% endif %}
+    </ul><!-- .nav -->
+  </div><!-- .span3 -->
+
+  <div class="span9">
+    <div class="content_right" ng-controller="AdminCtrl">
+      {% block admin %}
+      {% endblock %}
+      {% include "admin/remove_item.html" %}
+    </div><!-- .content_right -->
+  </div>
+</section>
+{% endblock %}
+
+{% block js_files %}
+  {% if not sync %}
+    "{{ '/static/js/%s' % js_version['admin'] }}",
+    {% block js_module_files %}{% endblock %}
+  {% endif %}
+{% endblock %}
+
+{% block js_files_sync %}
+  {% if sync %}
+    <script src="{{ '/static/js/%s' % js_version['admin'] }}" ></script>
+    {% block js_module_files_sync %}{% endblock %}
+  {% endif %}
+{% endblock %}

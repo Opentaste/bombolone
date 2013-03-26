@@ -1,4 +1,4 @@
-Copyright (c) 2012 Leonardo Zizzamia, Gianluca Bargelli. See AUTHORS for more details.
+Copyright (c) 2013 Leonardo Zizzamia, Gianluca Bargelli. See AUTHORS for more details.
 
 All rights reserved.
 
