@@ -1,11 +1,11 @@
 {% extends "admin/index.html" %}
 
-{% block head %}
-    <title>{{ g.pages.edit_page }}</title>
+{% block title %}
+{{ g.pages.edit_page }}
 {% endblock %}
 
 
-{% block content_right %}
+{% block admin %}
 <form action="{{ url_for('pages.update', _id=_id) }}" enctype="multipart/form-data" class="pages_table_tools" method="post">
     
     <div class="content_right row-fluid"> 

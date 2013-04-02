@@ -5,7 +5,7 @@ UsersCtrl = ($scope, $resource, $rootScope) ->
 	user_value = page["user"] or {}
 	$scope.user = 
 		_id: user_value["_id"] or ""
-		ot_name: user_value["ot_name"] or ""
+		username: user_value["username"] or ""
 		email: user_value["email"] or ""
 		rank: user_value["rank"] or ""
 		lan: user_value["lan"] or ""

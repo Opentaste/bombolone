@@ -80,8 +80,11 @@ class Login(object):
             else:
                 # Save session in main domain
                 token = get_token(CLIENT_ID, CLIENT_SECRET, user['username'], user['password'])
+                print token
+                if token is None:
+                    self.message = g.login_msg('login_error_4')
+                    return False
                 g.db.users.update({ '_id' : ObjectId(user['_id']) }, { "$set": { "token": token } })
-                print "fine"
                 session['user_id'] = user['_id']
                 if permanent is not None:
                     session.permanent = True

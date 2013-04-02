@@ -1,4 +1,4 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
 
 {% block title %} Login {% endblock %}
 
@@ -11,7 +11,7 @@
   <h1>Accedi a Bombolone</h1>
   {% include "error/message_old.html" %}
   <section class="login_social">
-    <span class="button facebook_login" onlogin="window.location = '/status/'" data-scope="email,publish_stream,offline_access">
+    <span class="button facebook_login">
       Accedi con Facebook
     </span>
   </section>

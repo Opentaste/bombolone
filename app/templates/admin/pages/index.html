@@ -5,7 +5,7 @@
 
 {% block nav_active_6 %}class="active"{% endblock %}
 
-{% block content_admin %}
+{% block admin %}
     <h2 ng-bind="module='pages'">{{ g.pages.name }}</h2>
     {% if g.my['rank'] < 15 %}
     <br />
@@ -56,6 +56,5 @@
         </tbody>
     </table>
     {% endif %}
-    {% include "modules/remove_item.html" %}
 {% endblock %}
 

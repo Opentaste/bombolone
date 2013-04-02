@@ -10,6 +10,7 @@ A collection of all the decorators
 # Imports outside Bombolone
 from flask import g, abort, request, current_app
 from functools import wraps
+from api.oauth2db import oauth2db
 
 class GetValue(object):
     """ """
@@ -79,6 +80,57 @@ def get_hash_admin():
     g.admin = dictionary
 
 ### Authentication Zone ###
+def check_token(function_to_decorate):
+    """ Requires standard login credentials """
+    @wraps(function_to_decorate)
+    def decorated_function(*args, **kwargs):
+
+        token = request.args.get('token', None)
+
+        if token is None:
+            abort(401)
+
+        validation = oauth2db.check_token(token)
+        if not validation["success"]:
+            abort(401)
+
+        return function_to_decorate(*args, **kwargs)
+    return decorated_function
+
+def check_token_post(function_to_decorate):
+    """ Requires standard login credentials """
+    @wraps(function_to_decorate)
+    def decorated_function(*args, **kwargs):
+
+        if not "token" in request.json:
+            abort(401)
+
+        token = request.json['token']
+
+        validation = oauth2db.check_token(token)
+        if not validation["success"]:
+            abort(401)
+
+        return function_to_decorate(*args, **kwargs)
+    return decorated_function
+
+def check_token_ajax(function_to_decorate):
+    """ Requires standard login credentials """
+    @wraps(function_to_decorate)
+    def decorated_function(*args, **kwargs):
+
+        token = request.headers.get('X-Requested-Token', None)
+
+        if token is None:
+            abort(401)
+
+        validation = oauth2db.check_token(token)
+        if not validation["success"]:
+            abort(401)
+
+        return function_to_decorate(*args, **kwargs)
+    return decorated_function
+
 def check_authentication(function_to_decorate):
     """ Requires standard login credentials """
     @wraps(function_to_decorate)

@@ -1,0 +1,224 @@
+/*
+ * Bombolone
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *
+ *
+ * HTML5 display definitions ================================================ */
+ 
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+  display: block; 
+}
+
+audio, canvas, video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1; 
+}
+
+audio:not([controls]), [hidden] {
+  display: none; 
+}
+
+/* Base ===================================================================== */
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-size: 1em;
+  line-height: 1.4;
+  font-family: sans-serif;
+  color: #222; 
+}
+
+button, input, select, textarea {
+  font-family: sans-serif;
+  color: #222; 
+}
+
+/* Link ===================================================================== */
+
+a {
+  &:focus {
+    outline: thin dotted; 
+  }
+  &:hover, &:active {
+    outline: 0; 
+  } 
+}
+
+/* Typography =============================================================== */
+
+b, strong {
+  font-weight: bold; 
+}
+
+blockquote {
+  margin: 1em 40px; 
+}
+
+dfn {
+  font-style: italic; 
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0; 
+}
+
+pre, code, kbd, samp {
+  font-family: monospace, serif;
+  _font-family: 'courier new', monospace;
+  font-size: 1em; 
+}
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word; 
+}
+
+q {
+  quotes: none;
+  &:before, &:after {
+    content: "";
+    content: none; 
+  } 
+}
+
+small {
+  font-size: 85%; 
+}
+
+sub {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; 
+}
+
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.5em; 
+}
+
+sub {
+  bottom: -0.25em; 
+}
+
+/* Lists ==================================================================== */
+
+ul, ol, dd {
+  margin: 0;
+  padding: 0; 
+}
+
+ul, ol {
+  padding: 0;
+  margin: 0 0 9px 25px; 
+}
+
+ul {
+  margin-left: 0;
+  list-style: none; 
+}
+
+li {
+  line-height: 18px; 
+}
+
+/* Embedded content ========================================================= */
+
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle; 
+}
+
+svg:not(:root) {
+  overflow: hidden; 
+}
+
+legend {
+  border: 0;
+  *margin-left: -7px;
+  padding: 0;
+  white-space: normal; 
+}
+
+button, input, select, textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle; 
+}
+
+button, input {
+  line-height: normal; 
+}
+
+label, button, input, select, textarea {
+  font: 13px / 20px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle; 
+}
+
+input {
+  &[type="checkbox"], &[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+    *width: 13px;
+    *height: 13px; 
+  } 
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0; 
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: top;
+  resize: vertical; 
+}
+
+input:valid, textarea:valid {}
+
+input:invalid, textarea:invalid {
+  background-color: #f0dddd; 
+}
+
+/* Tables =================================================================== */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; 
+}
+
+td {
+  vertical-align: top; 
+}
+
+/* Forms ==================================================================== */
+
+form {
+  margin: 0; 
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0; 
+}

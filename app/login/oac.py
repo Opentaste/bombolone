@@ -17,6 +17,7 @@ The client flow is:
 import json
 import requests
 from config import PATH_API
+from api.oauth2db import oauth2db
 
 CLIENT_ID = '47a69c6a267cd0807408'
 CLIENT_SECRET = '2cb223b50493fe842e138d61bd2caa4f62c6565b'
@@ -25,20 +26,18 @@ def get_token(client_id, client_secret, username, password):
     """
     Returns an OAuth2 authorization token or None in case
     of errors. This is the flow for non-web clients."""
-    print 5
     try:
         if oauth2db.check_client(client_id, client_secret):
-            if oauth2db.check_user(auth.username, auth.password):
-                token, refresh = oauth2db.generate_token(client_id, auth.username)
+            if oauth2db.check_user(username, password):
+                token, refresh = oauth2db.generate_token(client_id, username)
                 res = { "token": token }
     except:
         res = { "error": "" }
-    print 6
     
     if 'token' in res:
         return res['token']
     else:
-        return res
+        return None
 
 def refresh_token(refresh_token):
     """Returns a new valid token or None, in case of error."""

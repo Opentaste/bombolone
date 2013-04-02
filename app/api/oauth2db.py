@@ -46,7 +46,7 @@ class OAuth2DB:
         """Returns True if the given username and password are
         registered in the DB, False otherwise."""
 
-        user = g.db.users.find_one({"ot_name" : username})
+        user = g.db.users.find_one({"username" : username})
         if user['password'] == password:
             return True
         return False
@@ -60,8 +60,8 @@ class OAuth2DB:
         new_token_left = md5() 
         new_token_right = sha1()
         new_token_left.update(username)
-        new_token_right.update(self.TOKEN + 'leo')
-        new_token = new_token_left.hexdigest() + 'f759d' + new_token_right.hexdigest()
+        new_token_right.update(self.TOKEN + 'bombolone')
+        new_token = new_token_left.hexdigest() + new_token_right.hexdigest()
 
         return (new_token, self.REFRESH_TOKEN)
     

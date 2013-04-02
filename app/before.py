@@ -18,6 +18,7 @@ from pymongo.objectid import ObjectId
 # Imports inside Bombolone
 from config import DEBUG, EXTENSIONS_REQUEST, PATH, PATH_API, PROJECT_DIR, LIST_LANGUAGES
 from shared import db
+from login.oac import get_token, CLIENT_SECRET, CLIENT_ID
 
 # Imports from Opentaste's Core
 from decorators import get_hash_admin
@@ -73,6 +74,9 @@ def core_before_request():
         # If user_id not exist in the user list g.my is None
         if my:
             g.my = my
+            if not "token" in g.my:
+                g.my['token'] = get_token(CLIENT_ID, CLIENT_SECRET, user['username'], user['password'])
+                g.db.users.update({ "_id" : g.my["_id"] }, user)
             # get user language
             g.lan = g.my['lan']
             g.language = g.available_languages[g.lan]

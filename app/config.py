@@ -16,7 +16,7 @@ DATABASE = 'bombolone'
 PATH = 'http://0.0.0.0:5000'
 
 # ~
-PATH_API = 'http://0.0.0.0:5000/api'
+PATH_API = 'http://0.0.0.0\\\:5000/api'
 
 # ~
 PATH_LAYOUT = 'http://0.0.0.0:5000/static/layout/'

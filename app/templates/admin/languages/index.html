@@ -4,41 +4,41 @@
 
 {% block nav_active_4 %}class="active"{% endblock %}
 
-{% block content_admin %}
-    <h2>{{ g.languages.name }}</h2>
-    {% if status %}<div class="{{ status }}"><a class="close">×</a>{{ message }}</div>{% endif %}
-    <form action="{{ url_for('languages.overview') }}" method="post" >
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th style="width:5%;"></th>
-                    <th style="width:15%;">{{ g.languages.code }}</th>
-                    <th style="width:40%;">{{ g.languages.language }}</th>
-                    <th style="width:40%;">_id</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <td colspan="4"></td>
-                </tr>
-            </tfoot>
-            <tbody>
-                {% for i, language in enumerate(languages_list) %}
-                <tr>
-                    <td>
-                        <input type="checkbox" name="{{ language['code'] }}" 
-                        {% if language['code'] == lan %} disabled="disabled" {% endif %}
-                        {% if language['check'] %} checked="checked" {% endif %}>
-                    </td>
-                    <td>{{ language['code'] }}</td>
-                    <td>{{ language_chosen['value'][language['code']] }}</td>
-                    <td>{{ language['_id'] }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div>
-            <button tabindex="20" type="submit" class="button button-submit"> {{ g.admin['save'] }}</button>
-        </div>
-    </form>
+{% block admin %}
+<h2>{{ g.languages.name }}</h2>
+{% if status %}<div class="{{ status }}"><a class="close">×</a>{{ message }}</div>{% endif %}
+<form action="{{ url_for('languages.overview') }}" method="post" >
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th style="width:5%;"></th>
+        <th style="width:15%;">{{ g.languages.code }}</th>
+        <th style="width:40%;">{{ g.languages.language }}</th>
+        <th style="width:40%;">_id</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td colspan="4"></td>
+      </tr>
+    </tfoot>
+    <tbody>
+      {% for i, language in enumerate(languages_list) %}
+      <tr>
+        <td>
+          <input type="checkbox" name="{{ language['code'] }}" 
+          {% if language['code'] == lan %} disabled="disabled" {% endif %}
+          {% if language['check'] %} checked="checked" {% endif %}>
+        </td>
+        <td>{{ language['code'] }}</td>
+        <td>{{ language_chosen['value'][language['code']] }}</td>
+        <td>{{ language['_id'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div>
+    <button tabindex="20" type="submit" class="button button-submit"> {{ g.admin['save'] }}</button>
+  </div>
+</form>
 {% endblock %}

@@ -1,10 +1,10 @@
 {% extends "admin/index.html" %}
 
-{% block head %}
-    <title>{{ g.pages.add_page }}</title>
+{% block title %}
+{{ g.pages.add_page }}
 {% endblock %}
 
-{% block content_right %}
+{% block admin %}
 <form action="{{ url_for('pages.new') }}" ng-controller="PagesCtrl" class="pages_table_tools" method="post">
     
     <div class="content_right row-fluid"> 
