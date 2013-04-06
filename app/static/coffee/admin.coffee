@@ -34,7 +34,7 @@ AdminCtrl = ($scope, $resource, $rootScope, $compile) ->
         if resource.success
           $scope.pop_item_from_list()
         else
-          console.log "Non puoi eliminare questo elemento"
+          alert "You can't remove this element"
 
     check_remove_hidden()
 

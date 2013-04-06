@@ -1,12 +1,10 @@
 {% extends "admin/index.html" %}
 
-{% block title %}
-User update
-{% endblock %}
+{% block title %} User update {% endblock %}
 
 {% block admin %}
 <h2>{{ g.users.update_user }}</h2>
-<form action="{{ url_for('users.update', _id=_id) }}" enctype="multipart/form-data" method="post" >
+<div class="update_user">
   <ul class="nav nav-tabs">
     <li class="li_account active" ng-class="{active:tab_menu.selected == 'account'}">
       <a ng-click="select_tab('account')">Account</a>
@@ -14,38 +12,94 @@ User update
     <li class="li_profile" ng-class="{active:tab_menu.selected == 'profile'}">
       <a ng-click="select_tab('profile')">{{ g.admin.profile }}</a>
     </li>
+    <li class="li_others" ng-class="{active:tab_menu.selected == 'others'}">
+      <a ng-click="select_tab('others')">Others info</a>
+    </li>
     <li class="li_password" ng-class="{active:tab_menu.selected == 'password'}">
       <a ng-click="select_tab('password')">Password</a>
     </li>
   </ul>
-  {% if status %}<div class="{{ status }}"><a class="close">×</a>{{ message }}</div>{% endif %}
-  <div class="form-horizontal">
+  {% include "error/message.html" %}
+  <div class="form-horizontal" ng-controller="UsersCtrl">
     <fieldset>
-      <section class="sec_account">
-        {% include "modules/users/account.html" %}
+
+      <section ng-class="{hidden:tab_menu.selected != 'account'}" data-test="tab-1">
+        {% include "admin/users/account.html" %}
+        {% if my.rank < 15 %}
+        <div class="control-group">
+          <label>Status</label>
+          <div class="controls">
+            <select ng-model="user.status">
+              <option value="0">Disattivato</option>
+              <option value="1">Attivo</option>
+            </select>
+          </div>
+        </div>
+        {% endif %}
       </section>
-      <section class="sec_profile">
-        {% include "modules/users/upload_image.html" %}
-        {% include "modules/users/profile.html" %}
+
+      <section class="hidden" ng-class="{hidden:tab_menu.selected != 'profile'}" data-test="tab-2">
+        {% include "admin/users/upload_image.html" %}
+        {% include "admin/users/profile.html" %}
       </section>
-      <section class="sec_password">
+
+      <section class="hidden" ng-class="{hidden:tab_menu.selected != 'others'}" data-test="tab-3">
+        {% include "admin/users/others.html" %}
+      </section>
+
+      <section class="hidden" ng-class="{hidden:tab_menu.selected != 'password'}" data-test="tab-4">
         <div class="control-group">
           <label>Nuova Password</label>
           <div class="controls">
-            <input type="password" name="password_new" value="" tabindex="3" maxlength="20" />
+            <input type="password" tabindex="3" maxlength="20" ng-model="user.password_new" data-test="password_new" />
           </div>
         </div>
         <div class="control-group">
           <label>Nuova {{ g.users.check_password }}</label>
           <div class="controls">
-            <input type="password" name="password_check" value="" tabindex="4" maxlength="20" />
+            <input type="password" tabindex="4" maxlength="20" ng-model="user.password_check" data-test="password_check" />
           </div>
         </div>
       </section>
+
       <div class="form-actions">
-        <button tabindex="200" type="submit" class="button button-submit">{{ g.admin.save }}</button>
+        <button tabindex="200" ng-click="stop_upload();save()" 
+        class="button button-submit" data-test="submit">{{ g.admin.save }}</button>
       </div>
     </fieldset>
   </div><!-- .form-horizontal -->
-</form>
+</div>
+{% endblock %}
+
+{% block js_module_files %}
+  {% if not sync %}
+    "{{ '/static/js/%s' % js_version['users'] }}",
+    "{{ '/static/js/%s' % js_version['upload'] }}",
+  {% endif %}
+{% endblock %}
+
+{% block js_module_files_sync %}
+  {% if sync %}
+    <script src="{{ '/static/js/%s' % js_version['users'] }}" ></script>
+    <script src="{{ '/static/js/%s' % js_version['upload'] }}" ></script>
+  {% endif %}
+{% endblock %}
+
+{% block js_data %}
+<script>
+page["user"] = {
+  _id: "{{ data.user._id }}",
+  username: "{{ data.user.username }}",
+  email: "{{ data.user.email }}",
+  rank: "{{ data.user.rank }}",
+  lan: "{{ data.user.lan }}",
+  time_zone: "{{ data.user.time_zone }}",
+  name: "{{ data.user.name }}",
+  location: "{{ data.user.location }}",
+  web: "{{ data.user.web }}",
+  description: "{{ data.user.description }}",
+  image_show: "{{ data.user.image_show }}",
+  status: {{ data.user.status }}
+}
+</script>
 {% endblock %}

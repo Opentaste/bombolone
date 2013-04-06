@@ -1,25 +1,25 @@
 <div class="control-group">
     <label>Username</label>
     <div class="controls">
-        <input type="text" name="username" value="{{ user.username }}" tabindex="1" maxlength="20">
+        <input type="text" ng-model="user.username" tabindex="1" maxlength="20" data-test="username">
         <p class="help-block">Write username</p>
     </div>
 </div>
 <div class="control-group">
-	<label>Email</label>
-	<div class="controls">
-	    <input type="text" name="email" value="{{ user.email }}" class="span4" tabindex="2" maxlength="200">
-	    <p class="help-block">Write email</p>
-	</div>
+    <label>Email</label>
+    <div class="controls">
+        <input type="text" ng-model="user.email" class="span4" tabindex="2" maxlength="200" data-test="email">
+        <p class="help-block">Write email</p>
+    </div>
 </div>
-{% if my.rank < 40 and g.list_ranks %}
+{% if my.rank == 10 and list_ranks %}
 <div class="control-group">
     <label>{{ g.users.rank }}</label>
     <div class="controls">
-        <select name="rank">
-            {% for x in g.list_ranks if (x.rank > my.rank or my.rank < 15) and x.rank < 70 %}
-            <option value="{{ x.rank }}" 
-            {% if user.rank == x.rank %}selected="selected"{% endif %}>{{ x.name }}</option>
+        <select ng-model="user.rank">
+            <option value="" selected="selected"></option>
+            {% for x in list_ranks %}
+            <option value="{{ x.rank }}">{{ x.name }}</option>
             {% endfor %}
         </select>
     </div>
@@ -28,235 +28,129 @@
 <div class="control-group">
     <label>{{ g.users.language }}</label>
     <div class="controls">
-        <select name="language">
+        <select ng-model="user.lan" ng-istant-model>
+            <option value="" selected="selected"></option>
             {% for code, name in language_name %}
-            <option value="{{ code }}" {% if user.lan == code %}selected="selected"{% endif %} >{{ name }}</option>
+            <option value="{{ code }}">{{ name }}</option>
             {% endfor %}
         </select>
     </div>
 </div>
 <div class="control-group">
-	<label>{{ g.users.time_zone }}</label>
-	<div class="controls">
-	    <select name="time_zone">
-		     <option {% if user.time_zone == 'US/Hawaii' %}selected="selected"{% endif %} 
-		     value="US/Hawaii">(UTC-10:00) Hawaii</option>
-             <option {% if user.time_zone == 'US/Alaska' %}selected="selected"{% endif %}
-             value="US/Alaska">(UTC-09:00) Alaska</option>
-             <option {% if user.time_zone=='US/Pacific' %}selected="selected"{% endif %} 
-             value="US/Pacific">(UTC-8) Pacific Time - USA &amp; Canada</option>
-             <option {% if user.time_zone=='US/Arizona' %}selected="selected"{% endif %} 
-             value="US/Arizona">(UTC-7) Arizona</option>
-             <option {% if user.time_zone=='US/Mountain' %}selected="selected"{% endif %} 
-             value="US/Mountain">(UTC-7) Mountain Time - USA &amp; Canada</option>
-             <option {% if user.time_zone=='US/Central' %}selected="selected"{% endif %} 
-             value="US/Central">(UTC-6) Central Time - USA &amp; Canada</option>
-             <option {% if user.time_zone=='US/Eastern' %}selected="selected"{% endif %} 
-             value="US/Eastern">(UTC-5) Eastern Time - USA &amp; Canada</option>
-             <option {% if user.time_zone == 'Canada/Atlantic'%}selected="selected"{% endif %} 
-   			 value="Canada/Atlantic">(UTC-4) Atlantic Time</option>
-             <option {% if user.time_zone == 'Canada/Newfoundland'%}selected="selected"{% endif %} 
-  			 value="Canada/Newfoundland">(UTC-3) Newfoundland</option>
+    <label>{{ g.users.time_zone }}</label>
+    <div class="controls">
+        <select ng-model="user.time_zone">
+            <option value="" selected="selected"></option>
+            <option value="US/Hawaii">(UTC-10:00) Hawaii</option>
+            <option value="US/Alaska">(UTC-09:00) Alaska</option>
+            <option value="US/Pacific">(UTC-8) Pacific Time - USA &amp; Canada</option>
+            <option value="US/Arizona">(UTC-7) Arizona</option>
+            <option value="US/Mountain">(UTC-7) Mountain Time - USA &amp; Canada</option>
+            <option value="US/Central">(UTC-6) Central Time - USA &amp; Canada</option>
+            <option value="US/Eastern">(UTC-5) Eastern Time - USA &amp; Canada</option>
+            <option value="Canada/Atlantic">(UTC-4) Atlantic Time</option>
+            <option value="Canada/Newfoundland">(UTC-3) Newfoundland</option>
 
-             <option disabled="disabled" value="">-- {{ g.users.time_zone_end_1 }} --</option>
+            <option disabled="disabled" value="">-- {{ g.users.time_zone_end_1 }} --</option>
 
-             <option {% if user.time_zone=='Pacific/Midway' %}selected="selected"{% endif %} 
-             value="Pacific/Midway">(UTC-11) Midway Island</option>
-             <option {% if user.time_zone=='America/Tijuana' %}selected="selected"{% endif %} 
-             value="America/Tijuana">(UTC-8) Tijuana</option>
-             <option {% if user.time_zone=='America/Chihuahua' %}selected="selected"{% endif %} 
-             value="America/Chihuahua">(UTC-7) Chihuahua</option>
-             <option {% if user.time_zone=='America/Mazatlan' %}selected="selected"{% endif %} 
-             value="America/Mazatlan">(UTC-7) Mazatlan</option>
-             <option {% if user.time_zone=='America/Mexico_City' %}selected="selected"{% endif %} 
-             value="America/Mexico_City">(UTC-6) Mexico City</option>
-             <option {% if user.time_zone=='America/Monterrey' %}selected="selected"{% endif %} 
-             value="America/Monterrey">(UTC-6) Monterrey</option>
-             <option {% if user.time_zone=='America/Bogota' %}selected="selected"{% endif %} 
-       		 value="America/Bogota">(UTC-5) Bogota</option>
-             <option {% if user.time_zone=='America/Lima' %}selected="selected"{% endif %} 
-      		 value="America/Lima">(UTC-5) Lima</option>
-             <option {% if user.time_zone=='America/Caracas' %}selected="selected"{% endif %} 
-     		 value="America/Caracas">(UTC-4) Caracas</option>
-             <option {% if user.time_zone=='Canada/Atlantic' %}selected="selected"{% endif %} 
-    		 value="Canada/Atlantic">(UTC-4) Atlantic Time (Canada)</option>
-             <option {% if user.time_zone=='America/La_Paz' %}selected="selected"{% endif %} 
-   			 value="America/La_Paz">(UTC-4) La Paz</option>
-             <option {% if user.time_zone=='America/Santiago'%}selected="selected"{% endif %} 
-  			 value="America/Santiago">(UTC-4) Santiago</option>
-             <option {% if user.time_zone == 'America/Argentina/Buenos_Aires' %}
-             selected="selected"{% endif %} 
-			 value="America/Argentina/Buenos_Aires">(UTC-3) Buenos Aires</option>
-			     <option {% if user.time_zone == 'Atlantic/Azores' %}selected="selected"{% endif %} 
-			     value="Atlantic/Azores">(UTC-1) Azores</option>                
-             <option {% if user.time_zone == 'Atlantic/Cape_Verde' %}selected="selected"{% endif %} 
-			     value="Atlantic/Cape_Verde">(UTC-1) Cape Verde</option>
-			     <option {% if user.time_zone == 'Africa/Casablanca' %}selected="selected"{% endif %} 
-			     value="Africa/Casablanca">(UTC) Casablanca</option>
-			     <option {% if user.time_zone == 'Europe/Dublin' %}selected="selected"{% endif %} 
-			     value="Europe/Dublin">(UTC) Dublin</option>
-             <option {% if user.time_zone == 'Europe/Lisbon' %}selected="selected"{% endif %} 
-			     value="Europe/Lisbon">(UTC) Lisbon</option>
-             <option {% if user.time_zone == 'Europe/London' %}selected="selected"{% endif %} 
-			     value="Europe/London">(UTC) London</option>
-             <option {% if user.time_zone == 'Africa/Monrovia' %}selected="selected"{% endif %} 
-			     value="Africa/Monrovia">(UTC) Monrovia</option>
-		     <option {% if user.time_zone == 'Europe/Amsterdam' %}selected="selected"{% endif %} 
-		     value="Europe/Amsterdam">(UTC+1) Amsterdam</option>
-             <option {% if user.time_zone == 'Europe/Belgrade' %}selected="selected"{% endif %}
-             value="Europe/Belgrade">(UTC+1) Belgrade</option>
-             <option {% if user.time_zone == 'Europe/Berlin' %}selected="selected"{% endif %}
-             value="Europe/Berlin">(UTC+1) Berlin</option>
-             <option {% if user.time_zone == 'Europe/Bratislava' %}selected="selected"{% endif %}
-             value="Europe/Bratislava">(UTC+1) Bratislava</option>
-             <option {% if user.time_zone == 'Europe/Brussels' %}selected="selected"{% endif %}
-             value="Europe/Brussels">(UTC+1) Brussels</option>
-             <option {% if user.time_zone == 'Europe/Budapest' %}selected="selected"{% endif %}
-             value="Europe/Budapest">(UTC+1) Budapest</option>
-             <option {% if user.time_zone == 'Europe/Copenhagen' %}selected="selected"{% endif %}
-             value="Europe/Copenhagen">(UTC+1) Copenhagen</option>
-             <option {% if user.time_zone == 'Europe/Ljubljana' %}selected="selected"{% endif %}
-             value="Europe/Ljubljana">(UTC+1) Ljubljana</option>
-             <option {% if user.time_zone == 'Europe/Madrid' %}selected="selected"{% endif %}
-             value="Europe/Madrid">(UTC+1) Madrid</option>
-             <option {% if user.time_zone == 'Europe/Paris' %}selected="selected"{% endif %}
-             value="Europe/Paris">(UTC+1) Paris</option>
-             <option {% if user.time_zone == 'Europe/Prague' %}selected="selected"{% endif %}
-             value="Europe/Prague">(UTC+1) Prague</option>
-             <option {% if user.time_zone == 'Europe/Rome' %}selected="selected"{% endif %}
-             value="Europe/Rome">(UTC+1) Rome</option>
-             <option {% if user.time_zone == 'Europe/Sarajevo' %}selected="selected"{% endif %}
-             value="Europe/Sarajevo">(UTC+1) Sarajevo</option>
-             <option {% if user.time_zone == 'Europe/Skopje' %}selected="selected"{% endif %}
-             value="Europe/Skopje">(UTC+1) Skopje</option>
-             <option {% if user.time_zone == 'Europe/Stockholm' %}selected="selected"{% endif %}
-             value="Europe/Stockholm">(UTC+1) Stockholm</option>
-             <option {% if user.time_zone == 'Europe/Vienna' %}selected="selected"{% endif %}
-             value="Europe/Vienna">(UTC+1) Vienna</option>
-             <option {% if user.time_zone == 'Europe/Warsaw' %}selected="selected"{% endif %}
-             value="Europe/Warsaw">(UTC+1) Warsaw</option>
-             <option {% if user.time_zone == 'Europe/Zagreb' %}selected="selected"{% endif %}
-             value="Europe/Zagreb">(UTC+1) Zagreb</option>
-             <option {% if user.time_zone == 'Europe/Zurich' %}selected="selected"{% endif %}
-             value="Europe/Zurich">(UTC+1) Zurich</option>
-             <option {% if user.time_zone == 'Europe/Athens' %}selected="selected"{% endif %}
-             value="Europe/Athens">(UTC+2) Athens</option>
-             <option {% if user.time_zone == 'Europe/Bucharest' %}selected="selected"{% endif %}
-             value="Europe/Bucharest">(UTC+2) Bucharest</option>
-             <option {% if user.time_zone == 'Africa/Cairo' %}selected="selected"{% endif %}
-             value="Africa/Cairo">(UTC+2) Cairo</option>
-             <option {% if user.time_zone == 'Africa/Harare' %}selected="selected"{% endif %}
-             value="Africa/Harare">(UTC+2) Harare</option>
-             <option {% if user.time_zone == 'Europe/Helsinki' %}selected="selected"{% endif %}
-             value="Europe/Helsinki">(UTC+2) Helsinki</option>
-             <option {% if user.time_zone == 'Europe/Istanbul' %}selected="selected"{% endif %}
-             value="Europe/Istanbul">(UTC+2) Istanbul</option>
-             <option {% if user.time_zone == 'Asia/Jerusalem' %}selected="selected"{% endif %}
-             value="Asia/Jerusalem">(UTC+2) Jerusalem</option>
-             <option {% if user.time_zone == 'Europe/Minsk' %}selected="selected"{% endif %}
-             value="Europe/Minsk">(UTC+2) Minsk</option>
-             <option {% if user.time_zone == 'Europe/Riga' %}selected="selected"{% endif %}
-             value="Europe/Riga">(UTC+2) Riga</option>
-             <option {% if user.time_zone == 'Europe/Sofia' %}selected="selected"{% endif %}
-             value="Europe/Sofia">(UTC+2) Sofia</option>
-             <option {% if user.time_zone == 'Europe/Tallinn' %}selected="selected"{% endif %}
-             value="Europe/Tallinn">(UTC+2) Tallinn</option>
-             <option {% if user.time_zone == 'Europe/Vilnius' %}selected="selected"{% endif %}
-             value="Europe/Vilnius">(UTC+2) Vilnius</option>
-             <option {% if user.time_zone == 'Asia/Baghdad' %}selected="selected"{% endif %}
-             value="Asia/Baghdad">(UTC+3) Baghdad</option>
-             <option {% if user.time_zone == 'Asia/Kuwait' %}selected="selected"{% endif %}
-             value="Asia/Kuwait">(UTC+3) Kuwait</option>
-             <option {% if user.time_zone == 'Europe/Moscow' %}selected="selected"{% endif %}
-             value="Europe/Moscow">(UTC+3) Moscow</option>
-             <option {% if user.time_zone == 'Africa/Nairobi' %}selected="selected"{% endif %}
-             value="Africa/Nairobi">(UTC+3) Nairobi</option>
-             <option {% if user.time_zone == 'Asia/Riyadh' %}selected="selected"{% endif %}
-             value="Asia/Riyadh">(UTC+3) Riyadh</option>
-             <option {% if user.time_zone == 'Europe/Volgograd' %}selected="selected"{% endif %}
-             value="Europe/Volgograd">(UTC+3) Volgograd</option>
-             <option {% if user.time_zone == 'Asia/Tehran' %}selected="selected"{% endif %}
-             value="Asia/Tehran">(UTC+3) Tehran</option>
-             <option {% if user.time_zone == 'Asia/Baku' %}selected="selected"{% endif %}
-             value="Asia/Baku">(UTC+4) Baku</option>
-             <option {% if user.time_zone == 'Asia/Muscat' %}selected="selected"{% endif %}
-             value="Asia/Muscat">(UTC+4) Muscat</option>
-             <option {% if user.time_zone == 'Asia/Tbilisi' %}selected="selected"{% endif %}
-             value="Asia/Tbilisi">(UTC+4) Tbilisi</option> 
-             <option {% if user.time_zone == 'Asia/Yerevan' %}selected="selected"{% endif %}
-             value="Asia/Yerevan">(UTC+4) Yerevan</option>
-             <option {% if user.time_zone == 'Asia/Kabul' %}selected="selected"{% endif %}
-             value="Asia/Kabul">(UTC+4:30) Kabul</option>
-             <option {% if user.time_zone == 'Asia/Karachi' %}selected="selected"{% endif %}
-             value="Asia/Karachi">(UTC+5) Karachi</option>
-             <option {% if user.time_zone == 'Asia/Tashkent' %}selected="selected"{% endif %}
-             value="Asia/Tashkent">(UTC+5) Tashkent</option>
-             <option {% if user.time_zone == 'Asia/Kolkata' %}selected="selected"{% endif %}
-             value="Asia/Kolkata">(UTC+5:30) Kolkata</option>
-             <option {% if user.time_zone == 'Asia/Kathmandu' %}selected="selected"{% endif %}
-             value="Asia/Kathmandu">(UTC+5:45) Kathmandu</option>
-             <option {% if user.time_zone == 'Asia/Almaty' %}selected="selected"{% endif %}
-             value="Asia/Almaty">(UTC+6) Almaty</option>
-             <option {% if user.time_zone == 'Asia/Dhaka' %}selected="selected"{% endif %}
-             value="Asia/Dhaka">(UTC+6) Dhaka</option>
-             <option {% if user.time_zone == 'Asia/Novosibirsk' %}selected="selected"{% endif %}
-             value="Asia/Novosibirsk">(UTC+6) Novosibirsk</option>
-             <option {% if user.time_zone == 'Asia/Rangoon' %}selected="selected"{% endif %}
-             value="Asia/Rangoon">(UTC+6:30) Rangoon</option>
-             <option {% if user.time_zone == 'Asia/Bangkok' %}selected="selected"{% endif %}
-             value="Asia/Bangkok">(UTC+7) Bangkok</option>
-             <option {% if user.time_zone == 'Asia/Jakarta' %}selected="selected"{% endif %}
-             value="Asia/Jakarta">(UTC+7) Jakarta</option>            
-             <option {% if user.time_zone == 'Asia/Krasnoyarsk' %}selected="selected"{% endif %}
-             value="Asia/Krasnoyarsk">(UTC+7) Krasnoyarsk</option>
-             <option {% if user.time_zone == 'Asia/Hong_Kong' %}selected="selected"{% endif %}
-             value="Asia/Hong_Kong">(UTC+8) Hong Kong</option>            
-             <option {% if user.time_zone == 'Asia/Irkutsk' %}selected="selected"{% endif %}
-             value="Asia/Irkutsk">(UTC+8) Irkutsk</option>            
-             <option {% if user.time_zone == 'Asia/Kuala_Lumpur' %}selected="selected"{% endif %}
-             value="Asia/Kuala_Lumpur">(UTC+8) Kuala Lumpur</option>
-             <option {% if user.time_zone == 'Australia/Perth' %}selected="selected"{% endif %}
-             value="Australia/Perth">(UTC+8) Perth</option>             
-             <option {% if user.time_zone == 'Asia/Singapore' %}selected="selected"{% endif %}
-             value="Asia/Singapore">(UTC+8) Singapore</option>            
-             <option {% if user.time_zone == 'Asia/Taipei' %}selected="selected"{% endif %}
-             value="Asia/Taipei">(UTC+8) Taipei</option>
-             <option {% if user.time_zone == 'Asia/Ulaanbaatar' %}selected="selected"{% endif %}
-             value="Asia/Ulaanbaatar">(UTC+8) Ulaan Bataar</option>            
-             <option {% if user.time_zone == 'Asia/Urumqi' %}selected="selected"{% endif %}
-             value="Asia/Urumqi">(UTC+8) Urumqi</option>            
-             <option {% if user.time_zone == 'Asia/Seoul' %}selected="selected"{% endif %}
-             value="Asia/Seoul">(UTC+9) Seoul</option>
-             <option {% if user.time_zone == 'Asia/Tokyo' %}selected="selected"{% endif %}
-             value="Asia/Tokyo">(UTC+9) Tokyo</option>            
-             <option {% if user.time_zone == 'Asia/Yakutsk' %}selected="selected"{% endif %}
-             value="Asia/Yakutsk">(UTC+9) Yakutsk</option>            
-             <option {% if user.time_zone == 'Australia/Adelaide' %}selected="selected"{% endif %}
-             value="Australia/Adelaide">(UTC+9:30) Adelaide</option>
-             <option {% if user.time_zone == 'Australia/Darwin' %}selected="selected"{% endif %}
-             value="Australia/Darwin">(UTC+9:30) Darwin</option>
-             <option {% if user.time_zone == 'Australia/Brisbane' %}selected="selected"{% endif %}
-             value="Australia/Brisbane">(UTC+10) Brisbane</option>            
-             <option {% if user.time_zone == 'Pacific/Guam' %}selected="selected"{% endif %}
-             value="Pacific/Guam">(UTC+10) Guam</option>
-             <option {% if user.time_zone == 'Australia/Hobart' %}selected="selected"{% endif %}
-             value="Australia/Hobart">(UTC+10) Hobart</option>
-             <option {% if user.time_zone == 'Australia/Melbourne' %}selected="selected"{% endif %}
-             value="Australia/Melbourne">(UTC+10) Melbourne</option>            
-             <option {% if user.time_zone == 'Pacific/Port_Moresby' %}selected="selected"{% endif %}
-             value="Pacific/Port_Moresby">(UTC+10) Port Moresby</option>
-             <option {% if user.time_zone == 'Australia/Sydney' %}selected="selected"{% endif %}
-             value="Australia/Sydney">(UTC+10) Sydney</option>
-             <option {% if user.time_zone == 'Asia/Vladivostok' %}selected="selected"{% endif %}
-             value="Asia/Vladivostok">(UTC+10) Vladivostok</option>            
-             <option {% if user.time_zone == 'Asia/Magadan' %}selected="selected"{% endif %}
-             value="Asia/Magadan">(UTC+10) Magadan</option>
-             <option {% if user.time_zone == 'Pacific/Auckland' %}selected="selected"{% endif %}
-             value="Pacific/Auckland">(UTC+12) Auckland</option>     
-             <option {% if user.time_zone == 'Pacific/Fiji' %}selected="selected"{% endif %}
-             value="Pacific/Fiji">(UTC+12) Fiji</option>            
-             <option {% if user.time_zone == 'Asia/Kamchatka' %}selected="selected"{% endif %}
-             value="Asia/Kamchatka">(UTC+12) Kamchatka</option>
-	    </select>
-	</div><!-- .controls -->
+            <option value="Pacific/Midway">(UTC-11) Midway Island</option>
+            <option value="America/Tijuana">(UTC-8) Tijuana</option>
+            <option value="America/Chihuahua">(UTC-7) Chihuahua</option>
+            <option value="America/Mazatlan">(UTC-7) Mazatlan</option>
+            <option value="America/Mexico_City">(UTC-6) Mexico City</option>
+            <option value="America/Monterrey">(UTC-6) Monterrey</option>
+            <option value="America/Bogota">(UTC-5) Bogota</option>
+            <option value="America/Lima">(UTC-5) Lima</option>
+            <option value="America/Caracas">(UTC-4) Caracas</option>
+            <option value="Canada/Atlantic">(UTC-4) Atlantic Time (Canada)</option>
+            <option value="America/La_Paz">(UTC-4) La Paz</option>
+            <option value="America/Santiago">(UTC-4) Santiago</option>
+            <option value="America/Argentina/Buenos_Aires">(UTC-3) Buenos Aires</option>
+            <option value="Atlantic/Azores">(UTC-1) Azores</option>                
+            <option value="Atlantic/Cape_Verde">(UTC-1) Cape Verde</option>
+            <option value="Africa/Casablanca">(UTC) Casablanca</option>
+            <option value="Europe/Dublin">(UTC) Dublin</option>
+            <option value="Europe/Lisbon">(UTC) Lisbon</option>
+            <option value="Europe/London">(UTC) London</option>
+            <option value="Africa/Monrovia">(UTC) Monrovia</option>
+            <option value="Europe/Amsterdam">(UTC+1) Amsterdam</option>
+            <option value="Europe/Belgrade">(UTC+1) Belgrade</option>
+            <option value="Europe/Berlin">(UTC+1) Berlin</option>
+            <option value="Europe/Bratislava">(UTC+1) Bratislava</option>
+            <option value="Europe/Brussels">(UTC+1) Brussels</option>
+            <option value="Europe/Budapest">(UTC+1) Budapest</option>
+            <option value="Europe/Copenhagen">(UTC+1) Copenhagen</option>
+            <option value="Europe/Ljubljana">(UTC+1) Ljubljana</option>
+            <option value="Europe/Madrid">(UTC+1) Madrid</option>
+            <option value="Europe/Paris">(UTC+1) Paris</option>
+            <option value="Europe/Prague">(UTC+1) Prague</option>
+            <option value="Europe/Rome">(UTC+1) Rome</option>
+            <option value="Europe/Sarajevo">(UTC+1) Sarajevo</option>
+            <option value="Europe/Skopje">(UTC+1) Skopje</option>
+            <option value="Europe/Stockholm">(UTC+1) Stockholm</option>
+            <option value="Europe/Vienna">(UTC+1) Vienna</option>
+            <option value="Europe/Warsaw">(UTC+1) Warsaw</option>
+            <option value="Europe/Zagreb">(UTC+1) Zagreb</option>
+            <option value="Europe/Zurich">(UTC+1) Zurich</option>
+            <option value="Europe/Athens">(UTC+2) Athens</option>
+            <option value="Europe/Bucharest">(UTC+2) Bucharest</option>
+            <option value="Africa/Cairo">(UTC+2) Cairo</option>
+            <option value="Africa/Harare">(UTC+2) Harare</option>
+            <option value="Europe/Helsinki">(UTC+2) Helsinki</option>
+            <option value="Europe/Istanbul">(UTC+2) Istanbul</option>
+            <option value="Asia/Jerusalem">(UTC+2) Jerusalem</option>
+            <option value="Europe/Minsk">(UTC+2) Minsk</option>
+            <option value="Europe/Riga">(UTC+2) Riga</option>
+            <option value="Europe/Sofia">(UTC+2) Sofia</option>
+            <option value="Europe/Tallinn">(UTC+2) Tallinn</option>
+            <option value="Europe/Vilnius">(UTC+2) Vilnius</option>
+            <option value="Asia/Baghdad">(UTC+3) Baghdad</option>
+            <option value="Asia/Kuwait">(UTC+3) Kuwait</option>
+            <option value="Europe/Moscow">(UTC+3) Moscow</option>
+            <option value="Africa/Nairobi">(UTC+3) Nairobi</option>
+            <option value="Asia/Riyadh">(UTC+3) Riyadh</option>
+            <option value="Europe/Volgograd">(UTC+3) Volgograd</option>
+            <option value="Asia/Tehran">(UTC+3) Tehran</option>
+            <option value="Asia/Baku">(UTC+4) Baku</option>
+            <option value="Asia/Muscat">(UTC+4) Muscat</option>
+            <option value="Asia/Tbilisi">(UTC+4) Tbilisi</option> 
+            <option value="Asia/Yerevan">(UTC+4) Yerevan</option>
+            <option value="Asia/Kabul">(UTC+4:30) Kabul</option>
+            <option value="Asia/Karachi">(UTC+5) Karachi</option>
+            <option value="Asia/Tashkent">(UTC+5) Tashkent</option>
+            <option value="Asia/Kolkata">(UTC+5:30) Kolkata</option>
+            <option value="Asia/Kathmandu">(UTC+5:45) Kathmandu</option>
+            <option value="Asia/Almaty">(UTC+6) Almaty</option>
+            <option value="Asia/Dhaka">(UTC+6) Dhaka</option>
+            <option value="Asia/Novosibirsk">(UTC+6) Novosibirsk</option>
+            <option value="Asia/Rangoon">(UTC+6:30) Rangoon</option>
+            <option value="Asia/Bangkok">(UTC+7) Bangkok</option>
+            <option value="Asia/Jakarta">(UTC+7) Jakarta</option>            
+            <option value="Asia/Krasnoyarsk">(UTC+7) Krasnoyarsk</option>
+            <option value="Asia/Hong_Kong">(UTC+8) Hong Kong</option>            
+            <option value="Asia/Irkutsk">(UTC+8) Irkutsk</option>            
+            <option value="Asia/Kuala_Lumpur">(UTC+8) Kuala Lumpur</option>
+            <option value="Australia/Perth">(UTC+8) Perth</option>             
+            <option value="Asia/Singapore">(UTC+8) Singapore</option>            
+            <option value="Asia/Taipei">(UTC+8) Taipei</option>
+            <option value="Asia/Ulaanbaatar">(UTC+8) Ulaan Bataar</option>            
+            <option value="Asia/Urumqi">(UTC+8) Urumqi</option>            
+            <option value="Asia/Seoul">(UTC+9) Seoul</option>
+            <option value="Asia/Tokyo">(UTC+9) Tokyo</option>            
+            <option value="Asia/Yakutsk">(UTC+9) Yakutsk</option>            
+            <option value="Australia/Adelaide">(UTC+9:30) Adelaide</option>
+            <option value="Australia/Darwin">(UTC+9:30) Darwin</option>
+            <option value="Australia/Brisbane">(UTC+10) Brisbane</option>            
+            <option value="Pacific/Guam">(UTC+10) Guam</option>
+            <option value="Australia/Hobart">(UTC+10) Hobart</option>
+            <option value="Australia/Melbourne">(UTC+10) Melbourne</option>            
+            <option value="Pacific/Port_Moresby">(UTC+10) Port Moresby</option>
+            <option value="Australia/Sydney">(UTC+10) Sydney</option>
+            <option value="Asia/Vladivostok">(UTC+10) Vladivostok</option>            
+            <option value="Asia/Magadan">(UTC+10) Magadan</option>
+            <option value="Pacific/Auckland">(UTC+12) Auckland</option>     
+            <option value="Pacific/Fiji">(UTC+12) Fiji</option>            
+            <option value="Asia/Kamchatka">(UTC+12) Kamchatka</option>
+        </select>
+    </div><!-- .controls -->
 </div><!-- .control-group -->

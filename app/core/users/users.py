@@ -26,11 +26,11 @@ from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 from pymongo.errors import InvalidId, PyMongoError
 
-# Imports inside Opentaste
+# Imports inside Bombolone
 from config import PATH, LIST_LANGUAGES, UP_AVATARS_TMP_FOLDER
 from decorators import check_rank, get_hash
 
-# Imports from Opentaste's Core
+# Imports from Bombolone's Core
 from core.emails import ChangeEmail
 from core.not_allowed import PROHIBITED_NAME_LIST
 from core.utils import create_password
@@ -92,7 +92,7 @@ class User(object):
         self.list_images = []
         self.message = None
         self.success = False
-        self.changed_ot_name = False
+        self.changed_username = False
         self.user = { 
             "created": datetime.utcnow(),
             "description": "",
@@ -113,7 +113,7 @@ class User(object):
             "notifications" : {
                 "comments" : [ ]
             },
-            "ot_name": "",
+            "username": "",
             "password": "",
             "remember_verify": "",
             "rank": 80,
@@ -270,8 +270,8 @@ class User(object):
     def __request_account(self, settings=None): 
         """ Get from request.form the account values and check it """
         form = self.params
-        old_ot_name = self.user['ot_name']
-        self.user['ot_name'] = form['ot_name']
+        old_username = self.user['username']
+        self.user['username'] = form['username']
         old_email = self.user['email']
         new_email = str.lower(str(form['email']))
         self.user['lan'] = form['lan']
@@ -284,41 +284,41 @@ class User(object):
             if form['rank'] in map(str, range(10, 90, 10)):
                 self.user['rank'] = int(form['rank'])
         
-        # Check that the ot_name field is not empty
-        if not len(self.user['ot_name']):
+        # Check that the username field is not empty
+        if not len(self.user['username']):
             self.message = g.users_msg('error_account_1')
         
-        # If the ot_name is changed
-        elif old_ot_name != self.user['ot_name']:
+        # If the username is changed
+        elif old_username != self.user['username']:
             # It's important to change directory avatars
-            # Changed ot_name from old_ot_name to new_ot_name
-            new_ot_name = unicode(self.user['ot_name']).lower()
-            old_ot_name = unicode(old_ot_name).lower()
+            # Changed username from old_username to new_username
+            new_username = unicode(self.user['username']).lower()
+            old_username = unicode(old_username).lower()
             
-            # Check the ot_name is available and if is different from old ot_name
-            if new_ot_name != old_ot_name:
+            # Check the username is available and if is different from old username
+            if new_username != old_username:
                 try:
-                    regx = re.compile('^'+new_ot_name+'$', re.IGNORECASE)
-                    available_ot_name = g.db.users.find_one({"ot_name" : regx })
+                    regx = re.compile('^'+new_username+'$', re.IGNORECASE)
+                    available_username = g.db.users.find_one({"username" : regx })
                 except:
-                    available_ot_name = 'Error invalid expression'
+                    available_username = 'Error invalid expression'
             else:
-                available_ot_name = None
+                available_username = None
             
-            # Check that the ot_name has between 2 and 20 characters
-            if not check.length(self.user['ot_name'], 2, 20):
+            # Check that the username has between 2 and 20 characters
+            if not check.length(self.user['username'], 2, 20):
                 self.message = g.users_msg('error_account_2')
             
-            # Verify that the format of the ot_name is correct
-            elif not check.username(self.user['ot_name']):
+            # Verify that the format of the username is correct
+            elif not check.username(self.user['username']):
                 self.message = g.users_msg('error_account_3')
             
-            # Check that the ot_name is not among those prohibited.
-            elif self.user['ot_name'] in PROHIBITED_NAME_LIST:
+            # Check that the username is not among those prohibited.
+            elif self.user['username'] in PROHIBITED_NAME_LIST:
                 self.message = g.users_msg('error_account_4')
             
-            # Raises an error message if ot_name is not available.
-            elif not available_ot_name is None:
+            # Raises an error message if username is not available.
+            elif not available_username is None:
                 self.message = g.users_msg('error_account_5')
         
         
@@ -422,7 +422,7 @@ class User(object):
         file_name = os.path.join(UP_AVATARS_TMP_FOLDER, self.user['image_tmp'])
         if os.path.exists(file_name):
             with open(file_name) as image:
-                up = Upload(self.user['ot_name'], image)
+                up = Upload(self.user['username'], image)
                 up.avatar_upload(self.user['_id'])
             
             self.list_images = up.names_list
@@ -438,7 +438,7 @@ class User(object):
         context = {
             "path": '{}/change_email'.format(PATH),
             "verify": verify,
-            "ot_name": g.my['ot_name']
+            "username": g.my['username']
         }
         msg = ChangeEmail(self.user['new_email'], context)
         email_response = msg.send()

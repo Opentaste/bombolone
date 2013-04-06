@@ -6,7 +6,7 @@ UsersCtrl = function($scope, $resource, $rootScope) {
   user_value = page["user"] || {};
   $scope.user = {
     _id: user_value["_id"] || "",
-    ot_name: user_value["ot_name"] || "",
+    username: user_value["username"] || "",
     email: user_value["email"] || "",
     rank: user_value["rank"] || "",
     lan: user_value["lan"] || "",

@@ -3,9 +3,9 @@
 verify.py
 ~~~~~~
 
-:copyright: (c) 2012 by OpenTaste
+:copyright: (c) 2013 by Bombolone
 """
-# Imports outside OpenTaste
+# Imports outside Bombolone
 import re
 import os
 import string
@@ -19,33 +19,33 @@ from urlparse import urlparse
 from hashlib import md5, sha1
 from flask import session, g, request, abort, current_app
 
-# Imports inside OpenTaste
+# Imports inside Bombolone
 from core.utils import ensure_objectid, create_password
 
 def verify_email(magic_base_string):
-    fake_magic_string = str(magic_base_string) + 'leo'
+    fake_magic_string = str(magic_base_string) + 'bombolone'
     md = md5() 
     sh = sha1()
     md.update(fake_magic_string)
     rand_one = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(8))
     rand_two = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10))
-    sh.update('verifica_muahahah_email')
+    sh.update('verifica_bombolone_email')
     verify = md.hexdigest() + rand_one + sh.hexdigest() + rand_two + '_' + str(magic_base_string)
     return verify
 
 def verify_remember(user):
-    fake_email = user['email'] + 'leonardo'
+    fake_email = user['email'] + 'bombolone'
     md = md5()
     sh = sha1()
     sh_two = sha1()
-    sh_two.update(user['ot_name'])
+    sh_two.update(user['username'])
     check = sh_two.hexdigest()
     g.db.users.update({ '_id' : user['_id'] }, {'remember_password' : check})
     md.update(fake_email)
     rand_one = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(8))
     rand_two = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10))
     rand_three = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(6))
-    sh.update('ma_ke_stai_a_di_muahahah_email')
+    sh.update('ma_ke_bombolone_stai_a_di_email')
     verify = md.hexdigest()+rand_one+sh.hexdigest()+rand_two+'_'+check+rand_three+'_'+str(user['_id'])
     return verify
 

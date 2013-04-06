@@ -52,32 +52,32 @@ describe('Scenario test', function() {
         element('[data-test=submit]').click();
         expect(element('[ng-bind=message_message]').text()).toMatch(/Account updated successfully/);
 
-        input("user.ot_name").enter('');
-        expect(element('[data-test="ot_name"]').val()).toBe("");
+        input("user.username").enter('');
+        expect(element('[data-test="username"]').val()).toBe("");
         element('[data-test="submit"]').click();
         expect(element('[ng-bind=message_message]').text()).toMatch(/You should enter the username/);
 
-        input("user.ot_name").enter('a');
-        expect(element('[data-test="ot_name"]').val()).toBe("a");
+        input("user.username").enter('a');
+        expect(element('[data-test="username"]').val()).toBe("a");
         element('[data-test="submit"]').click();
         expect(element('[ng-bind=message_message]').text()).toMatch(/The username entered must be at least two characters/);
 
-        input("user.ot_name").enter('%%');
-        expect(element('[data-test="ot_name"]').val()).toBe("%%");
+        input("user.username").enter('%%');
+        expect(element('[data-test="username"]').val()).toBe("%%");
         element('[data-test="submit"]').click();
         expect(element('[ng-bind=message_message]').text()).toMatch(/The username must be alphanumeric with no spaces/);
 
-        input("user.ot_name").enter('leonardo');
-        expect(element('[data-test="ot_name"]').val()).toBe("leonardo");
+        input("user.username").enter('leonardo');
+        expect(element('[data-test="username"]').val()).toBe("leonardo");
         element('[data-test="submit"]').click();
         expect(element('[ng-bind=message_message]').text()).toMatch(/The entered username is not available/);
 
-        input("user.ot_name").enter('zizzamia');
-        expect(element('[data-test="ot_name"]').val()).toBe("zizzamia");
+        input("user.username").enter('zizzamia');
+        expect(element('[data-test="username"]').val()).toBe("zizzamia");
         element('[data-test="submit"]').click();
         expect(element('[ng-bind=message_message]').text()).toMatch(/The entered username is not available/);
 
-        input("user.ot_name").enter('jack2'+timpestamp);
+        input("user.username").enter('jack2'+timpestamp);
         
         input("user.email").enter("");
         expect(element('[data-test="email"]').val()).toBe("");

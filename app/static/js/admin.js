@@ -32,7 +32,7 @@ AdminCtrl = function($scope, $resource, $rootScope, $compile) {
         if (resource.success) {
           return $scope.pop_item_from_list();
         } else {
-          return console.log("Non puoi eliminare questo elemento");
+          return alert("You can't remove this element");
         }
       });
     }

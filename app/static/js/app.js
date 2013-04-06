@@ -3,10 +3,6 @@ var AppCtrl;
 
 AppCtrl = function($scope, $resource, $rootScope) {
   var request_with_token;
-  $("[data-attribute=autocomplete_off]").attr("autocomplete", "off");
-  $scope.clean = function() {
-    return $rootScope.ac_show = "";
-  };
   $scope.dropdown = function() {
     if ($rootScope.dropdown_status === "open") {
       return $rootScope.dropdown_status = "";
@@ -26,21 +22,6 @@ AppCtrl = function($scope, $resource, $rootScope) {
         }
       }
     });
-  };
-  $scope.change_photo = function($event) {
-    var next, slide_up;
-    slide_up = $("body").css("overflow");
-    if (slide_up === "hidden") {
-      if ($event.keyCode === 37 && $rootScope.slide_now > 0) {
-        next = parseInt($rootScope.slide_now) - 1;
-        $rootScope.slide_now = next;
-        return $rootScope.slide_power(next, $rootScope.recipe_id);
-      } else if ($event.keyCode === 39 && $rootScope.slide_now < $rootScope.slide_end) {
-        next = parseInt($rootScope.slide_now) + 1;
-        $rootScope.slide_now = next;
-        return $rootScope.slide_power(next, $rootScope.recipe_id);
-      }
-    }
   };
   $scope.la = function(list_code) {
     if ($.inArray($rootScope.lan, list_code) >= 0) {
@@ -120,127 +101,6 @@ AppCtrl = function($scope, $resource, $rootScope) {
   $scope.ajaxAccountUpdatePassword = $resource($rootScope.API + "/account/update_password.json", {
     callback: "JSON_CALLBACK"
   }, request_with_token);
-  $scope.ajaxAutocompleteListIngredients = $resource($rootScope.API + "/autocomplete/list_ingredients.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
-  $scope.ajaxAutocompleteListTags = $resource($rootScope.API + "/autocomplete/list_tags.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
-  $scope.ajaxAutocompleteListIngredientSearch = $resource($rootScope.API + "/autocomplete/list_ingredient_search.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
-  $scope.ajaxAutocompleteListTagSearch = $resource($rootScope.API + "/autocomplete/list_tag_search.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
-  $scope.ajaxTimelineHome = $resource($rootScope.API + "/timeline/home.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
-  $scope.ajaxTimelineUser = $resource($rootScope.API + "/timeline/user.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
-  $scope.ajaxSearchRecipes = $resource($rootScope.API + "/search/recipes.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
-  $scope.ajaxImageView = $resource($rootScope.API + "/images/view.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
-  $scope.ajaxRecipeShow = $resource($rootScope.API + "/recipes/show.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
-  $scope.ajaxMeasuresList = $resource($rootScope.API + "/measures/list.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
-  $scope.ajaxTasty = $resource($rootScope.API + "/recipes/tasty.json", {
-    callback: "JSON_CALLBACK"
-  }, request_with_token);
-  $scope.ajaxFavorite = $resource($rootScope.API + "/recipes/favorite.json", {
-    callback: "JSON_CALLBACK"
-  }, request_with_token);
-  $scope.ajaxComments = $resource($rootScope.API + "/comments/show.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
-  $scope.ajaxCommentsAdd = $resource($rootScope.API + "/comments/add.json", {
-    callback: "JSON_CALLBACK"
-  }, request_with_token);
-  $scope.ajaxCommentsRemove = $resource($rootScope.API + "/comments/remove.json", {
-    callback: "JSON_CALLBACK"
-  }, request_with_token);
-  $scope.ajaxSaveRecipe = $resource($rootScope.API + "/recipes/save.json", {
-    callback: "JSON_CALLBACK"
-  }, request_with_token);
-  $scope.ajaxPublishRecipe = $resource($rootScope.API + "/recipes/publish.json", {
-    callback: "JSON_CALLBACK"
-  }, request_with_token);
-  $scope.ajaxEditRecipe = $resource($rootScope.API + "/recipes/edit.json", {
-    callback: "JSON_CALLBACK"
-  }, request_with_token);
-  $scope.ajaxRecipeAddIngredient = $resource($rootScope.API + "/recipes/add_ingredient.json", {
-    callback: "JSON_CALLBACK"
-  }, request_with_token);
-  $scope.ajaxRecipeAddTag = $resource($rootScope.API + "/recipes/add_tag.json", {
-    callback: "JSON_CALLBACK"
-  }, request_with_token);
-  $scope.ajaxRecipesRemoveDraft = $resource($rootScope.API + "/recipes/remove_draft.json", {
-    callback: "JSON_CALLBACK"
-  }, request_with_token);
-  $scope.ajaxIngredientsList = $resource($rootScope.API + "/ingredients/list.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
-  $scope.ajaxTagsList = $resource($rootScope.API + "/tags/list.json", {
-    callback: "JSON_CALLBACK"
-  }, {
-    get: {
-      method: "JSONP"
-    }
-  });
   $scope.ajaxHashTableList = $resource($rootScope.API + "/hash_table/list.json", {
     callback: "JSON_CALLBACK"
   }, request_with_token);

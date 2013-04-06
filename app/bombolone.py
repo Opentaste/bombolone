@@ -22,6 +22,8 @@ from core.utils import msg_status
 # Imports api modules Bombolone
 from api.oas import oas
 from api.admin.hash_table import hash_table_api
+from api.users.account import account_api
+from api.users.users import users_api
 
 # Imports Admin modules Bombolone
 from admin.admin import admin
@@ -45,6 +47,8 @@ from home import home
 LIST_MODULES = [home, 
                 login, 
                 hash_table_api,
+                account_api,
+                users_api,
                 admin,
                 oas, 
                 pages, 

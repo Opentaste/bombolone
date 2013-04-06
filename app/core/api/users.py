@@ -5,30 +5,30 @@ api.users.py
 
 Manages the users.
 
-:copyright: (c) 2012 by OpenTaste
+:copyright: (c) 2013 by Bombolone
 """
 
 
-# Imports outside OpenTaste
+# Imports outside Bombolone
 import re
 from flask import current_app, g
 from pymongo import ASCENDING, DESCENDING
 
-# Imports inside OpenTaste
+# Imports inside Bombolone
 from shared import db
 
 from core.utils import ensure_objectid, is_iterable
 
 
 def find(user_id=None,
-         ot_name=None,
+         username=None,
          sort_ascending=True,
          only_one=False):
     """
     Returns a list of users or a single user, if user_id or only_one are specified.
     
     user_id: a single user identifier (a string or an ObjectId) or a list of them
-    ot_name: the unique user's name
+    username: the unique user's name
     sort_ascending: if True, sorts the results from first to last, if False sorts them the other way
     only_one: if True, returns one tag at most
     """
@@ -53,13 +53,13 @@ def find(user_id=None,
         else:
             return denormalize(db.users.find_one({"_id" : ensure_objectid(user_id)}))
     
-    if ot_name:
-        if is_iterable(ot_name):
-            list_users = list(db.users.find({"ot_name" : {"$in": list(ot_name)}}))
+    if username:
+        if is_iterable(username):
+            list_users = list(db.users.find({"username" : {"$in": list(username)}}))
             return [ denormalize(u) for u in list_users ]
         else:
-            regex = re.compile('^'+ot_name+'$', re.IGNORECASE)
-            return denormalize(db.users.find_one({"ot_name" : regex}))
+            regex = re.compile('^'+username+'$', re.IGNORECASE)
+            return denormalize(db.users.find_one({"username" : regex}))
     
     
     # First, builds the filter conditions list
@@ -79,7 +79,7 @@ def find(user_id=None,
         
     # Sorts the filtered query results, if they're more than one
     if not only_one:
-        users = users.sort('ot_name', sort_ascending and ASCENDING or DESCENDING)
+        users = users.sort('username', sort_ascending and ASCENDING or DESCENDING)
       
     if only_one:
         return denormalize(users) # A dictionary

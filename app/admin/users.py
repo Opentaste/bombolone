@@ -24,6 +24,8 @@ from pymongo.errors import InvalidId, PyMongoError
 from decorators import check_rank, get_hash
 from config import UP_AVATARS_FOLDER, UP_IMAGE_FOLDER
 
+# Imports from Bombolone's Core
+from core.users.users import core_users_show, core_users_list
 from core.not_allowed import PROHIBITED_NAME_LIST
 from core.utils import create_password
 
@@ -45,7 +47,7 @@ def overview():
 
 
 @users.route('/admin/users/new/', methods=['POST', 'GET'])
-@check_rank(30)
+@check_rank(10)
 @get_hash('users')
 @get_hash('upload')
 def new():
@@ -66,7 +68,7 @@ def new():
     
 
 @users.route('/admin/users/<_id>/')
-@check_rank(30)
+@check_rank(10)
 @get_hash('users')
 @get_hash('upload')
 def update(_id):

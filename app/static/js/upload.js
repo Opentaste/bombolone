@@ -2,17 +2,17 @@
 var UploadCtrl;
 
 UploadCtrl = function($scope, $resource, $rootScope) {
-  var match_settings, match_users, match_write_recipe, up, __abort_upload, __format_size, __init_upload, __load_file, __show_message_error, __start_upload, __upload_supported;
+  var match_pages, match_settings, match_users, up, __abort_upload, __format_size, __init_upload, __load_file, __show_message_error, __start_upload, __upload_supported;
   $scope.upload_allowed = true;
-  match_write_recipe = path.match(/^\/write_recipe\/?$/i) || path.match(/^\/write_recipe\/([^\/]+)\/?$/i);
+  match_pages = path.match(/^\/pages\/?$/i) || path.match(/^\/pages\/([^\/]+)\/?$/i);
   match_users = path.match(/^\/admin\/users\/([^\/]+)\/?$/i);
   match_settings = path.match(/^\/settings\/profile\/?$/i);
-  if (match_write_recipe) {
-    console.log("Run write recipe");
+  if (match_pages) {
+    console.log("Run pages");
     up = {
       multiple: true,
       module: "recipes",
-      action: app["api_path_up"] + "/recipes/upload_image.json",
+      action: app["api_path_up"] + "/pages/upload_image.json",
       recipe: true
     };
   } else if (match_users || match_settings) {

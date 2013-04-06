@@ -6,7 +6,7 @@
 
 {% block admin %}
 <h2>{{ g.languages.name }}</h2>
-{% if status %}<div class="{{ status }}"><a class="close">×</a>{{ message }}</div>{% endif %}
+{% include "error/message_old.html" %}
 <form action="{{ url_for('languages.overview') }}" method="post" >
   <table class="table table-bordered table-striped">
     <thead>

@@ -34,6 +34,7 @@ HashTableCtrl = ($scope, $resource, $rootScope, $location) ->
     $scope.update = false
     _init_hash_table()
 
+
   # Update hash table
   if hash_table_update or hash_table_view
     $scope.title = "Update"
@@ -51,19 +52,24 @@ HashTableCtrl = ($scope, $resource, $rootScope, $location) ->
       for key, value of $scope.hash_map.value
         $scope.hash_map.value[key]["key"] = key
 
+
   # Upsert page: change language
   $scope.change_language = (code, language) ->
     $scope.hash_table.lan = code
     $scope.hash_table.language = language
     $scope.menu_language = false
 
+
   $scope.change_name_label = (name_label) ->
     $scope.name_label = name_label
+
 
   $scope.remove_label = (key) ->
     delete $scope.hash_map.value[key]
 
+
   counter = 0
+
 
   $scope.add_label = ->
     key = "aaa_key_#{counter}"
@@ -73,6 +79,7 @@ HashTableCtrl = ($scope, $resource, $rootScope, $location) ->
       it: "",
       key: ""
     $scope.hash_map.value[key] = value
+
 
   $scope.menu_reveal = ->
     $scope.menu_language = not $scope.menu_language

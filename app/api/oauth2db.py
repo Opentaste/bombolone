@@ -1,8 +1,12 @@
-# OpenTaste OAuth2 Flask server test
-# ==================================
-#
-# Supports only the flow for non-web clients.
+# -*- coding: utf-8 -*-
+"""
+oauth2db.py
+~~~~~~
+OAuth2 Flask server test
+Supports only the flow for non-web clients.
 
+:copyright: (c) 2013 by Bombolone
+"""
 import logging
 import json
 import random

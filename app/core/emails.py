@@ -5,7 +5,7 @@ emails.py
 
 :copyright: (c) 2013 by Bombolone
 """ 
-# Imports outside OpenTaste
+# Imports outside Bombolone
 import os
 import datetime
 import types
@@ -105,18 +105,18 @@ def _encode_str(s):
 
 class WelcomeEmail(GenericEmail):
     """ """
-    subject = "Welcome to Opentaste"
+    subject = "Welcome to Bombolone"
     html_template = "emails/welcome.html"
     text_template = "emails/welcome.txt"
 
 class ChangeEmail(GenericEmail):
     """ """
-    subject = "Opentaste Change email"
+    subject = "Bombolone Change email"
     html_template = "emails/set_new_email.html"
     text_template = "emails/set_new_email.txt"
 
 class RememberPassword(GenericEmail):
     """ """
-    subject = "Opentaste Remember Password"
+    subject = "Bombolone Remember Password"
     html_template = "emails/remember_password.html"
     text_template = "emails/remember_password.txt"

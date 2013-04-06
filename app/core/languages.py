@@ -5,13 +5,13 @@ languages.py
 The language module manages the languages you want 
 to use within application.
 
-:copyright: (c) 2012 by Opentaste
+:copyright: (c) 2013 by Bombolone
 """ 
-# Imports outside OpenTaste
+# Imports outside Bombolone
 from flask import Blueprint, g, request, render_template, session, abort
 from pymongo.errors import PyMongoError
 
-# Imports inside OpenTaste
+# Imports inside Bombolone
 from config import LIST_LANGUAGES
 
 class Languages(object):

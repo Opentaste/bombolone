@@ -39,7 +39,7 @@
 <script>
 page["user"] = {
   _id: "{{ data.user._id }}",
-  ot_name: "{{ data.user.ot_name }}",
+  username: "{{ data.user.username }}",
   email: "{{ data.user.email }}",
   rank: "{{ data.user.rank }}",
   lan: "{{ data.user.lan }}",
@@ -49,7 +49,7 @@ page["user"] = {
   web: "{{ data.user.web }}",
   description: "{{ data.user.description }}",
   image_show: "{{ data.user.image_show }}",
-  status: "{{ data.user.status }}"
+  status: {{ data.user.status }}
 }
 </script>
 {% endblock %} 

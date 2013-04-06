@@ -16,6 +16,8 @@ from pymongo.errors import PyMongoError
 from decorators import check_rank, get_hash 
 from config import LIST_LANGUAGES
 
+from core.languages import Languages
+
 MODULE_DIR = 'admin/languages'
 languages = Blueprint('languages', __name__)
 
@@ -27,7 +29,10 @@ def overview():
     # Update the list of languages allowed on the site, 
     # except for the language used by your users at that time.
     if request.method == 'POST':
-        data = language_object.update()
+        lan_object = Languages()
+        data = lan_object.update()
+        message = lan_object.message
+        status = lan_object.status
     
     # Gets documents from the collections of all languages 
     languages_list = g.languages_object.get_languages(1)

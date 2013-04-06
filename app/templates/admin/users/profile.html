@@ -1,27 +1,25 @@
 <div class="control-group">
-	<label>{{ g.users.setting_name }}</label>
-	<div class="controls">
-	    <input name="name" type="text" maxlength="60" value="{{ user.name or '' }}">
-	</div>
+  <label>{{ g.users.setting_name }}</label>
+  <div class="controls">
+    <input ng-model="user.name" type="text" maxlength="60" data-test="name">
+  </div>
 </div>
 <div class="control-group">
-	<label>{{ g.users.location }}</label>
-	<div class="controls">
-	    <input name="location" type="text" maxlength="100" value="{{ user.location or '' }}">
-	</div>
+  <label>{{ g.users.location }}</label>
+  <div class="controls">
+    <input ng-model="user.location" type="text" maxlength="100">
+  </div>
 </div>
 <div class="control-group">
-	<label>{{ g.users.web }}</label>
-	<div class="controls">
-	    <input name="web" type="text" class="span4" maxlength="200" value="{{ user.web or '' }}">
-	</div>
+  <label>{{ g.users.web }}</label>
+  <div class="controls">
+    <input ng-model="user.web" type="text" class="span4" maxlength="200" data-test="web">
+  </div>
 </div>
 <div class="control-group">
-	<label>{{ g.users.description }}</label>
-	<div class="controls">
-	    <textarea name="description" maxlength="200" class="span4" 
-	    onkeyup="return textareaLenght(this, 'word-des')"  
-	    cols="10" rows="3">{{ user.description or '' }}</textarea>
-        <span id="word-des" class="word-count">200</span>
-    </div>
+  <label>{{ g.users.description }}</label>
+  <div class="controls">
+    <textarea ng-model="user.description" maxlength="200" class="span4" cols="10" rows="3"></textarea>
+    <span class="word-count" ng-bind="200 - user.description.length">200</span>
+  </div>
 </div>

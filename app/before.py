@@ -20,7 +20,7 @@ from config import DEBUG, EXTENSIONS_REQUEST, PATH, PATH_API, PROJECT_DIR, LIST_
 from shared import db
 from login.oac import get_token, CLIENT_SECRET, CLIENT_ID
 
-# Imports from Opentaste's Core
+# Imports from Bombolone's Core
 from decorators import get_hash_admin
 from core.languages import Languages
 

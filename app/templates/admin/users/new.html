@@ -1,12 +1,10 @@
 {% extends "admin/index.html" %}
 
-{% block title %}
-New user
-{% endblock %}
+{% block title %} New user {% endblock %}
 
 {% block admin %}
 <h2>{{ g.users.add_user }}</h2>
-<form action="{{ url_for('users.new') }}" enctype="multipart/form-data" method="post" >
+<div class="new_user">
   <ul class="nav nav-tabs">
     <li class="li_account active" ng-class="{active:tab_menu.selected == 'account'}">
       <a ng-click="select_tab('account')">Account</a>
@@ -18,22 +16,51 @@ New user
       <a ng-click="select_tab('password')">Password</a>
     </li>
   </ul>
-  {% if status %}<div class="{{ status }}"><a class="close">×</a>{{ message }}</div>{% endif %}
-  <div class="form-horizontal">
+  {% include "error/message.html" %}
+  <div class="form-horizontal" ng-controller="UsersCtrl">
     <fieldset>
-      <section class="sec_account" ng-class="{hidden:tab_menu.selected != 'account'}">
-        {% include "modules/users/account.html" %}
+
+      <section ng-class="{hidden:tab_menu.selected != 'account'}" data-test="tab-1">
+        {% include "admin/users/account.html" %}
+        <div class="control-group">
+          <label>Status</label>
+          <div class="controls">
+            <select ng-model="user.status">
+              <option value="" selected="selected"></option>
+              <option value="0">Disattivato</option>
+              <option value="1">Attivo</option>
+            </select>
+          </div>
+        </div>
       </section>
-      <section class="sec_profile hidden" ng-class="{hidden:tab_menu.selected != 'profile'}">
-        {% include "modules/users/profile.html" %}
+
+      <section class="hidden" ng-class="{hidden:tab_menu.selected != 'profile'}" data-test="tab-2">
+        {% include "admin/users/upload_image.html" %}
+        {% include "admin/users/profile.html" %}
       </section>
-      <section class="sec_password hidden" ng-class="{hidden:tab_menu.selected != 'password'}">
-        {% include "modules/users/new_password.html" %}
+
+      <section class="hidden" ng-class="{hidden:tab_menu.selected != 'password'}" data-test="tab-4">
+        {% include "admin/users/new_password.html" %}
       </section>
+
       <div class="form-actions">
-        <button tabindex="200" type="submit" class="button button-submit">{{ g.users.create_user }}</button>
+        <button tabindex="200" ng-click="create()" class="button button-submit" data-test="submit">{{ g.users.create_user }}</button>
       </div>
     </fieldset>
   </div><!-- .form-horizontal -->
-</form>
+</div>
+{% endblock %}
+
+{% block js_module_files %}
+  {% if not sync %}
+    "{{ '/static/js/%s' % js_version['users'] }}",
+    "{{ '/static/js/%s' % js_version['upload'] }}",
+  {% endif %}
+{% endblock %}
+
+{% block js_module_files_sync %}
+  {% if sync %}
+    <script src="{{ '/static/js/%s' % js_version['users'] }}" ></script>
+    <script src="{{ '/static/js/%s' % js_version['upload'] }}" ></script>
+  {% endif %}
 {% endblock %}

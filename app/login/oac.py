@@ -3,7 +3,7 @@
 oac.py
 ~~~~~~
 
-OpenTaste OAuth2 client test (based on the module requests)
+Bombolone OAuth2 client test (based on the module requests)
 ===========================================================
 The client flow is:
   1) get a token with the get_token function;

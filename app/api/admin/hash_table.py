@@ -89,8 +89,7 @@ def remove():
 
     success = False
     if _id:
-        success = True
-        hash_object.remove()
+        success = hash_object.remove()
 
     data = {
         "success": success

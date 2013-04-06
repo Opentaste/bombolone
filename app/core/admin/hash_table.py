@@ -6,19 +6,19 @@ The Hash Table allows you to store multiple Hash Map,
 each of which has an Name Map and an Hash useful to 
 write the content for use on the web site.
 
-:copyright: (c) 2012 by Opentaste
+:copyright: (c) 2013 by Bombolone
 """ 
-# Imports outside Opentaste
+# Imports outside Bombolone
 from flask import Blueprint, request, g, render_template, url_for, redirect
 from pymongo.objectid import ObjectId
 from pymongo.errors import InvalidId, PyMongoError
 
-# Imports from Opentaste's Core
+# Imports from Bombolone's Core
 from core.utils import jsonify, ensure_objectid
 from core.languages import Languages
 from core.validators import CheckValue
 
-# Imports inside Opentaste
+# Imports inside Bombolone
 from config import LIST_LANGUAGES
 from decorators import check_rank, get_hash, jsonp
     
@@ -115,16 +115,22 @@ class HashTable(object):
     def remove(self):
         """ Remove hash map """
         list_main_id = [
-            '4f2b3e3918429f1b86000016',
-            '4f2b3e3918429f1b86000018'
+            '4f2b3e3918429f1b86000016', #
+            '4f2b3e3918429f1b86000018', #
+            '4f2b3e3918429f1b86000017', #
+            '4f2b3e3918429f1b8600001a', #
+            '4f44fd7218429f265b000000', #
+            '4f37da6b18429f3ec3000000', #
+            '4f2b3e3918429f1b86000019'  #users
         ]
-        if self.hash_map["_id"] in list_main_id:
-            return 'nada'
-        try:
-            g.db.hash_table.remove({ '_id' : ObjectId(self.hash_map["_id"]) })
-            return 'ok'
-        except PyMongoError:
-            return 'nada'
+        if str(self.hash_map["_id"]) in list_main_id:
+            return False
+        else:
+            try:
+                g.db.hash_table.remove({ '_id' : ObjectId(self.hash_map["_id"]) })
+                return True
+            except PyMongoError:
+                return False
     
     def __request_hash_map_user(self):
         """ """
