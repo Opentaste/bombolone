@@ -2,8 +2,7 @@
 
 ### Bombolone version 0.1.8 ###
 
-Bombolone is a tasty Content Management System for Python based on [Flask](http://flask.pocoo.org/), [MongoDB](http://www.mongodb.org/), [Coffeescript](http://coffeescript.org/), 
-[AngularJS](http://angularjs.org), [jQuery](http://jquery.com), [Sass](http://sass-lang.com) and [Twitter Bootstrap](http://twitter.github.com/bootstrap/). 
+Bombolone is a tasty Content Management System for Python based on [Flask](http://flask.pocoo.org/), [MongoDB](http://www.mongodb.org/), [Coffeescript](http://coffeescript.org/), [AngularJS](http://angularjs.org), [jQuery](http://jquery.com), [Sass](http://sass-lang.com) and [Twitter Bootstrap](http://twitter.github.com/bootstrap/). 
 It's designed to be a simple, flexible toolset for projects of any size.
 
 
@@ -86,7 +85,7 @@ In Bombolone there is an environment for testing any module or webpage.
 
 ## Who we are
 
-Lovers of the python and the web!
+Python and Javascript Lovers!
 
 The project was created by [Leonardo Zizzamia](http://zizzamia.com/). 
 
