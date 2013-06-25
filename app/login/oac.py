@@ -19,23 +19,30 @@ import requests
 from config import PATH_API
 from api.oauth2db import oauth2db
 
-CLIENT_ID = '47a69c6a267cd0807408'
-CLIENT_SECRET = '2cb223b50493fe842e138d61bd2caa4f62c6565b'
+CLIENT_ID = 'b5a86b5a296dc0307307'
+CLIENT_SECRET = '2cb123b50293fe742e238c81bd2b684f62a6565a'
 
 def get_token(client_id, client_secret, username, password):
     """
     Returns an OAuth2 authorization token or None in case
     of errors. This is the flow for non-web clients."""
-    try:
-        if oauth2db.check_client(client_id, client_secret):
-            if oauth2db.check_user(username, password):
-                token, refresh = oauth2db.generate_token(client_id, username)
-                res = { "token": token }
-    except:
-        res = { "error": "" }
-    
-    if 'token' in res:
-        return res['token']
+
+    # post parameters, and request path
+    params = {'client_id': client_id, 'client_secret': client_secret}
+    path = '{}/authorizations'.format(PATH_API)
+
+    # api request to 
+    # dev : http://0.0.0.0:5000/api/authorizations
+    r = requests.post( path
+        , data=params
+        , auth=(username, password))
+
+    if r.status_code == 200:
+        res = r.json()
+        if 'token' in res:
+            return res['token']
+        else:
+            return res
     else:
         return None
 

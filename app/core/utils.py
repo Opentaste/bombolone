@@ -13,7 +13,6 @@ from collections import Iterable
 from types import StringTypes
 
 import string
-import pytz
 import random
 import smtplib
 import unicodedata
