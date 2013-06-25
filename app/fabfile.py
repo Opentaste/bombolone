@@ -66,7 +66,7 @@ def minify():
 
     # Update file version
     db.js.update({ "file": "version" }, app_json, True)
-    local("mongodump --db "+DATABASE+" --collection js --out dump")
+    local("mongodump --db {} --collection js --out dump".format(DATABASE))
 
 
 # Tests tools =====================================================================        

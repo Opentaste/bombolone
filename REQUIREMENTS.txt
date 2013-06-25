@@ -4,3 +4,6 @@ simplejson
 flask
 requests
 PIL
+oauth
+recaptcha-client
+yuicompressor

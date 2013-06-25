@@ -74,14 +74,23 @@ def core_before_request():
         # If user_id not exist in the user list g.my is None
         if my:
             g.my = my
-            if not "token" in g.my:
-                g.my['token'] = get_token(CLIENT_ID, CLIENT_SECRET, user['username'], user['password'])
-                g.db.users.update({ "_id" : g.my["_id"] }, user)
+            # generate token if 
+            # - you don't have a token field
+            # - you have None as value
+            # - you have everything is not 72 characters
+            if not "token" in g.my or g.my["token"] is None or len(g.my["token"]) != 72:
+                generate_token()
             # get user language
             g.lan = g.my['lan']
             g.language = g.available_languages[g.lan]
             if my['rank'] < 80:
                 get_hash_admin()
+
+def generate_token():
+    """ """
+    token = get_token(CLIENT_ID, CLIENT_SECRET, g.my['username'], g.my['password'])
+    g.my['token'] = token
+    g.db.users.update({ "_id" : g.my["_id"] }, g.my)
 
 def core_inject_user():
     """Context processors run before the template is rendered and have 

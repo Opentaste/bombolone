@@ -9,7 +9,6 @@ verify.py
 import re
 import os
 import string
-import pytz
 import random
 import smtplib
 from PIL import Image 
