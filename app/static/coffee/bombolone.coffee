@@ -1,4 +1,4 @@
-ot = angular.module("bombolone", ["ui", "ngResource"])
+ot = angular.module("bombolone", ["ngResource"])
 
 protocol = window.location.protocol
 host = window.location.host
@@ -52,12 +52,6 @@ ot.run ($rootScope, $location) ->
   window.scope = angular.element(d).scope()
 
 
-_gaq = _gaq or []
-_gaq.push ["_setAccount", "UA-23437071-1"]
-_gaq.push ["_trackPageview"]
-
-if not sync
-  if not host.match(/^0.0.0.0:5000\/?$/i)
-    ga_protocol = if 'https:' == protocol then '//ssl' else 'http://www'
-    analytics = ga_protocol + '.google-analytics.com/ga.js'
-    $script [analytics]
+checkBroser = ->
+  if d.all && !d.addEventListener
+    alert "You should upgrade your copy of Windows Internet Explorer. This website does not support completely IE <= 8"

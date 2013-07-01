@@ -16,7 +16,7 @@ from urlparse import urlparse
 from pymongo.objectid import ObjectId
 
 # Imports inside Bombolone
-from config import DEBUG, EXTENSIONS_REQUEST, PATH, PATH_API, PROJECT_DIR, LIST_LANGUAGES
+from config import DEBUG, EXTENSIONS_REQUEST, PATH, PATH_API, PROJECT_DIR, LIST_LANGUAGES, JS_FILES
 from shared import db
 from login.oac import get_token, CLIENT_SECRET, CLIENT_ID
 
@@ -114,6 +114,8 @@ def core_inject_user():
     # "language" contains the full name of the language
     inject_object['lan'] = g.lan
     inject_object['language'] = g.language
+
+    inject_object['js_files'] = JS_FILES
 
     # Create the name javascript files :
     # - Debug mode, e.g. name_file.js?34321  means  name_file.js?random_number

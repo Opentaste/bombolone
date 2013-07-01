@@ -2,6 +2,7 @@
 var PagesCtrl, pages;
 
 PagesCtrl = function($scope, $resource, $rootScope) {
+  $scope.module = "pages";
   $scope.menu_language = false;
   $scope.tab_language = $rootScope.lan;
   $scope.name_language = $rootScope.language;

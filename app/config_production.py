@@ -56,3 +56,8 @@ EXTENSIONS_REQUEST = {'png', 'jpg', 'jpeg', 'gif', 'css', 'js'}
 
 # ~
 LIST_LANGUAGES = ['ar','cn','de','en','es','fr','gr','it','jp','pt','ru','tr']
+
+# List js local files
+JS_FILES = ['https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js', 
+			'https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.min.js',
+			'//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js']

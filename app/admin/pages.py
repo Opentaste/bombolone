@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-admin.py
+pages.py
 ~~~~~~
 
 :copyright: (c) 2013 by Leonardo Zizzamia
 :license: BSD (See LICENSE for details)
 """ 
 # Imports outside bombolone
-import re
 from flask import Blueprint, request, session, g, render_template, url_for, redirect
-from pymongo import ASCENDING, DESCENDING
 from pymongo.objectid import ObjectId
 from pymongo.errors import InvalidId, PyMongoError
 
@@ -19,19 +17,49 @@ from decorators import check_rank, get_hash
 MODULE_DIR = 'admin/pages'
 pages = Blueprint('pages', __name__)
 
-@pages.route('/admin/pages/')    
-@check_rank(10) 
+@pages.route('/admin/pages/')
+@check_rank(30) 
 @get_hash('pages')
 def overview():
+    """ 
+    List all the documents, each has a name 
+    that identifies it, and an hash map. 
+    """
+    return render_template('{}/index.html'.format(MODULE_DIR), **locals())
+
+
+@pages.route('/admin/pages/new/')
+@pages.route('/admin/pages/update/<_id>/')
+@check_rank(30)
+@get_hash('pages')
+def upsert(_id=None):
+    """ """
+    view = False
+    return render_template('{}/upsert.html'.format(MODULE_DIR), **locals())
+
+
+@pages.route('/admin/pages/view/<_id>/')
+@check_rank(40)
+@get_hash('pages')
+def view(_id=None):
+    """ """
+    view = True
+    return render_template('{}/upsert.html'.format(MODULE_DIR), **locals())
+
+
+
+
+
+
+
+
+def overview_old():
     """ The overview shows the list of the pages registered """
     pages_list = g.db.pages.find().sort('name')
     return render_template('{}/index.html'.format(MODULE_DIR), **locals() )
 
 
-@pages.route('/admin/pages/new/', methods=['POST', 'GET'])
-@check_rank(10) 
-@get_hash('pages')
-def new():
+def new_old():
     """ The administrator can create a new page """       
     pages_object = Pages()
     page = pages_object.page
@@ -50,11 +78,7 @@ def new():
     
     return render_template('{}/new.html'.format(MODULE_DIR), **locals())
 
-
-@pages.route('/admin/pages/<_id>/', methods=['POST', 'GET'])
-@check_rank(10) 
-@get_hash('pages')
-def update(_id):
+def update_old(_id):
     """ The administrator can update a page """       
     pages_object = Pages(_id)
     page = pages_object.page
@@ -76,10 +100,7 @@ def update(_id):
     return render_template('{}/update.html'.format(MODULE_DIR), **locals())
 
 
-@pages.route('/admin/pages/remove/<_id>/')  
-@check_rank(10) 
-@get_hash('pages')  
-def remove(_id):
+def remove_old(_id):
     """ """
     g.db.pages.remove({ '_id' : ObjectId(_id) })
     
@@ -89,7 +110,7 @@ def remove(_id):
 @pages.route('/admin/pages/add_label/<number_label>/')
 @check_rank(10) 
 @get_hash('pages')
-def add_label(number_label):
+def add_label_old(number_label):
     """ """
     pages_object = Pages() 
     i = number_label
