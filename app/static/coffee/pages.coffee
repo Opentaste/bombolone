@@ -1,6 +1,6 @@
 # Main element to change language
 PagesCtrl = ($scope, $resource, $rootScope) ->
-  $scope.module = "pages";
+  $scope.module = "pages"
   $scope.menu_language = false
   $scope.tab_language = $rootScope.lan
   $scope.name_language = $rootScope.language

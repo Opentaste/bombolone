@@ -1,32 +1,33 @@
 <img src="http://zizzamia.com/img/bombolone_logo.png"/>
 
-### Bombolone version 0.1.6 ###
+### Bombolone version 0.1.8 ###
 
-Bombolone is a tasty Content Management System for Python based on [Flask](http://flask.pocoo.org/), [MongoDB](http://www.mongodb.org/), 
-[AngularJS](http://angularjs.org), [jQuery](http://jquery.com), [Sass](http://sass-lang.com) and [Twitter Bootstrap](http://twitter.github.com/bootstrap/). 
+Bombolone is a tasty Content Management System for Python based on [Flask](http://flask.pocoo.org/), [MongoDB](http://www.mongodb.org/), [Coffeescript](http://coffeescript.org/), [AngularJS](http://angularjs.org), [jQuery](http://jquery.com), [Sass](http://sass-lang.com) and [Twitter Bootstrap](http://twitter.github.com/bootstrap/). 
 It's designed to be a simple, flexible toolset for projects of any size.
 
 
 
-## Quick start
+## Quick start in 10 steps
 
-1. Clone the git repo `git clone git@github.com:OwlStudios/bombolone.git`
+1. Run Mongodb `mongod`
 
-2. Move in Bombolone folder `cd bombolone/`
+2. Clone the git repo `git clone https://github.com/Opentaste/bombolone.git`
 
-3. Install requirements  `pip install -r REQUIREMENTS.txt`
+3. Move in Bombolone folder `cd bombolone/`
 
-4. `gem install compass`
+4. Install requirements  `pip install -r REQUIREMENTS.txt`
 
-5. Move in app folder `cd app/`
+5. Install [compass](http://compass-style.org/install/) `gem update --system` `gem install compass`
 
-6. Run Mongodb `mongod`
+6. Install [coffeescript](http://coffeescript.org/#installation) `sudo npm install -g coffee-script`
 
-7. Restore last version Bombolone Mongodb `fab mongodb_restore`
+7. Move in app folder `cd app/`
 
-8. Run Compass `compass watch`
+8. Restore last version Bombolone Mongodb `fab mongodb_restore`
 
-8. Run Bombolone `python bombolone.py`
+9. In two new tabs with the same path run Compass `compass watch` and Coffee `fab coffee`
+
+10. Run Bombolone `python bombolone.py`
 
 Registered users are:
 * Admin with username 'admin' and password 'admin123'
@@ -84,7 +85,7 @@ In Bombolone there is an environment for testing any module or webpage.
 
 ## Who we are
 
-Lovers of the python and the web!
+Python and Javascript Lovers!
 
 The project was created by [Leonardo Zizzamia](http://zizzamia.com/). 
 

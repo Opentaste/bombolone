@@ -17,13 +17,6 @@ ot.config ($locationProvider, $interpolateProvider) ->
   $interpolateProvider.endSymbol "]]"
 
 
-# List of custom directives
-ot.directive "onKeyup", ->
-  (scope, elm, attrs) ->
-    elm.bind "keyup", ->
-      scope.$apply attrs.onKeyup
-
-
 # First commands
 ot.run ($rootScope, $location) ->
 

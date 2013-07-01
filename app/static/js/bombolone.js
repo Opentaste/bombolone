@@ -16,14 +16,6 @@ ot.config(function($locationProvider, $interpolateProvider) {
   return $interpolateProvider.endSymbol("]]");
 });
 
-ot.directive("onKeyup", function() {
-  return function(scope, elm, attrs) {
-    return elm.bind("keyup", function() {
-      return scope.$apply(attrs.onKeyup);
-    });
-  };
-});
-
 ot.run(function($rootScope, $location) {
   $rootScope.API = app["api_path"];
   $rootScope.dropdown_status = "";

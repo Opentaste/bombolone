@@ -197,7 +197,7 @@ button, input {
 
 /* line 170, ../sass/reset.scss */
 label, button, input, select, textarea {
-  font: 13px/20px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 13px / 20px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
   vertical-align: baseline;
   *vertical-align: middle;
@@ -1623,7 +1623,7 @@ input, textarea {
 
 /* line 998, ../sass/admin.scss */
 input:focus, textarea:focus {
-  border-color: #E7A86B!important;
+  border-color: #e7a86b !important;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(226, 130, 35, 0.6);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(226, 130, 35, 0.6);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(226, 130, 35, 0.6);
@@ -1889,7 +1889,7 @@ input:focus:required:invalid:focus, textarea:focus:required:invalid:focus, selec
   min-width: 50px;
   text-align: center;
   cursor: pointer;
-  font: bold 12px/24px arial, helvetica, sans-serif;
+  font: bold 12px / 24px arial, helvetica, sans-serif;
   height: 24px;
   line-height: 24px;
   min-width: 50px;
@@ -1939,7 +1939,7 @@ input:focus:required:invalid:focus, textarea:focus:required:invalid:focus, selec
   background-image: -o-linear-gradient(top, #7c97c4, #768eb3);
   background-image: linear-gradient(top, #7c97c4, #768eb3);
   border: 1px solid #5f80b3;
-  color: #fff!important;
+  color: white !important;
   font-size: 13px;
   height: 23px;
   margin: 0 1.2em 0.4em 0;
@@ -1970,7 +1970,7 @@ input:focus:required:invalid:focus, textarea:focus:required:invalid:focus, selec
   background-image: -o-linear-gradient(top, #f25f54, #ec5643);
   background-image: linear-gradient(top, #f25f54, #ec5643);
   border: 1px solid #d54843;
-  color: #fff!important;
+  color: white !important;
   font-size: 13px;
   height: 23px;
   margin: 0 1.5em 1.2em 0;
