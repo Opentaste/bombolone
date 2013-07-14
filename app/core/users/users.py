@@ -23,7 +23,7 @@ from flask import Blueprint, abort, request, g, render_template, url_for, redire
 from random import randint
 from werkzeug import secure_filename
 from pymongo import ASCENDING, DESCENDING
-from pymongo.objectid import ObjectId
+from bson import ObjectId
 from pymongo.errors import InvalidId, PyMongoError
 
 # Imports inside Bombolone

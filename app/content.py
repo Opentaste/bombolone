@@ -9,7 +9,7 @@
 # Imports outside Bombolone
 from flask import Blueprint, abort, request, session, g, render_template, redirect
 from pymongo import ASCENDING, DESCENDING
-from pymongo.objectid import ObjectId
+from bson import ObjectId
 
 # Imports inside Bombolone
 from config import PATH

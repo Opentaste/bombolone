@@ -17,7 +17,7 @@ By default there are two users:
 # Imports outside Bombolone
 import os, re, shutil
 from flask import Blueprint, abort, request, g, render_template, url_for, redirect
-from pymongo.objectid import ObjectId
+from bson import ObjectId
 from pymongo.errors import InvalidId, PyMongoError
 
 # Imports inside Bombolone

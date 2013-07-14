@@ -1,7 +1,8 @@
-pymongo==2.1.1
+pymongo
 fabric
 simplejson
 flask
+werkzeug
 requests
 PIL
 oauth

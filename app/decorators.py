@@ -10,7 +10,7 @@ A collection of all the decorators
 # Imports outside Bombolone
 from flask import g, abort, request, current_app
 from functools import wraps
-from api.oauth2db import oauth2db
+from api.oauth2db import oauth_server
 
 class GetValue(object):
     """ """
@@ -90,7 +90,7 @@ def check_token(function_to_decorate):
         if token is None:
             abort(401)
 
-        validation = oauth2db.check_token(token)
+        validation = oauth_server.check_token(token)
         if not validation["success"]:
             abort(401)
 
@@ -107,7 +107,7 @@ def check_token_post(function_to_decorate):
 
         token = request.json['token']
 
-        validation = oauth2db.check_token(token)
+        validation = oauth_server.check_token(token)
         if not validation["success"]:
             abort(401)
 
@@ -124,7 +124,7 @@ def check_token_ajax(function_to_decorate):
         if token is None:
             abort(401)
 
-        validation = oauth2db.check_token(token)
+        validation = oauth_server.check_token(token)
         if not validation["success"]:
             abort(401)
 

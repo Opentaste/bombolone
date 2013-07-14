@@ -9,15 +9,15 @@ It's designed to be a simple, flexible toolset for projects of any size.
 
 ## Quick start in 10 steps
 
-1. Run Mongodb `mongod`
+1. Run Mongodb `sudo mongod`
 
 2. Clone the git repo `git clone https://github.com/Opentaste/bombolone.git`
 
 3. Move in Bombolone folder `cd bombolone/`
 
-4. Install requirements  `pip install -r REQUIREMENTS.txt`
+4. Install requirements  `sudo pip install -r REQUIREMENTS.txt`
 
-5. Install [compass](http://compass-style.org/install/) `gem update --system` `gem install compass`
+5. Install [compass](http://compass-style.org/install/) `sudo gem update --system` `sudo gem install compass`
 
 6. Install [coffeescript](http://coffeescript.org/#installation) `sudo npm install -g coffee-script`
 

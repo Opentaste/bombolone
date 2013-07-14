@@ -36,7 +36,6 @@ class OAuth2DB:
     def check_client(self, client_id, client_secret):
         """Returns True if the given client_id and client_secret
         are registered in the DB, False otherwise."""
-        
         return client_id \
                 and client_secret \
                 and client_id == self.CLIENT_ID \
@@ -45,7 +44,6 @@ class OAuth2DB:
     def check_user(self, username, password):
         """Returns True if the given username and password are
         registered in the DB, False otherwise."""
-
         user = g.db.users.find_one({"username" : username})
         if user is None:
             return False
@@ -90,4 +88,4 @@ class OAuth2DB:
         else:
             return {'success': False}
 
-oauth2db = OAuth2DB()
+oauth_server = OAuth2DB()

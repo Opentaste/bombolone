@@ -13,6 +13,9 @@ DESCRIPTION = 'Bombolone description'
 DATABASE = 'bombolone'
 
 # ~
+ENV = "prod"
+
+# ~
 PATH = 'http://www.bombolone.com'
 
 # ~

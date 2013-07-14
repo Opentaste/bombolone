@@ -8,7 +8,7 @@ setting.py
 # Imports outside Bombolone
 from flask import Blueprint, request, session, g, Response, render_template, url_for, redirect
 from pymongo import ASCENDING, DESCENDING
-from pymongo.objectid import ObjectId
+from bson import ObjectId
 
 # Imports from Bombolone
 from decorators import check_authentication, get_hash

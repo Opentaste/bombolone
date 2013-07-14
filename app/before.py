@@ -13,10 +13,10 @@ import random
 import simplejson as json
 from flask import g, request, session, abort
 from urlparse import urlparse
-from pymongo.objectid import ObjectId
+from bson import ObjectId
 
 # Imports inside Bombolone
-from config import DEBUG, EXTENSIONS_REQUEST, PATH, PATH_API, PROJECT_DIR, LIST_LANGUAGES, JS_FILES
+from config import DEBUG, EXTENSIONS_REQUEST, PATH, PATH_API, PROJECT_DIR, LIST_LANGUAGES, JS_FILES, ENV
 from shared import db
 from login.oac import get_token, CLIENT_SECRET, CLIENT_ID
 
@@ -123,6 +123,14 @@ def core_inject_user():
     # "language" contains the full name of the language
     inject_object['lan'] = g.lan
     inject_object['language'] = g.language
+
+    # Enviroment
+    if ENV == "prod":
+        inject_object['api_path'] = "yourdomain"
+        inject_object['path'] = "yourdomain"
+    elif ENV == "home":
+        inject_object['api_path'] = "http://0.0.0.0\\\:5000/api"
+        inject_object['path'] = "http://0.0.0.0\\:5000"
 
     inject_object['js_files'] = JS_FILES
 

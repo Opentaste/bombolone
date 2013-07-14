@@ -8,7 +8,7 @@ pages.py
 """ 
 # Imports outside bombolone
 from flask import Blueprint, request, session, g, render_template, url_for, redirect
-from pymongo.objectid import ObjectId
+from bson import ObjectId
 from pymongo.errors import InvalidId, PyMongoError
 
 # Imports inside bombolone

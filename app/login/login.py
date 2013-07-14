@@ -12,12 +12,12 @@ import oauth.oauth as oauth
 from time import time
 from flask import Blueprint, request, session, g, render_template, url_for, redirect, Markup, abort
 from recaptcha.client import captcha
-from pymongo.objectid import ObjectId
+from bson import ObjectId
 
 # Imports inside Bombolone
 from config import PATH, PATH_API
 
-from decorators import check_authentication, get_hash
+from decorators import check_authentication, get_hash, jsonp
 from oac import get_token, CLIENT_SECRET, CLIENT_ID
 
 from core.emails import RememberPassword
@@ -80,12 +80,11 @@ class Login(object):
             else:
                 # Save session in main domain
                 token = get_token(CLIENT_ID, CLIENT_SECRET, user['username'], user['password'])
-                print token
                 if token is None:
                     self.message = g.login_msg('login_error_4')
                     return False
                 g.db.users.update({ '_id' : ObjectId(user['_id']) }, { "$set": { "token": token } })
-                session['user_id'] = user['_id']
+                session['user_id'] = str(user['_id'])
                 if permanent is not None:
                     session.permanent = True
                 return True
@@ -212,6 +211,7 @@ def index():
     
     if request.method == 'POST':
         if login_object.sign_in():
+            print 10
             return redirect(url_for('home.index'))
     
     # Come back a message when there is an error	
