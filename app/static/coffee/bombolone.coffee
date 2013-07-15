@@ -12,6 +12,9 @@ ot.value "appName", "bombolone"
 # Main configuration
 ot.config ($locationProvider, $interpolateProvider) ->
 
+  # true - see HTML5 mode
+  $locationProvider.html5Mode(true).hashPrefix('!')
+
   # others
   $interpolateProvider.startSymbol "[["
   $interpolateProvider.endSymbol "]]"

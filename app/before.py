@@ -125,13 +125,8 @@ def core_inject_user():
     inject_object['language'] = g.language
 
     # Enviroment
-    if ENV == "prod":
-        inject_object['api_path'] = "yourdomain"
-        inject_object['path'] = "yourdomain"
-    elif ENV == "home":
-        inject_object['api_path'] = "http://0.0.0.0\\\:5000/api"
-        inject_object['path'] = "http://0.0.0.0\\:5000"
-
+    inject_object['api_path'] = "yourdomain" if ENV == "prod" else "http://0.0.0.0\\\:5000/api"
+    
     inject_object['js_files'] = JS_FILES
 
     # Create the name javascript files :

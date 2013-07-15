@@ -35,6 +35,7 @@ def overview():
 def upsert(_id=None):
     """ """
     view = False
+    new = True
     return render_template('{}/upsert.html'.format(MODULE_DIR), **locals())
 
 
@@ -44,6 +45,7 @@ def upsert(_id=None):
 def view(_id=None):
     """ """
     view = True
+    new = False
     return render_template('{}/upsert.html'.format(MODULE_DIR), **locals())
 
 

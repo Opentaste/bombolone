@@ -1,7 +1,7 @@
 # Compiled files
 *.pyc
 
-# OSX
+# OSX sucks
 .DS_Store
 
 # Eclipse & PyDev stuff
@@ -11,3 +11,8 @@
 
 # Sass
 .sass-cache
+~           
+
+# fabfile caches
+.coffeecache
+.minifycache

@@ -1,4 +1,4 @@
-<div class="label_pages control-group row-fluid" data-label-num="[[ $index ]]">
+<div class="label_pages control-group row-fluid">
     <span class="span1">Label :</span>
     <input type="text" value="" ng-model="label.label" class="span3 name_label input-little" />
     
@@ -7,17 +7,17 @@
     
     <span class="pages_remove_label button button-red span2 button-little" ng-click="remove_label($index)">- Remove label</span>
     
-    <input type="text" value="" ng-model="label.value"  class="span9 pages_tool" ng-class="{hidden: label.type != 1}" />
+    <input type="text" value="" ng-model="label.value"  class="span9 pages_tool" ng-class="{show: label.type == 'text'}" />
     
-    <textarea rows="4" cols="50" class="span9 hidden pages_tool" ng-class="{hidden: label.type != 2}" >[[ label.value ]]</textarea>
+    <textarea rows="4" cols="50" class="span9 hidden pages_tool" ng-class="{show: label.type == 'textarea'}" >[[ label.value ]]</textarea>
     
     <img src="">
     <input type="hidden" value="[[ label.value ]]">
-    <input type="file" class="span9 hidden pages_tool" ng-class="{hidden: label.type != 3}" />
+    <input type="file" class="span9 hidden pages_tool" ng-class="{show: label.type == 'image'}" />
     
     <select ng-model="label.type">
-        <option value="1">text</option>
-        <option value="2">textarea</option>
-        <option value="3">image</option>
+        <option value="text">text</option>
+        <option value="textarea">textarea</option>
+        <option value="image">image</option>
     </select>
 </div>

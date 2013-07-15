@@ -12,6 +12,7 @@ execution.
 """
 import os
 import time
+import hashlib
 import simplejson as json 
 from fabric.api import settings, run, env, cd, lcd, local
 from shared import db
@@ -23,7 +24,7 @@ LIST_JS_FILES = [x[:-3] for x in os.listdir('static/js/') if x[-3:] == '.js']
 def local_backup():
     """ """
     print '\n####### Backup MongoDB App #######'
-    local('mongodump --db '+DATABASE+' --out ../data/backup/mongodb/$(date +%F)')
+    local('mongodump --db {} --out ../data/backup/mongodb/$(date +%F)'.format(DATABASE))
         
 def mongodb_restore(date_backup=None):
     """ """
@@ -33,17 +34,94 @@ def mongodb_restore(date_backup=None):
         list_backup = sorted([ x for x in os.listdir('../data/backup/mongodb') if x[0] != '.'])
         date_backup = list_backup[-1]
     
-    local('mongorestore --db %s --drop ../data/backup/mongodb/%s/%s' % (DATABASE, date_backup, DATABASE))
+    local('mongorestore --db {0} --drop ../data/backup/mongodb/{1}/{0}'.format(DATABASE, date_backup))
     
 
-# Javascript tools ================================================================       
+# Javascript tools ================================================================   
 def coffee():
-    print '\n####### Coffee #######'
+    """
+    Run coffee daemon to watch for changes in static/coffee/
+    """
+    
+    print "\n##### Coffee #####"
     local('coffee --watch --bare --compile --output static/js/ static/coffee/')
 
+def coffeeshot():
+    """
+    Compile .coffee files that have been changed since last run
+    """
+    
+    print
+    print "This script will compile .coffee files that have been changed since last run\n\n"
+    
+    coffee_dir = os.path.join('static', 'coffee')
+    files = {}
+
+    # On first run, create a .coffeecache file 
+    if not os.path.isfile('.coffeecache'):
+        print "Creating empty .coffeecache...\n"
+        open('.coffeecache', 'w+').close()
+
+    print "Reading .coffeecache"
+    cache = open('.coffeecache', 'r')
+
+    for record in cache.readlines():
+        files[record.split(':')[0]] = record.split(':')[1].strip()
+
+    cache.close()
+
+    print "Checking for new .coffee files..."
+        
+    for filename in os.listdir(os.path.join('static', 'coffee')):
+        filename = filename.split('.')[0] # Remove file extension
+
+        if filename not in files.keys():
+            # Always compile and store MD5s for new files
+
+            print "New .coffee file: " + filename
+            files[filename] = hashlib.md5(open(os.path.join(coffee_dir, filename + ".coffee")).read()).hexdigest()
+            local('coffee --bare --compile --output static/js/ static/coffee/{}.coffee'.format(filename))
+        else:
+            # Compare hash with the known one
+
+            new_md5 = hashlib.md5(open(os.path.join(coffee_dir, filename + ".coffee")).read()).hexdigest()
+
+            if files[filename] != new_md5:
+
+                # If they don't match...
+                print "Updating {}...".format(filename)
+                local("coffee --bare --compile --output static/js/ static/coffee/{}.coffee".format(filename))
+                files[filename] = new_md5
+            else:
+                print filename + " has not changed"
+
+    cache = open('.coffeecache', 'w')
+    for f, md5 in files.items():
+        cache.write(':'.join((f, md5)) + '\n')
+
+    cache.close()
+
+        
 def minify():
-    print '\n####### Minify and change version js files #######'
+    """
+    Minify .js files that have been changed since last run
+    """
+
+    print "\nMinify JS files and update their version number"
+
     version = int(time.time()*0.01)
+
+    js_dir = os.path.join('static', 'js')
+    js_min_dir = os.path.join(js_dir, 'min')
+
+    already_minified =  [x[:-3].split('-')[0] for x in os.listdir(js_min_dir) if x[-3:] == '.js']
+
+    files = {}
+
+    # On first run, create a .minifycache file 
+    if not os.path.isfile('.minifycache'):
+        print "Creating empty .minifycache...\n"
+        local("touch .minifycache")
 
     # Get file version
     app_json = db.js.find_one({ "file": "version" })
@@ -56,17 +134,68 @@ def minify():
         app_json['js_file'] = {}
         app_json['js_file_version'] = {}
 
-    local('rm -fr static/js/min/*')
-    for name in LIST_JS_FILES:
-        app_json['js_file'][name] = name
-        app_json['js_file_version'][name] = 'min/{0}-{1}'.format(name, version)
-        local('cp static/js/{0}.js static/js/min/{0}-{1}.js'.format(name, version))
-        local('yuicompressor --nomunge -o static/js/min/{0}-{1}-min.js static/js/min/{0}-{1}.js'.format(name, version))
-        local('mv static/js/min/{0}-{1}-min.js static/js/min/{0}-{1}.js'.format(name, version))
+    print "Reading .minifycache"
+    cache = open('.minifycache', 'r')
+
+    for record in cache.readlines():
+        files[record.split(':')[0]] = record.split(':')[1].strip()
+
+    cache.close()
+
+    print "Checking for new .js files..."
+
+    for filename in LIST_JS_FILES:
+
+        app_json['js_file'][filename] = filename
+        app_json['js_file_version'][filename] = 'min/{0}-{1}'.format(filename, version)
+
+        if filename not in files.keys() or filename not in already_minified:
+            # Always compile and store MD5s for new files or files without
+            # a matching minified version
+
+            print "New .js file: " + filename
+            files[filename] = hashlib.md5(open(os.path.join(js_dir, filename + ".js")).read()).hexdigest()
+
+            origin_min = "static/js/min/{}-{}.js".format(filename, version)
+            destination_min = "static/js/min/{}-{}-min.js".format(filename, version)
+
+            local("cp static/js/{}.js {}".format(filename, origin_min))
+            local("yuicompressor --nomunge -o {} {}".format(destination_min, origin_min))
+            local("mv {} {}".format(destination_min, origin_min))
+        else:
+            # Compare hash with the known one
+
+            new_md5 = hashlib.md5(open(os.path.join(js_dir,
+                filename + ".js")).read()).hexdigest()
+
+            if files[filename] != new_md5:
+
+                # If they don't match...
+                print "Updating " + filename + "..."
+
+                # Remove the old minified file (if any)
+                local('rm -f static/js/min/{0}*.js'.format(filename))
+
+                origin_min = "static/js/min/{}-{}.js".format(filename, version)
+                destination_min = "static/js/min/{}-{}-min.js".format(filename, version)
+
+                local('cp static/js/{}.js {}'.format(filename, origin_min))
+                local("yuicompressor --nomunge -o {} {}".format(destination_min, origin_min))
+                local("mv {} {}".format(destination_min, origin_min))
+                files[filename] = new_md5
+            else:
+                print filename + " has not changed"
 
     # Update file version
     db.js.update({ "file": "version" }, app_json, True)
-    local("mongodump --db {} --collection js --out dump".format(DATABASE))
+    local("mongodump --db otdb --collection js --out dump")
+
+    # Update cache
+    cache = open('.minifycache', 'w')
+    for f, md5 in files.items():
+        cache.write(':'.join((f, md5)) + '\n')
+
+    cache.close()
 
 
 # Tests tools =====================================================================        

@@ -2882,13 +2882,17 @@ a.thumbnail:hover {
   margin: 10px 0 0 0;
   display: none;
 }
-/* line 1864, ../sass/admin.scss */
+/* line 1863, ../sass/admin.scss */
+.pages_table_tools .pages_tool.show {
+  display: inherit;
+}
+/* line 1868, ../sass/admin.scss */
 .pages_table_tools .pages_field select {
   float: right;
   margin: 10px 21px 0 0;
   width: 14.8936%;
 }
-/* line 1868, ../sass/admin.scss */
+/* line 1872, ../sass/admin.scss */
 .pages_table_tools .pages_field .control-group {
   border-right: 3px solid #DDDDDD;
   padding: 0 0 0 2px;
@@ -2898,18 +2902,18 @@ a.thumbnail:hover {
   box-sizing: border-box;
 }
 
-/* line 1876, ../sass/admin.scss */
+/* line 1880, ../sass/admin.scss */
 .label_pages {
   margin-bottom: 20px;
 }
 
-/* line 1879, ../sass/admin.scss */
+/* line 1883, ../sass/admin.scss */
 .pages_table_tools .control-group input {
   margin-bottom: 0;
 }
 
 /* Settings ================================================================================ */
-/* line 1884, ../sass/admin.scss */
+/* line 1888, ../sass/admin.scss */
 .settings, .content_right {
   background-color: #FCFCFC;
   border: 1px solid #DEDEDE;
@@ -2920,7 +2924,7 @@ a.thumbnail:hover {
   border-radius: 4px;
 }
 
-/* line 1893, ../sass/admin.scss */
+/* line 1897, ../sass/admin.scss */
 .settings .form-actions {
   background-color: #F5F5F5;
   border-top: 1px solid #DDDDDD;
@@ -2930,7 +2934,7 @@ a.thumbnail:hover {
 }
 
 /* Footer ================================================================================== */
-/* line 1902, ../sass/admin.scss */
+/* line 1906, ../sass/admin.scss */
 footer {
   border-top: 4px double #DEDEDE;
   margin: 30px auto 0;
@@ -2938,7 +2942,7 @@ footer {
   text-align: center;
   width: 940px;
 }
-/* line 1908, ../sass/admin.scss */
+/* line 1912, ../sass/admin.scss */
 footer p {
   opacity: 0.6;
   filter: alpha(opacity=60);

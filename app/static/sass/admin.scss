@@ -1859,7 +1859,11 @@ a.thumbnail:hover {
     padding: 17px 20px 18px; }
   .pages_tool {
     margin: 10px 0 0 0;
-    display: none; }
+    display: none; 
+    &.show {
+      display: inherit;
+    }
+  }
   .pages_field {
     select {
       float: right;
