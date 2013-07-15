@@ -32,10 +32,7 @@ PagesCtrl = function($scope, $resource, $rootScope) {
         "it": "",
         "en": ""
       },
-      "content": {
-        "it": "",
-        "en": ""
-      },
+      "content": [],
       "file": "",
       "labels": []
     };
@@ -52,17 +49,49 @@ PagesCtrl = function($scope, $resource, $rootScope) {
     return $scope.menu_reveal();
   };
   $scope.add_label = function() {
-    var label;
-    label = {
-      "type": "text",
-      "label": "",
-      "alias": "",
-      "value": ""
+    var content_item, label_item;
+    label_item = {
+      "name": "",
+      "type": "text"
     };
-    return $scope.page.labels.push(label);
+    content_item = {
+      "alias": {
+        "it": "",
+        "en": ""
+      },
+      "value": {
+        "it": "",
+        "en": ""
+      }
+    };
+    $scope.page.labels.push(label_item);
+    return $scope.page.content.push(content_item);
   };
-  return $scope.remove_label = function(index) {
-    return $scope.page.labels.splice(index, 1);
+  $scope.remove_label = function(index) {
+    $scope.page.labels.splice(index, 1);
+    return $scope.page.content.splice(index, 1);
+  };
+  $scope["new"] = function() {
+    var paramas;
+    $rootScope.message_show = false;
+    paramas = $scope.page;
+    paramas["token"] = app["token"];
+    return $scope.ajaxPagesNew.save(paramas, function(resource) {
+      return $scope.show_message(resource);
+    });
+  };
+  return $scope.save = function() {
+    var paramas;
+    $rootScope.message_show = false;
+    paramas = {
+      "_id": $scope.hash_map_id,
+      "name": $scope.hash_map.name,
+      "token": app["token"]
+    };
+    paramas = __get_value(paramas);
+    return $scope.ajaxPagesUpdate.save(paramas, function(resource) {
+      return $scope.show_message(resource);
+    });
   };
 };
 

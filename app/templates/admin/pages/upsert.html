@@ -70,8 +70,39 @@
   </div><!-- .control-group -->
 
   <div class="content_right row-fluid" style="margin-top:15px;padding-top:18px;"> 
-    <div class="pages_field" ng-repeat="label in page.labels | orderBy:label.key">
-      {% include 'admin/pages/label.html' %}
+    [[ page.content ]]
+    <br />
+    [[ page.labels ]]
+    <div class="pages_field" ng-repeat="item in page.content">
+      <div class="label_pages control-group row-fluid">
+        <span class="span1">Label :</span>
+        <input type="text" ng-model="page.labels[$index].name" class="span3 name_label input-little" />
+        
+        <span class="span1">Alias :</span>
+        <input type="text" ng-model="item.alias[code_language]" 
+        class="span4 alias_label input-little" />
+        
+        <span class="pages_remove_label button button-red span2 button-little" 
+        ng-click="remove_label($index)">- Remove label</span>
+        
+        <input type="text" ng-model="item.value[code_language]"  
+        class="span9 pages_tool" ng-class="{show: page.labels[$index].type == 'text'}" />
+        
+        <textarea rows="4" cols="50" class="span9 hidden pages_tool" 
+        ng-class="{show: page.labels[$index].type == 'textarea'}" 
+        >[[ item.value[code_language] ]]</textarea>
+        
+        <img src="">
+        <input type="hidden" value="[[ item.value[code_language] ]]">
+        <input type="file" class="span9 hidden pages_tool" 
+        ng-class="{show: page.labels[$index].type == 'image'}" />
+        
+        <select ng-model="page.labels[$index].type">
+            <option value="text">text</option>
+            <option value="textarea">textarea</option>
+            <option value="image">image</option>
+        </select>
+      </div>
     </div>
   </div><!-- .control-group -->
 
@@ -79,8 +110,8 @@
     <div class="form-horizontal">
       <fieldset>
         <div class="form-actions">
-          <button class="button button-submit" ng-click="new()" ng-hide="update" data-test="create">Create</button>
-          <button class="button button-submit" ng-click="save()" ng-show="update" data-test="save">{{ g.admin.save }}</button>
+          <button class="button button-submit" ng-click="new()" ng-hide="update">Create</button>
+          <button class="button button-submit" ng-click="save()" ng-show="update">{{ g.admin.save }}</button>
         </div>
       </fieldset>
     </div>

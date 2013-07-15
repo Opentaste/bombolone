@@ -80,3 +80,4 @@ LIST_LANGUAGES = ['ar','cn','de','en','es','fr','gr','it','jp','pt','ru','tr']
 
 # List js local files
 JS_FILES = ['/static/js/lib/angular.min.js', '/static/js/lib/angular-resource.min.js', '/static/js/lib/jquery.min.js']
+

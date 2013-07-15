@@ -24,7 +24,7 @@ PagesCtrl = ($scope, $resource, $rootScope) ->
       "url": { "it": "", "en": ""},
       "title":  { "it": "", "en": ""},
       "description":  { "it": "", "en": ""},
-      "content":  { "it": "", "en": ""},
+      "content":  [],
       "file": "",
       "labels": []
 
@@ -43,14 +43,39 @@ PagesCtrl = ($scope, $resource, $rootScope) ->
     $scope.menu_reveal()
 
   $scope.add_label = ->
-    label = 
+    label_item = 
+      "name": ""
       "type": "text"
-      "label": "", 
-      "alias": "", 
-      "value": ""
-    $scope.page.labels.push label
+
+    content_item = 
+      "alias": {"it": "", "en": ""}, 
+      "value": {"it": "", "en": ""}
+
+    $scope.page.labels.push label_item
+    $scope.page.content.push content_item
 
   $scope.remove_label = (index) ->
     $scope.page.labels.splice index, 1
+    $scope.page.content.splice index, 1
+
+  $scope.new = ->
+    $rootScope.message_show = false
+    paramas = $scope.page
+    paramas["token"] = app["token"]
+      
+    $scope.ajaxPagesNew.save paramas, (resource) ->
+      $scope.show_message(resource)
+
+  $scope.save = ->
+    $rootScope.message_show = false
+    paramas =
+      "_id": $scope.hash_map_id
+      "name": $scope.hash_map.name
+      "token": app["token"]
+
+    paramas = __get_value(paramas)
+      
+    $scope.ajaxPagesUpdate.save paramas, (resource) ->
+      $scope.show_message(resource)
 
 PagesCtrl.$inject = ["$scope", "$resource", "$rootScope"]

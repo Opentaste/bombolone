@@ -12,7 +12,6 @@ path = window.location.pathname;
 ot.value("appName", "bombolone");
 
 ot.config(function($locationProvider, $interpolateProvider) {
-  $locationProvider.html5Mode(true).hashPrefix('!');
   $interpolateProvider.startSymbol("[[");
   return $interpolateProvider.endSymbol("]]");
 });

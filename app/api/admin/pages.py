@@ -14,7 +14,7 @@ from pymongo.errors import InvalidId, PyMongoError
 from core.utils import jsonify, ensure_objectid
 from core.languages import Languages
 from core.validators import CheckValue
-from core.admin.hash_table import HashTable, hash_table_list, hash_table_get
+from core.admin.pages import Pages
 
 # Imports inside Bombolone
 from config import LIST_LANGUAGES
@@ -33,10 +33,10 @@ check = CheckValue()
 def overview():
     """ List all the documents, each has a name 
     that identifies it, and an hash map. """
-    hash_map_list = hash_table_list()
+    page_list = page_list()
     data = {
         "success": True,
-        "hash_map_list": hash_map_list
+        "page_list": page_list
     }
     return jsonify(data)
 
@@ -48,10 +48,10 @@ def overview():
 def get():
     """ """
     _id = request.args.get("_id", None)
-    hash_map = hash_table_get(_id)
+    page = pages_get(_id)
     data = {
         "success": True,
-        "hash_map": hash_map
+        "page": page
     }
     return jsonify(data)
 
@@ -64,13 +64,13 @@ def new():
     language_name = languages_object.get_languages(5)
     params = request.json
 
-    hash_object = HashTable(params=params)
-    hash_object.new()
+    page_object = Pages(params=params)
+    page_object.new()
 
     data = {
-        "success": hash_object.success,
-        "message": hash_object.message,
-        "hash_map": hash_object.hash_map
+        "success": page_object.success,
+        "message": page_object.message,
+        "page": page_object.page
     }
     return jsonify(data)
 
@@ -82,11 +82,11 @@ def remove():
     """ This method removes an hash map.
     :param _id: MongoDB ObjectId """
     _id = request.args.get("_id", None)
-    hash_object = HashTable(_id=_id)
+    page_object = Pages(_id=_id)
 
     success = False
     if _id:
-        success = hash_object.remove()
+        success = page_object.remove()
 
     data = {
         "success": success
@@ -104,20 +104,20 @@ def update():
 
     success = False
     message = ""
-    hash_map = {}
+    page = {}
 
     if "_id" in params:
-        hash_object = HashTable(params=params, _id=params["_id"])
-        hash_object.update()
+        page_object = Pages(params=params, _id=params["_id"])
+        page_object.update()
 
-        success = hash_object.success
-        message = hash_object.message
-        hash_map = hash_object.hash_map
+        success = page_object.success
+        message = page_object.message
+        page = page_object.hash_map
 
     data = {
         "success": success,
         "message": message,
-        "hash_map": hash_map
+        "page": page
     }
     return jsonify(data)
   
