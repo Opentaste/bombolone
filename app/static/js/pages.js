@@ -2,20 +2,31 @@
 var PagesCtrl;
 
 PagesCtrl = function($scope, $resource, $rootScope) {
-  var page_update;
+  var page_list, page_update, params;
   page_update = path.match(/^\/admin\/pages\/update\/?$/i);
+  page_list = path.match(/^\/admin\/pages\/?$/i);
   $scope.module = "pages";
   $scope.menu_language = false;
   $scope.code_language = $rootScope.lan;
   $scope.name_language = $rootScope.language;
   $scope.list_labels = [];
-  if (page_update) {
+  if (page_list) {
+    $rootScope.loader = true;
+    $scope.ajaxPagesList.get(function(resource) {
+      $rootScope.loader = false;
+      $rootScope.items_list = resource.page_list;
+      return $scope.show_item_list = true;
+    });
+  } else if (page_update) {
+    params = {
+      _id: $scope.page_id
+    };
     $scope.ajaxHashTableList.get(params, function(resource) {
       $rootScope.loader = false;
       $rootScope.items_list = resource.hash_map_list;
       return $scope.show_hash_map_list = true;
     });
-  } else {
+  } else if (page_new) {
     $scope.page = {
       "name": "",
       "from": "",

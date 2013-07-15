@@ -94,7 +94,11 @@ AppCtrl = ($scope, $resource, $rootScope) ->
     { callback: "JSON_CALLBACK" }, request_with_token )
   $scope.ajaxHashTableUpdate = $resource($rootScope.API + "/hash_table/update.json",
     { callback: "JSON_CALLBACK" }, request_with_token )
+  $scope.ajaxPagesList = $resource($rootScope.API + "/pages/list.json",
+    { callback: "JSON_CALLBACK" }, request_with_token )
   $scope.ajaxPagesNew = $resource($rootScope.API + "/pages/new.json",
+    { callback: "JSON_CALLBACK" }, request_with_token )
+  $scope.ajaxPagesGet = $resource($rootScope.API + "/pages/get.json",
     { callback: "JSON_CALLBACK" }, request_with_token )
   $scope.ajaxPagesUpdate = $resource($rootScope.API + "/pages/update.json",
     { callback: "JSON_CALLBACK" }, request_with_token )

@@ -6,55 +6,49 @@
 {% block nav_active_6 %}class="active"{% endblock %}
 
 {% block admin %}
-    <h2>{{ g.pages.name }}</h2>
-    {% if g.my['rank'] < 15 %}
-    <br />
-    <a href="{{ admin }}/pages/new/" title="" class="button button-blu">{{ g.pages.add_new_page }}</a>
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th style="width:25%">{{ g.admin.name_val }}</th>
-                <th style="width:60%">Url</th>
-                <th style="width:15%">{{ g.admin.remove }}</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <td colspan="4"></td>
-            </tr>
-        </tfoot>
-        <tbody>
-            {% for page in pages_list %}
-            <tr data-item="{{ str(page["_id"]) }}">
-                <td><a href="{{ admin }}/pages/{{ str(page['_id']) }}/">{{ page['name'] }}</a></td>
-                <td>{{ lan }} : {{ page['url'][lan] }}</td>
-                <td>
-                    <span class="remove_item" ng-click="remove('{{ str(page["_id"]) }}')">{{ g.admin.remove_item }}</span>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th style="width:100%;">{{ g.admin.name_val }}</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <td colspan="1"></td>
-            </tr>
-        </tfoot>
-        <tbody>
-            {% for page in pages_list %}
-            <tr>
-                <td><a href="{{ admin }}/pages/{{ str(page['_id']) }}/">{{ page['name'] }}</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% endif %}
+<div ng-controller="PagesCtrl">
+  <h2>{{ g.pages.name }}</h2>
+  <br />
+  {% if my.rank < 15 %}
+  <a href="{{ admin }}/pages/new/" title="" class="button button-blu">{{ g.pages.add_new_page }}</a>
+  {% endif %}
+  <table class="table table-bordered table-striped">
+      <thead>
+          <tr>
+              <th style="width:25%">{{ g.admin.name_val }}</th>
+              <th style="width:60%">Url</th>
+              <th style="width:15%">{{ g.admin.remove }}</th>
+          </tr>
+      </thead>
+      <tfoot>
+          <tr>
+              <td colspan="4"></td>
+          </tr>
+      </tfoot>
+      <tbody class="hidden" ng-class="{hidden: !show_item_list}">
+        <tr ng-repeat="item in items_list | orderBy:name">
+          <td><a href="/admin/pages/update/[[ item['_id'] ]]/">[[ item['name'] ]]</a></td>
+          <td>{{ lan }} : [[ item['url'][app.lan] ]]</td>
+          {% if my.rank < 15 %}
+          <td>
+            <span class="remove_item" ng-click="remove(item._id, $index)">{{ g.admin.remove_item }}</span>
+          </td>
+          {% endif %}
+        </tr>
+      </tbody>
+  </table>
+  {% include "error/loader.html" %}
+</div>
 {% endblock %}
 
+{% block js_module_files %}
+  {% if not sync %}
+    "{{ '/static/js/%s' % js_version['pages'] }}",
+  {% endif %}
+{% endblock %}
+
+{% block js_module_files_sync %}
+  {% if sync %}
+    <script src="{{ '/static/js/%s' % js_version['pages'] }}" ></script>
+  {% endif %}
+{% endblock %}

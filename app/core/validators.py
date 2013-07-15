@@ -71,6 +71,13 @@ class CheckValue(object):
         if URL_REGEX.match(data):
             return True
         return False
+
+    def url_two(self, data):
+        """ Validates the url 
+        :param url: The string """
+        if USERNAME_REGEX.match(data):
+            return True
+        return False
         
     def integer(self, data):
         """ """

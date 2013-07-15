@@ -33,7 +33,7 @@ check = CheckValue()
 def overview():
     """ List all the documents, each has a name 
     that identifies it, and an hash map. """
-    page_list = page_list()
+    page_list = list(g.db.pages.find().sort('name'))
     data = {
         "success": True,
         "page_list": page_list
@@ -48,7 +48,7 @@ def overview():
 def get():
     """ """
     _id = request.args.get("_id", None)
-    page = pages_get(_id)
+    page = g.db.pages.find({ "_id": ensure_objectid(_id) })
     data = {
         "success": True,
         "page": page

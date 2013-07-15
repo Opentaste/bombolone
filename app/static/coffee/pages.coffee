@@ -1,8 +1,9 @@
 # Main element to change language
 PagesCtrl = ($scope, $resource, $rootScope) ->
 
-  # Get page id
+  # Get page variables
   page_update = path.match(/^\/admin\/pages\/update\/?$/i)
+  page_list = path.match(/^\/admin\/pages\/?$/i)
 
   # Default variables
   $scope.module = "pages"
@@ -11,12 +12,22 @@ PagesCtrl = ($scope, $resource, $rootScope) ->
   $scope.name_language = $rootScope.language
   $scope.list_labels = []
 
-  if page_update
+  if page_list
+    $rootScope.loader = true
+    $scope.ajaxPagesList.get (resource) ->
+      $rootScope.loader = false
+      $rootScope.items_list = resource.page_list
+      $scope.show_item_list = true
+
+  else if page_update
+    params = 
+      _id: $scope.page_id
     $scope.ajaxHashTableList.get params, (resource) ->
       $rootScope.loader = false
       $rootScope.items_list = resource.hash_map_list
       $scope.show_hash_map_list = true
-  else
+
+  else if page_new
     $scope.page =
       "name": "",
       "from": "",

@@ -92,7 +92,9 @@ class Pages(object):
         if self.message is None:
             try:
                 g.db.pages.insert(self.page)
-                return True
+                self.success = True
+                self.status = 'msg msg-success'
+                self.message = g.pages_msg('success_update_page')
             except PyMongoError:
                 self.message = g.pages_msg('error_mongo_new')
                 
@@ -248,96 +250,27 @@ class Pages(object):
                         lista_url.pop()
                     num_urls = len(lista_url)
                 
-                kind_of_url = 'url_%s' % num_urls
-                if not kind_of_url in self.page:
-                    self.page[kind_of_url] = {}
-                self.page[kind_of_url][code] = lista_url
+                if not self.message:
+                    kind_of_url = 'url_{}'.format(num_urls)
+                    if not kind_of_url in self.page:
+                        self.page[kind_of_url] = {}
+                    self.page[kind_of_url][code] = lista_url
             
     def __request_content(self):
         """ """
         form      = self.params
-        self.page['labes'] = form["labes"]
+        self.page['labels'] = form["labels"]
         self.page['content'] = form["content"]
            
     def __request_values(self):
         """ """
         form = self.params
         
-        # get all the languages
-        for code in self.languages:            
-            
-            # 
-            for label in self.page['content'][code]:
+        for index, label in enumerate(self.page['content']):
+            # get all the languages
+            for code in self.languages:            
         
                 # if label is an image
-                if label["type"] is "image":
+                if self.page['labels'][index]["type"] is "image":
                     name_file = upload_file(code+'_'+str(i), 'page')
-                    if name_file is None:
-                        name_file = form['label_'+code+'_'+str(i)+'_hidden']
                     row_label['value'] = name_file
-
-@pages.route('/admin/pages/')    
-@check_rank(10) 
-@get_hash('pages')
-def overview():
-    """ The overview shows the list of the pages registered """
-    pages_list = g.db.pages.find().sort('name')
-    return render_template('{}/index.html'.format(MODULE_DIR), **locals() )
-
-
-@pages.route('/admin/pages/new/', methods=['POST', 'GET'])
-@check_rank(10) 
-@get_hash('pages')
-def new():
-    """ The administrator can create a new page """       
-    pages_object = Pages()
-    page = pages_object.page
-    
-    language_name = languages_object.get_languages(3)
-    
-    # Creation new page
-    if request.method == 'POST':
-        if pages_object.new():
-            return redirect(url_for('pages.overview'))
-    
-    # Come back a message when there is an error	
-    if not pages_object.message is None:
-        message = pages_object.message
-        status  = pages_object.status
-    
-    return render_template('{}/new.html'.format(MODULE_DIR), **locals())
-
-
-@pages.route('/admin/pages/<_id>/', methods=['POST', 'GET'])
-@check_rank(10) 
-@get_hash('pages')
-def update(_id):
-    """ The administrator can update a page """       
-    pages_object = Pages(_id)
-    page = pages_object.page
-    
-    language_name = languages_object.get_languages(3)
-    
-    # Update page
-    if request.method == 'POST':
-        if pages_object.update():
-            return redirect(url_for('pages.overview'))
-    
-    len_of_label = len(page['label'])
-    
-    # Come back a message when there is an error	
-    if not pages_object.message is None:
-        message = pages_object.message
-        status  = pages_object.status
-    
-    return render_template('{}/update.html'.format(MODULE_DIR), **locals())
-
-
-@pages.route('/admin/pages/remove/<_id>/')  
-@check_rank(10) 
-@get_hash('pages')  
-def remove(_id):
-    """ """
-    g.db.pages.remove({ '_id' : ObjectId(_id) })
-    
-    return 'ok'
