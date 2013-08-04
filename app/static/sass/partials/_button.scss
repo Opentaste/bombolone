@@ -1,0 +1,36 @@
+@import "compass";
+@import "compass/css3/user-interface";
+@import "partials/palette";
+
+/* =============================================================================
+Button style
+============================================================================= */
+.button, a.button {
+  @include border-radius(2px);
+  @include background(linear-gradient(top, #E4E4E4, #dedbd3));
+  @include transition-property(all);
+  @include transition-duration(0.218s);
+  @include user-select(none);
+
+  border: 1px solid #c7cdd3;
+  color:$tint-button-color;
+  text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.125);
+  display: inline-block;
+  min-width: 10px;
+  text-align: center;
+  cursor: pointer;
+  font: bold 12px/24px arial,helvetica,sans-serif;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 10px;
+}
+.button:hover, a:hover.button {
+  @include background(linear-gradient(top, #E4E4E4, #cccece));
+  @include transition-property(all);
+  @include transition-duration(0.218s);
+  @include box-shadow(0 1px 1px rgba(0,0,0,0.1));
+
+  border: 1px solid #CCCAC8;
+  text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.125);
+  text-decoration: none;  
+}

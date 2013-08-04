@@ -1,0 +1,89 @@
+@import "compass";
+@import "compass/css3/user-interface";
+@import "partials/palette";
+
+/* =============================================================================
+Typography style
+============================================================================= */
+p {
+  margin: 0 0 9px;
+  font-size: 13px;
+  line-height: 18px;
+  small {
+    font-size: 11px;
+    color: #999999; 
+  } 
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: bold;
+  color: #C6905C;
+  text-rendering: optimizelegibility; 
+}
+
+h1 {
+  font-size: 28px;
+  line-height: 34px;
+  small {
+    font-size: 16px; 
+  } 
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 34px;
+  small {
+    font-size: 16px; 
+  } 
+}
+
+h3 {
+  font-size: 16px;
+  line-height: 24px;
+  small {
+    font-size: 13px; 
+  } 
+}
+
+h4, h5 {
+  line-height: 16px; 
+}
+
+h4 {
+  font-size: 13px;
+  small {
+    font-size: 11px; 
+  } 
+}
+
+h5 {
+  font-size: 11px; 
+}
+
+a {
+  color: #C6905C;
+  cursor: pointer;
+  text-decoration: none;
+  &:link, &:visited {
+    color: #C6905C;
+    cursor: pointer;
+    text-decoration: none; 
+  }
+  &:hover {
+    color: #262626;
+    cursor: pointer;
+    text-decoration: none; 
+  } 
+}
+
+* {
+    &::-moz-selection { 
+        background: #ffcc89;
+        color: #222; 
+    }
+    &::selection { 
+        background: #ffcc89;
+        color: #222; 
+    }
+}

@@ -1,13 +1,13 @@
-/*
- * Bombolone
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *
- *
- * Main layout style ======================================================== */
-
-@import "reset";
+// External
 @import "compass";
+@import "h5bp";
 
+// External mixings
+@include h5bp-normalize;
+
+/* =============================================================================
+Main layout style
+============================================================================= */
 body {
   background-color: #efefef;
   color: #424242;
@@ -1317,7 +1317,7 @@ input:focus:required:invalid:focus, textarea:focus:required:invalid:focus, selec
   width: 14px;
   height: 14px;
   vertical-align: text-top;
-  background-image: url(../layout/icon/glyphicons-halflings.png);
+  background-image: image-url("icon/glyphicons-halflings.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
   *margin-right: .3em;
@@ -1325,7 +1325,8 @@ input:focus:required:invalid:focus, textarea:focus:required:invalid:focus, selec
     *margin-left: 0; } }
 
 .icon-white {
-  background-image: url(../layout/icon/glyphicons-halflings-white.png); }
+  background-image: image-url("icon/glyphicons-halflings-white.png"); 
+}
 
 .icon-glass {
   background-position: 0 0; }
