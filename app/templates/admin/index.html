@@ -1,4 +1,40 @@
-{% extends "content/home.html" %}
+{% extends "base.html" %}
+
+{% block body_id %}id="admin"{% endblock %}
+
+{% block header %}
+<header>
+  <nav>
+    <a href="{{ path }}" title="" class="brand">
+      <img src="{{ layout }}/logo/bombolone_header.png" alt="" />
+    </a>
+    <ul class="nav pull-right header-tabs">
+      <li>
+        <a href="{{ url_for('home.index') }}" title="">
+          {% if my.image %}
+          <img src="{{ path }}/static/avatars/{{ my.username.lower() }}/{{ my.image[1] }}"
+          style="margin-right:2px;width:20px" alt="{{ my.username }}" />
+          {% endif %}
+          {{ g.my.username }}
+        </a>
+      </li>
+      <li class="menu_account dropdown" ng-click="dropdown()" 
+      ng-class="{open: dropdown_status=='open'}">
+        <a>
+          <i class="icon-cog icon-white"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="{{ url_for('settings.account') }}" title="" >{{ g.admin.settings }}</a></li>
+          {% if g.my['rank'] < 25 %}
+          <li><a href="{{ url_for('admin.dashboard') }}" title="" >Admin</a></li>
+          {% endif %}
+          <li><a href="{{ url_for('login.logout') }}" title="" >Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+{% endblock %}
 
 {% block content %}
 <section class="row">

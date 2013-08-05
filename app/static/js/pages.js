@@ -2,7 +2,8 @@
 var PagesCtrl;
 
 PagesCtrl = function($scope, $resource, $rootScope) {
-  var page_list, page_update, params;
+  var page_list, page_new, page_update, params;
+  page_new = path.match(/^\/admin\/pages\/new\/?$/i);
   page_update = path.match(/^\/admin\/pages\/update\/?$/i);
   page_list = path.match(/^\/admin\/pages\/?$/i);
   $scope.module = "pages";

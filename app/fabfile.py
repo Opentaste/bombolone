@@ -147,7 +147,6 @@ def minify():
     for filename in LIST_JS_FILES:
 
         app_json['js_file'][filename] = filename
-        app_json['js_file_version'][filename] = 'min/{0}-{1}'.format(filename, version)
 
         if filename not in files.keys() or filename not in already_minified:
             # Always compile and store MD5s for new files or files without
@@ -162,6 +161,7 @@ def minify():
             local("cp static/js/{}.js {}".format(filename, origin_min))
             local("yuicompressor --nomunge -o {} {}".format(destination_min, origin_min))
             local("mv {} {}".format(destination_min, origin_min))
+            app_json['js_file_version'][filename] = 'min/{0}-{1}'.format(filename, version)
         else:
             # Compare hash with the known one
 
@@ -183,6 +183,7 @@ def minify():
                 local("yuicompressor --nomunge -o {} {}".format(destination_min, origin_min))
                 local("mv {} {}".format(destination_min, origin_min))
                 files[filename] = new_md5
+                app_json['js_file_version'][filename] = 'min/{0}-{1}'.format(filename, version)
             else:
                 print filename + " has not changed"
 

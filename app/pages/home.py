@@ -16,7 +16,4 @@ home = Blueprint('home', __name__)
 def index():
     """ Manages the contents of the home page """
     # If the "my" attribute exists, it means that user is logged in
-    if g.my:
-        return render_template('content/home.html', **locals())
-    else:
-        return render_template('intro/home.html', **locals())
+    return render_template('home.html', **locals())

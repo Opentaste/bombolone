@@ -212,7 +212,7 @@ def index():
     if request.method == 'POST':
         if login_object.sign_in():
             print 10
-            return redirect(url_for('home.index'))
+            return redirect(url_for('admin.dashboard'))
     
     # Come back a message when there is an error	
     if login_object.message:

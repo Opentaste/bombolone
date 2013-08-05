@@ -213,23 +213,15 @@ class Pages(object):
             if self.message is None:
                 error_in = ' ( ' + code + ' )'
                 
-                # Check that the url field is not empty
-                if not len(self.page['url'][code]):
-                    self.message = g.pages_msg('error_b_1') + error_in
-                
                 # If the url is changed
-                elif old_url[code] != self.page['url'][code]:
-                    lista_url = self.page['url'][code].split('/')
-                    # Convert list with strings all to lowercase
-                    map(lambda x:x.lower(),lista_url) 
-                    if self.page['url'][code][-1] == '/':
-                        lista_url.pop()
-                    num_urls = len(lista_url)
+                if old_url[code] != self.page['url'][code]:
+                    url_list = self.__get_url_list(code)
+                    num_urls = len(url_list)
                     
                     try:
                         for code_two in self.languages:
                             field = "url_%s.%s" % (num_urls, code_two)
-                            available_url = g.db.pages.find_one({ field : lista_url })
+                            available_url = g.db.pages.find_one({ field : url_list })
                     except:
                         available_url = 'Error invalid expression'
                     
@@ -245,16 +237,14 @@ class Pages(object):
                     elif not available_url is None:
                         self.message = g.pages_msg('error_b_4') + error_in
                 else:
-                    lista_url = old_url[code].split('/')
-                    if old_url[code][-1] == '/':
-                        lista_url.pop()
-                    num_urls = len(lista_url)
+                    url_list = self.__get_url_list(code)
+                    num_urls = len(url_list)
                 
                 if not self.message:
                     kind_of_url = 'url_{}'.format(num_urls)
                     if not kind_of_url in self.page:
                         self.page[kind_of_url] = {}
-                    self.page[kind_of_url][code] = lista_url
+                    self.page[kind_of_url][code] = url_list
             
     def __request_content(self):
         """ """
@@ -274,3 +264,14 @@ class Pages(object):
                 if self.page['labels'][index]["type"] is "image":
                     name_file = upload_file(code+'_'+str(i), 'page')
                     row_label['value'] = name_file
+
+    def __get_url_list(self, code):
+        """  """
+        url_list = self.page['url'][code].split('/')
+        # Convert list with strings all to lowercase
+        map(lambda x:x.lower(),url_list)
+        # Save the url without slash in the end ( '/' )
+        if len(self.page['url'][code]):
+            if self.page['url'][code][-1] == '/':
+                url_list.pop()
+        return url_list

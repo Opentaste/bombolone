@@ -2,6 +2,7 @@
 PagesCtrl = ($scope, $resource, $rootScope) ->
 
   # Get page variables
+  page_new = path.match(/^\/admin\/pages\/new\/?$/i)
   page_update = path.match(/^\/admin\/pages\/update\/?$/i)
   page_list = path.match(/^\/admin\/pages\/?$/i)
 
