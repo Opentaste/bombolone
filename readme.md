@@ -9,27 +9,41 @@ It's designed to be a simple, flexible toolset for projects of any size.
 
 ## Quick start in 12 steps
 
-1. Run Mongodb `sudo mongod`
+```shell
+# Run Mongodb 
+sudo mongod
 
-2. Clone the git repo in your new web app folder `git clone https://github.com/Opentaste/bombolone.git web_app`
+# Clone the git repo in your new web app folder
+git clone https://github.com/Opentaste/bombolone.git web_app
 
-3. Move in Bombolone folder `cd web_app/`
+# Move in Bombolone folder 
+cd web_app/
 
-4. Install requirements  `sudo pip install -r REQUIREMENTS.txt`
+# Install requirements 
+sudo pip install -r REQUIREMENTS.txt
 
-5. Install [compass](http://compass-style.org/install/) `sudo gem update --system` `sudo gem install compass`
+# Install [compass](http://compass-style.org/install/)
+sudo gem update --system` `sudo gem install compass
 
-6. Install [h5bp](https://github.com/sporkd/compass-h5bp) `sudo gem install compass-h5bp`
+# Install [h5bp](https://github.com/sporkd/compass-h5bp)
+sudo gem install compass-h5bp
 
-7. Install [coffeescript](http://coffeescript.org/#installation) `sudo npm install -g coffee-script`
+# Install [coffeescript](http://coffeescript.org/#installation)
+sudo npm install -g coffee-script
 
-8. Move in app folder `cd app/`
+# Move in app folder
+cd app/
 
-9. Restore last version Bombolone Mongodb `fab mongodb_restore`
+# Restore last version Bombolone Mongodb
+fab mongodb_restore
 
-10/11. In two new tabs with the same path run Compass `compass watch` and Coffee `fab coffee`
+# In two new tabs with the same path run Compass and Coffee
+compass watch
+fab coffee
 
-12. Run Bombolone `python bombolone.py`
+# Run Bombolone 
+python bombolone.py
+```
 
 Registered users are:
 * Admin with username 'admin' and password 'admin123'
