@@ -3,7 +3,7 @@ PagesCtrl = ($scope, $resource, $rootScope) ->
 
   # Get page variables
   page_new = path.match(/^\/admin\/pages\/new\/?$/i)
-  page_update = path.match(/^\/admin\/pages\/update\/?$/i)
+  page_update = path.match(/^\/admin\/pages\/update\/([^\/]+)\/?$/i)
   page_list = path.match(/^\/admin\/pages\/?$/i)
 
   # Default variables
@@ -12,6 +12,7 @@ PagesCtrl = ($scope, $resource, $rootScope) ->
   $scope.code_language = $rootScope.lan
   $scope.name_language = $rootScope.language
   $scope.list_labels = []
+  $scope.update = true
 
   if page_list
     $rootScope.loader = true
@@ -21,14 +22,14 @@ PagesCtrl = ($scope, $resource, $rootScope) ->
       $scope.show_item_list = true
 
   else if page_update
+    $scope.page_id = page_update[1]
     params = 
       _id: $scope.page_id
-    $scope.ajaxHashTableList.get params, (resource) ->
-      $rootScope.loader = false
-      $rootScope.items_list = resource.hash_map_list
-      $scope.show_hash_map_list = true
+    $scope.ajaxPagesGet.get params, (resource) ->
+      $rootScope.page = resource.page
 
   else if page_new
+    $scope.update = false
     $scope.page =
       "name": "",
       "from": "",
@@ -80,12 +81,9 @@ PagesCtrl = ($scope, $resource, $rootScope) ->
 
   $scope.save = ->
     $rootScope.message_show = false
-    paramas =
-      "_id": $scope.hash_map_id
-      "name": $scope.hash_map.name
-      "token": app["token"]
-
-    paramas = __get_value(paramas)
+    paramas = $scope.page
+    paramas["_id"] = $scope.page_id
+    paramas["token"] = app["token"]
       
     $scope.ajaxPagesUpdate.save paramas, (resource) ->
       $scope.show_message(resource)

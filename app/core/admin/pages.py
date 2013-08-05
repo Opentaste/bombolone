@@ -220,8 +220,9 @@ class Pages(object):
                     
                     try:
                         for code_two in self.languages:
-                            field = "url_%s.%s" % (num_urls, code_two)
+                            field = "url_{}.{}".format(num_urls, code_two)
                             available_url = g.db.pages.find_one({ field : url_list })
+                            print available_url, url_list
                     except:
                         available_url = 'Error invalid expression'
                     

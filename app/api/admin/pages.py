@@ -48,7 +48,7 @@ def overview():
 def get():
     """ """
     _id = request.args.get("_id", None)
-    page = g.db.pages.find({ "_id": ensure_objectid(_id) })
+    page = g.db.pages.find_one({ "_id": ensure_objectid(_id) })
     data = {
         "success": True,
         "page": page
@@ -112,7 +112,7 @@ def update():
 
         success = page_object.success
         message = page_object.message
-        page = page_object.hash_map
+        page = page_object.page
 
     data = {
         "success": success,
