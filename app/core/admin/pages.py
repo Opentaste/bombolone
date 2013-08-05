@@ -14,6 +14,7 @@ from bson import ObjectId
 from pymongo.errors import InvalidId, PyMongoError
 
 # Imports inside bombolone
+from core.utils import ensure_objectid
 from decorators import check_rank, get_hash
 from core.languages import Languages
 from core.validators import CheckValue
@@ -120,15 +121,13 @@ class Pages(object):
                 
         return False
         
-    def remove(self, _id):
-        """ Remove page from the database """
-        self.get_page(_id)
-        
+    def remove(self):
+        """ Remove page from the database """        
         # It checks page _id exist and that
         # you have permission to remove that page
-        if len(self.user) and g.my['rank'] < 15:
+        if g.my['rank'] < 15:
             try:
-                g.db.pages.remove({ '_id' : ObjectId(_id) })
+                g.db.pages.remove({ '_id' : ensure_objectid(self.page["_id"]) })
                 return 'ok'
             except PyMongoError:
                 return 'nada'
@@ -222,7 +221,6 @@ class Pages(object):
                         for code_two in self.languages:
                             field = "url_{}.{}".format(num_urls, code_two)
                             available_url = g.db.pages.find_one({ field : url_list })
-                            print available_url, url_list
                     except:
                         available_url = 'Error invalid expression'
                     
@@ -231,7 +229,7 @@ class Pages(object):
                         self.message = g.pages_msg('error_b_2') + error_in
                     
                     # Verify that the format of the url is correct
-                    elif not check.url_two(self.page['url'][code]):
+                    elif len(self.page['url'][code]) and not check.url_two(self.page['url'][code]):
                         self.message = g.pages_msg('error_b_3') + error_in
                     
                     # Raises an error message if url is not available.

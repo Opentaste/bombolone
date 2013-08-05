@@ -3,6 +3,7 @@ var UsersCtrl;
 
 UsersCtrl = function($scope, $resource, $rootScope) {
   var upload, user_value, __init_submit;
+  $rootScope.admin_module = "users";
   user_value = page["user"] || {};
   $scope.user = {
     _id: user_value["_id"] || "",

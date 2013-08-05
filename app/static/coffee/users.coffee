@@ -1,5 +1,6 @@
 # Users controller
 UsersCtrl = ($scope, $resource, $rootScope) ->
+	$rootScope.admin_module = "users"
 
 	# Define scope user
 	user_value = page["user"] or {}

@@ -1,5 +1,6 @@
 # Main element to change language
 PagesCtrl = ($scope, $resource, $rootScope) ->
+  $rootScope.admin_module = "pages"
 
   # Get page variables
   page_new = path.match(/^\/admin\/pages\/new\/?$/i)

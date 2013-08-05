@@ -127,7 +127,7 @@ class HashTable(object):
             return False
         else:
             try:
-                g.db.hash_table.remove({ '_id' : ObjectId(self.hash_map["_id"]) })
+                g.db.hash_table.remove({ '_id' : ensure_objectid(self.hash_map["_id"]) })
                 return True
             except PyMongoError:
                 return False
