@@ -91,7 +91,10 @@ PagesCtrl = function($scope, $resource, $rootScope) {
     paramas = $scope.page;
     paramas["token"] = app["token"];
     return $scope.ajaxPagesNew.save(paramas, function(resource) {
-      return $scope.show_message(resource);
+      $scope.show_message(resource);
+      $rootScope.page = resource.page;
+      $scope.page_id = resource.page._id;
+      return $scope.update = true;
     });
   };
   return $scope.save = function() {

@@ -217,12 +217,11 @@ class Pages(object):
                     url_list = self.__get_url_list(code)
                     num_urls = len(url_list)
                     
-                    try:
-                        for code_two in self.languages:
-                            field = "url_{}.{}".format(num_urls, code_two)
-                            available_url = g.db.pages.find_one({ field : url_list })
-                    except:
-                        available_url = 'Error invalid expression'
+                    for code_two in self.languages:
+                        field = "url_{}.{}".format(num_urls, code_two)
+                        page_id = ensure_objectid(self.page["_id"]) if "_id" in self.page else None
+                        available_url = g.db.pages.find_one({ field: url_list, "_id": { "$ne": page_id } })
+                    print available_url
                     
                     # Check that the url is a maximum of 200 characters
                     if not check.length(self.page['url'][code], 0, 200):

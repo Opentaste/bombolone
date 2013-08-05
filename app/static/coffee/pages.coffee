@@ -79,6 +79,9 @@ PagesCtrl = ($scope, $resource, $rootScope) ->
       
     $scope.ajaxPagesNew.save paramas, (resource) ->
       $scope.show_message(resource)
+      $rootScope.page = resource.page
+      $scope.page_id = resource.page._id
+      $scope.update = true
 
   $scope.save = ->
     $rootScope.message_show = false
