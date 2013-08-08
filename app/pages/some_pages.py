@@ -9,6 +9,11 @@
 # Imports outside bombolone
 from flask import request, session, g, render_template, url_for, redirect
 
+def home():
+    """ Manages the contents of the home page """
+    # If the "my" attribute exists, it means that user is logged in
+    return render_template('home.html', **locals())
+
 def contact(page, url, code):
     """ """
     title       = page['title'][code]

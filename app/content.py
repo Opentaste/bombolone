@@ -17,12 +17,30 @@ from config import PATH
 content = Blueprint('content', __name__)
 	
 def render_content_page(num_of_path, path):
-    """ Using the path of the url, look inside the collection of pages 
-    that matches the page. If it matches, then it is rendered. """
+    """ 
+    Using the path of the url, look inside the collection of pages 
+    that matches the page. If it matches, then it is rendered. 
+
+    The main for loop is searching the "page_document" by 
+    the languages "code_lan", inside every page we serch the kind of
+    url with a specific "num_of_path", like url_1.en or url_2.it 
+        { 
+            "_id" : ObjectId("51ff3038f646460919000001"), 
+            ...
+            "url" : { 
+                "en" : "about/story", 
+                "it" : "chi_siamo/storia" 
+            }, 
+            "url_2" : { 
+                "en" : [  "about",  "story" ], 
+                "it" : [  "chi_siamo",  "storia" ] 
+            }, 
+            ... 
+        }
+    """
     languages = g.languages_object.get_languages(4)
     page_document = None
     
-    # Search the page for any language code
     for code_lan in languages:
         # Inside any page it saved the path with this format
         url = "url_{}.{}".format(num_of_path, code_lan)
@@ -36,8 +54,8 @@ def render_content_page(num_of_path, path):
                 word = page["url_"+str(num_of_path)][code_lan][i]
                 if path[i] == word:
                     count += 1
-                if word[0] == '<' and word[-1] == '>':
-                    count += 1
+                #if word[0] == '<' and word[-1] == '>':
+                #    count += 1
             # If the counter is the same of num_of_path
             # means we found the page we need it
             if count == num_of_path:
@@ -64,13 +82,14 @@ def render_content_page(num_of_path, path):
         # ===============================================================
         title       = page_document['title'][code]
         description = page_document['description'][code]
-        content     = { x['label'] : x['value'] for x in page_document['content'][code]}
+        content     = {}
+        if page_document['content']:
+            content = { x['label'] : x['value'] for x in page_document['content'][code]}
         # For every page you must specify the file where you want 
         # to use the contents stored in the database.
         return render_template('pages/'+page_document['file']+'.html', **locals())
 
-
-@content.route('/<regex("((?!static).*)"):one>/', methods=['POST', 'GET'])
+@content.route('/<regex("((?!static).*)"):one>', methods=['POST', 'GET'])
 def one(one):
     """ """
     path = [one]

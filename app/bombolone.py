@@ -42,10 +42,8 @@ from login.login import login
 
 # Imports modules Bombolone
 from content import content
-from home import home
 
-LIST_MODULES = [home, 
-                login,
+LIST_MODULES = [login,
                 hash_table_api,
                 pages_api,
                 account_api,

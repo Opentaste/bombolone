@@ -16,6 +16,7 @@ URL_REGEX = re.compile(
         r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
         r'(?::\d+)?' # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+URL_TWO_REGEX = re.compile(r'^[A-Za-z0-9_\/]+$', re.IGNORECASE)
 USERNAME_REGEX = re.compile(r'^[a-z0-9_]+$', re.I)
 FULLNAME_REGEX = re.compile(r'^[^\W0-9_]+([ \-\'][^\W0-9_]+)*?$', re.U)
 EMAIL_REGEX = re.compile(r'^.+@[^.].*\.[a-z]{2,10}$', re.IGNORECASE)
@@ -75,7 +76,7 @@ class CheckValue(object):
     def url_two(self, data):
         """ Validates the url 
         :param url: The string """
-        if USERNAME_REGEX.match(data):
+        if URL_TWO_REGEX.match(data):
             return True
         return False
         

@@ -229,6 +229,7 @@ class Pages(object):
                     
                     # Verify that the format of the url is correct
                     elif len(self.page['url'][code]) and not check.url_two(self.page['url'][code]):
+                        print 3, self.page['url'][code]
                         self.message = g.pages_msg('error_b_3') + error_in
                     
                     # Raises an error message if url is not available.
