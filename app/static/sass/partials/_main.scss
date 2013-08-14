@@ -14,9 +14,17 @@ body {
 }
 
 .content {
-  margin: 54px auto 5px;
+  margin: 20px auto 0;
   padding: 15px 0;
-  width: 940px;
+  width: 800px;
+
+  p.intro {
+    margin: 12px auto;
+    width: 580px;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: center;
+  }
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

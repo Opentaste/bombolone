@@ -27,28 +27,40 @@
 
   <title>{% block all_title %}Bombolone | {% block title %} {{ title }} {% endblock %}{% endblock %}</title>
   <meta name="description" content="{% block description %} {{ description }} {% endblock %}">
-
-  <link rel="stylesheet" href="/static/css/style.css?4">
+  
+  <link rel="stylesheet" href="/static/css/bombolone/admin.css">
   {% block css %}{% endblock %}
   <link rel="shortcut icon" href="/static/favicon.ico">
 </head>
-<body ng-controller="AppCtrl">
+<body {% block body_ng %}ng-controller="AppCtrl"{% endblock %} ng-click="clean()">
 
+  {% block header %}
   <header>
-    <img src="{{ layout }}/logo/bombolone_logo.png" alt="" />
+    <nav>
+      <a href="{{ path }}" title="" class="brand">
+        <img src="{{ layout }}/admin/bombolone_header.png" alt="" />
+      </a>
+      <ul class="intro pull-right">
+        <li>
+          <a href="{{ path }}/login/" class="button" title="">Login</a>
+        </li>
+      </ul>
+    </nav>
   </header>
+  {% endblock %}
 
   <div class="content">
     {% block content %}{% endblock %}
   </div>
 
-  <footer>
+  {% block footer %}
+  <footer data-lan="{{ lan }}" data-language="{{ language }}">
     <p>
       Copyright 2013 
       <a href="https://github.com/OwlStudios/bombolone">Bombolone</a> All rights reserved.
     </p>
-    <p><a href="/login/" title="">Login</a></p>
   </footer>
+  {% endblock %}
 
   {% block js_code %} {% endblock %}
   {% block js_data %}{% endblock %}

@@ -24,7 +24,7 @@ from core.emails import RememberPassword
 from core.verify import verify_remember, check_verify_remember
 from core.utils import create_password
 
-MODULE_DIR = 'intro/login'
+MODULE_DIR = 'admin/login'
 login = Blueprint('login', __name__)
 
 class Login(object):

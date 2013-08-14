@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "admin/base.html" %}
 
 {% block title %} Login {% endblock %}
 
@@ -6,11 +6,6 @@
 <div class="login box">
   <h1>Accedi a Bombolone</h1>
   {% include "error/message_old.html" %}
-  <section class="login_social">
-    <span class="button facebook_login">
-      Accedi con Facebook
-    </span>
-  </section>
   <section class="login_classic">
     <form name="login" action="{{ url_for('login.index') }}" method="post">
       <p>
