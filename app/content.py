@@ -84,12 +84,12 @@ def render_content_page(num_of_path, path):
         description = page_document['description'][code]
         content     = {}
         if page_document['content']:
-            content = { x['label'] : x['value'] for x in page_document['content'][code]}
+            content = { x[0]["name"]: x[1]["value"][code] for x in zip(page_document['labels'], page_document['content']) }
         # For every page you must specify the file where you want 
         # to use the contents stored in the database.
         return render_template('pages/'+page_document['file']+'.html', **locals())
 
-@content.route('/<regex("((?!static).*)"):one>', methods=['POST', 'GET'])
+@content.route('/<regex("((?!static).*)"):one>/', methods=['POST', 'GET'])
 def one(one):
     """ """
     path = [one]

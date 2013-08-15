@@ -77,35 +77,35 @@ def inject_user():
 def bad_request(error):
     """ Raise if the browser sends something to the application the 
     application or server cannot handle. """
-    return render_template('error/400.html')
+    return render_template('error/400.html'), 400
 
 @app.errorhandler(401)
 def unauthorized(error):
     """Raise if the user is not authorized. Also used if you want 
     to use HTTP basic auth."""
-    return render_template('error/401.html')
+    return render_template('error/401.html'), 401
 
 @app.errorhandler(404)
 def not_found(error):
     """ Raise if a resource does not exist and never existed. """
-    return render_template('error/404.html')
+    return render_template('error/404.html'), 404
     
 @app.errorhandler(408)
 def request_timeout(error):
     """Raise to signalize a timeout."""
-    return  render_template('error/408.html')
+    return  render_template('error/408.html'), 408
     
 @app.errorhandler(413)
 def request_too_large(error):
     """Like 413 but for too long URLs."""
-    return  render_template('error/413.html')
+    return  render_template('error/413.html'), 413
     
     
 @app.errorhandler(500)
 def bad_request(error):
     """ Raise if the browser sends something to the application the 
     application or server cannot handle. """
-    return render_template('error/500.html')
+    return render_template('error/500.html'), 500
      
      
 # ========================================================================	

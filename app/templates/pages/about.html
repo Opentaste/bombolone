@@ -1,10 +1,12 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
 
 {% block title %} {{ title }} {% endblock %}
 {% block description %} {{ description }} {% endblock %}
 
 
 {% block content %}
-    About
+    About {{ content.one }}
+    <br />
+    Hi {{ content.two }}
 {% endblock %}
 
