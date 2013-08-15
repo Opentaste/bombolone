@@ -9,16 +9,15 @@
 # Imports outside bombolone
 from flask import request, session, g, render_template, url_for, redirect
 
-def home():
-    """ Manages the contents of the home page """
-    # If the "my" attribute exists, it means that user is logged in
-    return render_template('home.html', **locals())
+from decorators import get_template
+from core.utils import get_content_dict
 
+@get_template("pages")
 def contact(page, url, code):
     """ """
     title       = page['title'][code]
     description = page['description'][code]
-    content     = page['content'][code]
+    content     = get_content_dict(page, code)
     
     if request.method == 'POST':
         text = request.form['text']
@@ -32,5 +31,3 @@ def contact(page, url, code):
         send_email(title, text, text_email, email)
         g.message = 'email sent'
         g.status = 'mes-green'
-    
-    return render_template('pages/'+page['file']+'.html', **locals())

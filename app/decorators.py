@@ -8,7 +8,7 @@ A collection of all the decorators
 :license: BSD (See LICENSE for details)
 """ 
 # Imports outside Bombolone
-from flask import g, abort, request, current_app
+from flask import g, abort, request, current_app, render_template
 from functools import wraps
 from api.oauth2db import oauth_server
 
@@ -21,7 +21,9 @@ class GetValue(object):
         return self.dictionary.get(key, 'Error not defined : {}'.format(key))
 
 def jsonp(f):
-    """Wraps JSONified output for JSONP"""
+    """
+    Wraps JSONified output for JSONP
+    """
     @wraps(f)
     def decorated_function(*args, **kwargs):
         callback = request.args.get('callback', False)
@@ -78,6 +80,21 @@ def get_hash_admin():
     get_value = GetValue(dictionary)
     g.admin_msg = get_value.check_key
     g.admin = dictionary
+
+def get_template(template_directive):
+    """ 
+    Run the template from a specific directive
+
+    @get_template("pages")
+    """
+    def real_decorator(function_to_decorate):
+        @wraps(function_to_decorate)
+        def decorated_function(*args, **kwargs):
+            function_to_decorate(*args, **kwargs)
+            return render_template(template_directive+'/'+args[0]['file']+'.html', **locals())
+        return decorated_function
+
+    return real_decorator
 
 ### Authentication Zone ###
 def check_token(function_to_decorate):

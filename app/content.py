@@ -13,6 +13,7 @@ from bson import ObjectId
 
 # Imports inside Bombolone
 from config import PATH
+from core.utils import get_content_dict
 
 content = Blueprint('content', __name__)
 	
@@ -74,8 +75,15 @@ def render_content_page(num_of_path, path):
         page_from = page_document['from']
         page_import = page_document['import']
         if page_from and page_import:
-            name = __import__(page_from, globals(), locals(), [], -1)
-            method_to_call = getattr(name, page_import)
+            page_from = "pages."+page_from
+            modules = page_from.split(".")
+            if len(modules) == 1:
+                module = __import__(page_from, globals(), locals(), [], -1)
+                method_to_call = getattr(module, page_import)
+            else:
+                module = __import__(page_from, globals(), locals(), [], -1)
+                module_called = getattr(module, modules[1])
+                method_to_call = getattr(module_called, page_import)
             return method_to_call(page_document, path, code)
         
         # 2) static page
@@ -84,7 +92,7 @@ def render_content_page(num_of_path, path):
         description = page_document['description'][code]
         content     = {}
         if page_document['content']:
-            content = { x[0]["name"]: x[1]["value"][code] for x in zip(page_document['labels'], page_document['content']) }
+            content = get_content_dict(page_document, code)
         # For every page you must specify the file where you want 
         # to use the contents stored in the database.
         return render_template('pages/'+page_document['file']+'.html', **locals())
