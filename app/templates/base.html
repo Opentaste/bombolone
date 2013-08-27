@@ -47,7 +47,14 @@
       Copyright 2013 
       <a href="https://github.com/OwlStudios/bombolone">Bombolone</a> All rights reserved.
     </p>
-    <p><a href="/login/" title="">Login</a></p>
+    <p>
+      {% if my %} 
+      <a href="/admin/" title="">Admin</a>
+      <a href="/logout/" title="">Logout</a>
+      {% else %}
+      <a href="/login/" title="">Login</a>
+      {% endif %}
+    </p>
   </footer>
 
   {% block js_code %} {% endblock %}

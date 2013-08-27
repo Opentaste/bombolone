@@ -43,12 +43,15 @@ def render_content_page(num_of_path, path):
     page_document = None
     
     for code_lan in languages:
+
         # Inside any page it saved the path with this format
         url = "url_{}.{}".format(num_of_path, code_lan)
+
         # Create a list of pages
         list_pages = [ page for page in g.db.pages.find({ url : { "$exists" : True } }) ]
         for page in list_pages:
             count  = 0
+
             # Any time the "path" is the same or we have some
             # value like "<i_am_variable>" increase the counter
             for i in range(num_of_path):
@@ -57,6 +60,7 @@ def render_content_page(num_of_path, path):
                     count += 1
                 #if word[0] == '<' and word[-1] == '>':
                 #    count += 1
+
             # If the counter is the same of num_of_path
             # means we found the page we need it
             if count == num_of_path:
@@ -93,9 +97,16 @@ def render_content_page(num_of_path, path):
         content     = {}
         if page_document['content']:
             content = get_content_dict(page_document, code)
+            
         # For every page you must specify the file where you want 
         # to use the contents stored in the database.
         return render_template('pages/'+page_document['file']+'.html', **locals())
+
+@content.route('/', methods=['POST', 'GET'])
+def home():
+    """ """
+    path = ['']
+    return render_content_page(1, path)
 
 @content.route('/<regex("((?!static).*)"):one>/', methods=['POST', 'GET'])
 def one(one):
