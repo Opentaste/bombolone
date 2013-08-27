@@ -14,11 +14,48 @@ import os
 import time
 import hashlib
 import simplejson as json 
-from fabric.api import settings, run, env, cd, lcd, local
-from shared import db
+from fabric.api import settings, run, env, cd, lcd, local, sudo
+try:
+    from shared import db
+except:
+    db = None
 from config import DATABASE
 
 LIST_JS_FILES = [x[:-3] for x in os.listdir('static/js/') if x[-3:] == '.js']
+
+
+# Install =========================================================================
+def install():
+    """ 
+    Install all the requirements to run Bombolone
+    """
+    if not check_database("install"):
+        return False
+
+    print '\n####### Install Bombolone #######'
+    print 'For Install correctly some library we need be Administrator'
+
+    # Install requirements 
+    local("sudo pip install -r ../REQUIREMENTS.txt")
+    # Install Compass (http://compass-style.org/install/)
+    local("gem update --system")
+    local("gem install compass")
+    # Install h5bp (https://github.com/sporkd/compass-h5bp)
+    local("gem install compass-h5bp")
+    # Install coffeescript (http://coffeescript.org/#installation)
+    local("sudo npm install -g coffee-script")
+
+
+# Helpers =========================================================================
+def check_database(name_function):
+    """
+    Check if is running the MongoDB database
+    """
+    if db is None:
+        print "\nYou need run MongoDB for complete the {} function".format(name_function)
+        return False
+    return True
+
 
 # Database ========================================================================
 def local_backup():
@@ -26,15 +63,20 @@ def local_backup():
     print '\n####### Backup MongoDB App #######'
     local('mongodump --db {} --out ../data/backup/mongodb/$(date +%F)'.format(DATABASE))
         
-def mongodb_restore(date_backup=None):
+
+def mongodb_restore(database=None, date_backup=None):
     """ """
     print '\n####### Restore MongoDB #######'
-    # when date backup is None allows to update the database to the last backup
+
+    if database is None:
+        database = DATABASE
+    
+    # When date backup is None allows to update the database to the last backup
     if date_backup is None:
         list_backup = sorted([ x for x in os.listdir('../data/backup/mongodb') if x[0] != '.'])
         date_backup = list_backup[-1]
     
-    local('mongorestore --db {0} --drop ../data/backup/mongodb/{1}/{0}'.format(DATABASE, date_backup))
+    local('mongorestore --db {0} --drop ../data/backup/mongodb/{1}/{2}'.format(database, date_backup, DATABASE))
     
 
 # Javascript tools ================================================================   
@@ -45,6 +87,7 @@ def coffee():
     
     print "\n##### Coffee #####"
     local('coffee --watch --bare --compile --output static/js/ static/coffee/')
+
 
 def coffeeshot():
     """
@@ -101,11 +144,13 @@ def coffeeshot():
 
     cache.close()
 
-        
+      
 def minify():
     """
     Minify .js files that have been changed since last run
     """
+    if not check_database("minify"):
+        return False
 
     print "\nMinify JS files and update their version number"
 
@@ -212,7 +257,8 @@ def tests():
             local('python check_settings.py')
     finally:
         drop_db_tests()
-    
+   
+
 def drop_db_tests():
     """ """
     print '\n####### Drop Test Database #######'

@@ -7,35 +7,20 @@ It's designed to be a simple, flexible toolset for projects of any size.
 
 
 
-## Quick start in 12 steps
+## Quick start in 6 steps
 
 ```shell
 # Run Mongodb 
 sudo mongod
 
 # Clone the git repo in your new web app folder
-git clone https://github.com/Opentaste/bombolone.git web_app
+git clone https://github.com/Opentaste/bombolone.git new_app
 
-# Move in Bombolone folder 
-cd web_app/
-
-# Install requirements 
-sudo pip install -r REQUIREMENTS.txt
-
-# Install [compass](http://compass-style.org/install/)
-sudo gem update --system` `sudo gem install compass
-
-# Install [h5bp](https://github.com/sporkd/compass-h5bp)
-sudo gem install compass-h5bp
-
-# Install [coffeescript](http://coffeescript.org/#installation)
-sudo npm install -g coffee-script
-
-# Move in app folder
-cd app/
+# Install libries
+fab install
 
 # Restore last version Bombolone Mongodb
-fab mongodb_restore
+fab mongodb_restore:database=new_app
 
 # In two new tabs with the same path run Compass and Coffee
 compass watch
@@ -96,7 +81,7 @@ With the HashTable module you can create different hashmap be used inside module
 
 
 ## Tests
-In Bombolone there is an environment for testing any module or webpage.
+In Bombolone will is an environment for testing any module or webpage.
 
 
 ## Who we are
