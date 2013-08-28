@@ -85,12 +85,12 @@
         <input type="text" ng-model="item.value[code_language]"  
         class="span9 pages_tool" ng-class="{show: page.labels[$index].type == 'text'}" />
         
-        <textarea rows="4" cols="50" class="span9 hidden pages_tool" 
+        <textarea rows="4" cols="50" class="span9 hidden pages_tool" ng-model="item.value[code_language]"
         ng-class="{show: page.labels[$index].type == 'textarea'}" 
         >[[ item.value[code_language] ]]</textarea>
         
         <img src="">
-        <input type="hidden" value="[[ item.value[code_language] ]]">
+        <input type="hidden" value="[[ item.value[code_language] ]]" ng-model="item.value[code_language]">
         <input type="file" class="span9 hidden pages_tool" 
         ng-class="{show: page.labels[$index].type == 'image'}" />
         

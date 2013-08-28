@@ -72,13 +72,14 @@ def render_content_page(num_of_path, path):
     # Retrive page document by g.lan
     code = g.lan
     page_document = get_page_content(code, num_of_path, path)
-    
-    # Retrive page document by one of the available languages
-    for code_lan in languages:
-        code = code_lan
-        page_document = get_page_content(code, num_of_path, path)
-        if page_document is not None:
-            break
+
+    if page_document is None: 
+        # Retrive page document by one of the available languages
+        for code_lan in languages:
+            code = code_lan
+            page_document = get_page_content(code, num_of_path, path)
+            if page_document is not None:
+                break
     
     # If page is None then there doesn't exist 
     # the page for that url

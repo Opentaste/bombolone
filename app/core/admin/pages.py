@@ -250,6 +250,8 @@ class Pages(object):
         form      = self.params
         self.page['labels'] = form["labels"]
         self.page['content'] = form["content"]
+
+        print self.page['content']
            
     def __request_values(self):
         """ """
