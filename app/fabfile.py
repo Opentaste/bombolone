@@ -243,6 +243,23 @@ def minify():
 
     cache.close()
 
+   
+# Update Bombolone  ===============================================================      
+def update():
+    """ """
+    print '\n####### Update Bombolone #######'
+    local("rm -fr tmp_update")
+    local("git clone https://github.com/Opentaste/bombolone.git tmp_update")
+    try:
+        local("rsync -avz --delete tmp_update/app/admin .")
+        local("rsync -avz --delete tmp_update/app/api .")
+        local("rsync -avz --delete tmp_update/app/core .")
+        local("rsync -avz --delete tmp_update/app/templates/admin templates")
+    except:
+        print "Got an error!!!"
+    finally:
+        local("rm -fr tmp_update")
+
 
 # Tests tools =====================================================================        
 def tests():
