@@ -840,6 +840,24 @@ a:hover {
   color: #222;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
+::selection {
+  background: #ffcc89;
+  color: #222;
+}
+
+::-moz-selection {
+  background: #ffcc89;
+  color: #222;
+}
+
+.hidden {
+  display: none !important;
+}
+
 .icon-de {
   background-position: 0 -52px;
   background-image: url('/static/layout/icons-se7c40ab2d8.png');

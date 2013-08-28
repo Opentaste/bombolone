@@ -87,3 +87,21 @@ a {
         color: #222; 
     }
 }
+
+.underline {
+  text-decoration:underline;
+}
+
+::selection { 
+  background: #ffcc89; 
+  color: #222; 
+}
+::-moz-selection { 
+  background: #ffcc89; 
+  color: #222; 
+}
+
+.hidden {
+  display: none!important;
+}
+

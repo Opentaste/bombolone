@@ -16,6 +16,34 @@ from config import PATH
 from core.utils import get_content_dict
 
 content = Blueprint('content', __name__)
+
+def get_page_content(code_lan, num_of_path, path):
+    """
+    By passing the language code and path, 
+    is return the page content object
+    """
+    # Inside any page it saved the path with this format
+    url = "url_{}.{}".format(num_of_path, code_lan)
+
+    # Create a list of pages
+    list_pages = [ page for page in g.db.pages.find({ url : { "$exists" : True } }) ]
+    for page in list_pages:
+        count  = 0
+
+        # Any time the "path" is the same or we have some
+        # value like "<i_am_variable>" increase the counter
+        for i in range(num_of_path):
+            word = page["url_"+str(num_of_path)][code_lan][i]
+            if path[i] == word:
+                count += 1
+            #if word[0] == '<' and word[-1] == '>':
+            #    count += 1
+
+        # If the counter is the same of num_of_path
+        # means we found the page we need it
+        if count == num_of_path:
+            return page
+    return None
 	
 def render_content_page(num_of_path, path):
     """ 
@@ -40,33 +68,17 @@ def render_content_page(num_of_path, path):
         }
     """
     languages = g.languages_object.get_languages(4)
-    page_document = None
+
+    # Retrive page document by g.lan
+    code = g.lan
+    page_document = get_page_content(code, num_of_path, path)
     
+    # Retrive page document by one of the available languages
     for code_lan in languages:
-
-        # Inside any page it saved the path with this format
-        url = "url_{}.{}".format(num_of_path, code_lan)
-
-        # Create a list of pages
-        list_pages = [ page for page in g.db.pages.find({ url : { "$exists" : True } }) ]
-        for page in list_pages:
-            count  = 0
-
-            # Any time the "path" is the same or we have some
-            # value like "<i_am_variable>" increase the counter
-            for i in range(num_of_path):
-                word = page["url_"+str(num_of_path)][code_lan][i]
-                if path[i] == word:
-                    count += 1
-                #if word[0] == '<' and word[-1] == '>':
-                #    count += 1
-
-            # If the counter is the same of num_of_path
-            # means we found the page we need it
-            if count == num_of_path:
-                code = code_lan
-                page_document = page
-                break
+        code = code_lan
+        page_document = get_page_content(code, num_of_path, path)
+        if page_document is not None:
+            break
     
     # If page is None then there doesn't exist 
     # the page for that url
