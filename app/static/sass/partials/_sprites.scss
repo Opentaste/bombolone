@@ -1,0 +1,54 @@
+// Icon folder
+$iconFolder: "icons";
+
+//-----------------------------------
+// Background
+//-----------------------------------
+@mixin sprite-background-image($map, $sprite, $dimensions: false, $offset-x: 0, $offset-y: 0) {
+	@include sprite($map, $sprite, $dimensions, $offset-x, $offset-y);
+	background-image: $map;
+	background-repeat: no-repeat;
+}
+
+//-----------------------------------
+// Icons
+//-----------------------------------
+$icon-sprites: sprite-map("#{$iconFolder}/*.png",
+	$spacing: 2px
+	//$new-position: 100%, $new-spacing: 15px, $new-repeat: no-repeat
+);
+
+$icons: sprite_names($icon-sprites); // Get a list of all the images used in the sprite
+
+@mixin icon($image, $dimensions: true) {
+	$imgPath: "#{$iconFolder}/#{$image}.png";
+	//background-image: image-url($imgPath); // Non-sprite
+	@include sprite-background-image($icon-sprites, $image); // Sprite
+	@if $dimensions {
+		width: image-width($imgPath);
+		height: image-height($imgPath);
+	}
+}
+
+// Create an .icon-{iconName} class for each icon. Careful what is added here, as lines will be replicated for every single icon.
+@each $icon in $icons {
+	@if str-index($icon, "_hover") == 0 { // This uses a custom function, and skips files with "_hover" in the filename
+		.icon-#{$icon} {
+			@include icon($icon);
+			&.text {
+				padding-left: image-width(sprite-file($icon-sprites, $icon))+5px;
+			}
+		}
+	}
+}
+
+[class*="icon-"] {
+	display: inline-block;
+	vertical-align: middle;
+	/*&.text {
+		width: auto;
+		font-weight: bold;
+		color: #35758d;
+		line-height: 1;
+	}*/
+}

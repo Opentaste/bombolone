@@ -1,8 +1,5 @@
 {% extends "base.html" %}
 
-{% block title %} home title  {% endblock %}
-{% block description %} home description  {% endblock %}
-
 {% block content %}
 <div>
 	<p class="intro">
@@ -12,6 +9,6 @@
 		<a href="http://jquery.com">jQuery</a>, <a href="http://sass-lang.com">Sass</a> and
 		<a href="http://html5boilerplate.com/">h5bp</a>.
 	</p>
-	<p class="intro">It's designed to be a simple, flexible toolset for projects of any size.</p>
+	<p class="intro">{{ content.par_num_2 }}</p>
 </div>
 {% endblock %}

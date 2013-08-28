@@ -48,6 +48,13 @@
       <a href="https://github.com/OwlStudios/bombolone">Bombolone</a> All rights reserved.
     </p>
     <p>
+      {% for code, language in all_languages.iteritems() %}
+      <span ng-click="set_language('{{ code }}')" class="set_language {% if lan == code %}underline{% endif %}">
+        <i class="icon-{{ code }}"></i>{{ language }}
+      </span>
+      {% endfor %}
+    </p>
+    <p>
       {% if my %} 
       <a href="/admin/" title="">Admin</a>
       <a href="/logout/" title="">Logout</a>
