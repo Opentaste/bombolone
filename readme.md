@@ -20,7 +20,7 @@ git clone https://github.com/Opentaste/bombolone.git new_app
 fab install
 
 # Restore last version Bombolone Mongodb
-fab mongodb_restore:database=new_app
+fab init_database:name_database=new_app
 
 # In two new tabs with the same path run Compass and Coffee
 compass watch

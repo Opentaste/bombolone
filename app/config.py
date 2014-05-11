@@ -10,7 +10,7 @@ TITLE = 'Bombolone'
 DESCRIPTION = 'Bombolone description'
 
 # Database connection
-DATABASE = 'bombolone'
+DATABASE = 'leo'
 
 # ~
 ENV = "home"

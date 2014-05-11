@@ -12,7 +12,7 @@ from datetime import datetime
 from flask import jsonify as flask_jsonify
 from flask import Blueprint, request, session, g, Response, render_template, url_for, redirect, abort
 from pymongo import ASCENDING, DESCENDING
-from pymongo.objectid import ObjectId
+from bson import ObjectId
 from werkzeug import secure_filename
 
 from config import UP_AVATARS_TMP_FOLDER

@@ -19,7 +19,7 @@ config.PROJECT_STATIC_FILES = 'data/test'
 import bombolone
 from helpers import create_password
 from pymongo import Connection
-from pymongo.objectid import ObjectId
+from bson import ObjectId
 
 # Imports modules application
 from admin import admin

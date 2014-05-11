@@ -14,6 +14,7 @@ import os
 import time
 import hashlib
 import simplejson as json 
+import shutil
 from fabric.api import settings, run, env, cd, lcd, local, sudo
 try:
     from shared import db
@@ -76,8 +77,43 @@ def mongodb_restore(database=None, date_backup=None):
         list_backup = sorted([ x for x in os.listdir('../data/backup/mongodb') if x[0] != '.'])
         date_backup = list_backup[-1]
     
-    local('mongorestore --db {0} --drop ../data/backup/mongodb/{1}/{2}'.format(database, date_backup, DATABASE))
-    
+    local('mongorestore --db {0} --drop ../data/backup/mongodb/{1}/{2}'.format(DATABASE, date_backup, database))
+   
+
+def init_database(name_database=None):
+    """
+    Init the basic database
+    """
+    # to do, here we need write in the config file the name of database
+    #DATABASE = name_database
+
+    new_line = "DATABASE = 'leo'\n"
+
+    with open("config.py","r") as fp:
+        lines = fp.readlines()
+
+    for i, line in enumerate(lines):
+        if line.startswith('DATABASE ='):
+            print line
+            lines[i] = new_line
+            break
+    else:
+        print "damn could not find the line"
+        raise SystemExit("Damn!")
+
+    with open("new_config.py","w") as fp:
+        fp.writelines(lines)
+
+    shutil.copy("new_config.py", "config.py")
+
+    #mongodb_restore(database="bombolone")
+
+
+def write_db_in_config(name_database):
+    """
+    """
+    pass
+
 
 # Javascript tools ================================================================   
 def coffee():
@@ -234,7 +270,7 @@ def minify():
 
     # Update file version
     db.js.update({ "file": "version" }, app_json, True)
-    local("mongodump --db otdb --collection js --out dump")
+    local("mongodump --db {} --collection js --out dump".format(DATABASE))
 
     # Update cache
     cache = open('.minifycache', 'w')

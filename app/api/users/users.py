@@ -10,7 +10,7 @@ import re
 from datetime import datetime
 from flask import Blueprint, request, session, g, Response, render_template, url_for, redirect, abort 
 from pymongo import ASCENDING, DESCENDING
-from pymongo.objectid import ObjectId
+from bson import ObjectId
 
 from decorators import get_hash, jsonp, check_token, check_token_post
 
