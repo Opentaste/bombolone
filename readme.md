@@ -92,7 +92,7 @@ Python and Javascript Lovers!
 
 The project was created by [@zizzamia](https://twitter.com/Zizzamia). 
 
-Contributors: [@diegor](https://twitter.com/diegor), [@danmaccauro]https://twitter.com/danmaccauro, [@bernarpa](https://twitter.com/bernarpa).
+Contributors: [@diegor](https://twitter.com/diegor), [@danmaccauro](https://twitter.com/danmaccauro), [@bernarpa](https://twitter.com/bernarpa).
 
 The logo was designed by [@FakeSamGregory](https://twitter.com/FakeSamGregory).
 
