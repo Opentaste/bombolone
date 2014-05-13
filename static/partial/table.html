@@ -1,0 +1,78 @@
+<table class="table table-bordered table-striped table-super-condensed table-th-click">
+  <thead>
+    <tr>
+      <th ng-repeat="item in table.head" style="width:[[ table.headWidth[$index] ]]%" 
+        ng-class="{active : sortTable=='-'+table.sortBy[$index] || sortTable==table.sortBy[$index]}" 
+        ng-click="sort_by($index)">
+        [[ table.head[$index] ]] 
+        <span ng-if="sortTable=='-'+table.sortBy[$index]" class="fa fa-caret-up"></span>
+        <span ng-if="sortTable==table.sortBy[$index]" class="fa fa-sort-down"></span>
+      </th> 
+      <th style="width:4%" ng-if="admin">
+      </th>
+    </tr>
+  </thead>
+  <tfoot>
+    <td colspan="[[ table.head.length ]]"> 
+      <ul>
+        <li>
+          <input type="checkbox" ng-model="show_url" />Show url
+        </li>
+        <li>
+          <input type="checkbox" ng-model="show_alias" />Show alias
+        </li>
+      </ul>
+    </td>
+  </tfoot>
+
+  <tbody ng-if="table.type.hash_table"> 
+    <tr ng-repeat="item in itemsList | orderBy:sortTable">
+      <td>
+        <a href="/admin/hash_table/update/[[ item._id ]]/">[[ item.name ]]</a>
+      </td>
+      <td ng-bind="item.sum"></td> 
+      <td ng-if="admin">
+        <span class="button button-remove" ng-click="remove(hash_map._id)">
+          <i class="fa fa-times"></i>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+
+  <tbody ng-if="table.type.ranks"> 
+    <tr ng-repeat="item in itemsList | orderBy:sortTable"> 
+      <td>
+        <a href="/admin/rank/update/[[ item._id ]]/" ng-if="admin">[[ item.name ]]</a>
+        <span ng-if="!admin">[[ item.name ]]</span>
+      </td>
+      <td>[[ item.rank ]]</td>
+      <td>[[ item.number_user ]]</td>
+      <td ng-if="admin">
+        <span class="button button-remove" ng-click="remove(item._id)">
+          <i class="fa fa-times"></i>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+
+  <tbody ng-if="table.type.users"> 
+    <tr ng-repeat="item in itemsList | orderBy:sortTable">
+      <td>
+        <img ng-if="item.image.length" ng-src="[[ '/static/avatars/'+item._id+'/'+item.image[0] || '' ]]"
+        style="max-width:20px; max-height:20px" />
+      </td> 
+      <td>
+        <a href="/admin/users/[[ item._id ]]/" data-test="[[ item.username ]]" data-test-id="[[ item._id ]]">
+          <span ng-bind="item.username"></span>
+        </a>
+      </td>
+      <td ng-if="admin">
+        <span ng-bind="item.email.substring(0, 45)"><span>
+      </td>
+      <td>
+        <span ng-bind="item.created | date:short"></span>
+      </td>
+      <td ng-if="admin"></td>
+    </tr>
+  </tbody>
+</table>

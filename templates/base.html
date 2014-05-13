@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="{{ lan }}" {% if sync %}ng-app="bombolone"{% endif %}>
+<head>
+  <meta charset="utf-8">
+  {% include "base_script.html" %}
+  <script>
+  var run_bombolone = function() {
+    $script([
+      {% for item in js_files_step_two %}'{{ item }}',{% endfor %}
+    ], function calb_a() {
+      $script(["{{ '/static/js/%s' % js_version['bombolone'] }}"], function calb_b() {
+        $script([
+          "{{ '/static/js/%s' % js_version['services/api'] }}",
+        ], function calb_c() {
+          $script([
+            "{{ '/static/js/%s' % js_version['controllers/app'] }}",
+            {% block js_files %}{% endblock %}
+          ], function calb_d() {
+            domready(function calb_e(){
+              angular.bootstrap(d, ['bombolone']);
+            });
+          });
+        });
+      });
+    });
+  };
+  $script([
+      {% for item in js_files_step_one %}'{{ item }}',{% endfor %}
+  ], run_bombolone);
+  </script>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>{% block all_title %}Bombolone | {% block title %} {{ title }} {% endblock %}{% endblock %}</title>
+  <meta name="description" content="{% block description %} {{ description }} {% endblock %}">
+
+  <link rel="stylesheet" href="/static/css/style.css?4">
+  {% block css %}{% endblock %}
+  <link rel="shortcut icon" href="/static/favicon.ico">
+</head>
+<body ng-controller="AppCtrl">
+
+  <header>
+    <img src="/static/layout/logo/bombolone_logo.png" alt="" />
+  </header>
+
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+
+  <footer>
+    <p>
+      Copyright 2014
+      <a href="https://github.com/OwlStudios/bombolone">Bombolone</a> All rights reserved.
+    </p>
+    <p>
+      {% for code, language in all_languages.iteritems() %}
+      <span ng-click="set_language('{{ code }}')" class="set_language {% if lan == code %}underline{% endif %}">
+        <i class="icon-{{ code }}"></i>{{ language }}
+      </span>
+      {% endfor %}
+    </p>
+    <p>
+      {% if my %} 
+      <a href="/admin/" title="">Admin</a>
+      <a href="/logout/" title="">Logout</a>
+      {% else %}
+      <a href="/login/" title="">Login</a>
+      {% endif %}
+    </p>
+  </footer>
+
+  {% block js_code %} {% endblock %}
+  {% block js_data %}{% endblock %}
+</body>
+</html>

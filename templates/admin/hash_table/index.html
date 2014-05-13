@@ -1,0 +1,31 @@
+{% extends "admin/index.html" %}
+
+{% block title %} {{ g.hash_table.title }} {% endblock %}
+{% block description %}  {% endblock %}
+
+{% block nav_active_5 %}class="active"{% endblock %}
+
+{% block admin %}
+<div ng-controller="HashTableCtrl">
+  <h2>{{ g.hash_table.name }}</h2>
+  <br />
+  {% if my.rank < 15 %}
+  <a href="/admin/hash_table/new/" title="" class="button button-blu">{{ g.hash_table.add_new_hash_map }}</a>
+  {% endif %}
+  <table table-admin table-type="hash-table" table-list="items_list" on-remove="remove"></table>
+  {% include "error/loader.html" %}
+</div>
+{% endblock %}
+
+{% block js_module_files %}
+  {% if not sync %}
+    "{{ '/static/js/%s' % js_version['admin/hash_table'] }}",
+  {% endif %}
+{% endblock %}
+
+{% block js_module_files_sync %}
+  {% if sync %}
+    <script src="{{ '/static/js/%s' % js_version['admin/hash_table'] }}" ></script>
+  {% endif %}
+{% endblock %}
+

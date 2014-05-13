@@ -1,8 +1,8 @@
 <img src="http://zizzamia.com/img/bombolone_logo.png"/>
 
-### Bombolone version 0.2.2 ###
+### Bombolone version 0.3.0 ###
 
-Bombolone is a tasty Content Management System for Python based on [Flask](http://flask.pocoo.org/), [MongoDB](http://www.mongodb.org/), [Coffeescript](http://coffeescript.org/), [AngularJS](http://angularjs.org), [jQuery](http://jquery.com), [Sass](http://sass-lang.com) and [h5bp](http://html5boilerplate.com/). 
+Bombolone is a tasty Content Management System for Python based on [Flask](http://flask.pocoo.org/), [MongoDB](http://www.mongodb.org/), [AngularJS](http://angularjs.org), [Sass](http://sass-lang.com) and [Bootstrap](http://getbootstrap.com/). 
 It's designed to be a simple, flexible toolset for projects of any size.
 
 
@@ -22,9 +22,8 @@ fab install
 # Restore last version Bombolone Mongodb
 fab init_database:name_database=new_app
 
-# In two new tabs with the same path run Compass and Coffee
+# In a new tab with the same path run Compass
 compass watch
-fab coffee
 
 # Run Bombolone 
 python bombolone.py
@@ -81,18 +80,21 @@ With the HashTable module you can create different hashmap be used inside module
 
 
 ## Tests
-In Bombolone will is an environment for testing any module or webpage.
+In Bombolone there is an environment for testing any module or webpage.
 
+```
+python unit_test.py 
+```
 
 ## Who we are
 
 Python and Javascript Lovers!
 
-The project was created by [Leonardo Zizzamia](http://zizzamia.com/). 
+The project was created by [@zizzamia](https://twitter.com/Zizzamia). 
 
-Contributors: Gianluca Bargelli, Giacomo Marinangeli, Paolo Bernardi, Rafael Lucas, Michael Cable.
+Contributors: [@diegor](https://twitter.com/diegor), [@bernarpa](https://twitter.com/bernarpa).
 
-The logo was designed by Sam Gregory.
+The logo was designed by [@FakeSamGregory](https://twitter.com/FakeSamGregory).
 
 
 ## License

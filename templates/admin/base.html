@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="{{ lan }}" {% if sync %}ng-app="bombolone"{% endif %}>
+<head>
+  <meta charset="utf-8">
+  {% include "base_script.html" %}
+  <script>
+  var run_bombolone = function() {
+    $script([
+      {% for item in js_files_step_two %}'{{ item }}',{% endfor %}
+    ], function calb_a() {
+      $script(["{{ '/static/js/%s' % js_version['bombolone'] }}"], function calb_b() {
+        $script([
+          "{{ '/static/js/%s' % js_version['services/api'] }}",
+        ], function calb_c() {
+          $script([
+            "{{ '/static/js/%s' % js_version['controllers/app'] }}",
+            {% block js_files %}{% endblock %}
+          ], function calb_d() {
+            domready(function calb_e(){
+              angular.bootstrap(d, ['bombolone']);
+            });
+          });
+        });
+      });
+    });
+  };
+  $script([
+      {% for item in js_files_step_one %}'{{ item }}',{% endfor %}
+  ], run_bombolone);
+  </script>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>{% block all_title %}Bombolone | {% block title %} {{ title }} {% endblock %}{% endblock %}</title>
+  <meta name="description" content="{% block description %} {{ description }} {% endblock %}">
+  
+  <link rel="stylesheet" href="/static/css/bombolone/admin.css">
+  {% block css %}{% endblock %}
+  <link rel="shortcut icon" href="/static/favicon.ico">
+</head>
+<body {% block body_ng %}ng-controller="AppCtrl"{% endblock %} ng-click="clean()">
+
+  {% block header %}
+  <header>
+    <nav>
+      <a href="{{ path }}" title="" class="brand">
+        <img src="/static/layout/admin/bombolone_header.png" alt="" />
+      </a>
+      <ul class="intro pull-right">
+        <li>
+          <a href="{{ path }}/login/" class="button" title="">Login</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  {% endblock %}
+
+  <div class="content">
+    {% block content %}{% endblock %}
+  </div>
+
+  {% block footer %}
+  <footer data-lan="{{ lan }}" data-language="{{ language }}">
+    <p>
+      Copyright 2014
+      <a href="https://github.com/OwlStudios/bombolone">Bombolone</a> All rights reserved.
+    </p>
+  </footer>
+  {% endblock %}
+
+  {% block js_code %} {% endblock %}
+  {% block js_data %}{% endblock %}
+</body>
+</html>

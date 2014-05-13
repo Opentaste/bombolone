@@ -1,0 +1,48 @@
+{% extends "admin/index.html" %}
+
+{% block title %} {{ g.rank.update_title }} {% endblock %}
+{% block description %} {{ g.rank.update_description }} {% endblock %}
+
+{% block ng_section %}ng-controller="RankCtrl"{% endblock %}
+
+{% block admin %}
+<h2 ng-show="!update">{{ g.rank.create_rank }}</h2>
+<h2 ng-show="update">{{ g.rank.update_rank }}</h2>
+{% include "error/message.html" %}
+<div class="form-horizontal">
+	<fieldset>
+  <div class="control-group">
+  	<label>Name</label>
+  	<div class="controls">
+  		<input type="text" name="name" ng-model="rank.name" placeholder="Enter name rank">
+  	</div>
+  </div>
+  <div class="control-group">
+  	<label>Rank</label>
+  	<div class="controls">
+  		<input type="text" name="rank" ng-model="rank.rank" placeholder="Enter value rank">
+  	</div>
+  </div>
+  <br />
+  <div class="form-actions">
+	  <button class="button button-submit" ng-click="create_rank()" 
+		ng-show="!update" data-test="create">{{ g.admin.create }}</button>
+		<button class="button button-submit" ng-click="update_rank()" 
+		ng-show="update" data-test="save">{{ g.admin.save }}</button>
+  </div>
+  </fieldset>
+</div>
+{% endblock %}
+
+{% block js_module_files %}
+  {% if not sync %}
+    "{{ '/static/js/%s' % js_version['admin/rank'] }}",
+  {% endif %}
+{% endblock %}
+
+{% block js_module_files_sync %}
+  {% if sync %}
+    <script src="{{ '/static/js/%s' % js_version['admin/rank'] }}" ></script>
+  {% endif %}
+{% endblock %}
+

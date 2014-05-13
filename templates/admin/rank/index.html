@@ -1,0 +1,30 @@
+{% extends "admin/index.html" %}
+
+{% block title %} {{ g.rank.title }} {% endblock %}
+{% block description %} {{ g.rank.description }} {% endblock %}
+
+{% block nav_active_3 %}class="active"{% endblock %}
+
+{% block admin %}
+<div ng-controller="RankCtrl">
+  <h2>{{ g.rank.title }}</h2>
+  <br />
+  {% if my.rank < 15 %}
+  <a href="/admin/rank/new/" title="" class="button button-blu">{{ g.rank.create_rank }}</a>
+  {% endif %}
+  <table table-admin table-type="ranks" table-list="items_list" on-remove="remove"></table>
+  {% include "error/loader.html" %}
+</div>
+{% endblock %}
+
+{% block js_module_files %}
+  {% if not sync %}
+    "{{ '/static/js/%s' % js_version['admin/rank'] }}",
+  {% endif %}
+{% endblock %}
+
+{% block js_module_files_sync %}
+  {% if sync %}
+    <script src="{{ '/static/js/%s' % js_version['admin/rank'] }}" ></script>
+  {% endif %}
+{% endblock %}

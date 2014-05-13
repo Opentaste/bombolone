@@ -16,3 +16,6 @@
 # fabfile caches
 .coffeecache
 .minifycache
+
+# Symbolic link Files
+config.py
