@@ -54,6 +54,9 @@ from api.hash_table import api_hash_table
 from api.account import api_account
 from api.users import api_users
 
+# Imports pages modules Bombolone
+from api.pages import api_pages
+
 # Imports rank modules Bombolone
 from api.rank import api_rank
 
@@ -64,6 +67,7 @@ LIST_MODULES = [login,
                 api_account,
                 api_languages,
                 api_hash_table,
+                api_pages,
                 api_rank,
                 api_login,
                 api_users,

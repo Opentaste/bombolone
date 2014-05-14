@@ -41,6 +41,12 @@ bombolone.factory('api', [
       // Lanugages API 
       languagesChange: get_resource("/languages/change.json"),
 
+      // Pages API
+      pagesList: get_resource_by_credentials("/pages/list.json"),
+      pagesGet: get_resource_by_credentials("/pages/get.json"),
+      pagesCreate: get_resource_by_credentials("/rank/create.json"),
+      pagesUpdate: get_resource_by_credentials("/rank/update.json"),
+
       // Rank API
       rankShow: get_resource_by_credentials("/rank/show.json"),
       rankCreate: get_resource_by_credentials("/rank/create.json"),

@@ -2,7 +2,8 @@ bombolone.controller('PagesCtrl', [
   "$scope", 
   "$resource", 
   "$rootScope", 
-  function($scope, $resource, $rootScope) {
+  "api",
+  function($scope, $resource, $rootScope, api) {
     var page_list, page_new, page_update, params;
     $rootScope.admin_module = "pages";
     page_new = path.match(/^\/admin\/pages\/new\/?$/i);
@@ -16,7 +17,7 @@ bombolone.controller('PagesCtrl', [
     $scope.update = true;
     if (page_list) {
       $rootScope.loader = true;
-      $scope.ajaxPagesList.get(function(resource) {
+      api.pagesList.get(function(resource) {
         $rootScope.loader = false;
         $rootScope.items_list = resource.page_list;
         $scope.show_item_list = true;
@@ -26,7 +27,7 @@ bombolone.controller('PagesCtrl', [
       params = {
         _id: $scope.page_id
       };
-      $scope.ajaxPagesGet.get(params, function(resource) {
+      api.pagesGet.get(params, function(resource) {
         $rootScope.page = resource.page;
       });
     } else if (page_new) {
@@ -51,10 +52,10 @@ bombolone.controller('PagesCtrl', [
         "file": "",
         "labels": []
       };
-    }
-    $("[data-toggle=dropdown]").blur(function() {
-      $scope.menu_language = false;
-    });
+    };
+    //$("[data-toggle=dropdown]").blur(function() {
+    //  $scope.menu_language = false;
+    //});
     $scope.menu_reveal = function() {
       $scope.menu_language = !$scope.menu_language;
     };
@@ -91,7 +92,7 @@ bombolone.controller('PagesCtrl', [
       $rootScope.message_show = false;
       paramas = $scope.page;
       paramas["token"] = app["token"];
-      $scope.ajaxPagesNew.save(paramas, function(resource) {
+      api.pagesCreate.save(paramas, function(resource) {
         $scope.show_message(resource);
         $rootScope.page = resource.page;
         $scope.page_id = resource.page._id;
@@ -104,7 +105,7 @@ bombolone.controller('PagesCtrl', [
       paramas = $scope.page;
       paramas["_id"] = $scope.page_id;
       paramas["token"] = app["token"];
-      $scope.ajaxPagesUpdate.save(paramas, function(resource) {
+      api.pagesUpdate.save(paramas, function(resource) {
         $scope.show_message(resource);
       });
     };
