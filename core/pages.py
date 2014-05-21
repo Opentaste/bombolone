@@ -6,7 +6,6 @@ core.pages.py
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """ 
-# Imports outside bombolone
 import re
 from flask import Blueprint, request, session, g, render_template, url_for, redirect
 from pymongo import ASCENDING, DESCENDING
@@ -42,7 +41,7 @@ class Pages(object):
     
     def __init__(self, params={}, _id=None):
         """ """
-        self.languages = languages_object.get_languages(4)
+        self.languages = languages_object.available_lang_code
         self.success = False
         self.params = params
         if _id is None:

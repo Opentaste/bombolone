@@ -14,6 +14,7 @@ import sys
 from config import PATH
 from tests.account import TestAccount, TestAccountByClient, TestAccountAPI
 from tests.hash_table import TestHashTable, TestHashTableByClient, TestHashTableAPI
+from tests.rank import TestRank, TestRankAPI
 from tests.utils import TestUtils
 
 if __name__ == '__main__':
@@ -33,6 +34,7 @@ if __name__ == '__main__':
         list_class += [
             TestAccount,
             TestHashTable,
+            TestRank,
             TestUtils
         ]
 
@@ -46,6 +48,7 @@ if __name__ == '__main__':
         list_class += [
             TestAccountAPI,
             TestHashTableAPI,
+            TestRankAPI,
             TestUsersAPI
         ]
 
