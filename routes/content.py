@@ -9,7 +9,7 @@ content.py
 from flask import Blueprint, abort, request, session, g, render_template, redirect
 
 # Imports inside Bombolone
-from config import PATH
+import model.pages
 from core.utils import get_content_dict
 
 content = Blueprint('content', __name__)
@@ -23,7 +23,7 @@ def get_page_content(code_lan, num_of_path, path):
     url = "url_{}.{}".format(num_of_path, code_lan)
 
     # Create a list of pages
-    list_pages = [ page for page in g.db.pages.find({ url : { "$exists" : True } }) ]
+    list_pages = [ page for page in model.pages.find(url={ "$exists" : True })]
     for page in list_pages:
         count  = 0
 
@@ -114,30 +114,30 @@ def render_content_page(num_of_path, path):
 
 @content.route('/', methods=['POST', 'GET'])
 def home():
-    """ """
+    """Path home page level deep"""
     path = ['']
     return render_content_page(1, path)
 
 @content.route('/<regex("((?!static).*)"):one>/', methods=['POST', 'GET'])
 def one(one):
-    """ """
+    """Path one level deep"""
     path = [one]
     return render_content_page(1, path)
 
 @content.route('/<regex("((?!static).*)"):one>/<two>/', methods=['POST', 'GET'])
 def two(one, two):
-    """ """
+    """Path two level deep"""
     path = [one, two]
     return render_content_page(2, path)
  
 @content.route('/<regex("((?!static).*)"):one>/<two>/<three>/', methods=['POST', 'GET'])
 def three(one, two, three):
-    """ """
+    """Path three level deep"""
     path = [one, two, three]
     return render_content_page(3, path)
     
 @content.route('/<regex("((?!static).*)"):one>/<two>/<three>/<four>/', methods=['POST', 'GET'])
 def four(one, two, three, four):
-    """ """
+    """Path four level deep"""
     path = [one, two, three, four]
     return render_content_page(4, path)
