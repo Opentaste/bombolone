@@ -6,12 +6,12 @@ login.py
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """
-# Imports outside Bombolone
-from flask import Blueprint, request, session, g, render_template, url_for, redirect, abort
+from flask import (Blueprint, request, session, g, render_template, 
+                   url_for, redirect, abort)
 
 # Imports inside Bombolone
 from decorators import get_hash, authentication
-from core.login import sign_in, core_logout
+from core.login import sign_in
 from core.utils import get_message
 
 login = Blueprint('login', __name__)
@@ -50,5 +50,4 @@ def logout():
     session.pop('user_id', None)
     session.pop('language', None)
     session.pop('synchronization', None)
-    core_logout(token)
     return redirect("/")

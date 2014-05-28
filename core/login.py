@@ -6,12 +6,6 @@ login.py
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """
-import re
-import httplib
-import oauth.oauth as oauth
-from flask import request, session, g, render_template, url_for, redirect, Markup, abort
-from time import time
-
 # Imports inside Bombolone
 import model.users
 from config import PATH, PATH_API, NOTACTIVATED
@@ -55,12 +49,3 @@ def sign_in(username_or_email=None,
                 "permanent": permanent
             }
     return dict(success=False, errors=[{ "code": error_code }])
-
-def core_logout(token):
-    """
-    Remove the given token from oauth_tokens
-
-    :param token: the token to remove
-    """
-    model.oauth_tokens.remove(token)
-

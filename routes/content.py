@@ -6,7 +6,8 @@ content.py
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """ 
-from flask import Blueprint, abort, request, session, g, render_template, redirect
+from flask import (Blueprint, abort, request, session, g, current_app, 
+                   render_template, redirect, send_from_directory)
 
 # Imports inside Bombolone
 import model.pages
@@ -117,6 +118,12 @@ def home():
     """Path home page level deep"""
     path = ['']
     return render_content_page(1, path)
+
+@content.route('/robots.txt/')
+@content.route('/sitemap.xml/')
+@content.route('/favicon.ico/')
+def static_from_root():
+    return send_from_directory(current_app.static_folder, request.path[1:])
 
 @content.route('/<regex("((?!static).*)"):one>/', methods=['POST', 'GET'])
 def one(one):
