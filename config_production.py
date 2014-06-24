@@ -4,7 +4,7 @@ import os
 DEBUG = False
 
 # Database connection
-DATABASE = 'name_database'
+DATABASE = 'bombolone'
 
 # ~
 ENV = "prod"
@@ -69,4 +69,4 @@ JS_FILES_STEP_TWO = ['https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/ang
                      '/static/js/lib/angular-ui.min.js']
 
 # ~
-CSS_FONT_AWESOME = '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css'
+CSS_FONT_AWESOME = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'

@@ -10,7 +10,7 @@ path = window.location.pathname;
 bombolone = angular.module("bombolone", [
   'ngRoute', 
   'ngResource', 
-  'ui',
+  'ui'
 ]).config(function($interpolateProvider) {
   /* $interpolateProvider 
    * we need replace {{ }} with  [[ ]]

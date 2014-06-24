@@ -3,12 +3,12 @@
 {% block header %}
 <header>
   <nav>
-    <a href="{{ path }}" title="" class="brand">
+    <a href="/" title="" class="brand">
       <img src="/static/layout/admin/bombolone_header.png" alt="" />
     </a>
     <ul class="nav pull-right header-tabs">
       <li>
-        <a href="/" title="">
+        <a href="/admin/" title="">
           {% if my.image %}
           <img src="{{ path }}/static/avatars/{{ my.username.lower() }}/{{ my.image[1] }}"
           style="margin-right:2px;width:20px" alt="{{ my.username }}" />
@@ -19,7 +19,7 @@
       <li class="menu_account dropdown" ng-click="dropdown()" 
       ng-class="{open: dropdown_status=='open'}">
         <a>
-          <i class="icon-cog icon-white"></i>
+          <i class="fa fa-bars"></i>
         </a>
         <ul class="dropdown-menu">
           <li><a href="{{ url_for('settings.account') }}" title="" >{{ g.admin.settings }}</a></li>
@@ -35,7 +35,7 @@
 {% endblock %}
 
 {% block content %}
-<section class="row">
+<section class="row" {% block ng_section %}{% endblock %}>
   <div class="span3">
     <ul class="nav nav-tabs nav-stacked">
       <li>
@@ -78,17 +78,7 @@
 {% endblock %}
 
 {% block js_files %}
-  {% if not sync %}
-    "{{ '/static/js/%s' % js_version['admin/admin'] }}",
-    "{{ '/static/js/%s' % js_version['directives/table'] }}",
-    {% block js_module_files %}{% endblock %}
-  {% endif %}
-{% endblock %}
-
-{% block js_files_sync %}
-  {% if sync %}
-    <script src="{{ '/static/js/%s' % js_version['admin/admin'] }}" ></script>
-    <script src="{{ '/static/js/%s' % js_version['directives/table'] }}" ></script>
-    {% block js_module_files_sync %}{% endblock %}
-  {% endif %}
+  "{{ '/static/js/%s' % js_version['admin/admin'] }}",
+  "{{ '/static/js/%s' % js_version['directives/table'] }}",
+  {% block js_module_files %}{% endblock %}
 {% endblock %}

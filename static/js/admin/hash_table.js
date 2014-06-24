@@ -1,8 +1,6 @@
 'use strict';
 
-/*
-Hash Table v6
-*/
+/* Hash Table v6 */
 bombolone.controller('HashTableCtrl', [
   "$scope", 
   "$resource", 

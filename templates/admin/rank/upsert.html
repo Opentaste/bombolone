@@ -35,14 +35,6 @@
 {% endblock %}
 
 {% block js_module_files %}
-  {% if not sync %}
-    "{{ '/static/js/%s' % js_version['admin/rank'] }}",
-  {% endif %}
-{% endblock %}
-
-{% block js_module_files_sync %}
-  {% if sync %}
-    <script src="{{ '/static/js/%s' % js_version['admin/rank'] }}" ></script>
-  {% endif %}
+  "{{ '/static/js/%s' % js_version['admin/rank'] }}",
 {% endblock %}
 

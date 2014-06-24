@@ -22,17 +22,8 @@
 {% endblock %}     
 
 {% block js_files %}
-  {% if not sync %}
-    "{{ '/static/js/%s' % js_version['users'] }}",
-    "{{ '/static/js/%s' % js_version['upload'] }}",
-  {% endif %}
-{% endblock %}
-
-{% block js_files_sync %}
-  {% if sync %}
-    <script src="{{ '/static/js/%s' % js_version['users'] }}" ></script>
-    <script src="{{ '/static/js/%s' % js_version['upload'] }}" ></script>
-  {% endif %}
+  "{{ '/static/js/%s' % js_version['users'] }}",
+  "{{ '/static/js/%s' % js_version['upload'] }}",
 {% endblock %}
 
 {% block js_data %}

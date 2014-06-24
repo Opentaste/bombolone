@@ -1,8 +1,6 @@
 'use strict';
 
-/*
-Admin controller v6
-*/
+/* Admin controller v6 */
 bombolone.controller('AdminCtrl', [
   "$scope", 
   "$resource", 

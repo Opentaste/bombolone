@@ -4,7 +4,7 @@ import os
 DEBUG = True
 
 # Database connection
-DATABASE = 'name_database'
+DATABASE = 'bombolone'
 
 # ~
 ENV = "home"
@@ -81,4 +81,4 @@ JS_FILES_STEP_TWO = ['/static/js/lib/angular-resource.min.js',
                      '/static/js/lib/angular-ui.min.js']
 
 # ~
-CSS_FONT_AWESOME = '/static/css/font-awesome/font-awesome.min.css'
+CSS_FONT_AWESOME = '/static/css/font-awesome/font-awesome.css'
