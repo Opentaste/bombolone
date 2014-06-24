@@ -7,18 +7,17 @@ upload.py
 :license: BSD (See LICENSE for details)
 """
 import cStringIO
-import re
 import os
 import werkzeug
 import time
 from random import randint
-from flask import request, g, Response
+from flask import request
 from imghdr import what
 from PIL import Image
 
 # Imports inside Bombolone
 from config import (EXTENSIONS, ALLOWED_EXTENSIONS, ALLOWED_ALL_EXTENSIONS,
-                   UP_AVATARS_FOLDER)
+                    UP_AVATARS_FOLDER)
 from core.utils import get_extension, linkify
 
 AVATAR_IMAGE_SIZE = {

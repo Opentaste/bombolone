@@ -8,19 +8,13 @@ Generic helper functions
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """
-import os
-import datetime
-import time
 import json
 import string
 import re
-import binascii
 import unicodedata
 from collections import Iterable
 from types import StringTypes
 from hashlib import md5, sha1
-from unicodedata import normalize
-from flask import g, request
 from werkzeug import Response
 from bson.objectid import ObjectId
 

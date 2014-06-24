@@ -7,10 +7,8 @@ core.pages.py
 :license: BSD (See LICENSE for details)
 """ 
 import re
-from flask import Blueprint, request, session, g
-from pymongo import ASCENDING, DESCENDING
+from flask import Blueprint, g
 from bson import ObjectId
-from pymongo.errors import InvalidId, PyMongoError
 
 # Imports inside bombolone
 from core.utils import ensure_objectid

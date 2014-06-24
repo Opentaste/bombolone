@@ -9,13 +9,12 @@ The user module allows administrators to create, modify and delete users.
 """
 import os
 import re
-import urllib
 from datetime import datetime
-from flask import request, g, session
+from flask import request, g
 
 # Imports inside Bombolone
 import model.users
-from config import PATH, UP_AVATARS_TMP_FOLDER, ACTIVATED
+from config import UP_AVATARS_TMP_FOLDER, ACTIVATED
 from decorators import check_rank, get_hash
 from core.languages import LIST_LANGUAGES
 from core.utils import create_password, ensure_objectid, get_extension

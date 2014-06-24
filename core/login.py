@@ -8,7 +8,7 @@ login.py
 """
 # Imports inside Bombolone
 import model.users
-from config import PATH, PATH_API, NOTACTIVATED
+from config import NOTACTIVATED
 from core.utils import create_password
 
 def sign_in(username_or_email=None,

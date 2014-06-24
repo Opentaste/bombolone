@@ -9,14 +9,12 @@ write the content for use on the web site.
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """
-from flask import request, g
-from pymongo.errors import InvalidId, PyMongoError
+from flask import g
 
 # Imports inside Bombolone
 from core.languages import Languages
-from core.utils import jsonify
 from core.validators import CheckValue
-from decorators import check_rank, get_hash
+from decorators import check_rank
 import model.hash_table
 
 check = CheckValue()
@@ -62,12 +60,12 @@ def new(params={}):
     return dict(success=False, errors=[{ "code": error_code }])
 
 
-def update(params={}):
+def update(params={}, my_rank=g.my['rank']):
     """ 
     """
     _id = params.get("_id", None)
     hash_map = model.hash_table.find(hash_table_id=_id)
-    if g.my['rank'] < 25:
+    if my_rank < 25:
         hash_map, error_code = _request_hash_map(hash_map, params)
     else:
         hash_map, error_code = _request_hash_map_user(hash_map, params)
