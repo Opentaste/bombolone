@@ -14,7 +14,7 @@ from core.utils import msg_status, get_message
 from decorators import authentication, get_hash
 import model.ranks
 
-MODULE_DIR = 'content/settings'
+MODULE_DIR = 'admin/settings'
 settings = Blueprint('settings', __name__)
 
 @settings.route('/settings/profile/')
@@ -22,6 +22,7 @@ settings = Blueprint('settings', __name__)
 @get_hash('users')
 @get_hash('settings')
 @get_hash('upload')
+@get_hash('admin')
 def profile():
     """ """
     list_ranks = model.ranks.find()
@@ -33,6 +34,7 @@ def profile():
 @authentication
 @get_hash('users')
 @get_hash('settings')
+@get_hash('admin')
 def account():
     """ """
     list_ranks = model.ranks.find()
@@ -45,6 +47,7 @@ def account():
 @authentication
 @get_hash('users')
 @get_hash('settings')
+@get_hash('admin')
 def password():
     """ """
     data = core.users.get(user_id=g.my['_id'], my_id=g.my['_id'])
