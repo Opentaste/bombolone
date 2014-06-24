@@ -1,6 +1,4 @@
 pymongo==2.6.3
-Fabric==1.4.2
-ssh==1.8.0
 simplejson==2.5.0
 Flask==0.10.1
 Werkzeug==0.8.3

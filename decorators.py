@@ -7,7 +7,7 @@ A collection of all the decorators
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """
-from flask import g, abort, request, current_app
+from flask import g, abort
 from functools import wraps
 
 # Imports inside Bombolone

@@ -5,7 +5,11 @@
 Bombolone is a tasty Content Management System for Python based on [Flask](http://flask.pocoo.org/), [MongoDB](http://www.mongodb.org/), [AngularJS](http://angularjs.org), [Sass](http://sass-lang.com) and [Bootstrap](http://getbootstrap.com/). 
 It's designed to be a simple, flexible toolset for projects of any size.
 
+## Some dependencies
 
+- [Virtualenv](http://virtualenv.readthedocs.org/en/latest/)
+- [MongoDB](http://www.mongodb.org/)
+- [Fabric](http://www.fabfile.org/)
 
 ## Quick start in 6 steps
 
