@@ -11,7 +11,7 @@ bombolone = angular.module("bombolone", [
   'ngRoute', 
   'ngResource', 
   'ui',
-]).config(function( $interpolateProvider) {
+]).config(function($interpolateProvider) {
   /* $interpolateProvider 
    * we need replace {{ }} with  [[ ]]
    * */

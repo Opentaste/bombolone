@@ -8,6 +8,7 @@ Generic helper functions
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """
+import datetime
 import json
 import string
 import re
