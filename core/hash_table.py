@@ -60,7 +60,7 @@ def new(params={}):
     return dict(success=False, errors=[{ "code": error_code }])
 
 
-def update(params={}, my_rank=g.my['rank']):
+def update(params={}, my_rank=None):
     """ 
     """
     _id = params.get("_id", None)

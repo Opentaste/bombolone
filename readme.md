@@ -10,6 +10,7 @@ It's designed to be a simple, flexible toolset for projects of any size.
 - [Virtualenv](http://virtualenv.readthedocs.org/en/latest/)
 - [MongoDB](http://www.mongodb.org/)
 - [Fabric](http://www.fabfile.org/)
+- [Rubygems](https://rubygems.org/)
 
 ## Quick start in 6 steps
 
@@ -24,7 +25,7 @@ git clone https://github.com/Opentaste/bombolone.git new_app
 cd new_app && virtualenv venv && . venv/bin/activate
 
 # Install libries and init Bombolone Mongodb
-pip install -r REQUIREMENTS.txt && fab init && fab init_database:name_database=new_app
+fab install && fab init_database:name_database=new_app
 
 # In a new tab with the same path run Compass
 compass watch

@@ -65,5 +65,5 @@ def remove():
 def update():
     """ """
     params = request.json
-    data = core.hash_table.update(params=params)
+    data = core.hash_table.update(params=params, my_rank=g.my['rank'])
     return jsonify(data)

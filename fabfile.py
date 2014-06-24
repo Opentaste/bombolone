@@ -31,6 +31,7 @@ def install():
     print '\n####### Install Bombolone #######'
 
     # Install python PIL library
+    local("pip install -r REQUIREMENTS.txt")
     local("pip install PIL --allow-external PIL --allow-unverified PIL")
     # Install Compass (http://compass-style.org/install/)
     local("gem update --system")
