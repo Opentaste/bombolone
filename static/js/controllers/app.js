@@ -79,5 +79,22 @@ bombolone.controller('AppCtrl', [
         $rootScope.message_show = false;
       }
     };
+
+    scrollTo = function(element, to, duration) {
+      var difference, perTick;
+      if (duration < 0) {
+        return;
+      }
+      difference = to - element.scrollTop;
+      perTick = difference / duration * 10;
+      setTimeout((function() {
+        element.scrollTop = element.scrollTop + perTick;
+        scrollTo(element, to, duration - 10);
+      }), 10);
+    };
+
+    $scope.scroll_top = function() {
+      return scrollTo(document.body, 0, 400);
+    };
   }
 ]);

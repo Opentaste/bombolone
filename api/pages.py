@@ -9,7 +9,7 @@ pages.py
 from flask import Blueprint, request, g
 
 # Imports inside Bombolone
-from core.utils import jsonify
+from core.utils import jsonify, ensure_objectid
 from core.pages import Pages
 from decorators import authentication, check_rank, get_hash
 
