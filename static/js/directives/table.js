@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 Tables in the administration v6
 */

@@ -1,3 +1,5 @@
+'use strict';
+
 /* Bombolone v4 */
 var host, path, bombolone, protocol, qsa;
 qsa = d.querySelectorAll.bind(d);
@@ -8,7 +10,7 @@ path = window.location.pathname;
 bombolone = angular.module("bombolone", [
   'ngRoute', 
   'ngResource', 
-  'ui'
+  'ui',
 ]).config(function( $interpolateProvider) {
   /* $interpolateProvider 
    * we need replace {{ }} with  [[ ]]

@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 Upload v4
 */

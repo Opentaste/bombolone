@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 Users controller v4
 */

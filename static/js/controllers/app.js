@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 Application controller v5
 */

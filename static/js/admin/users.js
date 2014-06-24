@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 Users Admin controller v6
 */

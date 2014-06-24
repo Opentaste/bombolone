@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 Api v4
 */

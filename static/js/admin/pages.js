@@ -1,3 +1,5 @@
+'use strict';
+
 bombolone.controller('PagesCtrl', [
   "$scope", 
   "$resource", 

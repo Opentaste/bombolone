@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 Hash Table v6
 */

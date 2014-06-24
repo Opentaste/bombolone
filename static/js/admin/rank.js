@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 Rank v6
 */

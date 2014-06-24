@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 Admin controller v6
 */
