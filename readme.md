@@ -19,17 +19,14 @@ git clone https://github.com/Opentaste/bombolone.git new_app
 # Create your own environment from the new_app folder
 cd new_app && virtualenv venv && . venv/bin/activate
 
-# Install libries
-fab install
-
-# Restore last version Bombolone Mongodb
-fab init_database:name_database=new_app
+# Install libries and init Bombolone Mongodb
+fab install && fab init_database:name_database=new_app
 
 # In a new tab with the same path run Compass
 compass watch
 
 # Run Bombolone 
-python bombolone.py
+python app.py
 ```
 
 Registered users are:

@@ -4,7 +4,7 @@ import os
 DEBUG = False
 
 # Database connection
-DATABASE = 'bombolone'
+DATABASE = 'name_database'
 
 # ~
 ENV = "prod"

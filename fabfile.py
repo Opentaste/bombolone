@@ -65,7 +65,7 @@ def local_backup():
 
 def mongodb_restore(database=None, date_backup=None):
     """ """
-    print '\n####### Restore MongoDB #######'
+    print '\n####### Restore MongoDB from {0} to {1} #######'.format(database, DATABASE)
 
     if database is None:
         database = DATABASE
@@ -82,35 +82,28 @@ def init_database(name_database=None):
     """
     Init the basic database
     """
-    # to do, here we need write in the config file the name of database
-    #DATABASE = name_database
+    print '\n####### Init new database #######'
+    write_db_in_config(name_database=name_database)
+    mongodb_restore(database="bombolone")
 
-    new_line = "DATABASE = 'leo'\n"
 
+def write_db_in_config(name_database=None):
+    """
+    """
+    new_line = "DATABASE = '{0}'\n".format(name_database)
     with open("config.py","r") as fp:
         lines = fp.readlines()
-
     for i, line in enumerate(lines):
         if line.startswith('DATABASE ='):
-            print line
             lines[i] = new_line
             break
     else:
         print "damn could not find the line"
         raise SystemExit("Damn!")
-
     with open("new_config.py","w") as fp:
         fp.writelines(lines)
-
     shutil.copy("new_config.py", "config.py")
-
-    #mongodb_restore(database="bombolone")
-
-
-def write_db_in_config(name_database):
-    """
-    """
-    pass
+    os.remove("new_config.py")
 
 
 # Javascript tools ================================================================   
