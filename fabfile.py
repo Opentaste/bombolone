@@ -35,9 +35,9 @@ def install():
     print 'For Install correctly some library we need be Administrator'
 
     # Install requirements 
-    local("sudo pip install -r REQUIREMENTS.txt")
+    local("pip install -r REQUIREMENTS.txt")
     # Install python PIL library
-    local("sudo pip install PIL --allow-external PIL --allow-unverified PIL")
+    local("pip install PIL --allow-external PIL --allow-unverified PIL")
     # Install Compass (http://compass-style.org/install/)
     local("gem update --system")
     local("gem install compass")

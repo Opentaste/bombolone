@@ -16,8 +16,11 @@ sudo mongod
 # Clone the git repo in your new web app folder
 git clone https://github.com/Opentaste/bombolone.git new_app
 
-# Install libries from the new_app folder
-cd new_app && fab install
+# Create your own environment from the new_app folder
+cd new_app && virtualenv venv && . venv/bin/activate
+
+# Install libries
+fab install
 
 # Restore last version Bombolone Mongodb
 fab init_database:name_database=new_app
