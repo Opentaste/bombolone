@@ -20,7 +20,7 @@ git clone https://github.com/Opentaste/bombolone.git new_app
 cd new_app && virtualenv venv && . venv/bin/activate
 
 # Install libries and init Bombolone Mongodb
-fab install && fab init_database:name_database=new_app
+pip install -r REQUIREMENTS.txt && fab init && fab init_database:name_database=new_app
 
 # In a new tab with the same path run Compass
 compass watch

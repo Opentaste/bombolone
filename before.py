@@ -9,7 +9,7 @@ It's much important to access before and after any request.
 """
 import random
 import json
-from flask import session, g, request, redirect
+from flask import session, g, request
 
 # Imports inside Bombolone
 from config import (DEBUG, ENV, JS_FILES_STEP_ONE, JS_FILES_STEP_TWO,

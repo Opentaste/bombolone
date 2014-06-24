@@ -12,10 +12,10 @@ import logging
 import sys
 
 from config import PATH
-from tests.account import TestAccount, TestAccountByClient, TestAccountAPI
-from tests.hash_table import TestHashTable, TestHashTableByClient, TestHashTableAPI
-from tests.rank import TestRank, TestRankAPI
-from tests.utils import TestUtils
+from tests.python.account import TestAccount, TestAccountByClient, TestAccountAPI
+from tests.python.hash_table import TestHashTable, TestHashTableByClient, TestHashTableAPI
+from tests.python.rank import TestRank, TestRankAPI
+from tests.python.utils import TestUtils
 
 if __name__ == '__main__':
     type_test = None

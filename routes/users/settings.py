@@ -6,7 +6,7 @@ setting.py
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """ 
-from flask import Blueprint, request, session, g, Response, render_template, url_for, redirect
+from flask import Blueprint, request, session, g, Response, render_template, redirect
 
 # Imports inside Bombolone
 import core.users

@@ -7,7 +7,7 @@ core.pages.py
 :license: BSD (See LICENSE for details)
 """ 
 import re
-from flask import Blueprint, request, session, g, render_template, url_for, redirect
+from flask import Blueprint, request, session, g
 from pymongo import ASCENDING, DESCENDING
 from bson import ObjectId
 from pymongo.errors import InvalidId, PyMongoError

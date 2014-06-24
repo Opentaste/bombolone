@@ -12,8 +12,8 @@ write the content for use on the web site.
 from flask import Blueprint, request
 
 # Imports inside Bombolone
-from core import hash_table
-from core.utils import jsonify, ensure_objectid
+import core.hash_table
+from core.utils import jsonify
 from decorators import get_hash, authentication, check_rank
 
 MODULE_DIR = 'admin/hash_table'
@@ -26,7 +26,7 @@ api_hash_table = Blueprint('api_hash_table', __name__)
 def overview():
     """ List all the documents, each has a name
     that identifies it, and an hash map. """
-    data = hash_table.get_list()
+    data = core.hash_table.get_list()
     return jsonify(data)
 
 @api_hash_table.route('/api/1.0/hash_table/get.json')
@@ -36,7 +36,7 @@ def overview():
 def get():
     """ """
     _id = request.args.get("_id", None)
-    data = hash_table.get(_id)
+    data = core.hash_table.get(_id)
     return jsonify(data)
 
 @api_hash_table.route('/api/1.0/hash_table/new.json', methods=['POST'])
@@ -46,7 +46,7 @@ def get():
 def new():
     """ Create a new document within the hash table. """
     params = request.json
-    data = hash_table.new(params=params)
+    data = core.hash_table.new(params=params)
     return jsonify(data)
 
 @api_hash_table.route('/api/1.0/hash_table/remove.json', methods=['DELETE'])
@@ -55,7 +55,7 @@ def new():
 def remove():
     """ This method removes an hash map"""
     _id = request.args.get("_id", None)
-    data = hash_table.remove(_id=_id)
+    data = core.hash_table.remove(_id=_id)
     return jsonify(data)
 
 @api_hash_table.route('/api/1.0/hash_table/update.json', methods=['POST'])
@@ -65,5 +65,5 @@ def remove():
 def update():
     """ """
     params = request.json
-    data = hash_table.update(params=params)
+    data = core.hash_table.update(params=params)
     return jsonify(data)

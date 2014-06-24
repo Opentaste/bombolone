@@ -12,14 +12,13 @@ import os
 import werkzeug
 import time
 from random import randint
-from flask import request, g, Response, url_for
+from flask import request, g, Response
 from imghdr import what
 from PIL import Image
-from werkzeug import secure_filename
 
 # Imports inside Bombolone
 from config import (EXTENSIONS, ALLOWED_EXTENSIONS, ALLOWED_ALL_EXTENSIONS,
-                   UP_AVATARS_FOLDER, UP_AVATARS_TMP_FOLDER)
+                   UP_AVATARS_FOLDER)
 from core.utils import get_extension, linkify
 
 AVATAR_IMAGE_SIZE = {

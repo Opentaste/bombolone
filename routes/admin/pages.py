@@ -6,7 +6,7 @@ pages.py
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """ 
-from flask import Blueprint, request, session, g, render_template, url_for, redirect
+from flask import Blueprint, request, session, g, render_template
 from bson import ObjectId
 from pymongo.errors import InvalidId, PyMongoError
 

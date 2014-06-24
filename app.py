@@ -44,9 +44,6 @@ from routes.admin.users import users
 # Import content module Bombolone
 from routes.content import content
 
-# Imports api modules Bombolone
-from api.login import api_login
-
 # Imports hash_table modules Bombolone
 from api.hash_table import api_hash_table
 

@@ -28,14 +28,8 @@ def install():
     """ 
     Install all the requirements to run Bombolone
     """
-    if not check_database("install"):
-        return False
-
     print '\n####### Install Bombolone #######'
-    print 'For Install correctly some library we need be Administrator'
 
-    # Install requirements 
-    local("pip install -r REQUIREMENTS.txt")
     # Install python PIL library
     local("pip install PIL --allow-external PIL --allow-unverified PIL")
     # Install Compass (http://compass-style.org/install/)

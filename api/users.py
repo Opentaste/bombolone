@@ -6,11 +6,11 @@ api.users.py
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """
-from flask import Blueprint, request, g, render_template, url_for, redirect, abort
+from flask import Blueprint, request, g
 
 # Imports inside Bombolone
 from core import users
-from core.utils import ensure_objectid, jsonify
+from core.utils import jsonify
 from decorators import authentication, check_rank, get_hash
 
 api_users = Blueprint('api_users', __name__)

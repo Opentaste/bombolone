@@ -6,7 +6,7 @@ web_pages.py
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """ 
-from flask import request, session, g, render_template, url_for, redirect
+from flask import request, session, g
 
 # Imports inside Bombolone
 from decorators import get_template

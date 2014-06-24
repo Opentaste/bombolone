@@ -7,7 +7,7 @@ content.py
 :license: BSD (See LICENSE for details)
 """ 
 from flask import (Blueprint, abort, request, session, g, current_app, 
-                   render_template, redirect, send_from_directory)
+                   render_template, send_from_directory)
 
 # Imports inside Bombolone
 import model.pages
@@ -112,6 +112,11 @@ def render_content_page(num_of_path, path):
         # For every page you must specify the file where you want 
         # to use the contents stored in the database.
         return render_template('pages/'+page_document['file']+'.html', **locals())
+
+@content.route('/api/1.0/<three>/', methods=['POST', 'GET'])
+@content.route('/api/1.0/<three>/<four>', methods=['POST', 'GET'])
+def api_404(three, four):
+    abort(404)
 
 @content.route('/', methods=['POST', 'GET'])
 def home():

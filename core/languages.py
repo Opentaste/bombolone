@@ -8,7 +8,7 @@ to use within application.
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """
-from flask import g, request, render_template, session, abort
+from flask import g, request, session
 
 # Imports inside Bombolone
 import model.languages

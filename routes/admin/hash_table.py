@@ -9,7 +9,7 @@ write the content for use on the web site.
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """ 
-from flask import Blueprint, request, g, render_template, url_for, redirect
+from flask import Blueprint, request, g, render_template
 
 # Imports inside Bombolone
 from decorators import get_hash, check_rank, get_hash

@@ -21,7 +21,7 @@ from types import StringTypes
 from hashlib import md5, sha1
 from unicodedata import normalize
 from flask import g, request
-from werkzeug import secure_filename, Response
+from werkzeug import Response
 from bson.objectid import ObjectId
 
 def linkify(string):

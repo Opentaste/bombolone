@@ -6,19 +6,14 @@ pages.py
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """ 
-from flask import Blueprint, request, g, render_template, url_for, redirect
+from flask import Blueprint, request, g
 
 # Imports inside Bombolone
-from core.utils import jsonify, ensure_objectid
-from core.languages import Languages
-from core.validators import CheckValue
+from core.utils import jsonify
 from core.pages import Pages
 from decorators import authentication, check_rank, get_hash
 
 api_pages = Blueprint('api_pages', __name__)
-
-languages_object = Languages()
-check = CheckValue()
 
 @api_pages.route('/api/1.0/pages/list.json')
 @authentication
@@ -54,7 +49,6 @@ def get():
 @get_hash('pages')
 def new():
     """ Create a new document within the hash table. """
-    language_name = languages_object.get_languages(5)
     params = request.json
 
     page_object = Pages(params=params)
@@ -73,7 +67,6 @@ def new():
 @get_hash('pages')
 def update():
     """ """
-    language_name = languages_object.get_languages(5)
     params = request.json
 
     success = False

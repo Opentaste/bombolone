@@ -7,7 +7,7 @@ login.py
 :license: BSD (See LICENSE for details)
 """
 from flask import (Blueprint, request, session, g, render_template, 
-                   url_for, redirect, abort)
+                   redirect)
 
 # Imports inside Bombolone
 from decorators import get_hash, authentication
@@ -49,5 +49,4 @@ def logout():
     """ """
     session.pop('user_id', None)
     session.pop('language', None)
-    session.pop('synchronization', None)
     return redirect("/")

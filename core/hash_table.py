@@ -9,12 +9,12 @@ write the content for use on the web site.
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """
-from flask import request, g, render_template, url_for, redirect
+from flask import request, g
 from pymongo.errors import InvalidId, PyMongoError
 
 # Imports inside Bombolone
 from core.languages import Languages
-from core.utils import jsonify, ensure_objectid
+from core.utils import jsonify
 from core.validators import CheckValue
 from decorators import check_rank, get_hash
 import model.hash_table
