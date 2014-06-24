@@ -8,7 +8,7 @@
 {% block admin %}
 <h2>{{ g.users.name }}</h2>
 <br />
-<a href="{{ admin }}/users/new/" title="" class="button button-blu">{{ g.users.add_user }}</a>
+<a href="/admin/users/new/" title="" class="button button-blu">{{ g.users.add_user }}</a>
 <table class="table table-bordered table-striped table-condensed">
  <thead>
   <tr>
@@ -35,7 +35,7 @@
     </td>
     <td>
      {% if my.rank < user.rank or my.rank < 15 %}
-     <a href="{{ admin }}/users/{{ str(user['_id']) }}/">{{ user.username }}</a>
+     <a href="/admin/users/{{ str(user['_id']) }}/">{{ user.username }}</a>
      {% else %}
      {{ user.username }}
      {% endif %}
@@ -43,7 +43,7 @@
    <td>{{ ranks_list[user.rank] }}</td>
    <td>
      {% if my.rank < user.rank or my.rank < 15 %}
-     <a href="{{ admin }}/users/{{ str(user['_id']) }}/">{{ user['_id'] }}</a>
+     <a href="/admin/users/{{ str(user['_id']) }}/">{{ user['_id'] }}</a>
      {% endif %}
    </td>
    <td>
