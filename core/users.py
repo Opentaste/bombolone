@@ -219,7 +219,6 @@ class User(object):
         new_email = str.lower(str(form['email']))
         self.user['lan'] = form['lan']
         self.user['time_zone'] = form['time_zone']
-        self.user['newsletter'] = form['newsletter']
 
         if 'status' in form:
             self.user['status'] = int(form['status'])
@@ -399,7 +398,7 @@ def get_list(my_rank=None, my_id=None):
     """
     Returns the users list
     """
-    users = model.users.find(expand_rank=expand_rank, 
+    users = model.users.find(expand_rank=True, 
                              my_rank=my_rank, 
                              my_id=my_id)
     if users:

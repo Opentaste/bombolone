@@ -31,9 +31,12 @@ def get_page_content(code_lan, num_of_path, path):
         # Any time the "path" is the same or we have some
         # value like "<i_am_variable>" increase the counter
         for i in range(num_of_path):
-            word = page["url_"+str(num_of_path)][code_lan][i]
-            if path[i] == word:
-                count += 1
+            print page["url_"+str(num_of_path)]
+            page_by_lang = page["url_"+str(num_of_path)].get(code_lan, None)
+            if page_by_lang:
+                word = page_by_lang[i]
+                if path[i] == word:
+                    count += 1
             #if word[0] == '<' and word[-1] == '>':
             #    count += 1
 

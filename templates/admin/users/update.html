@@ -2,6 +2,8 @@
 
 {% block title %} User update {% endblock %}
 
+{% block ng_section %}ng-controller="UsersAdminCtrl"{% endblock %}
+
 {% block admin %}
 <h2>{{ g.users.update_user }}</h2>
 <div class="update_user">
@@ -72,8 +74,9 @@
 {% endblock %}
 
 {% block js_module_files %}
-  "{{ '/static/js/%s' % js_version['users'] }}",
-  "{{ '/static/js/%s' % js_version['upload'] }}",
+  "{{ '/static/js/%s' % js_version['admin/users'] }}",
+  "{{ '/static/js/%s' % js_version['controllers/users'] }}",
+  "{{ '/static/js/%s' % js_version['controllers/upload'] }}",
 {% endblock %}
 
 {% block js_data %}

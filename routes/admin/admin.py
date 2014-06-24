@@ -16,7 +16,7 @@ MODULE_DIR = 'admin'
 admin = Blueprint('admin', __name__)
 
 @admin.route('/admin/')
-@check_rank(10)
+@check_rank(80)
 @get_hash('admin')
 def dashboard():
     """ The dashboard contains a collection of information, 
@@ -24,7 +24,7 @@ def dashboard():
     return render_template('{}/dashboard.html'.format(MODULE_DIR))
 
 @admin.route('/admin/hash_table/overview/')
-@check_rank(10)
+@check_rank(80)
 @get_hash('admin')
 def hash_table_index():
     """ """

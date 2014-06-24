@@ -33,14 +33,15 @@
     {% include "error/message.html" %}
     <div class="control-group">
         <input type="text" name="name" class="input-xlarge" ng-model="page.name" 
-        placeholder="{{ g.pages.label_name }}" maxlength="20" />
+        placeholder="{{ g.pages.label_name }}" maxlength="20" ng-hide="view" />
+        <span class="input-xlarge uneditable-input" ng-bind="page.name" ng-show="view"></span>
     </div>
-    <div class="control-group">
+    <div class="control-group" ng-hide="view">
         <input type="text" name="from" ng-model="page.from" class="span4" placeholder="{{ g.pages.label_from }}" maxlength="20" />
         <input type="text" name="import" ng-model="page.import" class="span4" placeholder="{{ g.pages.label_import }}" maxlength="20" />
         <p class="help-block">{{ g.pages.help_import }}</p>
     </div>
-    <div class="control-group form-horizontal">
+    <div class="control-group form-horizontal" ng-hide="view">
         <span>templates/pages/</span>
         <input type="text" name="file" class="span3 input-little" ng-model="page.file" 
         maxlength="200" style="margin: 0 2px;" />.html
@@ -50,10 +51,10 @@
 
   <div class="content_right row-fluid" style="margin-top:15px;padding-top:18px;">
       <div class="control-group form-horizontal">
-          <span>{{ path }}/</span>
+          <span>{{ path }}/</span><span ng-bind="page.url[code_language]" ng-show="view"></span>
           <input type="text" class="span6 input-little" 
-          ng-model="page.url[code_language]" maxlength="200" style="margin-left:4px" />
-          <p class="help-block">{{ g.pages.help_url }}</p>
+          ng-model="page.url[code_language]" maxlength="200" style="margin-left:4px" ng-hide="view" />
+          <p class="help-block" ng-hide="view">{{ g.pages.help_url }}</p>
       </div>
       <div class="control-group">
           <input type="text" class="span8" ng-model="page.title[code_language]"
@@ -65,22 +66,24 @@
       </div>
   </div><!-- .content_right -->
 
-  <div class="control-group" style="margin-top:15px;text-align:right">
+  <div class="control-group" style="margin-top:15px;text-align:right" ng-hide="view">
     <span class="pages_add_label button button-blu" ng-click="add_label()">{{ g.admin.add_field }}</span>
   </div><!-- .control-group -->
 
   <div class="content_right row-fluid" style="margin-top:15px;padding-top:18px;"> 
     <div class="pages_field" ng-repeat="item in page.content">
       <div class="label_pages control-group row-fluid">
-        <span class="span1">Label :</span>
-        <input type="text" ng-model="page.labels[$index].name" class="span3 name_label input-little" />
+        <span class="span1" ng-hide="view">Label :</span>
+        <input type="text" ng-model="page.labels[$index].name" class="span3 name_label input-little" ng-hide="view" />
         
-        <span class="span1">Alias :</span>
+        <span class="span1" ng-hide="view">Alias :</span>
         <input type="text" ng-model="item.alias[code_language]" 
-        class="span4 alias_label input-little" />
+        class="span4 alias_label input-little" ng-hide="view" />
         
         <span class="pages_remove_label button button-red span2 button-little" 
-        ng-click="remove_label($index)">- Remove label</span>
+        ng-click="remove_label($index)" ng-hide="view">- Remove label</span>
+
+        <label ng-bind="item.alias[code_language]" ng-show="view"></label>
         
         <input type="text" ng-model="item.value[code_language]"  
         class="span9 pages_tool" ng-class="{show: page.labels[$index].type == 'text'}" />
@@ -94,7 +97,7 @@
         <input type="file" class="span9 hidden pages_tool" 
         ng-class="{show: page.labels[$index].type == 'image'}" />
         
-        <select ng-model="page.labels[$index].type">
+        <select ng-model="page.labels[$index].type" ng-hide="view">
             <option value="text">text</option>
             <option value="textarea">textarea</option>
             <option value="image">image</option>

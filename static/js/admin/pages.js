@@ -6,10 +6,11 @@ bombolone.controller('PagesCtrl', [
   "$rootScope", 
   "api",
   function($scope, $resource, $rootScope, api) {
-    var page_list, page_new, page_update, params;
+    var page_list, page_new, page_view, page_update, params;
     $rootScope.admin_module = "pages";
     page_new = path.match(/^\/admin\/pages\/new\/?$/i);
     page_update = path.match(/^\/admin\/pages\/update\/([^\/]+)\/?$/i);
+    page_view = path.match(/^\/admin\/pages\/view\/([^\/]+)\/?$/i);
     page_list = path.match(/^\/admin\/pages\/?$/i);
     $scope.module = "pages";
     $scope.menu_language = false;
@@ -17,6 +18,7 @@ bombolone.controller('PagesCtrl', [
     $scope.name_language = $rootScope.language;
     $scope.list_labels = [];
     $scope.update = true;
+    $scope.view = false;
     if (page_list) {
       $rootScope.loader = true;
       api.pagesList.get(function(resource) {
@@ -26,6 +28,15 @@ bombolone.controller('PagesCtrl', [
       });
     } else if (page_update) {
       $scope.page_id = page_update[1];
+      params = {
+        _id: $scope.page_id
+      };
+      api.pagesGet.get(params, function(resource) {
+        $rootScope.page = resource.page;
+      });
+    } else if (page_view) {
+      $scope.view = true;
+      $scope.page_id = page_view[1];
       params = {
         _id: $scope.page_id
       };

@@ -15,7 +15,7 @@ MODULE_DIR = 'admin/pages'
 pages = Blueprint('pages', __name__)
 
 @pages.route('/admin/pages/')
-@check_rank(10) 
+@check_rank(80) 
 @get_hash('pages')
 @get_hash('admin')
 def index():
@@ -38,7 +38,7 @@ def upsert(_id=None):
 
 
 @pages.route('/admin/pages/view/<_id>/')
-@check_rank(10)
+@check_rank(80)
 @get_hash('pages')
 @get_hash('admin')
 def view(_id=None):

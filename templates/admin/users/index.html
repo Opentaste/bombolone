@@ -3,56 +3,20 @@
 {% block title %} {{ g.users.title }} {% endblock %}
 {% block description %} {{ g.users.description }} {% endblock %}
 
+{% block ng_section %}ng-controller="UsersAdminCtrl"{% endblock %}
 {% block nav_active_2 %}class="active"{% endblock %}
 
 {% block admin %}
 <h2>{{ g.users.name }}</h2>
 <br />
+
+{% if my.rank < 15 %}
 <a href="/admin/users/new/" title="" class="button button-blu">{{ g.users.add_user }}</a>
-<table class="table table-bordered table-striped table-condensed">
- <thead>
-  <tr>
-    <th style="width:5%;"></th>	
-    <th style="width:32%;">Username</th>
-    <th style="width:20%;">Rank</th>
-    <th style="width:28%;">_id</th>
-    <th style="width:15%;"></th>
-  </tr>
-</thead>
-<tfoot>
-  <tr>
-   <td colspan="5"></td>
- </tr>
-</tfoot>
-<tbody>
-  {% for i, user in enumerate(users_list) %}
-  <tr class="item_{{ str(user['_id']) }}">
-    <td>
-      {% if user.image %}
-      <img src="{{ path }}/static/avatars/{{ user.username.lower() }}/{{ user.image[0] }}" 
-      alt="{{ user.username }}" />
-      {% endif %}
-    </td>
-    <td>
-     {% if my.rank < user.rank or my.rank < 15 %}
-     <a href="/admin/users/{{ str(user['_id']) }}/">{{ user.username }}</a>
-     {% else %}
-     {{ user.username }}
-     {% endif %}
-   </td>
-   <td>{{ ranks_list[user.rank] }}</td>
-   <td>
-     {% if my.rank < user.rank or my.rank < 15 %}
-     <a href="/admin/users/{{ str(user['_id']) }}/">{{ user['_id'] }}</a>
-     {% endif %}
-   </td>
-   <td>
-     {% if my['_id'] != user['_id'] and user.rank > my.rank %}
-     <span class="remove_item item_{{ str(user['_id']) }}">{{ g.admin.remove_item }}</span>
-     {% endif %}
-   </td>
- </tr>
- {% endfor %}
-</tbody>
-</table>
+{% endif %}
+
+<table table-admin table-type="users" table-list="items_list" sort="sort_table" on-remove="remove"></table>
+{% endblock %}
+
+{% block js_module_files %}
+  "{{ '/static/js/%s' % js_version['admin/users'] }}",
 {% endblock %}

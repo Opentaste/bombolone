@@ -42,11 +42,11 @@
         <a {% block nav_active_1 %}{% endblock %} 
         href="{{ url_for('admin.dashboard') }}" title="" >Dashboard</a>
       </li>
-      {% if g.my['rank'] < 15 %}
       <li>
         <a {% block nav_active_6 %}{% endblock %} 
         href="{{ url_for('pages.index') }}" title="" >Pages</a>
       </li>
+      {% if g.my['rank'] < 15 %}
       <li>
         <a {% block nav_active_2 %}{% endblock %}
         href="{{ url_for('users.index') }}" title="" >Users</a>

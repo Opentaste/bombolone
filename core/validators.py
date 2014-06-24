@@ -85,6 +85,17 @@ class CheckValue(object):
             return True
         return False
 
+    def url_two(self, data):
+        """
+        Validates the url 
+        :param url: The string  
+        
+        """
+        regex = re.compile(r'^[\w\-\.]+[^#?\s]+$', re.IGNORECASE)
+        if regex.match(data):
+            return True
+        return False
+
     def is_integer(self, data):
         """ """
         try:

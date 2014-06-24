@@ -17,7 +17,7 @@ api_pages = Blueprint('api_pages', __name__)
 
 @api_pages.route('/api/1.0/pages/list.json')
 @authentication
-@check_rank(10)
+@check_rank(80)
 @get_hash('pages')
 def overview():
     """ List all the documents, each has a name 
@@ -31,7 +31,7 @@ def overview():
 
 @api_pages.route('/api/1.0/pages/get.json')
 @authentication
-@check_rank(10)
+@check_rank(80)
 @get_hash('pages')
 def get():
     """ """
@@ -63,7 +63,7 @@ def new():
 
 @api_pages.route('/api/1.0/pages/update.json', methods=['POST'])
 @authentication
-@check_rank(10)
+@check_rank(80)
 @get_hash('pages')
 def update():
     """ """
