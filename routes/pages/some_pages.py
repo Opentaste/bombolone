@@ -28,6 +28,6 @@ def contact(page, url, code):
         <h3>I'm """+name+"""</h3>
         <p style="font-size:15px">"""+text+"""</p>"""
         text = 'I\'m %s \n %s' % (name, text)
-        send_email(title, text, text_email, email)
+        g.email_text = text_email
         g.message = 'email sent'
         g.status = 'mes-green'

@@ -7,7 +7,7 @@ A collection of all the decorators
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """
-from flask import g, abort
+from flask import g, abort, render_template
 from functools import wraps
 
 # Imports inside Bombolone
@@ -67,4 +67,19 @@ def get_hash(hash_map_name):
             setattr(g, hash_map_name, dictionary)
             return function_to_decorate(*args, **kwargs)
         return decorated_function
+    return real_decorator
+
+def get_template(template_directive):
+    """ 
+    Run the template from a specific directive
+
+    @get_template("pages")
+    """
+    def real_decorator(function_to_decorate):
+        @wraps(function_to_decorate)
+        def decorated_function(*args, **kwargs):
+            function_to_decorate(*args, **kwargs)
+            return render_template(template_directive+'/'+args[0]['file']+'.html', **locals())
+        return decorated_function
+
     return real_decorator
