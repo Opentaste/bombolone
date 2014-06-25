@@ -27,7 +27,11 @@
       </tfoot>
       <tbody class="hidden" ng-class="{hidden: !show_item_list}">
         <tr ng-repeat="item in items_list | orderBy:name">
+          {% if my.rank < 15 %}
           <td><a href="/admin/pages/update/[[ item['_id'] ]]/">[[ item['name'] ]]</a></td>
+          {% else %}
+          <td><a href="/admin/pages/view/[[ item['_id'] ]]/">[[ item['name'] ]]</a></td>
+          {% endif %}
           <td>{{ lan }} : [[ item['url'][app.lan] ]]</td>
           {% if my.rank < 15 %}
           <td>
