@@ -66,6 +66,13 @@
       Copyright 2014
       <a href="https://github.com/Opentaste/bombolone">Bombolone</a> All rights reserved.
     </p>
+    <p>
+      {% for code, language in all_languages.iteritems() %}
+      <a href="/language/{{ code }}/" class="set_language {% if lan == code %}underline{% endif %}">
+        <i class="icon-{{ code }}"></i>{{ language }}
+      </a>
+      {% endfor %}
+    </p>
   </footer>
   {% endblock %}
 

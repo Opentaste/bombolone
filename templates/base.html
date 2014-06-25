@@ -56,9 +56,9 @@
     </p>
     <p>
       {% for code, language in all_languages.iteritems() %}
-      <span ng-click="set_language('{{ code }}')" class="set_language {% if lan == code %}underline{% endif %}">
+      <a href="/language/{{ code }}/" class="set_language {% if lan == code %}underline{% endif %}">
         <i class="icon-{{ code }}"></i>{{ language }}
-      </span>
+      </a>
       {% endfor %}
     </p>
     <p>

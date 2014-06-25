@@ -15,16 +15,22 @@ footer {
   	opacity: 0.6;
     filter: alpha(opacity = 60); 
 
-    span.set_language {
-    	margin: 0 10px 0 0;
-    	i {
-    		margin: 0 4px 0 0;
-    	}
-    	&:hover {
-				color:#D5913C;
-			  cursor: pointer;
-			  text-decoration:underline;
-			}
+    a {
+      &.set_language {
+        color: #222;
+        margin: 0 10px 0 0;
+        i {
+          margin: 0 4px 0 0;
+        }
+        &:hover {
+  		    color:#D5913C;
+          cursor: pointer;
+          text-decoration:underline;
+        }
+      }
+      &.underline {
+        text-decoration: underline;
+      }
     }
-	} 
+	}
 }

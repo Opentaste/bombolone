@@ -9,7 +9,7 @@ write the content for use on the web site.
 :copyright: (c) 2014 by @zizzamia
 :license: BSD (See LICENSE for details)
 """
-from flask import Blueprint, request
+from flask import Blueprint, request, g
 
 # Imports inside Bombolone
 import core.hash_table
