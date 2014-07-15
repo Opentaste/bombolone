@@ -13,7 +13,6 @@ execution.
 import os
 import time
 import hashlib
-import simplejson as json 
 import shutil
 from fabric.api import settings, run, env, cd, lcd, local, sudo
 try:
@@ -30,6 +29,10 @@ def install():
     """
     print '\n####### Install Bombolone #######'
 
+    # Install npm dependencies
+    local("sudo npm install -g bower")
+    local("npm install")
+    local("bower install")
     # Install python PIL library
     local("pip install -r REQUIREMENTS.txt")
     local("pip install PIL --allow-external PIL --allow-unverified PIL")

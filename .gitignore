@@ -16,3 +16,10 @@
 # fabfile caches
 .coffeecache
 .minifycache
+
+# Node
+node_modules
+npm-debug.log
+
+# Bower
+static/components/

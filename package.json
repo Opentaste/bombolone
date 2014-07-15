@@ -1,0 +1,29 @@
+{
+  "name": "bombolone",
+  "version": "0.3.2",
+  "description": "Bombolone is a tasty Content Management System for Python based on Flask, MongoDB, AngularJS, Sass and Bootstrap. It's designed to be a simple, flexible toolset for projects of any size.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Opentaste/bombolone.git"
+  },
+  "keywords": [
+    "bombolone",
+    "python",
+    "flask",
+    "angularjs"
+  ],
+  "author": "@zizzamia",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/Opentaste/bombolone/issues"
+  },
+  "homepage": "https://github.com/Opentaste/bombolone"
+}

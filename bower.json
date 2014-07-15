@@ -1,0 +1,10 @@
+{
+  "name": "bombolone",
+  "version": "0.3.2",
+  "dependencies": {
+    "angular": "1.2.20",
+    "angular-route": "1.2.20",
+    "angular-resource": "1.2.20",
+    "components-font-awesome": "4.1.0"
+  }
+}

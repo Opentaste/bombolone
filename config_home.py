@@ -4,7 +4,7 @@ import os
 DEBUG = True
 
 # Database connection
-DATABASE = 'bombolone'
+DATABASE = 'new_app'
 
 # ~
 ENV = "home"
@@ -73,12 +73,12 @@ ACTIVATED = 1
 NOTACTIVATED = 0
 
 # List js local files
-JS_FILES_STEP_ONE = ['/static/js/lib/angular.min.js',
-                     '/static/js/lib/angular-route.min.js']
+JS_FILES_STEP_ONE = ['/static/components/angular/angular.min.js',
+                     '/static/components/angular-route/angular-route.min.js']
 
 # List js local files
-JS_FILES_STEP_TWO = ['/static/js/lib/angular-resource.min.js',
+JS_FILES_STEP_TWO = ['/static/components/angular-resource/angular-resource.min.js',
                      '/static/js/lib/angular-ui.min.js']
 
 # ~
-CSS_FONT_AWESOME = '/static/css/font-awesome/font-awesome.css'
+CSS_FONT_AWESOME = '/static/components/components-font-awesome/css/font-awesome.min.css'
