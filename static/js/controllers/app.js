@@ -1,9 +1,8 @@
 'use strict';
 
-/*
-Application controller v5
-*/
-bombolone.controller('AppCtrl', [
+/* Application controller v5 */
+angular.module('bombolone.controllers.app', [])
+.controller('AppCtrl', [
   "$scope", 
   "$resource", 
   "$rootScope", 

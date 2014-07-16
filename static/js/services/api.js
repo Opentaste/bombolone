@@ -1,9 +1,8 @@
 'use strict';
 
-/*
-Api v4
-*/
-bombolone.factory('api', [
+/* Api v4 */
+angular.module('bombolone.services.api', [])
+.factory('api', [
   "$rootScope", 
   "$resource", 
   "$http", 

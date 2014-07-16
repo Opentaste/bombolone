@@ -17,6 +17,10 @@
 </div>
 {% endblock %}
 
+{% block js_module_names %}
+	'bombolone.controllers.hashTable',
+{% endblock %}
+
 {% block js_module_files %}
   "{{ '/static/js/%s' % js_version['admin/hash_table'] }}",
 {% endblock %}

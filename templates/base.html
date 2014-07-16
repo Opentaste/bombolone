@@ -4,29 +4,29 @@
   <meta charset="utf-8">
   {% include "base_script.html" %}
   <script>
-  var run_bombolone = function() {
-    $script([
-      {% for item in js_files_step_two %}'{{ item }}',{% endfor %}
-    ], function calb_a() {
-      $script(["{{ '/static/js/%s' % js_version['bombolone'] }}"], function calb_b() {
-        $script([
-          "{{ '/static/js/%s' % js_version['services/api'] }}",
-        ], function calb_c() {
-          $script([
-            "{{ '/static/js/%s' % js_version['controllers/app'] }}",
-            {% block js_files %}{% endblock %}
-          ], function calb_d() {
-            domready(function calb_e(){
-              angular.bootstrap(d, ['bombolone']);
-            });
-          });
-        });
-      });
-    });
-  };
+  // load all of the dependencies asynchronously.
   $script([
-      {% for item in js_files_step_one %}'{{ item }}',{% endfor %}
-  ], run_bombolone);
+    {% for item in js_files_step_one %}'{{ item }}',{% endfor %}
+    {% for item in js_files_step_two %}'{{ item }}',{% endfor %}
+  ], function() {
+    bombolone = angular.module("bombolone", [
+      'ngRoute', 
+      'ngResource', 
+      'ui',
+      'bombolone.services.api',
+      'bombolone.controllers.app',
+      {% block js_module_names %}{% endblock %}
+    ]);
+    $script([
+      "{{ '/static/js/%s' % js_version['bombolone'] }}",
+      "{{ '/static/js/%s' % js_version['services/api'] }}",
+      "{{ '/static/js/%s' % js_version['controllers/app'] }}",
+      {% block js_files %}{% endblock %}
+    ], function() {
+      // when all is done, execute bootstrap angular application
+      angular.bootstrap(document, ['bombolone']);
+    });
+  });
   </script>
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">

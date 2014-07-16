@@ -1,9 +1,8 @@
 'use strict';
 
-/*
-Users Admin controller v6
-*/
-bombolone.controller('UsersAdminCtrl', [
+/* Users Admin controller v6 */
+angular.module('bombolone.controllers.usersAdmin', [])
+.controller('UsersAdminCtrl', [
   "$scope", 
   "$resource", 
   "$rootScope", 

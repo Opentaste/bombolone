@@ -1,9 +1,8 @@
 'use strict';
 
-/*
-Tables in the administration v6
-*/
-bombolone.directive('tableAdmin', [
+/* Tables in the administration v6 */
+angular.module('bombolone.directives.table', [])
+.directive('tableAdmin', [
   "$rootScope", 
   function($rootScope) {
     return {

@@ -1,7 +1,8 @@
 'use strict';
 
 /* Admin controller v6 */
-bombolone.controller('AdminCtrl', [
+angular.module('bombolone.controllers.admin', [])
+.controller('AdminCtrl', [
   "$scope", 
   "$resource", 
   "$rootScope", 

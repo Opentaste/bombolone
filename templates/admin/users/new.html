@@ -53,6 +53,12 @@
 </div>
 {% endblock %}
 
+{% block js_module_names %}
+  'bombolone.controllers.usersAdmin',
+  'bombolone.controllers.users',
+  'bombolone.controllers.upload'
+{% endblock %}
+
 {% block js_module_files %}
   "{{ '/static/js/%s' % js_version['admin/users'] }}",
   "{{ '/static/js/%s' % js_version['controllers/users'] }}",

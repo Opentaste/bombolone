@@ -77,6 +77,12 @@
 </section>
 {% endblock %}
 
+{% block js_names %}
+  'bombolone.controllers.admin',
+  'bombolone.directives.table',
+  {% block js_module_names %}{% endblock %}
+{% endblock %}
+
 {% block js_files %}
   "{{ '/static/js/%s' % js_version['admin/admin'] }}",
   "{{ '/static/js/%s' % js_version['directives/table'] }}",

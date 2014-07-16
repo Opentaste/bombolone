@@ -1,9 +1,8 @@
 'use strict';
 
-/*
-Users controller v4
-*/
-bombolone.controller('UsersCtrl', [
+/* Users controller v4 */
+angular.module('bombolone.controllers.users', [])
+.controller('UsersCtrl', [
   "$scope", 
   "$resource", 
   "$rootScope", 

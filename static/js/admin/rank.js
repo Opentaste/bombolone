@@ -1,9 +1,8 @@
 'use strict';
 
-/*
-Rank v6
-*/
-bombolone.controller('RankCtrl', [
+/* Rank v6 */
+angular.module('bombolone.controllers.rank', [])
+.controller('RankCtrl', [
   "$scope", 
   "$resource", 
   "$rootScope", 

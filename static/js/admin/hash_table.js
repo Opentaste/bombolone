@@ -1,7 +1,8 @@
 'use strict';
 
 /* Hash Table v6 */
-bombolone.controller('HashTableCtrl', [
+angular.module('bombolone.controllers.hashTable', [])
+.controller('HashTableCtrl', [
   "$scope", 
   "$resource", 
   "$rootScope", 

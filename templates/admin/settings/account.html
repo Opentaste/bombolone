@@ -20,8 +20,12 @@
 </div><!-- .form-horizontal -->
 {% endblock %}
 
+{% block js_names %}
+  'bombolone.controllers.users',
+{% endblock %}
+
 {% block js_files %}
-  "{{ '/static/js/%s' % js_version['users'] }}",
+  "{{ '/static/js/%s' % js_version['controllers/users'] }}",
 {% endblock %}
 
 {% block js_data %}

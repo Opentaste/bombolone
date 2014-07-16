@@ -1,6 +1,7 @@
 'use strict';
 
-bombolone.controller('PagesCtrl', [
+angular.module('bombolone.controllers.pages', [])
+.controller('PagesCtrl', [
   "$scope", 
   "$resource", 
   "$rootScope", 

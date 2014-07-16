@@ -17,6 +17,10 @@
 <table table-admin table-type="users" table-list="items_list" sort="sort_table" on-remove="remove"></table>
 {% endblock %}
 
+{% block js_module_names %}
+	'bombolone.controllers.usersAdmin',
+{% endblock %}
+
 {% block js_module_files %}
   "{{ '/static/js/%s' % js_version['admin/users'] }}",
 {% endblock %}

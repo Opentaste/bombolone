@@ -1,10 +1,11 @@
 'use strict';
 
-/*
-Upload v4
-*/
-bombolone.controller('UploadCtrl', 
-  ["$scope", "$resource", "$rootScope",
+/* Upload v4 */
+angular.module('bombolone.controllers.upload', [])
+.controller('UploadCtrl', [
+  "$scope", 
+  "$resource", 
+  "$rootScope",
     function($scope, $resource, $rootScope) {
       var match_settings, match_users, up, __abort_upload, __format_size, __init_upload, __load_file, __show_message_error, __start_upload, __upload_supported;
       $scope.upload_allowed = true;

@@ -39,6 +39,7 @@ def install():
     # Install Compass (http://compass-style.org/install/)
     local("gem update --system")
     local("gem install compass")
+    local("gem install compass-h5bp")
     # Install bootstrap (https://github.com/twbs/bootstrap-sass)
     local("gem install bootstrap-sass")
 
