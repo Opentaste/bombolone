@@ -1,3 +1,4 @@
+Pillow==2.5.1
 pymongo==2.6.3
 simplejson==2.5.0
 Flask==0.10.1

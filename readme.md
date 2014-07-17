@@ -5,30 +5,35 @@
 Bombolone is a tasty Content Management System for Python based on [Flask](http://flask.pocoo.org/), [MongoDB](http://www.mongodb.org/), [AngularJS](http://angularjs.org), [Sass](http://sass-lang.com) and [Bootstrap](http://getbootstrap.com/). 
 It's designed to be a simple, flexible toolset for projects of any size.
 
-## Some dependencies
+## Some basic dependencies
+```
+# Install Homebrew
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
-- [Virtualenv](http://virtualenv.readthedocs.org/en/latest/)
-- [MongoDB](http://www.mongodb.org/)
-- [Fabric](http://www.fabfile.org/)
-- [Rubygems](https://rubygems.org/)
+# Install MongoDB
+brew install mongodb
 
-## Quick start in 6 steps
+# Install Virtualenv
+sudo pip install virtualenv
+```
+
+## Quick start
 
 ```shell
+# Clone the git repo in your new web app folder
+git clone https://github.com/Opentaste/bombolone.git new_app && cd new_app
+
 # Run Mongodb
 sudo mongod
 
-# Clone the git repo in your new web app folder
-git clone https://github.com/Opentaste/bombolone.git new_app
-
 # Create your own environment from the new_app folder
-cd new_app && virtualenv venv && . venv/bin/activate
+virtualenv venv && . venv/bin/activate
 
-# Install libries and init Bombolone Mongodb
-fab install && fab init_database:name_database=new_app
+# Install libraries
+pip install -r REQUIREMENTS.txt
 
-# In a new tab with the same path run Compass
-compass watch
+# Init Bombolone Mongodb
+fab init_database:name_database=new_app
 
 # Run Bombolone 
 python app.py
@@ -84,12 +89,42 @@ With the HashTable module you can create different hashmap be used inside module
 * Users : can edit any content of hash map by default.
 
 
-## Tests
-In Bombolone there is an environment for testing any module or webpage.
+## How compile CSS
+Before need install some ruby dependencies
+```
+gem update --system
+gem install compass
+gem install compass-h5bp
+gem install bootstrap-sass
+```
 
+In a new tab with the same path run Compass
+```
+compass watch
+```
+
+
+## Python Tests
+Run python test
 ```
 python unit_test.py 
 ```
+
+
+## Js Unit/Integration Tests
+Before run the test, you need install some dependecies.
+```
+# Install Nvm
+git clone https://github.com/creationix/nvm.git ~/.nvm
+source ~/.nvm/nvm.sh
+
+# Install Npm
+nvm install v0.10.29
+
+# Installing all node packaged modules
+npm install
+```
+
 
 ## Who we are
 
