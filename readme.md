@@ -6,7 +6,7 @@ Bombolone is a tasty Content Management System for Python based on [Flask](http:
 It's designed to be a simple, flexible toolset for projects of any size.
 
 
-## Quick start
+## Important dependecies
 Before starting check if you have all you need.
 ```shell
 # Install Homebrew
@@ -18,7 +18,11 @@ brew install mongodb
 # Install Virtualenv
 sudo pip install virtualenv
 ```
+Important, if you use a Mac OSX please install the commandline tools 
+manually from Apple's Developer site.
+[developer.apple.com/downloads/…](https://developer.apple.com/downloads/index.action?=command%20line%20tools#)
 
+## Quick start
 Just for running a new app let's follow these 6 steps.
 ```shell
 # Clone the git repo in your new web app folder
