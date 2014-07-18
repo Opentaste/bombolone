@@ -132,12 +132,12 @@ class Pages(object):
         
     def __request_first_block(self):
         """ """
-        form                = self.params
-        old_name            = self.page['name']
-        self.page['name']   = form['name']
-        self.page['from']   = form['from']
+        form = self.params
+        old_name = self.page['name']
+        self.page['name'] = form['name']
+        self.page['from'] = form['from']
         self.page['import'] = form['import']
-        self.page['file']   = form['file']
+        self.page['file'] = form['file']
                 
         # Check that the name field is not empty
         if not len(form['name']):
@@ -188,10 +188,10 @@ class Pages(object):
     
     def __request_second_block(self):
         """ """            
-        form                     = self.params
-        old_url                  = self.page['url']
-        self.page['url']         = {}
-        self.page['title']       = {}
+        form = self.params
+        old_url = self.page['url']
+        self.page['url'] = {}
+        self.page['title'] = {}
         self.page['description'] = {}
         
         for i in range(10):
@@ -199,8 +199,8 @@ class Pages(object):
             if key in self.page:
                 del(self.page[key])
 
-        self.page['url']         = form['url']
-        self.page['title']       = form['title']
+        self.page['url'] = form['url']
+        self.page['title'] = form['title']
         self.page['description'] = form['description']
         
         # Get URL, Title and Description in any languages
@@ -210,7 +210,7 @@ class Pages(object):
                 error_in = ' ( ' + code + ' )'
                 
                 # If the url is changed
-                if old_url[code] != self.page['url'][code]:
+                if old_url.get(code) != self.page['url'].get(code):
                     url_list = self.__get_url_list(code)
                     num_urls = len(url_list)
                     
@@ -265,11 +265,11 @@ class Pages(object):
 
     def __get_url_list(self, code):
         """  """
-        url_list = self.page['url'][code].split('/')
+        url = self.page['url'].get(code, '')
+        url_list = url.split('/')
         # Convert list with strings all to lowercase
         map(lambda x:x.lower(),url_list)
         # Save the url without slash in the end ( '/' )
-        if len(self.page['url'][code]):
-            if self.page['url'][code][-1] == '/':
-                url_list.pop()
+        if len(url) and url[-1] == '/':
+            url_list.pop()
         return url_list

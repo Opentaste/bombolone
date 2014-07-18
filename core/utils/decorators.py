@@ -19,7 +19,7 @@ def get_hash_map(module, lan):
     if module_map is None:
         current_app.logger.critical("Important, you have to restore last database!")
         return None
-    return { x : y[lan] for x, y in module_map['value'].iteritems() }
+    return { x : y.get(lan, '') for x, y in module_map['value'].iteritems() }
 
 class GetValue(object):
     """ """

@@ -11,7 +11,7 @@
   <table class="table table-bordered table-striped">
     <thead>
       <tr>
-        {% if my.rank == 15 %}
+        {% if my.rank < 15 %}
         <th style="width:5%;"></th>
         {% endif %}
         <th style="width:15%;">{{ g.languages.code }}</th>
@@ -27,7 +27,7 @@
     <tbody>
       {% for i, language in enumerate(languages_list) %}
       <tr>
-        {% if my.rank == 15 %}
+        {% if my.rank < 15 %}
         <td>
           <input type="checkbox" name="{{ language['code'] }}" 
           {% if language['code'] == lan %} disabled="disabled" {% endif %}
@@ -41,7 +41,7 @@
       {% endfor %}
     </tbody>
   </table>
-  {% if my.rank == 15 %}
+  {% if my.rank < 15 %}
   <div>
     <button tabindex="20" type="submit" class="button button-submit"> {{ g.admin['save'] }}</button>
   </div>

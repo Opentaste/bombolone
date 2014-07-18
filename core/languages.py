@@ -114,18 +114,15 @@ class Languages(object):
         return [ (x , y) for x, y in sorted(names['value'].iteritems())]
 
     def update(self):
-        """ Saves which languages to use in web application """
+        """Saves which languages to use in web application."""
         for code in LIST_LANGUAGES:
             if code != g.lang:
                 if code in request.form and 'on' == request.form[code]:
                     check = True
                 else:
                     check = False
-                # Update the permissions of the languages
-                # and prepares the message of operation success
-                set_update = {'$set' : { 'check' : check } }
-                model.languages.update(code=code, 
-                                       lanugage=set_update)
+                language = model.languages.find(code=code, only_one=True)
+                model.languages.update(language_id=language['_id'], check=check)
                 self.message = g.languages_msg('success_update')
                 self.status = 'msg msg-success'
 

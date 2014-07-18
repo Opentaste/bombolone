@@ -95,6 +95,6 @@ def get_content_dict(page, code):
     The key id the name label, and the value is get by the language code
     used in that moment on the page.
     """
-    content = { x[0]["name"]: x[1]["value"][code] for x in zip(page['labels'], page['content']) }
+    content = { x[0]["name"]: x[1]["value"].get(code, '') for x in zip(page['labels'], page['content']) }
     return content
 

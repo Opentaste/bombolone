@@ -106,15 +106,16 @@ def render_content_page(num_of_path, path):
         
         # 2) static page
         # ===============================================================
-        title       = page_document['title'][code]
-        description = page_document['description'][code]
-        content     = {}
+        title = page_document['title'].get(code, '')
+        description = page_document['description'].get(code, '')
+        content = {}
         if page_document['content']:
             content = get_content_dict(page_document, code)
             
         # For every page you must specify the file where you want 
         # to use the contents stored in the database.
-        return render_template('pages/'+page_document['file']+'.html', **locals())
+        template_file = 'pages/{0}.html'.format(page_document['file'])
+        return render_template(template_file, **locals())
 
 @content.route('/api/1.0/<three>/', methods=['POST', 'GET'])
 @content.route('/api/1.0/<three>/<four>', methods=['POST', 'GET'])

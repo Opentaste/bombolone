@@ -32,6 +32,7 @@ Manages the languages.
 # Imports inside Bombolone
 from shared import db
 from model_engine import db_engine
+from core.utils import ensure_objectid
 
 def find(name=None,
          code=None,
@@ -53,3 +54,18 @@ def find(name=None,
                      only_one=only_one,
                      sorted_by=sorted_by)
 
+def update(language_id=None, value=None, check=None):
+    """
+    """
+    if language_id is None:
+        return False
+    dict_set = {}
+    if value:
+        dict_set["value"] = value
+    if check:
+        dict_set["check"] = check
+    set_language = {
+        '$set': dict_set
+    }
+    db.languages.update({'_id': ensure_objectid(language_id)}, set_language)
+    return language_id
