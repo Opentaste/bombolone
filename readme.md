@@ -65,23 +65,23 @@ but configurable to allow multiple levels of access depending on rank.
 
 ## Core Modules
 
-** Users **
+#### Users ####
 Allows user administration: 
 * Administrators : can create, modify or delete users.
 * Users : can only read the account list by default.
 
-** Rank **
+#### Rank ####
 The rank module allows you to see what ranks are available.
 
-** Pages **
+#### Pages ####
 Allows you to quickly create dynamic and static pages.
 * Administrators : can create, edit, modify or delete pages.
 * Users : can edit any content pages by default.
 
-** Languages **
+#### Languages ####
 From here you can decide which languages you want the site to use.
 
-** HashTable **
+#### HashTable ####
 With the HashTable module you can create different hashmap be used inside modules or the site.
 * Administrators : can create, edit, modify or delete hash map.
 * Users : can edit any content of hash map by default.
@@ -149,13 +149,13 @@ fab write_db_in_config
 
 ## Tests
 
-** Python**
+#### Python ####
 Run python test
 ```shell
 python unit_test.py 
 ```
 
-** Js Unit/Integration Tests **
+#### Js Unit/Integration Tests ####
 Before run the test, you need install some dependecies.
 ```shell
 # Install Nvm
