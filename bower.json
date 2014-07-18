@@ -1,6 +1,6 @@
 {
   "name": "bombolone",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "dependencies": {
     "angular": "1.2.20",
     "angular-route": "1.2.20",

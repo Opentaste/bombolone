@@ -1,6 +1,6 @@
 <img src="http://zizzamia.com/img/bombolone_logo.png"/>
 
-### Bombolone version 0.3.2 ###
+### Bombolone version 0.3.3 ###
 
 Bombolone is a tasty Content Management System for Python based on [Flask](http://flask.pocoo.org/), [MongoDB](http://www.mongodb.org/), [AngularJS](http://angularjs.org), [Sass](http://sass-lang.com) and [Bootstrap](http://getbootstrap.com/). 
 It's designed to be a simple, flexible toolset for projects of any size.

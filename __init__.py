@@ -12,6 +12,6 @@ flexible toolset for projects of any size.
 """
 
 __title__ = 'bombolone'
-__version__ = '0.3.2'
+__version__ = '0.3.3'
 __author__ = '@zizzamia'
 __copyright__ = 'Copyright 2014 Bombolone'
