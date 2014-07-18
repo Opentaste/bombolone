@@ -4,4 +4,3 @@ simplejson==2.5.0
 Flask==0.10.1
 Werkzeug==0.8.3
 requests==0.13.3
-yuicompressor==2.4.7
