@@ -40,19 +40,19 @@ def local_backup():
     local('mongodump --db {} --out data/backup/mongodb/$(date +%F)'.format(DATABASE))
         
 
-def mongodb_restore(database=None, date_backup=None):
+def mongodb_restore(new_database=None, database=None, date_backup=None):
     """ """
-    print '\n####### Restore MongoDB from {0} to {1} #######'.format(database, DATABASE)
+    print '\n####### Restore MongoDB from {0} to {1} #######'.format(database, new_database)
 
-    if database is None:
-        database = DATABASE
+    if new_database is None:
+        new_database = DATABASE
     
     # When date backup is None allows to update the database to the last backup
     if date_backup is None:
         list_backup = sorted([ x for x in os.listdir('data/backup/mongodb') if x[0] != '.'])
         date_backup = list_backup[-1]
     
-    local('mongorestore --db {0} --drop data/backup/mongodb/{1}/{2}'.format(DATABASE, date_backup, database))
+    local('mongorestore --db {0} --drop data/backup/mongodb/{1}/{2}'.format(new_database, date_backup, database))
    
 
 def init_database(name_database=None):
@@ -61,7 +61,7 @@ def init_database(name_database=None):
     """
     print '\n####### Init new database #######'
     write_db_in_config(name_database=name_database)
-    mongodb_restore(database="bombolone")
+    mongodb_restore(new_database=name_database, database="bombolone")
 
 
 def write_db_in_config(name_database=None):

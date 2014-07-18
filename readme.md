@@ -5,8 +5,10 @@
 Bombolone is a tasty Content Management System for Python based on [Flask](http://flask.pocoo.org/), [MongoDB](http://www.mongodb.org/), [AngularJS](http://angularjs.org), [Sass](http://sass-lang.com) and [Bootstrap](http://getbootstrap.com/). 
 It's designed to be a simple, flexible toolset for projects of any size.
 
-## Some basic dependencies
-```
+
+## Quick start
+Before starting check if you have all you need.
+```shell
 # Install Homebrew
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
@@ -17,8 +19,7 @@ brew install mongodb
 sudo pip install virtualenv
 ```
 
-## Quick start
-
+Just for running a new app let's follow these 6 steps.
 ```shell
 # Clone the git repo in your new web app folder
 git clone https://github.com/Opentaste/bombolone.git new_app && cd new_app
@@ -33,7 +34,7 @@ virtualenv venv && . venv/bin/activate
 pip install -r REQUIREMENTS.txt
 
 # Init Bombolone Mongodb
-fab init_database:name_database=new_app
+mongorestore --db new_app --drop data/backup/mongodb/2014-06-24/bombolone
 
 # Run Bombolone 
 python app.py
@@ -56,13 +57,6 @@ It's important to note that beginning the application has two types
 of users: administrators and users. Administrator can do everything. 
 Users can only edit content and other little things,
 but configurable to allow multiple levels of access depending on rank.
-
-The core modules are as follows:
-* Users
-* Rank
-* Pages
-* Languages
-* HashTable
 
 
 ## Core Modules
@@ -90,30 +84,71 @@ With the HashTable module you can create different hashmap be used inside module
 
 
 ## How compile CSS
-Before need install some ruby dependencies
-```
+Setting up the ruby environment
+```shell
 gem update --system
 gem install compass
 gem install compass-h5bp
 gem install bootstrap-sass
 ```
 
-In a new tab with the same path run Compass
-```
+In a new tab with the same path run [Compass](http://compass-style.org/)
+```shell
 compass watch
 ```
 
 
-## Python Tests
-Run python test
+## Fabric command-line
+We use [Fabric](http://www.fabfile.org/) to provide a basic suite of operations for executing local 
+or remote shell commands, as well as auxiliary functionality such as prompting the 
+running user for input, or aborting execution.
+If you find trouble to installing Fabric, you can check this [page](http://www.fabfile.org/installing.html).
+
+Available commands:
+
+Check if is running the MongoDB database
+```shell
+fab check_database
 ```
+
+Init the basic database
+```shell
+fab init_database            
+```
+
+```shell
+fab local_backup
+```
+
+Minify .js files that have been changed since last run
+```shell
+fab minify                   
+```
+
+```shell
+fab mongodb_restore
+```
+
+```shell
+fab update
+```
+
+```shell
+fab write_db_in_config
+```
+
+
+## Tests
+
+### Python ###
+Run python test
+```shell
 python unit_test.py 
 ```
 
-
-## Js Unit/Integration Tests
+### Js Unit/Integration Tests ###
 Before run the test, you need install some dependecies.
-```
+```shell
 # Install Nvm
 git clone https://github.com/creationix/nvm.git ~/.nvm
 source ~/.nvm/nvm.sh
