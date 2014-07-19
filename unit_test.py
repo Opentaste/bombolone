@@ -12,8 +12,8 @@ import logging
 import sys
 
 from config import PATH
-from tests.python.account import TestAccount, TestAccountByClient, TestAccountAPI
-from tests.python.hash_table import TestHashTable, TestHashTableByClient, TestHashTableAPI
+from tests.python.account import TestAccount, TestAccountAPI
+from tests.python.hash_table import TestHashTable, TestHashTableAPI
 from tests.python.rank import TestRank, TestRankAPI
 from tests.python.utils import TestUtils
 
@@ -36,12 +36,6 @@ if __name__ == '__main__':
             TestHashTable,
             TestRank,
             TestUtils
-        ]
-
-    if type_test == "app":  
-        list_class += [
-            TestAccountByClient,
-            TestHashTableByClient
         ]
 
     if type_test == "api":  

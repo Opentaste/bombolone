@@ -45,9 +45,6 @@ headers = {'Accept': 'text/html'}
 class TestAccount(unittest.TestCase):
     pass
 
-class TestAccountByClient(unittest.TestCase):
-    pass
-
 class TestAccountAPI(unittest.TestCase):
 
     def test_account_update(self):

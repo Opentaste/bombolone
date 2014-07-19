@@ -45,9 +45,6 @@ headers = {'Accept': 'text/html'}
 class TestHashTable(unittest.TestCase):
     pass
 
-class TestHashTableByClient(unittest.TestCase):
-    pass
-
 class TestHashTableAPI(unittest.TestCase):
 
     def test_hash_table_list(self):
