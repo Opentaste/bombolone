@@ -205,10 +205,18 @@ def update():
     local("rm -fr tmp_update")
     local("git clone https://github.com/Opentaste/bombolone.git tmp_update")
     try:
-        local("rsync -avz --delete tmp_update/app/admin .")
-        local("rsync -avz --delete tmp_update/app/api .")
-        local("rsync -avz --delete tmp_update/app/core .")
-        local("rsync -avz --delete tmp_update/app/templates/admin templates")
+        list_core_module = ['hash_table', 'languages', 'pages', 'users']
+        for module in list_core_module:
+            for item in ['api', 'core', 'model']:
+                local("rsync -avz --delete tmp_update/{0}/{1} .".format(item, module))
+        local("rsync -avz --delete tmp_update/api/account .")
+        local("rsync -avz --delete tmp_update/api/rank .")
+        local("rsync -avz --delete tmp_update/core/utils .")
+        local("rsync -avz --delete tmp_update/core/login .")
+        local("rsync -avz --delete tmp_update/core/rank .")
+        local("rsync -avz --delete tmp_update/core/upload .")
+        local("rsync -avz --delete tmp_update/core/validators .")
+        local("rsync -avz --delete tmp_update/model/ranks .")
     except:
         print "Got an error!!!"
     finally:
