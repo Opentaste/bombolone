@@ -31,8 +31,12 @@ static/components/**/README.md
 static/components/**/gruntfile.js
 static/components/**/LICENSE
 static/components/**/package.json
+static/components/**/Makefile
 static/components/bootstrap/fonts*
 static/components/bootstrap/grunt*
 static/components/bootstrap/js*
 static/components/bootstrap/less*
-static/components/jquery
+static/components/bootstrap/dist/js
+static/components/components-font-awesome/less
+static/components/components-font-awesome/scss
+static/components/jquery/
