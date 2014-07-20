@@ -28,13 +28,12 @@ Manages the users.
 """
 import re
 from datetime import datetime
-from flask import current_app, g
+from flask import g
 from pymongo import ASCENDING, DESCENDING
 
 # Imports inside Bombolone
 from config import ACTIVATED
-from shared import app, db
-from model_engine import db_engine
+from model_engine import db, db_engine
 from core.utils import ensure_objectid, is_iterable
 
 def find(user_id=None,

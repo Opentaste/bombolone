@@ -16,16 +16,15 @@ except:
     sys.exit(0)
 
 # Imports outside Bombolone
-from flask import render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from jinja2 import contextfunction 
 from werkzeug.routing import BaseConverter
 
 # Imports inside Bombolone
 from before import core_before_request, core_context_processor
 from config import PORT, DEBUG
-from shared import app, db
 
-from core.utils import msg_status
+from core.utils import msg_status, errorhandler
 
 # Imports login modules Bombolone
 from routes.login.login import login
@@ -44,26 +43,34 @@ from routes.admin.users import users
 # Import content module Bombolone
 from routes.content import content
 
-# Imports hash_table modules Bombolone
-from api.hash_table import api_hash_table
-
-# Imports users modules Bombolone
+# Imports API modules
 from api.account import api_account
+from api.hash_table import api_hash_table
+from api.languages import api_languages
+from api.pages import api_pages
+from api.rank import api_rank
 from api.users import api_users
 
-# Imports pages modules Bombolone
-from api.pages import api_pages
 
-# Imports rank modules Bombolone
-from api.rank import api_rank
+# Create application and configuration
+app = Flask(__name__)
+app.config.from_pyfile('config.py')
+app.config.from_envvar('FLASKR_SETTINGS', silent=True)
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 # 10 Mb Max Upload
+app.test_request_context().push()
 
-# Imports languages modules Bombolone
-from api.languages import api_languages
+# regular expressions inside url routing
+class RegexConverter(BaseConverter):
+    def __init__(self, url_map, *items):
+        super(RegexConverter, self).__init__(url_map)
+        self.regex = items[0]
+
+app.url_map.converters['regex'] = RegexConverter
 
 LIST_MODULES = [login,
                 api_account,
-                api_languages,
                 api_hash_table,
+                api_languages,
                 api_pages,
                 api_rank,
                 api_users,
@@ -75,6 +82,9 @@ LIST_MODULES = [login,
                 hash_table, 
                 settings, 
                 content]
+
+for module in LIST_MODULES:
+    app.register_blueprint(module)
 
             
 # ========================================================================	
@@ -105,25 +115,16 @@ def context_processor():
 def bad_request(error):
     """Raise if the browser sends something to the application the 
     application or server cannot handle."""
-    if request.path.startswith('/api/1.0/'): 
-        message = "Raise if the browser sends something to the application the application or server cannot handle."
-        data = dict(success=False, errors=[{ "message": message, "code": 400 }])
-        response = jsonify(data)
-        response.status_code = 400
-        return response
-    return render_template('error/400.html'), 400
+    message = "Raise if the browser sends something to the "
+    message += "application the application or server cannot handle."
+    return errorhandler(400, message)
 
 @app.errorhandler(401)
 def unauthorized(error):
     """Raise if the user is not authorized. Also used if you want 
     to use HTTP basic auth."""
-    if request.path.startswith('/api/1.0/'): 
-        message = "Raise if the user is not authorized. Also used if you want to use HTTP basic auth."
-        data = dict(success=False, errors=[{ "message": message, "code": 401 }])
-        response = jsonify(data)
-        response.status_code = 401
-        return response
-    return render_template('error/401.html'), 401
+    message = "Raise if the user is not authorized. Also used if you want to use HTTP basic auth."
+    return errorhandler(401, message)
 
 @app.errorhandler(404)
 def not_found(error):
@@ -134,57 +135,37 @@ def not_found(error):
         return render_template('error/404.html'), 404
     if request.path.startswith('/static/'):
         return '', 404
-    if request.path.startswith('/api/1.0/'):
-        message = "Raise if a resource does not exist and never existed."
-        data = dict(success=False, errors=[{ "message": message, "code": 404 }])
-        response = jsonify(data)
-        response.status_code = 404
-        return response
-    return render_template('error/404.html'), 404
+    message = "Raise if a resource does not exist and never existed."
+    return errorhandler(404, message)
 
 @app.errorhandler(405)
 def not_found(error):
-    """
-    The method is not allowed for the requested URL.
-    """
-    if request.path.startswith('/api/1.0/'):
-        message = "Method Not Allowed"
-        data = dict(success=False, errors=[{ "message": message, "code": 405 }])
-        response = jsonify(data)
-        response.status_code = 405
-    return render_template('error/404.html'), 405
+    """The method is not allowed for the requested URL."""
+    message = "Method Not Allowed"
+    return errorhandler(405, message)
 
 @app.errorhandler(408)
 def request_timeout(error):
     """Raise to signalize a timeout."""
     message = '408 - Error caught in {1} : {0}'.format(error, request.path)
     app.logger.critical(message)
-    if request.path.startswith('/api/1.0/'):
-        data = dict(success=False, errors=[{ "message": message, "code": 408 }])
-        response = jsonify(data)
-        response.status_code = 408
-        return response
-    return render_template('error/408.html'), 408
+    return errorhandler(408, message)
     
 @app.errorhandler(413)
 def request_too_large(error):
     """Like 413 but for too long URLs."""
     message = '413 - Error caught in {1} : {0}'.format(error, request.path)
     app.logger.critical(message)
-    return render_template('error/413.html'), 413
+    return errorhandler(408, message)
     
 @app.errorhandler(500)
 def bad_request(error):
     """Raise if the browser sends something to the application the
     application or server cannot handle."""
-    if request.path.startswith('/api/1.0/'):
-        app.logger.critical("Path: {}".format(request.path))
-        app.logger.critical(logging.exception("Exception"))
-        data = dict(success=False, errors=[{ "message": message, "code": 500 }])
-        response = jsonify(data)
-        response.status_code = 500
-        return response
-    return render_template('error/500.html'), 500
+    app.logger.critical("Path: {}".format(request.path))
+    app.logger.critical(logging.exception("Exception"))
+    message = "Something went wrong!"
+    return errorhandler(500, message)
      
      
 # ========================================================================	
@@ -233,11 +214,6 @@ def split_word_format(value, letters=30):
         return value[:letters] + '<br />' + value[letters:]
     return value
 
-class RegexConverter(BaseConverter):
-    def __init__(self, url_map, *items):
-        super(RegexConverter, self).__init__(url_map)
-        self.regex = items[0]
-
 # add some functions to jinja
 app.jinja_env.globals['sorted'] = contextfunction(sorted_thing)  
 app.jinja_env.globals['int'] = contextfunction(int_thing)   
@@ -250,15 +226,6 @@ app.jinja_env.globals['enumerate'] = contextfunction(enumerate_thing)
 app.jinja_env.filters['date'] = date_time_format
 app.jinja_env.filters['split_word'] = split_word_format
 app.jinja_env.filters['msg'] = msg_status
-
-# regular expressions inside url routing
-app.url_map.converters['regex'] = RegexConverter
-
-for module in LIST_MODULES:
-    app.register_blueprint(module)
     
 if __name__ == '__main__':
-    if db is None:
-        app.logger.critical("App needs running MongoDB instance.")
-    else:
-        app.run(host='0.0.0.0', port=config.PORT)
+    app.run(host='0.0.0.0', port=config.PORT)

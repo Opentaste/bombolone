@@ -98,3 +98,12 @@ def get_content_dict(page, code):
     content = { x[0]["name"]: x[1]["value"].get(code, '') for x in zip(page['labels'], page['content']) }
     return content
 
+def errorhandler(status_code, message):
+    """Error handler helper"""
+    if request.path.startswith('/api/1.0/'): 
+        data = dict(success=False, errors=[{ "message": message, "code": status_code }])
+        response = jsonify(data)
+        response.status_code = status_code
+        return response
+    return render_template('error/{}.html'.format(status_code)), status_code
+

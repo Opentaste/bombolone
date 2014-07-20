@@ -15,8 +15,7 @@ Manages the ranks.
 :license: BSD (See LICENSE for details)
 """
 # Imports inside Bombolone
-from shared import db
-from model_engine import db_engine
+from model_engine import db, db_engine
 from core.utils import ensure_objectid, is_iterable
 import model.users
 

@@ -9,12 +9,11 @@ It's much important to access before and after any request.
 """
 import random
 import json
-from flask import session, g, request
+from flask import session, g, request, current_app
 
 # Imports inside Bombolone
 from config import (DEBUG, ENV, JS_FILES_STEP_ONE, JS_FILES_STEP_TWO,
                     NOTACTIVATED, CSS_FONT_AWESOME)
-from shared import db, app
 from core.utils import get_hash_map, GetValue
 from core.languages import Languages
 import model.users
@@ -60,7 +59,6 @@ def core_before_request():
     - It's save variable db in the global variable "g"
 
     """
-    g.db = db
     g.my = None
     g.languages_object = Languages()
     # Get all the available languages
