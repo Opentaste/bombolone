@@ -157,13 +157,13 @@ python unit_test.py
 
 #### Js Unit/Integration Tests ####
 Before run the test, you need install some dependecies.
+Download and install Node from [http://nodejs.org/download/](http://nodejs.org/download/)
 ```shell
 # Install Nvm
-git clone https://github.com/creationix/nvm.git ~/.nvm
-source ~/.nvm/nvm.sh
+curl https://raw.githubusercontent.com/creationix/nvm/v0.11.1/install.sh | bash
 
-# Install Npm
-nvm install v0.10.29
+# Select Nvm
+nvm use v0.10.29
 
 # Installing all node packaged modules
 npm install

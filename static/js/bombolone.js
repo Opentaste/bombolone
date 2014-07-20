@@ -2,7 +2,8 @@
 
 
 /* Bombolone v4 */
-var host, path, protocol, qsa;
+var d, host, path, protocol, qsa;
+d = document;
 qsa = d.querySelectorAll.bind(d);
 protocol = window.location.protocol;
 host = window.location.host;
