@@ -192,29 +192,7 @@ def len_thing(context, key):
 def enumerate_thing(context, key):
     return enumerate(key)
 
-def date_time_format(value, format='%d-%m-%Y - %H:%M', localized=False):
-    if type(value) is unicode or type(value) is str:
-        return 'We need fix it'
-    
-    if localized:
-        utc_time = pytz.utc.localize(value)
-        if g.my:
-            nation = pytz.timezone(g.my['time_zone'])
-        else:
-            nation = pytz.timezone('Europe/Rome')
-        nation_time = utc_time.astimezone(nation)
-        return str(nation_time.day) + ' ' + dict_month[g.lan][nation_time.month] + ' ' + str(nation_time.year)
-    else:
-        return value.strftime(format)
-
-def split_word_format(value, letters=30):
-    if len(value) > (letters * 2):
-        return value[:letters] + '<br />' + value[letters:(letters*2)] + '<br />' + value[(letters*2):]
-    if len(value) > letters:
-        return value[:letters] + '<br />' + value[letters:]
-    return value
-
-# add some functions to jinja
+# Add some functions to jinja
 app.jinja_env.globals['sorted'] = contextfunction(sorted_thing)  
 app.jinja_env.globals['int'] = contextfunction(int_thing)   
 app.jinja_env.globals['str'] = contextfunction(str_thing) 
@@ -222,9 +200,6 @@ app.jinja_env.globals['unicode'] = contextfunction(unicode_thing)
 app.jinja_env.globals['type'] = contextfunction(type_thing) 
 app.jinja_env.globals['len'] = contextfunction(len_thing) 
 app.jinja_env.globals['enumerate'] = contextfunction(enumerate_thing) 
-
-app.jinja_env.filters['date'] = date_time_format
-app.jinja_env.filters['split_word'] = split_word_format
 app.jinja_env.filters['msg'] = msg_status
     
 if __name__ == '__main__':
