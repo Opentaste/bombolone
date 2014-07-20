@@ -25,7 +25,7 @@ manually from Apple's Developer site.
 ## Quick start
 Just for running a new app let's follow these 6 steps.
 ```shell
-# Clone the git repo in your new web app folder
+# Clone the latest stable version in your new web app folder
 git clone --branch 0.3.3 https://github.com/Opentaste/bombolone.git new_app && cd new_app
 
 # Run Mongodb

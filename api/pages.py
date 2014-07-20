@@ -9,7 +9,8 @@ pages.py
 from flask import Blueprint, request, g
 
 # Imports inside Bombolone
-from core.utils import jsonify, ensure_objectid
+import model.pages
+from core.utils import jsonify
 from core.pages import Pages
 from decorators import authentication, check_rank, get_hash
 
@@ -22,7 +23,7 @@ api_pages = Blueprint('api_pages', __name__)
 def overview():
     """ List all the documents, each has a name 
     that identifies it, and an hash map. """
-    page_list = list(g.db.pages.find().sort('name'))
+    page_list = model.pages.find(sorted_by='name')
     data = {
         "success": True,
         "page_list": page_list
@@ -36,7 +37,7 @@ def overview():
 def get():
     """ """
     _id = request.args.get("_id", None)
-    page = g.db.pages.find_one({ "_id": ensure_objectid(_id) })
+    page = model.pages.find(page_id=_id)
     data = {
         "success": True,
         "page": page
@@ -50,10 +51,8 @@ def get():
 def new():
     """ Create a new document within the hash table. """
     params = request.json
-
     page_object = Pages(params=params)
-    page_object.new()
-
+    page_object.new(my_rank=g.my['rank'])
     data = {
         "success": page_object.success,
         "message": page_object.message,
@@ -68,19 +67,15 @@ def new():
 def update():
     """ """
     params = request.json
-
     success = False
     message = ""
     page = {}
-
     if "_id" in params:
         page_object = Pages(params=params, _id=params["_id"])
         page_object.update()
-
         success = page_object.success
         message = page_object.message
         page = page_object.page
-
     data = {
         "success": success,
         "message": message,
@@ -96,11 +91,9 @@ def remove():
     :param _id: MongoDB ObjectId """
     _id = request.args.get("_id", None)
     page_object = Pages(_id=_id)
-
     success = False
     if _id:
         success = page_object.remove()
-
     data = {
         "success": success
     }

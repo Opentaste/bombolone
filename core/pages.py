@@ -11,6 +11,7 @@ from flask import Blueprint, g
 from bson import ObjectId
 
 # Imports inside bombolone
+import model.pages
 from core.utils import ensure_objectid
 from decorators import check_rank, get_hash
 from core.languages import Languages
@@ -49,11 +50,7 @@ class Pages(object):
         
     def get_page(self, _id):
         """ Get the user document from Database """
-        try:
-            _id = ObjectId(_id)
-            self.page = g.db.pages.find_one({ '_id' : _id })
-        except InvalidId:
-            self.page = {}
+        self.page = model.pages.find(page_id=_id)
             
     def reset(self):
         """ Reset user value in Pages.page"""
@@ -78,9 +75,9 @@ class Pages(object):
             self.page['description'][code] = ''
             self.page['content'][code] = []
         
-    def new(self):
+    def new(self, my_rank=100):
         """ Insert new page in the database """
-        if g.my['rank'] < 15:
+        if my_rank < 15:
             self.__request_first_block()
             
         self.__request_second_block()
@@ -88,14 +85,10 @@ class Pages(object):
         self.__request_values()
         
         if self.message is None:
-            try:
-                g.db.pages.insert(self.page)
-                self.success = True
-                self.status = 'msg msg-success'
-                self.message = g.pages_msg('success_update_page')
-            except PyMongoError:
-                self.message = g.pages_msg('error_mongo_new')
-                
+            model.pages.create(page=self.page)
+            self.success = True
+            self.status = 'msg msg-success'
+            self.message = g.pages_msg('success_update_page')
         return False
         
     def update(self):
@@ -108,13 +101,10 @@ class Pages(object):
         self.__request_values()
         
         if self.message is None:
-            try:
-                g.db.pages.update({ '_id' : ObjectId(self.page['_id']) }, self.page)
-                self.success = True
-                self.status = 'msg msg-success'
-                self.message = g.pages_msg('success_update_page')
-            except PyMongoError:
-                self.message = g.pages_msg('error_mongo_update')
+            model.pages.update(page_id=self.page['_id'], page=self.page)
+            self.success = True
+            self.status = 'msg msg-success'
+            self.message = g.pages_msg('success_update_page')
                 
         return False
         
@@ -123,11 +113,7 @@ class Pages(object):
         # It checks page _id exist and that
         # you have permission to remove that page
         if g.my['rank'] < 15:
-            try:
-                g.db.pages.remove({ '_id' : ensure_objectid(self.page["_id"]) })
-                return 'ok'
-            except PyMongoError:
-                return 'nada'
+            model.pages.remove(page_id=self.page["_id"])
         return 'nada'
         
     def __request_first_block(self):
@@ -148,7 +134,7 @@ class Pages(object):
             try:
                 new_name = str.lower(str(self.page['name']))
                 regx = re.compile('^'+new_name+'$', re.IGNORECASE)
-                available_name = g.db.pages.find_one({"name" : regx })
+                available_name = model.pages.find(name=regx, only_one=True)
             except:
                 available_name = 'Error invalid expression'
             
@@ -217,7 +203,7 @@ class Pages(object):
                     for code_two in self.languages:
                         field = "url_{}.{}".format(num_urls, code_two)
                         page_id = ensure_objectid(self.page["_id"]) if "_id" in self.page else None
-                        available_url = g.db.pages.find_one({ field: url_list, "_id": { "$ne": page_id } })
+                        available_url = model.pages.find(field=field, field_value=url_list, page_id_ne=page_id)
                     print available_url
                     
                     # Check that the url is a maximum of 200 characters
