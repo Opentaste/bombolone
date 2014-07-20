@@ -81,4 +81,7 @@ JS_FILES_STEP_TWO = ['/static/components/angular-resource/angular-resource.min.j
                      '/static/js/lib/angular-ui.min.js']
 
 # ~
+CSS_BOOTSTRAP = '/static/components/bootstrap/dist/css/bootstrap.css'
+
+# ~
 CSS_FONT_AWESOME = '/static/components/components-font-awesome/css/font-awesome.min.css'

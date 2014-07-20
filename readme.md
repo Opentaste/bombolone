@@ -93,7 +93,6 @@ Setting up the ruby environment
 gem update --system
 gem install compass
 gem install compass-h5bp
-gem install bootstrap-sass
 ```
 
 In a new tab with the same path run [Compass](http://compass-style.org/)

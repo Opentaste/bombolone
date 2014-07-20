@@ -69,4 +69,7 @@ JS_FILES_STEP_TWO = ['https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/ang
                      '/static/js/lib/angular-ui.min.js']
 
 # ~
+CSS_BOOTSTRAP = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'
+
+# ~
 CSS_FONT_AWESOME = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'

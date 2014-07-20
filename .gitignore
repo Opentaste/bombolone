@@ -23,3 +23,16 @@ npm-debug.log
 
 # Virtualenv
 venv
+
+# Bower
+static/components/**/.*
+static/components/**/bower.json
+static/components/**/README.md
+static/components/**/gruntfile.js
+static/components/**/LICENSE
+static/components/**/package.json
+static/components/bootstrap/fonts*
+static/components/bootstrap/grunt*
+static/components/bootstrap/js*
+static/components/bootstrap/less*
+static/components/jquery

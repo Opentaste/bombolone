@@ -13,7 +13,7 @@ from flask import session, g, request, current_app
 
 # Imports inside Bombolone
 from config import (DEBUG, ENV, JS_FILES_STEP_ONE, JS_FILES_STEP_TWO,
-                    NOTACTIVATED, CSS_FONT_AWESOME)
+                    NOTACTIVATED, CSS_BOOTSTRAP, CSS_FONT_AWESOME)
 from core.utils import get_hash_map, GetValue
 from core.languages import Languages
 import model.users
@@ -115,6 +115,7 @@ def core_context_processor():
     inject_object['url_path'] = request.path
     inject_object['js_files_step_one'] = JS_FILES_STEP_ONE
     inject_object['js_files_step_two'] = JS_FILES_STEP_TWO
+    inject_object['css_bootstrap'] = CSS_BOOTSTRAP
     inject_object['css_font_awesome'] = CSS_FONT_AWESOME
 
     # Create the name javascript files :
