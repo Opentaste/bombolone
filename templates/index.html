@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block header %}
+<header>
+  <img src="/static/layout/logo/bombolone_logo.png" alt="" />
+</header>
+{% endblock %}
+
+{% block main_content %}
+<div class="content">
+  {% block content %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer>
+  <p>
+    Copyright 2014
+    <a href="https://github.com/Opentaste/bombolone">Bombolone</a> All rights reserved.
+  </p>
+  <p>
+    {% for code, language in all_languages.iteritems() %}
+    <a href="/language/{{ code }}/" class="set_language {% if lan == code %}underline{% endif %}">
+      <i class="icon-{{ code }}"></i>{{ language }}
+    </a>
+    {% endfor %}
+  </p>
+  <p>
+    {% if my %} 
+    <a href="/admin/" title="">Admin</a>
+    <a href="/logout/" title="">Logout</a>
+    {% else %}
+    <a href="/login/" title="">Login</a>
+    {% endif %}
+  </p>
+</footer>
+{% endblock %}

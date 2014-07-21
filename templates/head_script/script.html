@@ -1,0 +1,44 @@
+<script>
+var app, bombolone, d, page;
+d = document;
+page = {};
+{% include "head_script/angular-loader.html" %}
+{% include "head_script/async-loader.html" %}  
+app = {
+  "my": {% if my %}true{% else %}false{% endif %},
+  "lan": "{{ lan }}",
+  "language": "{{ language }}",
+  "base_url": "{{ path }}",
+  "all_the_languages": {{ all_the_languages | safe }}
+};
+{% if data %}
+page = { 
+  "message_show": {{ "true" if data.message_show else "false" }},
+  "message_status": "{{ data.success | msg }}",
+  "message_message": "{{ data.message or '' | safe }}"
+}
+{% endif %}
+// Load all of the dependencies asynchronously.
+$script([
+  {% for item in js_files_step_one %}'{{ item }}',{% endfor %}
+  {% for item in js_files_step_two %}'{{ item }}',{% endfor %}
+], function() {
+  bombolone = angular.module("bombolone", [
+    'ngRoute', 
+    'ngResource', 
+    'ui',
+    'bombolone.services.api',
+    'bombolone.controllers.app',
+    {% block js_module_names %}{% endblock %}
+  ]);
+  $script([
+    "{{ '/static/js/%s' % js_version['bombolone'] }}",
+    "{{ '/static/js/%s' % js_version['services/api'] }}",
+    "{{ '/static/js/%s' % js_version['controllers/app'] }}",
+    {% block js_files %}{% endblock %}
+  ], function() {
+    // when all is done, execute bootstrap angular application
+    angular.bootstrap(document, ['bombolone']);
+  });
+});
+</script>

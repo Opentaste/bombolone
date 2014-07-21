@@ -2,34 +2,8 @@
 <html lang="{{ lan }}">
 <head>
   <meta charset="utf-8">
-  {% include "base_script.html" %}
-  <script>
-  // load all of the dependencies asynchronously.
-  $script([
-    {% for item in js_files_step_one %}'{{ item }}',{% endfor %}
-    {% for item in js_files_step_two %}'{{ item }}',{% endfor %}
-  ], function() {
-    bombolone = angular.module("bombolone", [
-      'ngRoute', 
-      'ngResource', 
-      'ui',
-      'bombolone.services.api',
-      'bombolone.controllers.app',
-      {% block js_module_names %}{% endblock %}
-    ]);
-    $script([
-      "{{ '/static/js/%s' % js_version['bombolone'] }}",
-      "{{ '/static/js/%s' % js_version['services/api'] }}",
-      "{{ '/static/js/%s' % js_version['controllers/app'] }}",
-      {% block js_files %}{% endblock %}
-    ], function() {
-      // when all is done, execute bootstrap angular application
-      angular.bootstrap(document, ['bombolone']);
-    });
-  });
-  </script>
-
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  {% include "head_script/script.html" %}
 
   <title>{% block all_title %}Bombolone | {% block title %} {{ title }} {% endblock %}{% endblock %}</title>
   <meta name="description" content="{% block description %} {{ description }} {% endblock %}">
@@ -42,35 +16,14 @@
 </head>
 <body ng-controller="AppCtrl">
 
-  <header>
-    <img src="/static/layout/logo/bombolone_logo.png" alt="" />
-  </header>
+  {% block header %}
+  {% endblock %}
 
-  <div class="content">
-    {% block content %}{% endblock %}
-  </div>
+  {% block main_content %}
+  {% endblock %}
 
-  <footer>
-    <p>
-      Copyright 2014
-      <a href="https://github.com/Opentaste/bombolone">Bombolone</a> All rights reserved.
-    </p>
-    <p>
-      {% for code, language in all_languages.iteritems() %}
-      <a href="/language/{{ code }}/" class="set_language {% if lan == code %}underline{% endif %}">
-        <i class="icon-{{ code }}"></i>{{ language }}
-      </a>
-      {% endfor %}
-    </p>
-    <p>
-      {% if my %} 
-      <a href="/admin/" title="">Admin</a>
-      <a href="/logout/" title="">Logout</a>
-      {% else %}
-      <a href="/login/" title="">Login</a>
-      {% endif %}
-    </p>
-  </footer>
+  {% block footer %}
+  {% endblock %}
 
   {% block js_code %} {% endblock %}
   {% block js_data %}{% endblock %}
