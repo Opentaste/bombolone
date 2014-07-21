@@ -1659,6 +1659,19 @@ a.thumbnail:hover {
   display: inline-block;
   margin: 0 4px 0 0;
 }
+.hash_table_tools .form-actions {
+  background-color: #F5F5F5;
+  border-top: 1px solid #DDDDDD;
+  margin-bottom: 18px;
+  margin-top: 18px;
+  padding: 17px 20px 18px;
+}
+.hash_table_tools .help-block {
+  margin-top: 49px;
+  margin-left: 187px;
+  margin-bottom: 0;
+  width: 49%;
+}
 
 .hash_add_label {
   margin-left: 20px;
@@ -1667,14 +1680,6 @@ a.thumbnail:hover {
 .hash_remove_label {
   float: right !important;
   padding: 0;
-}
-
-.hash_table_tools .form-actions {
-  background-color: #F5F5F5;
-  border-top: 1px solid #DDDDDD;
-  margin-bottom: 18px;
-  margin-top: 18px;
-  padding: 17px 20px 18px;
 }
 
 /* Pages =================================================================================== */

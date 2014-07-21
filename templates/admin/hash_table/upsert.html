@@ -44,7 +44,6 @@
           <span class="hash_add_label button button_right button-blu" ng-click="add_label()" data-test="add_label">+ Add new label</span>
           {% endif %}
         </div>
-
         <div class="control-group row-fluid" ng-repeat="(key, value) in hash_map.value | orderBy:value.key">
           {% if view %}
           <span class="span3 uneditable-input" ng-bind="value.key"></span>
@@ -59,6 +58,7 @@
           <span class="hash_remove_label button button_remove button-red span2" 
           ng-click="remove_label(key)" data-test="remove_label_[[ $index ]]">- Remove label</span>
           {% endif %}
+          <p class="help-block" ng-if="hash_table.lan != 'en'">en : <span ng-bind="value.en"></span></p>
         </div>
         
         <div class="form-actions">
