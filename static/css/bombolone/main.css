@@ -619,6 +619,13 @@ a.thumbnail:hover {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+.pages_table_tools .pages_field .help-block {
+  margin-top: 0;
+  margin-left: 2px;
+  margin-bottom: 0;
+  width: 75%;
+  display: inline-block;
+}
 
 .label_pages {
   margin-bottom: 20px;

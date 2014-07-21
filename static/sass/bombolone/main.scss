@@ -566,7 +566,17 @@ a.thumbnail:hover {
       width: 99.9%;
       -moz-box-sizing: border-box;
       -webkit-box-sizing: border-box;
-      box-sizing: border-box; } } }
+      box-sizing: border-box; 
+    } 
+    .help-block {
+      margin-top: 0;
+      margin-left: 2px;
+      margin-bottom: 0;
+      width: 75%;
+      display: inline-block;
+    }
+  } 
+}
 
 .label_pages {
   margin-bottom: 20px; }
