@@ -37,6 +37,7 @@ static/components/bootstrap/grunt*
 static/components/bootstrap/js*
 static/components/bootstrap/less*
 static/components/bootstrap/dist/js
+static/components/bootstrap/dist/css/bootstrap-theme*
 static/components/components-font-awesome/less
 static/components/components-font-awesome/scss
 static/components/jquery/
