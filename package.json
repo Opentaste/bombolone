@@ -12,7 +12,8 @@
     "karma-chrome-launcher": "^0.1.4",
     "karma-cli": "0.0.4",
     "karma-jasmine": "^0.1.5",
-    "karma-spec-reporter": "^0.0.13"
+    "karma-spec-reporter": "^0.0.13",
+    "protractor": "^0.24.2"
   },
   "scripts": {
     "test": "cd tests/js/unit/ && karma start --single-run --reporters spec"

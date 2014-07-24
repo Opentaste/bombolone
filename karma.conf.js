@@ -13,7 +13,7 @@ module.exports = function(config){
       'static/components/angular-mocks/angular-mocks.js',
       'static/js/*.js',
       'static/js/**/*.js',
-      'tests/js/unit/spec/*.js'
+      'tests/js/unit/specs/*.js'
     ],
 
     // preprocess matching files before serving them to the browser

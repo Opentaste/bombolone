@@ -162,10 +162,27 @@ Download and install Node from [http://nodejs.org/download/](http://nodejs.org/d
 curl https://raw.githubusercontent.com/creationix/nvm/v0.11.1/install.sh | bash
 
 # Select Nvm
-nvm use v0.10.29
+nvm alias default v0.10.29
 
 # Installing all node packaged modules
 npm install
+
+# Install Protractor global
+npm install -g protractor
+
+# Install Selenium
+webdriver-manager update
+```
+
+Run Unit tests
+```shell
+npm test
+```
+
+Run Integration tests
+```shell
+webdriver-manager start
+protractor conf.js
 ```
 
 
