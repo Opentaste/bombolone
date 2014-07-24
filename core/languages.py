@@ -81,13 +81,22 @@ class Languages(object):
     @property
     def available_lang_code(self):
         """ 
-        Get all available languages by a list of tuple.
+        Get all available languages code.
         Return [u'en', u'it']
 
         """
         names = self.get_all_lang_by_code(g.lang)
         list_languages = self.available_lang
         return [ x for x, y in sorted(names['value'].iteritems()) if x in list_languages ]
+
+    @property
+    def all_lang_code(self):
+        """ 
+        Get all languages code.
+        Return [u'en', ..., u'it']
+
+        """
+        return [ lang['code'] for lang in self.all_lang ]
 
     @property
     def all_lang_by_tuple(self):

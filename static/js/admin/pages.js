@@ -7,22 +7,7 @@ angular.module('bombolone.controllers.pages', [])
   "$rootScope", 
   "api",
   function($scope, $resource, $rootScope, api) {
-    var LANGUAGES, page_list, page_new, page_view, page_update, params;
-    LANGUAGES = {
-        "ru" : "",
-        "fr" : "",
-        "en" : "",
-        "cn" : "",
-        "pt" : "",
-        "no" : "",
-        "jp" : "",
-        "de" : "",
-        "tr" : "",
-        "it" : "",
-        "ar" : "",
-        "es" : "",
-        "gr" : ""
-    }
+    var page_list, page_new, page_view, page_update, params;
     $rootScope.admin_module = "pages";
     page_new = path.match(/^\/admin\/pages\/new\/?$/i);
     page_update = path.match(/^\/admin\/pages\/update\/([^\/]+)\/?$/i);
@@ -65,9 +50,9 @@ angular.module('bombolone.controllers.pages', [])
         "name": "",
         "from": "",
         "import": "",
-        "url": LANGUAGES,
-        "title": LANGUAGES,
-        "description": LANGUAGES,
+        "url": {},
+        "title": {},
+        "description": {},
         "content": [],
         "file": "",
         "labels": []
@@ -91,8 +76,8 @@ angular.module('bombolone.controllers.pages', [])
         "type": "text"
       };
       content_item = {
-        "alias": LANGUAGES,
-        "value": LANGUAGES
+        "alias": {},
+        "value": {}
       };
       $scope.page.labels.push(label_item);
       $scope.page.content.push(content_item);
@@ -110,7 +95,9 @@ angular.module('bombolone.controllers.pages', [])
         $scope.show_message(resource);
         $rootScope.page = resource.page;
         $scope.page_id = resource.page._id;
-        $scope.update = true;
+        if (resource.success) {
+          $scope.update = true;
+        }
       });
     };
     $scope.save = function() {

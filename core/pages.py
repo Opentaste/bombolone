@@ -191,19 +191,25 @@ class Pages(object):
         
         # Get URL, Title and Description in any languages
         for code in self.languages:
+            self.page['url'][code] = self.page['url'].get(code, '')
+            self.page['title'][code] = self.page['url'].get(code, '')
+            self.page['description'][code] = self.page['url'].get(code, '')
 
             if self.message is None:
                 error_in = ' ( ' + code + ' )'
                 
                 # If the url is changed
-                if old_url.get(code) != self.page['url'].get(code):
+                if old_url.get(code) != self.page['url'][code]:
                     url_list = self.__get_url_list(code)
                     num_urls = len(url_list)
                     
                     for code_two in self.languages:
                         field = "url_{}.{}".format(num_urls, code_two)
                         page_id = ensure_objectid(self.page["_id"]) if "_id" in self.page else None
-                        available_url = model.pages.find(field=field, field_value=url_list, page_id_ne=page_id)
+                        available_url = model.pages.find(field=field, 
+                                                         field_value=url_list, 
+                                                         page_id_ne=page_id,
+                                                         only_one=True)
                     print available_url
                     
                     # Check that the url is a maximum of 200 characters
@@ -217,12 +223,14 @@ class Pages(object):
                     
                     # Raises an error message if url is not available.
                     elif not available_url is None:
-                        self.message = g.pages_msg('error_b_4') + error_in
+                        name_page = available_url['name']
+                        error_where = '{0} in the "{1}" page'.format(error_in, name_page)
+                        self.message = g.pages_msg('error_b_4') + error_where 
                 else:
                     url_list = self.__get_url_list(code)
                     num_urls = len(url_list)
                 
-                if not self.message:
+                if self.message is None:
                     kind_of_url = 'url_{}'.format(num_urls)
                     if not kind_of_url in self.page:
                         self.page[kind_of_url] = {}
@@ -230,7 +238,7 @@ class Pages(object):
             
     def __request_content(self):
         """ """
-        form      = self.params
+        form = self.params
         self.page['labels'] = form["labels"]
         self.page['content'] = form["content"]
 
@@ -259,3 +267,74 @@ class Pages(object):
         if len(url) and url[-1] == '/':
             url_list.pop()
         return url_list
+
+
+def get(page_id=None):
+    """ """
+    if page_id is None:
+        errors = [{ "message": "Page id required" }]
+    elif not ensure_objectid(page_id):
+        errors = [{ "message": "Bad page id" }]
+    else:
+        page = model.pages.find(page_id=page_id)
+        if page:
+            return dict(success=True, page=page)
+        else:
+            errors = [{ "message": "Bad page id" }]        
+    return dict(success=False, errors=errors)
+
+def get_list(sorted_by='name'):
+    """Returns the pages list
+    """
+    page_list = model.pages.find(sorted_by='name')
+    if page_list:
+        return dict(success=True, page_list=page_list)
+    else:
+        errors = [{ "message": "Error" }]
+    return dict(success=False, errors=errors)
+
+def create(params=None, my_rank=100):
+    """ """
+    page_object = Pages(params=params)
+    page_object.new(my_rank=my_rank)
+    if page_object.success:
+        data = {
+            "success": True,
+            "message": page_object.message,
+            "page": page_object.page
+        }
+        return data
+    errors = [{ "message": page_object.message }]
+    return dict(success=False, errors=errors, page=page_object.page)
+
+def update(params=None):
+    """ """
+    page = {}
+    if not "_id" in params:
+        errors = [{ "message": "Page id required" }]
+    else:
+        page_object = Pages(params=params, _id=params["_id"])
+        page_object.update()
+        message = page_object.message
+        page = page_object.page
+        if page_object.success:
+            data = {
+                "success": True,
+                "message": message,
+                "page": page
+            }
+            return data
+        errors = [{ "message": message }]
+    return dict(success=False, errors=errors, page=page)
+
+def remove(page_id=None):
+    """ """
+    page_object = Pages(_id=page_id)
+    success = False
+    if _id:
+        success = page_object.remove()
+    if success:
+        data = dict(success=True)
+        return data
+    errors = [{ "message": "error" }] 
+    return dict(success=False, errors=errors)

@@ -28,12 +28,13 @@ Manages the users.
 """
 import re
 from datetime import datetime
-from flask import g
 from pymongo import ASCENDING, DESCENDING
 
 # Imports inside Bombolone
+import model.ranks
 from config import ACTIVATED
-from model_engine import db, db_engine
+from model import db
+from model_engine import db_engine
 from core.utils import ensure_objectid, is_iterable
 
 def find(user_id=None,
@@ -61,7 +62,7 @@ def find(user_id=None,
             return user
 
         if expand_rank:
-            user['rank_name'] = { x['rank'] : x['name'] for x in g.db.ranks.find() }[user['rank']]
+            user['rank_name'] = { x['rank'] : x['name'] for x in model.ranks.find() }[user['rank']]
 
         # Data we want to show to our Soft Eng or the private user
         if isinstance(my_rank, int) and my_rank <= 70:

@@ -7,7 +7,8 @@ model.pages.py
 :license: BSD (See LICENSE for details)
 """
 # Imports inside Bombolone
-from model_engine import db, db_engine
+from model import db
+from model_engine import db_engine
 from core.utils import ensure_objectid, is_iterable
 
 def find(page_id=None,
@@ -35,7 +36,7 @@ def find(page_id=None,
         conditions.append({field: field_value})
 
     if page_id_ne:
-        conditions.append({'_id': { "$ne": page_id_ne }})
+        conditions.append({'_id': { "$ne": ensure_objectid(page_id_ne) }})
 
     return db_engine(collection=db.pages, 
                      item_id=page_id,

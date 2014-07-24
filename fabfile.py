@@ -16,7 +16,7 @@ import hashlib
 import shutil
 from fabric.api import settings, run, env, cd, lcd, local, sudo
 try:
-    from model.model_engine import db
+    from model import db
 except:
     db = None
 from config import DATABASE

@@ -24,7 +24,7 @@ def get_page_content(code_lan, num_of_path, path):
     url = "url_{}.{}".format(num_of_path, code_lan)
 
     # Create a list of pages
-    list_pages = [ page for page in model.pages.find(url={ "$exists" : True })]
+    list_pages = [ page for page in model.pages.find(field=url, field_value={ "$exists" : True })]
     for page in list_pages:
         count  = 0
 

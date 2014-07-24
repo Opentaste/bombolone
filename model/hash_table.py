@@ -30,7 +30,8 @@ Manages the hash_table.
 :license: BSD (See LICENSE for details)
 """
 # Imports inside Bombolone
-from model_engine import db, db_engine
+from model import db
+from model_engine import db_engine
 from core.utils import ensure_objectid
 
 def find(hash_table_id=None,

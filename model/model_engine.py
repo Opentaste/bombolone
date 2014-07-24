@@ -12,21 +12,6 @@ from pymongo import ASCENDING, DESCENDING
 from config import PORT_DATABASE, DATABASE
 from core.utils import ensure_objectid, is_iterable
 
-from pymongo import Connection
-from pymongo.errors import PyMongoError
-
-# Create db - The first step when working with PyMongo is to create
-# a Connection to the running mongod instance.
-try:
-	if PORT_DATABASE:
-		connection = Connection(port=PORT_DATABASE)
-	else:
-		connection = Connection()
-	db = connection[DATABASE]
-except PyMongoError, e:
-	db = None
-	print 'Error Database connection at PORT : {}'.format(PORT_DATABASE)
-
 def denormalize(item):
 	""" """
 	return item

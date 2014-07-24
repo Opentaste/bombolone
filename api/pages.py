@@ -9,8 +9,8 @@ pages.py
 from flask import Blueprint, request, g
 
 # Imports inside Bombolone
-import model.pages
-from core.utils import jsonify
+import core.pages
+from core.utils import jsonify, set_message
 from core.pages import Pages
 from decorators import authentication, check_rank, get_hash
 
@@ -23,11 +23,8 @@ api_pages = Blueprint('api_pages', __name__)
 def overview():
     """ List all the documents, each has a name 
     that identifies it, and an hash map. """
-    page_list = model.pages.find(sorted_by='name')
-    data = {
-        "success": True,
-        "page_list": page_list
-    }
+    data = core.pages.get_list(sorted_by='name')
+    data = set_message(data)
     return jsonify(data)
 
 @api_pages.route('/api/1.0/pages/get.json')
@@ -36,12 +33,9 @@ def overview():
 @get_hash('pages')
 def get():
     """ """
-    _id = request.args.get("_id", None)
-    page = model.pages.find(page_id=_id)
-    data = {
-        "success": True,
-        "page": page
-    }
+    page_id = request.args.get("_id", None)
+    data = core.pages.get(page_id=page_id)
+    data = set_message(data)
     return jsonify(data)
 
 @api_pages.route('/api/1.0/pages/create.json', methods=['POST'])
@@ -51,13 +45,8 @@ def get():
 def new():
     """ Create a new document within the hash table. """
     params = request.json
-    page_object = Pages(params=params)
-    page_object.new(my_rank=g.my['rank'])
-    data = {
-        "success": page_object.success,
-        "message": page_object.message,
-        "page": page_object.page
-    }
+    data = core.pages.create(params=params, my_rank=g.my['rank'])
+    data = set_message(data)
     return jsonify(data)
 
 @api_pages.route('/api/1.0/pages/update.json', methods=['POST'])
@@ -67,20 +56,8 @@ def new():
 def update():
     """ """
     params = request.json
-    success = False
-    message = ""
-    page = {}
-    if "_id" in params:
-        page_object = Pages(params=params, _id=params["_id"])
-        page_object.update()
-        success = page_object.success
-        message = page_object.message
-        page = page_object.page
-    data = {
-        "success": success,
-        "message": message,
-        "page": page
-    }
+    data = core.pages.update(params=params)
+    data = set_message(data)
     return jsonify(data)
 
 @api_pages.route('/api/1.0/pages/remove.json')
@@ -89,12 +66,7 @@ def update():
 def remove():
     """ This method removes an hash map.
     :param _id: MongoDB ObjectId """
-    _id = request.args.get("_id", None)
-    page_object = Pages(_id=_id)
-    success = False
-    if _id:
-        success = page_object.remove()
-    data = {
-        "success": success
-    }
+    page_id = request.args.get("_id", None)
+    data = core.pages.remove(page_id=page_id)
+    data = set_message(data)
     return jsonify(data) 

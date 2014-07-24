@@ -109,7 +109,7 @@ If you find trouble to installing Fabric, you can check this [page](http://www.f
 
 ```shell
 pip install fabric
-pip install yuicompressor
+sudo pip install yuicompressor
 ```
 
 Available commands:

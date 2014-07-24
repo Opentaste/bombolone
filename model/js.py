@@ -9,7 +9,8 @@ Manages the js.
 :license: BSD (See LICENSE for details)
 """
 # Imports inside Bombolone
-from model_engine import db, db_engine
+from model import db
+from model_engine import db_engine
 
 def find(file_name=None,
          only_one=False):
