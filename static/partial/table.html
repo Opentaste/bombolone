@@ -28,7 +28,7 @@
   <tbody ng-if="table.type.hash_table"> 
     <tr ng-repeat="item in itemsList | orderBy:sortTable">
       <td>
-        <a href="/admin/hash_table/update/[[ item._id ]]/">[[ item.name ]]</a>
+        <a href="/admin/hash-table/update/[[ item._id ]]/">[[ item.name ]]</a>
       </td>
       <td ng-bind="item.sum"></td> 
       <td ng-if="admin">

@@ -157,6 +157,7 @@ python unit_test.py
 #### Js Unit/Integration Tests ####
 Before run the test, you need install some dependecies.
 Download and install Node from [http://nodejs.org/download/](http://nodejs.org/download/)
+If you never use Protractor before you can have a quick intro [here](http://ramonvictor.github.io/protractor/slides/#/).
 ```shell
 # Install Nvm
 curl https://raw.githubusercontent.com/creationix/nvm/v0.11.1/install.sh | bash
@@ -179,12 +180,17 @@ Run Unit tests
 npm test
 ```
 
-Run Integration tests
+Run Integration tests not log in
 ```shell
 webdriver-manager start
 protractor conf.js
 ```
 
+Run Integration tests as admin
+```shell
+webdriver-manager start
+protractor conf.js --params.admin true --params.login.user 'admin' --params.login.password 'admin123'
+```
 
 ## Who we are
 

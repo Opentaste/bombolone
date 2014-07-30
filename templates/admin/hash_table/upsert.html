@@ -48,8 +48,7 @@
           {% if view %}
           <span class="span3 uneditable-input" ng-bind="value.key"></span>
           {% else %}
-          <input type="text" ng-model="value.key" class="span3 name_key" 
-          maxlength="30" data-test="key-[[ $index ]]">
+          <input type="text" ng-model="value.key" class="span3 name_key" maxlength="30">
           {% endif %}
           <textarea ng-repeat="(code, val) in value" class="{% if view %}span9{% else %}span6{% endif %}" 
           ng-show="hash_table.lan == code" ng-model="value[hash_table.lan]"

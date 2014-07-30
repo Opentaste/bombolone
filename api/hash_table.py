@@ -13,7 +13,7 @@ from flask import Blueprint, request, g
 
 # Imports inside Bombolone
 import core.hash_table
-from core.utils import jsonify
+from core.utils import jsonify, set_message
 from decorators import get_hash, authentication, check_rank
 
 MODULE_DIR = 'admin/hash_table'
@@ -27,6 +27,7 @@ def overview():
     """ List all the documents, each has a name
     that identifies it, and an hash map. """
     data = core.hash_table.get_list()
+    data = set_message(data)
     return jsonify(data)
 
 @api_hash_table.route('/api/1.0/hash_table/get.json')
@@ -37,6 +38,7 @@ def get():
     """ """
     _id = request.args.get("_id", None)
     data = core.hash_table.get(_id)
+    data = set_message(data)
     return jsonify(data)
 
 @api_hash_table.route('/api/1.0/hash_table/new.json', methods=['POST'])
@@ -47,6 +49,7 @@ def new():
     """ Create a new document within the hash table. """
     params = request.json
     data = core.hash_table.new(params=params)
+    data = set_message(data)
     return jsonify(data)
 
 @api_hash_table.route('/api/1.0/hash_table/remove.json', methods=['DELETE'])
@@ -56,6 +59,7 @@ def remove():
     """ This method removes an hash map"""
     _id = request.args.get("_id", None)
     data = core.hash_table.remove(_id=_id)
+    data = set_message(data)
     return jsonify(data)
 
 @api_hash_table.route('/api/1.0/hash_table/update.json', methods=['POST'])
@@ -66,4 +70,5 @@ def update():
     """ """
     params = request.json
     data = core.hash_table.update(params=params, my_rank=g.my['rank'])
+    data = set_message(data)
     return jsonify(data)

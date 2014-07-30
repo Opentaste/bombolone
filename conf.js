@@ -13,23 +13,29 @@ exports.config = {
     'browserName': 'chrome'
   },
 
-  // Spec patterns are relative to the current working directly when
-  // protractor is called.
-  specs: ['tests/js/e2e/specs/*.js'],
+  suites: {
+    admin: 'tests/js/e2e/admin.js',
+    adminHashTable: 'tests/js/e2e/admin-hash-table.js',
+    adminLanguages: 'tests/js/e2e/admin-languages.js',
+    home: 'tests/js/e2e/home.js',
+  },
 
   baseUrl: 'http://0.0.0.0:5000',
 
   // Options to be passed to Jasmine-node.
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000
+    defaultTimeoutInterval: 30000,
+    isVerbose: true
   },
 
-  onPrepare: function() {
-    browser.driver.get('http://0.0.0.0:5000/login/');
-
-    browser.driver.findElement(by.name('username')).sendKeys(admin.username);
-    browser.driver.findElement(by.name('password')).sendKeys(admin.password);
-    browser.driver.findElement(by.id('submit')).click();
+  // This can be changed via the command line as:
+  // --params.login.user 'ngrocks'
+  params: {
+    admin: false,
+    login: {
+      user: 'username',
+      password: 'password' 
+    }
   }
 };

@@ -39,40 +39,40 @@
   <div class="span3">
     <ul class="nav nav-tabs nav-stacked">
       <li>
-        <a {% block nav_active_1 %}{% endblock %} 
+        <a {% block nav_active_1 %}{% endblock %} data-test="menu-left-1"
         href="{{ url_for('admin.dashboard') }}" title="" >Dashboard</a>
       </li>
       <li>
-        <a {% block nav_active_6 %}{% endblock %} 
+        <a {% block nav_active_6 %}{% endblock %} data-test="menu-left-2"
         href="{{ url_for('pages.index') }}" title="" >Pages</a>
       </li>
       {% if g.my['rank'] < 15 %}
       <li>
-        <a {% block nav_active_2 %}{% endblock %}
+        <a {% block nav_active_2 %}{% endblock %} data-test="menu-left-3"
         href="{{ url_for('users.index') }}" title="" >Users</a>
       </li>
       <li>
-        <a {% block nav_active_3 %}{% endblock %}
+        <a {% block nav_active_3 %}{% endblock %} data-test="menu-left-4"
         href="{{ url_for('rank.index') }}" title="" >Rank</a>
       </li>
       <li>
-        <a {% block nav_active_4 %}{% endblock %}
+        <a {% block nav_active_4 %}{% endblock %} data-test="menu-left-5"
         href="{{ url_for('languages.index') }}" title="" >Languages</a>
       </li>
       <li>
-        <a {% block nav_active_5 %}{% endblock %}
+        <a {% block nav_active_5 %}{% endblock %} data-test="menu-left-6"
         href="{{ url_for('hash_table.index') }}" title="" >Hash Table</a>
       </li>
       {% endif %}
-    </ul><!-- .nav -->
-  </div><!-- .span3 -->
+    </ul>
+  </div>
 
   <div class="span9">
     <div class="content_right" ng-controller="AdminCtrl">
       {% block admin %}
       {% endblock %}
       {% include "admin/remove_item.html" %}
-    </div><!-- .content_right -->
+    </div>
   </div>
 </section>
 {% endblock %}

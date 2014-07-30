@@ -13,10 +13,10 @@ angular.module('bombolone.controllers.hashTable', [])
     params, __get_value, _init_hash_table;
 
     $rootScope.admin_module = "hash_table";
-    hash_table_overview = path.match(/^\/admin\/hash_table\/overview\/?$/i);
-    hash_table_index = path.match(/^\/admin\/hash_table\/?$/i);
-    hash_table_new = path.match(/^\/admin\/hash_table\/new\/?$/i);
-    hash_table_update = path.match(/^\/admin\/hash_table\/update\/([^\/]+)\/?$/i);
+    hash_table_overview = path.match(/^\/admin\/hash-table\/overview\/?$/i);
+    hash_table_index = path.match(/^\/admin\/hash-table\/?$/i);
+    hash_table_new = path.match(/^\/admin\/hash-table\/new\/?$/i);
+    hash_table_update = path.match(/^\/admin\/hash-table\/update\/([^\/]+)\/?$/i);
     $scope.menu_language = false;
     $scope.show_hash_map_list = false;
     $scope.hash_map_id = "";

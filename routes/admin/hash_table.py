@@ -17,7 +17,7 @@ from decorators import get_hash, check_rank, get_hash
 MODULE_DIR = 'admin/hash_table'
 hash_table = Blueprint('hash_table', __name__)
 
-@hash_table.route('/admin/hash_table/')
+@hash_table.route('/admin/hash-table/')
 @check_rank(10) 
 @get_hash('hash_table')
 @get_hash('admin')
@@ -29,8 +29,8 @@ def index():
     return render_template('{}/index.html'.format(MODULE_DIR), **locals())
 
 
-@hash_table.route('/admin/hash_table/new/')
-@hash_table.route('/admin/hash_table/update/<_id>/')
+@hash_table.route('/admin/hash-table/new/')
+@hash_table.route('/admin/hash-table/update/<_id>/')
 @check_rank(10)
 @get_hash('hash_table')
 @get_hash('admin')
@@ -40,7 +40,7 @@ def upsert(_id=None):
     return render_template('{}/upsert.html'.format(MODULE_DIR), **locals())
 
 
-@hash_table.route('/admin/hash_table/view/<_id>/')
+@hash_table.route('/admin/hash-table/view/<_id>/')
 @check_rank(10)
 @get_hash('hash_table')
 @get_hash('admin')
