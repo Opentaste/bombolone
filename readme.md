@@ -38,7 +38,7 @@ virtualenv venv && . venv/bin/activate
 pip install -r REQUIREMENTS.txt
 
 # Init Bombolone Mongodb
-mongorestore --db new_app --drop data/backup/mongodb/2014-07-20/bombolone
+mongorestore --db new_app --drop data/backup/mongodb/2014-07-29/bombolone
 
 # Run Bombolone 
 python app.py
