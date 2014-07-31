@@ -3,48 +3,30 @@
 {% block title %} {{ g.languages.title }} {% endblock %}
 
 {% block nav_active_4 %}class="active"{% endblock %}
+{% block ng_section %}ng-controller="LanguagesCtrl"{% endblock %}
 
 {% block admin %}
 <h2>{{ g.languages.name }}</h2>
 {% include "error/message_old.html" %}
-<form action="{{ url_for('languages.index') }}" method="post" >
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        {% if my.rank < 15 %}
-        <th style="width:5%;"></th>
-        {% endif %}
-        <th style="width:15%;">{{ g.languages.code }}</th>
-        <th style="width:40%;">{{ g.languages.language }}</th>
-        <th style="width:40%;">_id</th>
-      </tr>
-    </thead>
-    <tfoot>
-      <tr>
-        <td colspan="4"></td>
-      </tr>
-    </tfoot>
-    <tbody>
-      {% for i, language in enumerate(languages_list) %}
-      <tr>
-        {% if my.rank < 15 %}
-        <td>
-          <input type="checkbox" name="{{ language['code'] }}" 
-          {% if language['code'] == lan %} disabled="disabled" {% endif %}
-          {% if language['check'] %} checked="checked" {% endif %}>
-        </td>
-        {% endif %}
-        <td>{{ language['code'] }}</td>
-        <td>{{ language_chosen['value'][language['code']] }}</td>
-        <td>{{ language['_id'] }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% if my.rank < 15 %}
-  <div>
-    <button tabindex="20" type="submit" class="button button-submit"> {{ g.admin['save'] }}</button>
-  </div>
-  {% endif %}
-</form>
+
+{% if my.rank < 15 %}
+<a href="/admin/languages/new/" title="" class="btn btn-primary">{{ g.languages.create }}</a>
+{% endif %}
+
+<table table-admin table-type="languages" table-list="items_list" on-remove="remove"></table>
+
+{% if my.rank < 15 %}
+<div>
+  <button tabindex="20" type="submit" class="btn btn-primary" 
+  on-click="">{{ g.admin['save'] }}</button>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block js_module_names %}
+  'bombolone.controllers.languages',
+{% endblock %}
+
+{% block js_module_files %}
+  "{{ '/static/js/%s' % js_version['admin/languages'] }}",
 {% endblock %}

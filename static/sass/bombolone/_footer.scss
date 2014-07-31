@@ -1,0 +1,15 @@
+@import "compass";
+@import "partials/palette";
+
+/* Footer ================================================================================== */
+footer {
+  border-top: 4px double #DEDEDE;
+  margin: 30px auto 0;
+  padding: 20px;
+  text-align: center;
+  width: 940px;
+  p {
+    opacity: 0.6;
+    filter: alpha(opacity = 60); 
+  } 
+}

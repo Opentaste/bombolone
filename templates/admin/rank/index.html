@@ -10,7 +10,7 @@
   <h2>{{ g.rank.title }}</h2>
   <br />
   {% if my.rank < 15 %}
-  <a href="/admin/rank/new/" title="" class="button button-blu">{{ g.rank.create_rank }}</a>
+  <a href="/admin/rank/new/" title="" class="btn btn-primary">{{ g.rank.create_rank }}</a>
   {% endif %}
   <table table-admin table-type="ranks" table-list="items_list" on-remove="remove"></table>
   {% include "error/loader.html" %}

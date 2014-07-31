@@ -1,0 +1,39 @@
+@import "compass";
+@import "partials/palette";
+
+/* =============================================================================
+Login style
+============================================================================= */
+.login {
+  min-height: 260px;
+  padding: 5px 0 28px;
+  text-align: center;
+
+  h1 {
+    color: #363636;
+    font-size: 2em;
+    margin: 4px 0 8px 0; 
+  }
+  section {
+    &.login_social {
+      text-align: left;
+      float: left;
+      height: 160px;
+      margin: 0 0 0 100px;
+      padding: 0 30px;
+      width: 290px; }
+    &.login_classic {
+      text-align: left;
+      float: left;
+      height: 160px;
+      margin: 0 0 0 100px;
+      padding: 0 30px;
+      width: 290px;
+      border-left: 4px double rgba(0, 0, 0, 0.1);
+      margin: 0 0 0 0; 
+    } 
+  }
+  .submit {
+    float: right; 
+  }
+}

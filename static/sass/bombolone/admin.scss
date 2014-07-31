@@ -1,5 +1,4 @@
 @import "compass";
-@import "h5bp";
 
 /* =============================================================================
 Main layout style
@@ -25,8 +24,8 @@ body {
   visibility: none;
 }
 
-
-@import "old_bootstrap";
+@import "header";
 @import "main";
+@import "footer";
 @import "login";
 

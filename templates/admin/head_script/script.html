@@ -1,0 +1,22 @@
+<script>
+var app, bombolone, d, page;
+d = document;
+page = {};
+{% include "head_script/angular-loader.html" %}
+{% include "head_script/async-loader.html" %}  
+app = {
+  "my": {% if my %}true{% else %}false{% endif %},
+  "lan": "{{ lan }}",
+  "language": "{{ language }}",
+  "base_url": "{{ path }}",
+  "all_the_languages": {{ all_the_languages | safe }},
+  "rank": {{ rank }}
+};
+{% if data %}
+page = { 
+  "message_show": {{ "true" if data.message_show else "false" }},
+  "message_status": "{{ data.success | msg }}",
+  "message_message": "{{ data.message or '' | safe }}"
+}
+{% endif %}
+</script>

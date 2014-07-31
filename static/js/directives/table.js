@@ -37,6 +37,7 @@ angular.module('bombolone.directives.table', [])
           sortBy: [],
           type: {
             hash_table: false,
+            languages: false,
             ranks: false,
             users: false,
             items: true
@@ -55,6 +56,20 @@ angular.module('bombolone.directives.table', [])
             scope.table.headWidth = ["55", "45"];
             scope.table.head = ["name", "number"];
             scope.table.sortBy = ["name", "number"];
+          }
+
+        } else if (scope.tableType === "languages") {
+          scope.table.type.languages = true;
+          scope.table.type.items = false;
+          if (app.rank < 15) {
+            scope.table.admin = true;
+            scope.table.headWidth = ["5", "15", "35", "40"];
+            scope.table.head = ["", "code", "language", "_id"];
+            scope.table.sortBy = ["", "code", "language", "_id"];
+          } else {
+            scope.table.headWidth = ["15", "40", "40"];
+            scope.table.head = ["code", "language", "_id"];
+            scope.table.sortBy = ["code", "language", "_id"];
           }
 
         } else if (scope.tableType === "ranks") {

@@ -10,7 +10,7 @@
   <h2>{{ g.hash_table.name }}</h2>
   <br />
   {% if my.rank < 15 %}
-  <a href="/admin/hash_table/new/" title="" class="button button-blu">{{ g.hash_table.add_new_hash_map }}</a>
+  <a href="/admin/hash_table/new/" title="" class="btn btn-primary">{{ g.hash_table.add_new_hash_map }}</a>
   {% endif %}
   <table table-admin table-type="hash-table" table-list="items_list" on-remove="remove"></table>
   {% include "error/loader.html" %}

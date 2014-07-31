@@ -26,18 +26,17 @@ def index():
     """ 
     Overview and tool update of all languages supported!
     """
-    # Update the list of languages allowed on the site, 
-    # except for the language used by your users at that time.
-    if request.method == 'POST':
-        lan_object = Languages()
-        lan_object.update()
-        message = lan_object.message
-        status = lan_object.status
-    
-    # Gets documents from the collections of all languages 
-    languages_list = g.languages_object.all_lang
-    language_chosen = g.languages_object.get_all_lang_by_code(g.lang)
     return render_template( '{}/index.html'.format(MODULE_DIR), **locals())
+
+
+@languages.route('/admin/languages/new/')
+@languages.route('/admin/languages/update/<language_id>/')
+@check_rank(10)
+@get_hash('languages')
+@get_hash('admin')
+def upsert(language_id=None):
+    """ Upsert """   
+    return render_template('{}/upsert.html'.format(MODULE_DIR))
 
 
 @languages.route('/language/<lan>/')

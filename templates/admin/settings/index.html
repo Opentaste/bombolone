@@ -3,7 +3,7 @@
 {% block content %}
 <section class="row">
 
-  <div class="span3">
+  <div class="col-md-3">
     <ul class="nav nav-tabs nav-stacked">
       <li>
         <a href="{{ url_for('settings.profile') }}" 
@@ -19,7 +19,7 @@
       </li>
     </ul>
   </div>
-  <div class="span9">
+  <div class="col-md-9">
     <div class="settings">
       {% block settings %}
       {% endblock %}

@@ -39,6 +39,22 @@
     </tr>
   </tbody>
 
+  <tbody ng-if="table.type.languages"> 
+    <tr ng-repeat="item in itemsList | orderBy:sortTable">
+      <td ng-if="admin">
+        <input type="checkbox" name="[[ item.code ]]" ng-model="item.check">
+      </td>
+      <td><a href="/admin/languages/update/[[ item._id ]]/">[[ item.code ]]</a></td>
+      <td>[[ item.name ]]</td>
+      <td>[[ item._id ]]</td>
+      <td ng-if="admin">
+        <span class="button button-remove" ng-click="remove(item._id)">
+          <i class="fa fa-times"></i>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+
   <tbody ng-if="table.type.ranks"> 
     <tr ng-repeat="item in itemsList | orderBy:sortTable"> 
       <td>

@@ -3,7 +3,7 @@
 {% block header %}
 <header>
   <nav>
-    <a href="/" title="" class="brand">
+    <a href="/" title="">
       <img src="/static/layout/admin/bombolone_header.png" alt="" />
     </a>
     <ul class="nav pull-right header-tabs">
@@ -36,7 +36,7 @@
 
 {% block content %}
 <section class="row" {% block ng_section %}{% endblock %}>
-  <div class="span3">
+  <div class="col-md-3">
     <ul class="nav nav-tabs nav-stacked">
       <li>
         <a {% block nav_active_1 %}{% endblock %} data-test="menu-left-1"
@@ -67,7 +67,7 @@
     </ul>
   </div>
 
-  <div class="span9">
+  <div class="col-md-9">
     <div class="content_right" ng-controller="AdminCtrl">
       {% block admin %}
       {% endblock %}

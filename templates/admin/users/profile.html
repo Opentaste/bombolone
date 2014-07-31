@@ -13,13 +13,13 @@
 <div class="control-group">
   <label>{{ g.users.web }}</label>
   <div class="controls">
-    <input ng-model="user.web" type="text" class="span4" maxlength="200" data-test="web">
+    <input ng-model="user.web" type="text" class="col-md-4" maxlength="200" data-test="web">
   </div>
 </div>
 <div class="control-group">
   <label>{{ g.users.description }}</label>
   <div class="controls">
-    <textarea ng-model="user.description" maxlength="200" class="span4" cols="10" rows="3"></textarea>
+    <textarea ng-model="user.description" maxlength="200" class="col-md-4" cols="10" rows="3"></textarea>
     <span class="word-count" ng-bind="200 - user.description.length">200</span>
   </div>
 </div>

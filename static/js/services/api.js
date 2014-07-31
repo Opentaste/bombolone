@@ -7,55 +7,60 @@ angular.module('bombolone.services.api', [])
   "$resource", 
   "$http", 
   function($rootScope, $resource, $http) {
-    var api, request_with_credentials, get_resource_by_credentials, 
-    get_resource;
+    var api, requestWithCredentials, getResourceByCredentials, 
+    getResource;
 
-    request_with_credentials = {
+    requestWithCredentials = {
       'get': { method: "GET" },
       'post': { method: "POST" },
       'remove': { method: "DELETE" }
     };
     
-    $rootScope.request_with_token = request_with_credentials;
+    $rootScope.request_with_token = requestWithCredentials;
 
-    get_resource_by_credentials = function(url) {
-      return $resource($rootScope.API + url, {}, request_with_credentials);
+    getResourceByCredentials = function(url) {
+      return $resource($rootScope.API + url, {}, requestWithCredentials);
     };
 
-    get_resource = function(url) {
+    getResource = function(url) {
       return $resource($rootScope.API + url, {});
     };
 
     api = {
       // Account API
-      accountUpdate: get_resource_by_credentials("/account/update.json"),
-      accountUpdateProfile: get_resource_by_credentials("/account/update_profile.json"),
-      accountUpdateAccount: get_resource_by_credentials("/account/update_account.json"),
-      accountUpdatePassword: get_resource_by_credentials("/account/update_password.json"),
+      accountUpdate: getResourceByCredentials("/account/update.json"),
+      accountUpdateProfile: getResourceByCredentials("/account/update_profile.json"),
+      accountUpdateAccount: getResourceByCredentials("/account/update_account.json"),
+      accountUpdatePassword: getResourceByCredentials("/account/update_password.json"),
 
       // Hash Table API
-      hashTableList: get_resource_by_credentials("/hash_table/list.json"),
-      hashTableNew: get_resource_by_credentials("/hash_table/new.json"),
-      hashTableGet: get_resource_by_credentials("/hash_table/get.json"),
-      hashTableUpdate: get_resource_by_credentials("/hash_table/update.json"),
+      hashTableList: getResourceByCredentials("/hash_table/list.json"),
+      hashTableGet: getResourceByCredentials("/hash_table/get.json"),
+      hashTableNew: getResourceByCredentials("/hash_table/new.json"),
+      hashTableUpdate: getResourceByCredentials("/hash_table/update.json"),
 
       // Lanugages API 
-      languagesChange: get_resource("/languages/change.json"),
+      languagesChange: getResource("/languages/change.json"),
+      languageList: getResourceByCredentials("/languages/list.json"),
+      languageGet: getResourceByCredentials("/languages/get.json"),
+      languageNew: getResourceByCredentials("/languages/new.json"),
+      languageCreate: getResourceByCredentials("/languages/create.json"),
+      languageUpdate: getResourceByCredentials("/languages/update.json"),
 
       // Pages API
-      pagesList: get_resource_by_credentials("/pages/list.json"),
-      pagesGet: get_resource_by_credentials("/pages/get.json"),
-      pagesCreate: get_resource_by_credentials("/pages/create.json"),
-      pagesUpdate: get_resource_by_credentials("/pages/update.json"),
+      pagesList: getResourceByCredentials("/pages/list.json"),
+      pagesGet: getResourceByCredentials("/pages/get.json"),
+      pagesCreate: getResourceByCredentials("/pages/create.json"),
+      pagesUpdate: getResourceByCredentials("/pages/update.json"),
 
       // Rank API
-      rankShow: get_resource_by_credentials("/rank/show.json"),
-      rankCreate: get_resource_by_credentials("/rank/create.json"),
-      rankUpdate: get_resource_by_credentials("/rank/update.json"),
+      rankShow: getResourceByCredentials("/rank/show.json"),
+      rankCreate: getResourceByCredentials("/rank/create.json"),
+      rankUpdate: getResourceByCredentials("/rank/update.json"),
 
       // User API
-      usersList: get_resource_by_credentials("/users/list.json"),
-      usersNew: get_resource_by_credentials("/users/new.json"),
+      usersList: getResourceByCredentials("/users/list.json"),
+      usersNew: getResourceByCredentials("/users/new.json"),
     };
 
     return api;

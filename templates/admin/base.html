@@ -2,27 +2,8 @@
 <html lang="{{ lan }}">
 <head>
   <meta charset="utf-8">
+  {% include "admin/head_script/script.html" %}  
   <script>
-  var app, bombolone, d, page;
-  d = document;
-  page = {};
-  {% include "head_script/angular-loader.html" %}
-  {% include "head_script/async-loader.html" %}  
-  app = {
-    "my": {% if my %}true{% else %}false{% endif %},
-    "lan": "{{ lan }}",
-    "language": "{{ language }}",
-    "base_url": "{{ path }}",
-    "all_the_languages": {{ all_the_languages | safe }}
-  };
-  {% if data %}
-  page = { 
-    "message_show": {{ "true" if data.message_show else "false" }},
-    "message_status": "{{ data.success | msg }}",
-    "message_message": "{{ data.message or '' | safe }}"
-  }
-  {% endif %}
-  // Load all of the dependencies asynchronously.
   $script([
     {% for item in js_files_step_one %}'{{ item }}',{% endfor %}
     {% for item in js_files_step_two %}'{{ item }}',{% endfor %}
@@ -46,12 +27,12 @@
     });
   });
   </script>
-
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
   <title>{% block all_title %}Bombolone | {% block title %} {{ title }} {% endblock %}{% endblock %}</title>
   <meta name="description" content="{% block description %} {{ description }} {% endblock %}">
   
+  <link rel="stylesheet" href="{{ css_bootstrap }}">
   <link rel="stylesheet" href="{{ css_font_awesome }}">
   <link rel="stylesheet" href="/static/css/bombolone/admin.css">
   {% block css %}{% endblock %}
@@ -59,40 +40,13 @@
 </head>
 <body {% block body_ng %}ng-controller="AppCtrl"{% endblock %} ng-click="clean()">
 
-  {% block header %}
-  <header>
-    <nav>
-      <a href="{{ path }}" title="" class="brand">
-        <img src="/static/layout/admin/bombolone_header.png" alt="" />
-      </a>
-      <ul class="intro pull-right">
-        <li>
-          <a href="{{ path }}/login/" class="button" title="">Login</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  {% endblock %}
+  {% block header %}{% endblock %}
 
   <div class="content">
     {% block content %}{% endblock %}
   </div>
 
-  {% block footer %}
-  <footer data-lan="{{ lan }}" data-language="{{ language }}">
-    <p>
-      Copyright 2014
-      <a href="https://github.com/Opentaste/bombolone">Bombolone</a> All rights reserved.
-    </p>
-    <p>
-      {% for code, language in all_languages.iteritems() %}
-      <a href="/language/{{ code }}/" class="set_language {% if lan == code %}underline{% endif %}">
-        <i class="icon-{{ code }}"></i>{{ language }}
-      </a>
-      {% endfor %}
-    </p>
-  </footer>
-  {% endblock %}
+  {% block footer %}{% endblock %}
 
   {% block js_code %} {% endblock %}
   {% block js_data %}{% endblock %}

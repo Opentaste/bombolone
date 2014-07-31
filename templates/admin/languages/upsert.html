@@ -1,20 +1,20 @@
 {% extends "admin/index.html" %}
 
-{% block title %} {{ g.rank.update_title }} {% endblock %}
-{% block description %} {{ g.rank.update_description }} {% endblock %}
+{% block title %} {{ g.languages.update_title }} {% endblock %}
+{% block description %} {{ g.languages.update_description }} {% endblock %}
 
-{% block ng_section %}ng-controller="RankCtrl"{% endblock %}
+{% block ng_section %}ng-controller="LanguagesCtrl"{% endblock %}
 
 {% block admin %}
-<h2 ng-show="!update">{{ g.rank.create_rank }}</h2>
-<h2 ng-show="update">{{ g.rank.update_rank }}</h2>
+<h2 ng-show="!update">{{ g.languages.create }}</h2>
+<h2 ng-show="update">{{ g.languages.update }}</h2>
 {% include "error/message.html" %}
 <div class="form-horizontal">
 	<fieldset>
   <div class="control-group">
   	<label>Name</label>
   	<div class="controls">
-  		<input type="text" name="name" ng-model="rank.name" placeholder="Enter name rank">
+  		<input type="text" name="name" ng-model="language.name" placeholder="Enter name rank">
   	</div>
   </div>
   <div class="control-group">
@@ -35,10 +35,10 @@
 {% endblock %}
 
 {% block js_module_names %}
-  'bombolone.controllers.rank',
+  'bombolone.controllers.languages',
 {% endblock %}
 
 {% block js_module_files %}
-  "{{ '/static/js/%s' % js_version['admin/rank'] }}",
+  "{{ '/static/js/%s' % js_version['admin/languages'] }}",
 {% endblock %}
 

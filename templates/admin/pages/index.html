@@ -10,36 +10,36 @@
   <h2>{{ g.pages.name }}</h2>
   <br />
   {% if my.rank < 15 %}
-  <a href="/admin/pages/new/" title="" class="button button-blu">{{ g.pages.add_new_page }}</a>
+  <a href="/admin/pages/new/" title="" class="btn btn-primary">{{ g.pages.add_new_page }}</a>
   {% endif %}
   <table class="table table-bordered table-striped">
-      <thead>
-          <tr>
-              <th style="width:25%">{{ g.admin.name_val }}</th>
-              <th style="width:60%">Url</th>
-              <th style="width:15%">{{ g.admin.remove }}</th>
-          </tr>
-      </thead>
-      <tfoot>
-          <tr>
-              <td colspan="4"></td>
-          </tr>
-      </tfoot>
-      <tbody class="hidden" ng-class="{hidden: !show_item_list}">
-        <tr ng-repeat="item in items_list | orderBy:name">
-          {% if my.rank < 15 %}
-          <td><a href="/admin/pages/update/[[ item['_id'] ]]/">[[ item['name'] ]]</a></td>
-          {% else %}
-          <td><a href="/admin/pages/view/[[ item['_id'] ]]/">[[ item['name'] ]]</a></td>
-          {% endif %}
-          <td>{{ lan }} : [[ item['url'][app.lan] ]]</td>
-          {% if my.rank < 15 %}
-          <td>
-            <span class="remove_item" ng-click="remove(item._id, $index)">{{ g.admin.remove_item }}</span>
-          </td>
-          {% endif %}
-        </tr>
-      </tbody>
+    <thead>
+      <tr>
+        <th style="width:25%">{{ g.admin.name_val }}</th>
+        <th style="width:60%">Url</th>
+        <th style="width:15%">{{ g.admin.remove }}</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td colspan="4"></td>
+      </tr>
+    </tfoot>
+    <tbody class="hidden" ng-class="{hidden: !show_item_list}">
+      <tr ng-repeat="item in items_list | orderBy:name">
+        {% if my.rank < 15 %}
+        <td><a href="/admin/pages/update/[[ item['_id'] ]]/">[[ item['name'] ]]</a></td>
+        {% else %}
+        <td><a href="/admin/pages/view/[[ item['_id'] ]]/">[[ item['name'] ]]</a></td>
+        {% endif %}
+        <td>{{ lan }} : [[ item['url'][app.lan] ]]</td>
+        {% if my.rank < 15 %}
+        <td>
+          <span class="remove_item" ng-click="remove(item._id, $index)">{{ g.admin.remove_item }}</span>
+        </td>
+        {% endif %}
+      </tr>
+    </tbody>
   </table>
   {% include "error/loader.html" %}
 </div>

@@ -135,6 +135,18 @@ class Languages(object):
                 self.message = g.languages_msg('success_update')
                 self.status = 'msg msg-success'
 
+def get_list():
+    """ """
+    lan_object = Languages()
+    languages_list = lan_object.all_lang
+    language_chosen = lan_object.get_all_lang_by_code(g.lang)
+    data = {
+        "success": True,
+        "languages": languages_list,
+        "chosen": language_chosen
+    }
+    return data
+
 def show():
     """ """
     data = {
@@ -151,6 +163,10 @@ def new():
 
 def update():
     """ """
+    lan_object = Languages()
+    lan_object.update()
+    message = lan_object.message
+    status = lan_object.status
     data = {
         "success": True,
     }
