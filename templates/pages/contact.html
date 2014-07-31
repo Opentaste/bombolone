@@ -7,14 +7,14 @@
 <h1>Contact</h1>
 {% if g.message %}<div id="{{ g.status }}">{{ g.message }}</div>{% endif %}
 {% if g.email_text %}{{ g.email_text | safe }}{% endif %}
-<form name="login" action="{{ url }}" method="post"> 
-    
-    <label style="display:block;font-size:16px; margin:10px 0 2px 0;">Name</label>
-    <input name="name" class="form-control" type="text" value="" />
-    
-    <label style="display:block;font-size:16px;margin:10px 0 2px 0;">Text</label>
-    <textarea name="text" class="form-control" rows="4" cols="10" style="height:100px;margin:2px 0 10px 0;"></textarea>
-    
-    <input type="submit" value="Send" />
+<form name="login" action="{{ url }}" method="post">
+  <label style="display:block;font-size:16px; margin:10px 0 2px 0;">Name</label>
+  <input name="name" class="form-control" type="text" value="" />
+
+  <label style="display:block;font-size:16px;margin:10px 0 2px 0;">Text</label>
+  <textarea name="text" class="form-control" rows="4" cols="10" 
+  style="height:100px;margin:2px 0 10px 0;"></textarea>
+
+  <input type="submit" value="Send" />
 </form>
 {% endblock %}
