@@ -32,18 +32,20 @@
   <div class="control-group" style="margin-top:15px;">
     {% include "error/message.html" %}
     <div class="control-group">
-      <input type="text" name="name" class="input-xlarge" ng-model="page.name" 
+      <input type="text" name="name" class="form-control" ng-model="page.name" 
       placeholder="{{ g.pages.label_name }}" maxlength="20" ng-hide="view" />
       <span class="input-xlarge uneditable-input" ng-bind="page.name" ng-show="view"></span>
     </div>
     <div class="control-group" ng-hide="view">
-      <input type="text" name="from" ng-model="page.from" class="col-md-4" placeholder="{{ g.pages.label_from }}" maxlength="20" />
-      <input type="text" name="import" ng-model="page.import" class="col-md-4" placeholder="{{ g.pages.label_import }}" maxlength="20" />
+      <input type="text" name="from" ng-model="page.from" class="form-control col-md-4" 
+      placeholder="{{ g.pages.label_from }}" maxlength="20" />
+      <input type="text" name="import" ng-model="page.import" class="form-control col-md-4" 
+      placeholder="{{ g.pages.label_import }}" maxlength="20" />
       <p class="help-block">{{ g.pages.help_import }}</p>
     </div>
     <div class="control-group form-horizontal" ng-hide="view">
       <span>templates/pages/</span>
-      <input type="text" name="file" class="col-md-3 input-little" ng-model="page.file" 
+      <input type="text" name="file" class="form-control col-md-3 input-little" ng-model="page.file" 
       maxlength="200" style="margin: 0 2px;" />.html
       <p class="help-block">{{ g.pages.help_file_templates }}</p>
     </div>
@@ -52,12 +54,12 @@
   <div class="content_right row-fluid" style="margin-top:15px;padding-top:18px;">
     <div class="control-group form-horizontal">
       <span>{{ path }}/</span><span ng-bind="page.url[code_language]" ng-show="view"></span>
-      <input type="text" class="col-md-6 input-little" 
+      <input type="text" class="form-control col-md-6 input-little" 
       ng-model="page.url[code_language]" maxlength="200" style="margin-left:4px" ng-hide="view" />
       <p class="help-block" ng-hide="view">{{ g.pages.help_url }}</p>
     </div>
     <div class="control-group">
-      <input type="text" class="col-md-8" ng-model="page.title[code_language]"
+      <input type="text" class="form-control col-md-8" ng-model="page.title[code_language]"
       placeholder="{{ g.pages.label_title }}" maxlength="20" class="col-md-8" />
     </div>
     <div class="control-group">
@@ -74,11 +76,12 @@
     <div class="pages_field" ng-repeat="item in page.content">
       <div class="label_pages control-group row-fluid">
         <span class="col-md-1" ng-hide="view">Label :</span>
-        <input type="text" ng-model="page.labels[$index].name" class="col-md-3 name_label input-little" ng-hide="view" />
+        <input type="text" ng-model="page.labels[$index].name" 
+        class="form-control col-md-3 name_label" ng-hide="view" />
         
         <span class="col-md-1" ng-hide="view">Alias :</span>
         <input type="text" ng-model="item.alias[code_language]" 
-        class="col-md-4 alias_label input-little" ng-hide="view" />
+        class="form-control col-md-4 alias_label" ng-hide="view" />
         
         <span class="pages_remove_label btn btn-danger span2 btn-sm" 
         ng-click="remove_label($index)" ng-hide="view">- Remove label</span>
@@ -86,18 +89,19 @@
         <label ng-bind="item.alias[code_language]" ng-show="view"></label>
         
         <input type="text" ng-model="item.value[code_language]"  
-        class="col-md-9 pages_tool" ng-class="{show: page.labels[$index].type == 'text'}" />
+        class="form-control col-md-9 pages_tool" ng-class="{show: page.labels[$index].type == 'text'}" />
         
-        <textarea rows="4" cols="50" class="col-md-9 hidden pages_tool" ng-model="item.value[code_language]"
-        ng-class="{show: page.labels[$index].type == 'textarea'}" 
-        >[[ item.value[code_language] ]]</textarea>
+        <textarea rows="4" cols="50" class="form-control col-md-9 hidden pages_tool" 
+        ng-model="item.value[code_language]"
+        ng-class="{show: page.labels[$index].type == 'textarea'}">[[ item.value[code_language] ]]</textarea>
         
         <img src="">
-        <input type="hidden" value="[[ item.value[code_language] ]]" ng-model="item.value[code_language]">
-        <input type="file" class="col-md-9 hidden pages_tool" 
+        <input type="hidden" class="form-control" value="[[ item.value[code_language] ]]" 
+        ng-model="item.value[code_language]">
+        <input type="file" class="form-control" class="col-md-9 hidden pages_tool" 
         ng-class="{show: page.labels[$index].type == 'image'}" />
         
-        <select ng-model="page.labels[$index].type" ng-hide="view">
+        <select class="form-control" ng-model="page.labels[$index].type" ng-hide="view">
           <option value="text">text</option>
           <option value="textarea">textarea</option>
           <option value="image">image</option>

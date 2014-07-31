@@ -33,7 +33,7 @@
           {% if view %}
           <span class="input-xlarge uneditable-input" ng-bind="hash_map.name"></span>
           {% else %}
-          <input type="text" name="name" class="input-xlarge"
+          <input type="text" name="name" class="form-control"
           placeholder="Name Map..." tabindex="1" maxlength="20" ng-model="hash_map.name" />
           {% endif %}
         </div>
@@ -48,7 +48,7 @@
           {% if view %}
           <span class="col-md-3 uneditable-input" ng-bind="value.key"></span>
           {% else %}
-          <input type="text" ng-model="value.key" class="col-md-3 name_key" maxlength="30">
+          <input type="text" ng-model="value.key" class="form-control col-md-3 name_key" maxlength="30">
           {% endif %}
           <textarea ng-repeat="(code, val) in value" class="{% if view %}span9{% else %}span6{% endif %}" 
           ng-show="hash_table.lan == code" ng-model="value[hash_table.lan]"

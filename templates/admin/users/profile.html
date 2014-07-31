@@ -1,25 +1,26 @@
 <div class="control-group">
   <label>{{ g.users.setting_name }}</label>
   <div class="controls">
-    <input ng-model="user.name" type="text" maxlength="60" data-test="name">
+    <input ng-model="user.name" type="text" class="form-control" maxlength="60" data-test="name">
   </div>
 </div>
 <div class="control-group">
   <label>{{ g.users.location }}</label>
   <div class="controls">
-    <input ng-model="user.location" type="text" maxlength="100">
+    <input ng-model="user.location" type="text" class="form-control" maxlength="100">
   </div>
 </div>
 <div class="control-group">
   <label>{{ g.users.web }}</label>
   <div class="controls">
-    <input ng-model="user.web" type="text" class="col-md-4" maxlength="200" data-test="web">
+    <input ng-model="user.web" type="text" class="form-control col-md-4" 
+    maxlength="200" data-test="web">
   </div>
 </div>
 <div class="control-group">
   <label>{{ g.users.description }}</label>
   <div class="controls">
-    <textarea ng-model="user.description" maxlength="200" class="col-md-4" cols="10" rows="3"></textarea>
+    <textarea ng-model="user.description" maxlength="200" class="form-control col-md-4" cols="10" rows="3"></textarea>
     <span class="word-count" ng-bind="200 - user.description.length">200</span>
   </div>
 </div>

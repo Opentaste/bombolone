@@ -53,13 +53,15 @@
         <div class="control-group">
           <label>Nuova Password</label>
           <div class="controls">
-            <input type="password" tabindex="3" maxlength="20" ng-model="user.password_new" data-test="password_new" />
+            <input type="password" tabindex="3" maxlength="20" class="form-control" 
+            ng-model="user.password_new" data-test="password_new" />
           </div>
         </div>
         <div class="control-group">
           <label>Nuova {{ g.users.check_password }}</label>
           <div class="controls">
-            <input type="password" tabindex="4" maxlength="20" ng-model="user.password_check" data-test="password_check" />
+            <input type="password" tabindex="4" maxlength="20" class="form-control" 
+            ng-model="user.password_check" data-test="password_check" />
           </div>
         </div>
       </section>
