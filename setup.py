@@ -25,7 +25,7 @@ dependency_links = []
 
 install_requires=[
     "Flask",
-    "pymongo",
+    "pymongo<=2.8.1",
     "simplejson",
     "Werkzeug",
     "requests",
