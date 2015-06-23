@@ -1,4 +1,3 @@
-__author__ = 'walter'
 # -*- coding: utf-8 -*-
 
 #This is just a work-around for a Python2.7 issue causing
