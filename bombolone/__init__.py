@@ -1,4 +1,3 @@
-__author__ = 'walter'
 import click
 from fabfile import minify, init_database, local_backup
 
