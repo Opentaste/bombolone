@@ -35,13 +35,13 @@ sudo mongod
 virtualenv venv && . venv/bin/activate
 
 # Install libraries
-pip install -r REQUIREMENTS.txt
+python setup.py install && cd bombolone
 
 # Init Bombolone Mongodb
-mongorestore --db new_app --drop data/backup/mongodb/2014-07-29/bombolone
+bombolone bake
 
 # Run Bombolone 
-python app.py
+bombolone serve
 ```
 
 Registered users are:

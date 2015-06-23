@@ -1,5 +1,9 @@
 # Compiled files
 *.pyc
+*.pyo
+build*
+dist*
+*.egg-info
 
 # OSX sucks
 .DS_Store
@@ -11,7 +15,7 @@
 
 # Sass
 .sass-cache
-~           
+~
 
 # fabfile caches
 .coffeecache
@@ -23,6 +27,9 @@ npm-debug.log
 
 # Virtualenv
 venv
+
+# IDEA sucks
+.idea*
 
 # Bower
 static/components/**/.*
